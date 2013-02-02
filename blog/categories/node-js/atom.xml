@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Node.js | おいら屋ファクトリー]]></title>
   <link href="http://ebith.github.com/blog/categories/node-js/atom.xml" rel="self"/>
   <link href="http://ebith.github.com/"/>
-  <updated>2013-02-03T01:36:25+09:00</updated>
+  <updated>2013-02-03T01:38:26+09:00</updated>
   <id>http://ebith.github.com/</id>
   <author>
     <name><![CDATA[ebith]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[HubotでIRC Botを作る]]></title>
-    <link href="http://ebith.github.com/2013/02/01/hubot-irc/"/>
-    <updated>2013-02-01T04:09:00+09:00</updated>
-    <id>http://ebith.github.com/2013/02/01/hubot-irc</id>
+    <link href="http://ebith.github.com/2013/02/03/hubot-irc/"/>
+    <updated>2013-02-03T01:09:00+09:00</updated>
+    <id>http://ebith.github.com/2013/02/03/hubot-irc</id>
     <content type="html"><![CDATA[<h2>Node.jsのインストールと下準備</h2>
 
 <p>Node.jsの管理には<a href="https://github.com/hokaccha/nodebrew" title="hokaccha/nodebrew · GitHub">Nodebrew</a>を使う。<br/>
