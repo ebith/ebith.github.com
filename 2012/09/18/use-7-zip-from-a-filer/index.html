@@ -1,0 +1,284 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>ファイラから7-zip(7zG.exe)使うようにすると捗る - おいら屋ファクトリー</title>
+  <meta name="author" content="ebith">
+
+  
+  <meta name="description" content="Windowsではずっと統合アーカイバプロジェクトのDLL群とそれらを使うアーカイバにお世話になってきたけど、
+7-Zipのほうが速いので7-Zip付属の7zG.exe, 7z.exeとB2E(Bridge To Executables)に移行することにした。
+B2Eの本家はNoahだけど、 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-site-verification" content="2weq-haP9jiK3brxIN6DELbPYBYT4Q2eaW_-miG8pII">
+
+  
+  <link rel="canonical" href="http://ebith.github.com/2012/09/18/use-7-zip-from-a-filer/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="おいら屋ファクトリー" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34280150-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">おいら屋ファクトリー</a></h1>
+  
+    <h2>PC関係、ゲームや料理にiPhoneとか</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.co.jp/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:ebith.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">ファイラから7-zip(7zG.exe)使うようにすると捗る</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-18T00:10:00+09:00" pubdate data-updated="true">Sep 18<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Windowsではずっと統合アーカイバプロジェクトのDLL群とそれらを使うアーカイバにお世話になってきたけど、<br/>
+<a href="http://sevenzip.sourceforge.jp/" title="7-Zip">7-Zip</a>のほうが速いので7-Zip付属の7zG.exe, 7z.exeとB2E(Bridge To Executables)に移行することにした。<br/>
+B2Eの本家は<a href="http://www.kmonos.net/lib/noah.ja.html" title="Noah - kMonos.NET">Noah</a>だけど、<a href="http://claybird.sakura.ne.jp/garage/lhaforge/" title="泥巣 : 作品庫 - LhaForge">LhaForge</a>の方がコマンドラインオプションが充実していて使いやすいのでそっちを使う。</p>
+
+<div><script src='https://gist.github.com/3737689.js'></script>
+<noscript><pre><code>load:
+  (name 7zG.exe)
+  (type 7z LZMA *LZMA2)
+
+encode:
+  (if (method 1) (cmd a -t7z -m0=LZMA (arc.7z) (list\*)))
+  (if (method 2) (cmd a -t7z -m0=LZMA2 (arc.7z) (list\*)))</code></pre></noscript></div>
+
+
+<p>zip, 7z圧縮用と展開用のスクリプト。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  C:\usr\app\lfarchive\LhaForge.exe /b2e /e                   #展開
+</span><span class='line'>  C:\usr\app\lfarchive\LhaForge.exe /b2e /c:zip /method:Store #圧縮(Zip Store)
+</span><span class='line'>  C:\usr\app\lfarchive\LhaForge.exe /b2e /c:7z /method:LZMA2  #圧縮(7z LZMA2)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>LhaForgeをファイラから呼ぶ場合こんな感じ。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">ebith</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-18T00:10:00+09:00" pubdate data-updated="true">Sep 18<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/win/'>Win</a>, <a class='category' href='/blog/categories/software/'>software</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2012/09/17/server-backup-to-dropbox/" title="Previous Post: VPSのバックアップをDropboxに取る">&laquo; VPSのバックアップをDropboxに取る</a>
+      
+      
+        <a class="basic-alignment right" href="/2012/09/23/keepass2-for-osx/" title="Next Post: KeePass2のkdbxをMacでも快適に読めるようにした">KeePass2のkdbxをMacでも快適に読めるようにした &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/02/01/hubot-irc/">HubotでIRC Botを作る</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/01/31/played-games/">今月遊んだゲーム</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/01/10/holiday-sale/">年末年始にゲーム35本買ったのでその一覧</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/01/05/terraria-server-with-ubuntu-server-12.04/">さくらのVPS 2G(Ubuntu 12.04)でTerrariaServer(TShock)を動かす</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/12/22/useful-tips-for-vimperator/">Vimperatorを便利に使うためのtips</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("ebith", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <p>Follow <a href="http://twitter.com/ebith">@ebith</a></p>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - ebith -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'ebith';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://ebith.github.com/2012/09/18/use-7-zip-from-a-filer/';
+        var disqus_url = 'http://ebith.github.com/2012/09/18/use-7-zip-from-a-filer/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

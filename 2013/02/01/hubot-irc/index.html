@@ -1,0 +1,437 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>HubotでIRC Botを作る - おいら屋ファクトリー</title>
+  <meta name="author" content="ebith">
+
+  
+  <meta name="description" content="Node.jsのインストールと下準備 Node.jsの管理にはNodebrewを使う。
+Readmeに従ってインストールして、Nodebrew経由でNodeのバイナリを入れる。
+更にcoffee-script必要らしいのとforeverあると便利らしいので入れとく。 1
+2
+3
+4 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-site-verification" content="2weq-haP9jiK3brxIN6DELbPYBYT4Q2eaW_-miG8pII">
+
+  
+  <link rel="canonical" href="http://ebith.github.com/2013/02/01/hubot-irc/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="おいら屋ファクトリー" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34280150-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">おいら屋ファクトリー</a></h1>
+  
+    <h2>PC関係、ゲームや料理にiPhoneとか</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.co.jp/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:ebith.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">HubotでIRC Botを作る</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-01T04:09:00+09:00" pubdate data-updated="true">Feb 1<span>st</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2>Node.jsのインストールと下準備</h2>
+
+<p>Node.jsの管理には<a href="https://github.com/hokaccha/nodebrew" title="hokaccha/nodebrew · GitHub">Nodebrew</a>を使う。<br/>
+Readmeに従ってインストールして、Nodebrew経由でNodeのバイナリを入れる。<br/>
+更にcoffee-script必要らしいのとforeverあると便利らしいので入れとく。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>nodebrew install-binary stable
+</span><span class='line'>nodebrew use v0.8.17
+</span><span class='line'>npm install -g forever
+</span><span class='line'>npm install -g coffee-script
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Bot作る</h2>
+
+<p>フォルダ構成はこんなの。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>bot/
+</span><span class='line'>├── node_modules
+</span><span class='line'>├── scripts
+</span><span class='line'>│   ├── colorful-ping.coffee
+</span><span class='line'>│   ├── config.coffee
+</span><span class='line'>│   ├── fetch-title.coffee
+</span><span class='line'>│   ├── rating.coffee
+</span><span class='line'>│   ├── reddit-gamedeals.coffee
+</span><span class='line'>│   ├── upgrade.coffee
+</span><span class='line'>│   └── vpn-manager.coffee
+</span><span class='line'>├── hubot-scripts.json
+</span><span class='line'>├── package.json
+</span><span class='line'>└── run.sh
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>こんな感じにpackage.json書いてnpm installするとややこしいことなくインストール完了。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;ebithubot&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;0.0.1&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nt">&quot;dependencies&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nt">&quot;hubot&quot;</span><span class="p">:</span> <span class="s2">&quot;2.3.5&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nt">&quot;hubot-irc&quot;</span><span class="p">:</span> <span class="s2">&quot;0.1.4&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nt">&quot;hubot-scripts&quot;</span><span class="p">:</span> <span class="s2">&quot;2.2.2&quot;</span><span class="p">,</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nt">&quot;cron&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nt">&quot;request&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nt">&quot;iconv-jp&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nt">&quot;request&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nt">&quot;cheerio&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nt">&quot;aws-sdk&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nt">&quot;ntwitter&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>あとは好きなだけスクリプトを書いてBotの機能強化に励む。<br/>
+<a href="https://github.com/github/hubot/tree/master/src/scripts" title="hubot/src/scripts at master · github/hubot · GitHub">Hubot付属のscript</a>が良い例。</p>
+
+<h2>運用において</h2>
+
+<p>スクリプトのリロード機能が無くて、毎回再起動するしかないのでIRC Proxy無しでの運用は厳しい。<br/>
+かといって普段使いのProxyに繋ぐと入ってるチャンネル全部のメッセージを処理対象にしてしまうのでイマイチ。</p>
+
+<h3>起動スクリプト</h3>
+
+<p>設定類は環境変数で行うのが基本らしいのでシェルスクリプトに<code>export</code>を並び立てる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c">#!/usr/bin/env bash</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># hubot</span>
+</span><span class='line'><span class="nb">export </span><span class="nv">PORT</span><span class="o">=</span>8889
+</span><span class='line'>
+</span><span class='line'><span class="c"># hubot-irc</span>
+</span><span class='line'><span class="nb">export </span><span class="nv">HUBOT_IRC_UNFLOOD</span><span class="o">=</span><span class="s2">&quot;true&quot;</span>
+</span><span class='line'><span class="nb">export </span><span class="nv">HUBOT_IRC_NICK</span><span class="o">=</span><span class="s2">&quot;ebithubot&quot;</span>
+</span><span class='line'><span class="nb">export </span><span class="nv">HUBOT_IRC_PORT</span><span class="o">=</span><span class="s2">&quot;6669&quot;</span>
+</span><span class='line'><span class="nb">export </span><span class="nv">HUBOT_IRC_SERVER</span><span class="o">=</span><span class="s2">&quot;localhost&quot;</span>
+</span><span class='line'><span class="nb">export </span><span class="nv">HUBOT_IRC_ROOMS</span><span class="o">=</span><span class="s2">&quot;#ebithubot&quot;</span>
+</span><span class='line'>
+</span><span class='line'>forever start -c coffee node_modules/hubot/bin/hubot -a irc
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Notice使いたい</h3>
+
+<p><a href="http://blog.fumiz.me/2012/08/05/hubot-irc-bot-script/#notice" title="hubotスクリプトの書き方とサンプル集 | mitc">hubotスクリプトの書き方とサンプル集 | mitc</a>によると互換性のために削除されたらしい。<br/>
+hubot-ircにパッチを当てて復活させる。v0.1.4向け。</p>
+
+<div><script src='https://gist.github.com/4505583.js'></script>
+<noscript><pre><code>diff --git a/src/irc.coffee b/src/irc.coffee
+index 1cd6be3..dbfb495 100644
+--- a/src/irc.coffee
++++ b/src/irc.coffee
+@@ -5,6 +5,12 @@
+ Irc = require 'irc'
+ 
+ class IrcBot extends Adapter
++  constructor: (@robot) -&gt;
++    super @robot
++    @robot.notice = (user, strings...) -&gt;
++      @adapter.notice user, strings...
++    @robot.Response = IrcResponse
++
+   send: (user, strings...) -&gt;
+     for str in strings
+       if not str?
+@@ -176,5 +182,9 @@ class IrcBot extends Adapter
+ 
+     self.emit &quot;connected&quot;
+ 
++class IrcResponse extends Response
++  notice: (strings...) -&gt;
++    @robot.adapter.notice @message.user, strings...
++
+ exports.use = (robot) -&gt;
+   new IrcBot robot</code></pre></noscript></div>
+
+
+<h3>データの永続化</h3>
+
+<p>データの永続化はオプションになっていて、Redis以外にもMongoDBやAmazon S3とかファイルも選べるようになってる。<br/>
+どれもhubot-scriptsのリポジトリに入っているので<code>hubot-scripts.json</code>に<code>["redis-brain.coffee"]</code>とか書く。<br/>
+永続化のための*-brain.coffeeが読み込まれるとrobot.brain.dataが5秒おきに自動保存されるようになる。</p>
+
+<p>ただし02/01/2013現在npm上で最新のhubot-scripts 2.4.1に入ってるredis-brain.coffeeは壊れてるので一つ前の2.2.2とか使うべき。</p>
+
+<h3>forever</h3>
+
+<p>簡単なdaemontoolsみたいなので便利なんだけど、logrotateの仕組みが無いのでログをいっぱい吐いてるとディスクを圧迫する。<br/>
+かといってログをrmとかしちゃうとそこで書き込みが止まってしまうのでアレ。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">ebith</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-01T04:09:00+09:00" pubdate data-updated="true">Feb 1<span>st</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/node-js/'>Node.js</a>, <a class='category' href='/blog/categories/hubot/'>hubot</a>, <a class='category' href='/blog/categories/software/'>software</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2013/01/31/played-games/" title="Previous Post: 今月遊んだゲーム">&laquo; 今月遊んだゲーム</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/02/01/hubot-irc/">HubotでIRC Botを作る</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/01/31/played-games/">今月遊んだゲーム</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/01/10/holiday-sale/">年末年始にゲーム35本買ったのでその一覧</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/01/05/terraria-server-with-ubuntu-server-12.04/">さくらのVPS 2G(Ubuntu 12.04)でTerrariaServer(TShock)を動かす</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/12/22/useful-tips-for-vimperator/">Vimperatorを便利に使うためのtips</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("ebith", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <p>Follow <a href="http://twitter.com/ebith">@ebith</a></p>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - ebith -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'ebith';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://ebith.github.com/2013/02/01/hubot-irc/';
+        var disqus_url = 'http://ebith.github.com/2013/02/01/hubot-irc/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

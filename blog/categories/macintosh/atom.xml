@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Macintosh | おいら屋ファクトリー]]></title>
+  <link href="http://ebith.github.com/blog/categories/macintosh/atom.xml" rel="self"/>
+  <link href="http://ebith.github.com/"/>
+  <updated>2013-02-03T01:36:25+09:00</updated>
+  <id>http://ebith.github.com/</id>
+  <author>
+    <name><![CDATA[ebith]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Gyazoのアップロード先をTumblrにするやつ(Gyamblr) API v2版 for OS X]]></title>
+    <link href="http://ebith.github.com/2012/09/07/gyamblr-for-osx%28tumblr-api-v2%29/"/>
+    <updated>2012-09-07T01:22:00+09:00</updated>
+    <id>http://ebith.github.com/2012/09/07/gyamblr-for-osx(tumblr-api-v2)</id>
+    <content type="html"><![CDATA[<p>気づいたらAPI v1の提供が終了したとかでアップロードできなくなっていたのでv2版書きました。</p>
+
+<h2>使い方</h2>
+
+<p>scriptをGyazoのものと差し替えれば動きますが、tumblifeのgemが必要だったりOAuthの例に漏れず各種トークンが必要だったりするのでよしなにしてください。<br/>
+トークン類は<a href="http://www.tumblr.com/oauth/apps" title="Tumblr">Tumblr</a>でアプリを登録して、oauth.rbを使うと良いと思います。</p>
+
+<p><div><script src='https://gist.github.com/3657917.js'></script>
+<noscript><pre><code>#!/usr/bin/env ruby
+require 'oauth'
+
+consumer = OAuth::Consumer.new(
+  'consumer_key',
+  'consumer_secret',
+  {
+    site: 'http://api.tumblr.com',
+    request_token_url: &quot;http://www.tumblr.com/oauth/request_token&quot;,
+    authorize_url: &quot;http://www.tumblr.com/oauth/authorize&quot;,
+    access_token_url: &quot;http://www.tumblr.com/oauth/access_token&quot;
+  }
+)
+request_token = consumer.get_request_token
+system('open ' + request_token.authorize_url)
+
+p 'enter oauth_verifier'
+oauth_verifier = gets.chomp!
+access_token = request_token.get_access_token(:oauth_verifier =&gt; oauth_verifier)
+
+p 'oauth_token : ' + access_token.token
+p 'oauth_token_secret : ' + access_token.secret</code></pre></noscript></div>
+</p>
+]]></content>
+  </entry>
+  
+</feed>

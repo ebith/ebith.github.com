@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Mac | おいら屋ファクトリー]]></title>
+  <link href="http://ebith.github.com/blog/categories/mac/atom.xml" rel="self"/>
+  <link href="http://ebith.github.com/"/>
+  <updated>2013-02-03T01:36:25+09:00</updated>
+  <id>http://ebith.github.com/</id>
+  <author>
+    <name><![CDATA[ebith]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[KeePass2のkdbxをMacでも快適に読めるようにした]]></title>
+    <link href="http://ebith.github.com/2012/09/23/keepass2-for-osx/"/>
+    <updated>2012-09-23T04:21:00+09:00</updated>
+    <id>http://ebith.github.com/2012/09/23/keepass2-for-osx</id>
+    <content type="html"><![CDATA[<p>Macbook触ってる時間が長くなってくるとKeePass2がまともに動かないのが凄く気になってきたし、<br/>
+かと言って1Passwordは凄く高いのでどうにかしたくて右往左往してたらkdbxを読めるPerlモジュールを見つけたので頑張った。</p>
+
+<p>PerlのFile::KeePassとIO::Prompter、<a href="https://github.com/mooz/percol" title="mooz/percol">mooz/percol</a>が必要。</p>
+
+<p><div><script src='https://gist.github.com/3767494.js'></script>
+<noscript><pre><code>#!/usr/bin/env perl
+use strict;
+use warnings;
+use utf8;
+
+use File::KeePass;
+use IO::Prompter;
+use Encode;
+
+my $file = shift @ARGV;
+my $pass = prompt('Password: ', -e =&gt; '');
+
+my $k = File::KeePass-&gt;new;
+
+$k-&gt;load_db($file, $pass);
+
+$k-&gt;unlock;
+
+my @entries = $k-&gt;find_entries({});
+
+open(OUT, '| percol | awk \'BEGIN { FS = &quot; :: &quot;} { printf $2 }\' | pbcopy ');
+foreach my $entry (@entries) {
+  next unless ($entry-&gt;{title} &amp;&amp; $entry-&gt;{password});
+  print OUT encode_utf8(&quot;$entry-&gt;{title} :: $entry-&gt;{password}\n&quot;);
+}
+close(OUT);
+
+$k-&gt;clear;</code></pre></noscript></div>
+</p>
+
+<p><code>sh
+./keepass.pl ~/ebith.kdbx
+</code></p>
+
+<p>みたいな感じで使う。
+percolのお陰で絞込み検索が素晴らしい感じなので便利。</p>
+]]></content>
+  </entry>
+  
+</feed>

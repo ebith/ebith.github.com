@@ -1,0 +1,337 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>新PCにWindows 7入れた - おいら屋ファクトリー</title>
+  <meta name="author" content="ebith">
+
+  
+  <meta name="description" content="Windows 7のインストールは3回目ぐらい、XPの頃と比べると本当に楽になった。
+OSのインストール後の流れをメモっておく。 ドライバのインストール マザーボード系 チップセット
+LAN
+USB3 GPU
+サウンドカード 設定 サービスの停止 Superfetch
+Windows Search &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-site-verification" content="2weq-haP9jiK3brxIN6DELbPYBYT4Q2eaW_-miG8pII">
+
+  
+  <link rel="canonical" href="http://ebith.github.com/2012/09/12/install-windows-7/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="おいら屋ファクトリー" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34280150-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">おいら屋ファクトリー</a></h1>
+  
+    <h2>PC関係、ゲームや料理にiPhoneとか</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.co.jp/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:ebith.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">新PCにWindows 7入れた</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-12T21:43:00+09:00" pubdate data-updated="true">Sep 12<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Windows 7のインストールは3回目ぐらい、XPの頃と比べると本当に楽になった。<br/>
+OSのインストール後の流れをメモっておく。</p>
+
+<h2>ドライバのインストール</h2>
+
+<ul>
+<li>マザーボード系
+
+<ul>
+<li>チップセット</li>
+<li>LAN</li>
+<li>USB3</li>
+</ul>
+</li>
+<li>GPU</li>
+<li>サウンドカード</li>
+</ul>
+
+
+<h2>設定</h2>
+
+<ul>
+<li>サービスの停止
+
+<ul>
+<li>Superfetch</li>
+<li>Windows Search</li>
+</ul>
+</li>
+<li>SNP: 無効(<a href="http://itpro.nikkeibp.co.jp/article/COLUMN/20100824/351391/" title="ITアーキテクトの「やってはいけない」 - ［Windows 7編］ネットワーク設定を標準で使ってはいけない：ITpro">ITアーキテクトの「やってはいけない」 - ［Windows 7編］ネットワーク設定を標準で使ってはいけない：ITpro</a>)</li>
+<li>システムの復元: 無効</li>
+<li>ページングファイル: 最小</li>
+<li>ハイバネーション: オフ</li>
+<li>バックアップ: 週1に設定</li>
+</ul>
+
+
+<h2>ソフトのインストール</h2>
+
+<ul>
+<li><a href="http://www.comodo.com/home/internet-security/free-internet-security.php" title="Free Internet Security, Download Internet Security Software Suite - Comodo">COMODO Internet Security</a>
+
+<ul>
+<li>インストールに関しては2chのテンプレが詳しい(<a href="http://find.2ch.net/?STR=comodo+internet+security" title="2ch検索: [comodo internet security]">2ch検索: [comodo internet security]</a>)</li>
+<li>日本語化(<a href="http://torichuu.blog69.fc2.com/" title="NipsuのBlog">NipsuのBlog</a>)</li>
+</ul>
+</li>
+<li><a href="https://www.dropbox.com/" title="Dropbox - 生活をシンプルに">Dropbox</a></li>
+<li><a href="http://www.fraps.com/" title="FRAPS show fps, record video game movies, screen capture software">FRAPS</a></li>
+<li><a href="http://www.mozilla.jp/firefox/" title="次世代ブラウザ Firefox — 高速・安全・カスタマイズ自在な無料ブラウザ">Firefox</a></li>
+<li><a href="http://www.google.co.jp/ime/" title="Google 日本語入力 - ダウンロード">Google 日本語入力</a></li>
+<li><a href="http://www.growlforwindows.com/gfw/" title="Growl for Windows">Growl for Windows</a></li>
+<li><a href="http://www.apple.com/jp/itunes/download/" title="アップル - iTunes - iTunesを今すぐダウンロード">iTunes</a>
+
+<ul>
+<li><a href="http://www.apple.com/jp/support/iphone/enterprise/" title="Apple - サポート - iPhone - エンタープライズ">iPhone 構成ユーティリティ</a></li>
+<li>C:\Users\ebith\AppData\Roaming\Apple Computer\MobileSyncとC:\Users\ebith\Music\iTunesをデータドライブに移動してシンボリックリンクをはっておく</li>
+</ul>
+</li>
+<li><a href="http://schinagl.priv.at/nt/hardlinkshellext/hardlinkshellext.html" title="Link Shell Extension">Link Shell Extension</a></li>
+<li><a href="http://www.skype.com/intl/ja/home" title="オンラインで無料のSkypeインスタント通話と固定電話への格安通話 - Skype">Skype</a></li>
+<li><a href="http://store.steampowered.com/" title="Steam へようこそ">Steam</a></li>
+<li><a href="http://www.truecrypt.org/" title="TrueCrypt - Free Open-Source On-The-Fly Disk Encryption Software for Windows 7/Vista/XP, Mac OS X and Linux">TrueCrypt</a></li>
+<li><a href="https://www.virtualbox.org/" title="Oracle VM VirtualBox">VirtualBox</a>
+
+<ul>
+<li><a href="http://www.toptensoftware.com/VBoxHeadlessTray/" title="Topten Software">VBoxHeadlessTray</a></li>
+</ul>
+</li>
+<li><a href="http://www.appletkan.com/nodoka.htm" title="汎用キーバインディング変更ソフト「のどか」">のどか</a></li>
+</ul>
+
+
+<p>その他のファイルはバックアップからコピーして戻す。<br/>
+ソフト自体はポータブルなのにインストーラー版しか提供しないソフトが多くてこういう時すごく面倒くさいよね。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">ebith</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-12T21:43:00+09:00" pubdate data-updated="true">Sep 12<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/windows/'>Windows</a>, <a class='category' href='/blog/categories/software/'>software</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2012/09/11/muesli-cookies/" title="Previous Post: ミューズリーのクッキー">&laquo; ミューズリーのクッキー</a>
+      
+      
+        <a class="basic-alignment right" href="/2012/09/17/server-backup-to-dropbox/" title="Next Post: VPSのバックアップをDropboxに取る">VPSのバックアップをDropboxに取る &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/02/01/hubot-irc/">HubotでIRC Botを作る</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/01/31/played-games/">今月遊んだゲーム</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/01/10/holiday-sale/">年末年始にゲーム35本買ったのでその一覧</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/01/05/terraria-server-with-ubuntu-server-12.04/">さくらのVPS 2G(Ubuntu 12.04)でTerrariaServer(TShock)を動かす</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/12/22/useful-tips-for-vimperator/">Vimperatorを便利に使うためのtips</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("ebith", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <p>Follow <a href="http://twitter.com/ebith">@ebith</a></p>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - ebith -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'ebith';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://ebith.github.com/2012/09/12/install-windows-7/';
+        var disqus_url = 'http://ebith.github.com/2012/09/12/install-windows-7/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

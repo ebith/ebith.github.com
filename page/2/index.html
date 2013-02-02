@@ -1,0 +1,1097 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>おいら屋ファクトリー</title>
+  <meta name="author" content="ebith">
+
+  
+  <meta name="description" content="(function(){ let libly = plugins.libly; let apiKey; commands.addUserCommand( ['ldrSwitch'], 'Livedoor Readerのサブアカウントを切り替える', function (args) { if (! &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-site-verification" content="2weq-haP9jiK3brxIN6DELbPYBYT4Q2eaW_-miG8pII">
+
+  
+  <link rel="canonical" href="http://ebith.github.com/page/2/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="おいら屋ファクトリー" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34280150-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">おいら屋ファクトリー</a></h1>
+  
+    <h2>PC関係、ゲームや料理にiPhoneとか</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.co.jp/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:ebith.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/10/19/ldr-subaccount-switcher-for-vimperator/">Livedoor Readerのサブアカウントを切り替えるためのVimperatorプラグイン</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-19T02:30:00+09:00" pubdate data-updated="true">Oct 19<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div><script src='https://gist.github.com/3913442.js'></script>
+<noscript><pre><code>(function(){
+
+ let libly = plugins.libly;
+ let apiKey;
+
+ commands.addUserCommand(
+   ['ldrSwitch'],
+   'Livedoor Readerのサブアカウントを切り替える',
+   function (args) {
+    if (!args.length) {
+      getAcc(function (accList) {
+        switchAcc(apiKey, accList[0][0]);
+      });
+    } else {
+      switchAcc(apiKey, args.literalArg);
+    }
+   },
+   {
+      literal: 0,
+      completer: function (context) {
+        context.incomplete = true;
+        context.title = ['account'];
+        context.compare = void 0;
+
+        getAcc (function (accList) {
+          context.completions = accList;
+          context.incomplete = false;
+        });
+
+      }
+    },
+    true
+  );
+
+  function switchAcc (apiKey, acc) {
+    let url = 'http://reader.livedoor.com/account/switch';
+    let req = new libly.Request(url, null, {postBody: 'ApiKey=' + apiKey + '&amp;switch_to=' + acc});
+    req.addEventListener('onSuccess', function (res) {
+      liberator.echo('account switched: ' + acc);
+    });
+    req.post();
+  }
+
+  function getAcc (callback) {
+    let url = 'http://reader.livedoor.com/subaccount';
+    let req = new libly.Request(url);
+    let accList = [];
+    req.addEventListener('onSuccess', function (res) {
+      apiKey = res.getHTMLDocument('//input[@name=&quot;ApiKey&quot;]')[0].value;
+      res.getHTMLDocument('//input[@name=&quot;switch_to&quot;]').forEach(function (acc) {
+        accList.push([acc.value, acc.value]);
+      });
+      callback(accList);
+    });
+    req.get();
+  }
+
+})();
+</code></pre></noscript></div>
+
+
+<p><code>ldrSwitch</code>コマンドが追加されるのでよしなにしてください。</p>
+
+<h3>TODO?</h3>
+
+<p>JSのエラーコンソールにやたらとセキュリティエラーが出ちゃうんだけどよくわからないのでそのままになってる。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/10/09/permanently-erase-disk/">HDDのデータを念入りに消去する</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-09T10:38:00+09:00" pubdate data-updated="true">Oct 9<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>sfdisk -l                   <span class="c"># 消したいディスクを確認する</span>
+</span><span class='line'>shred -v -n 3 -z /dev/hoge  <span class="c"># ランダムデータを3回書き込んだのちゼロフィル</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>大抵のディストリで可能らしいけど<a href="http://www.sysresccd.org/SystemRescueCd_Homepage" title="SystemRescueCd">SystemRescueCd</a>がシンプルで扱いやすい。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/10/01/i-got-raspberry-pi/">ラズベリーパイを手に入れた！</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-01T09:02:00+09:00" pubdate data-updated="true">Oct 1<span>st</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://www.flickr.com/photos/ebith/8038651368/" title="Raspberry Pi 1/2 by Ebith, on Flickr"><img src="http://farm9.staticflickr.com/8462/8038651368_d716208375_n.jpg" width="320" height="239" alt="Raspberry Pi 1/2"></a><a href="http://www.flickr.com/photos/ebith/8038648103/" title="Raspberry Pi 2/2 by Ebith, on Flickr"><img src="http://farm9.staticflickr.com/8316/8038648103_f163c4d92a_n.jpg" width="320" height="239" alt="Raspberry Pi 2/2"></a><br/>
+6月末にRSに注文したものの、届く気配もなかったのでModMyPiに頼んでみると1週間で到着。<br/>
+残念ながらRev1だったけど、Arch Linuxを入れてHeadless運用でしばらく遊ぶことにする。</p>
+
+<p>最初の接続までは<a href="http://hitoriblog.com/?p=9733" title="約3,300円で買えるLinuxパソコンRaspberry PiをMacで使う | ひとりぶろぐ">約3,300円で買えるLinuxパソコンRaspberry PiをMacで使う | ひとりぶろぐ</a>を参考にした。<br/>
+<a href="https://github.com/exaviorn/RasPiWrite" title="exaviorn/RasPiWrite">RasPiWrite</a>はエラーを吐くので適当なfork版を使う。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>nmap -sP 192.168.0.0/24
+</span><span class='line'>ssh root@x.x.x.x
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>alarmpiのホスト名だと繋げなかったのでIP探してsshで接続。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>pacman -Syu     <span class="c"># Arch Linuxのアップデート</span>
+</span><span class='line'>passwd          <span class="c"># rootのパスワード変更</span>
+</span><span class='line'>adduser         <span class="c"># 普段使い用のユーザー追加(sudo用にwheelグループにも所属させておく)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># sudo導入</span>
+</span><span class='line'>pacman -S sudo
+</span><span class='line'>visudo
+</span><span class='line'>  %wheel <span class="nv">ALL</span><span class="o">=(</span>ALL<span class="o">)</span> ALL
+</span><span class='line'>  Defaults <span class="nv">timestamp_timeout</span><span class="o">=</span>30
+</span><span class='line'>
+</span><span class='line'><span class="c"># 固定IPにする(systemd/Services - ArchWiki - https://wiki.archlinux.org/index.php/Systemd/Services#Static_Ethernet_network)</span>
+</span><span class='line'>vi /etc/conf.d/network
+</span><span class='line'>  <span class="nv">interface</span><span class="o">=</span>eth0
+</span><span class='line'>  <span class="nv">address</span><span class="o">=</span>192.168.0.32
+</span><span class='line'>  <span class="nv">netmask</span><span class="o">=</span>24
+</span><span class='line'>  <span class="nv">broadcast</span><span class="o">=</span>192.168.0.255
+</span><span class='line'>  <span class="nv">gateway</span><span class="o">=</span>192.168.0.1
+</span><span class='line'>vi /etc/systemd/system/network.service
+</span><span class='line'>  <span class="o">[</span>Unit<span class="o">]</span>
+</span><span class='line'>  <span class="nv">Description</span><span class="o">=</span>Network Connectivity
+</span><span class='line'>  <span class="nv">Wants</span><span class="o">=</span>network.target
+</span><span class='line'>  <span class="nv">Before</span><span class="o">=</span>network.target
+</span><span class='line'>  <span class="o">[</span>Service<span class="o">]</span>
+</span><span class='line'>  <span class="nv">Type</span><span class="o">=</span>oneshot
+</span><span class='line'>  <span class="nv">RemainAfterExit</span><span class="o">=</span>yes
+</span><span class='line'>  <span class="nv">EnvironmentFile</span><span class="o">=</span>/etc/conf.d/network
+</span><span class='line'>  <span class="nv">ExecStart</span><span class="o">=</span>/sbin/ip link <span class="nb">set </span>dev <span class="k">${</span><span class="nv">interface</span><span class="k">}</span> up
+</span><span class='line'>  <span class="nv">ExecStart</span><span class="o">=</span>/sbin/ip addr add <span class="k">${</span><span class="nv">address</span><span class="k">}</span>/<span class="k">${</span><span class="nv">netmask</span><span class="k">}</span> broadcast <span class="k">${</span><span class="nv">broadcast</span><span class="k">}</span> dev <span class="k">${</span><span class="nv">interface</span><span class="k">}</span>
+</span><span class='line'>  <span class="nv">ExecStart</span><span class="o">=</span>/sbin/ip route add default via <span class="k">${</span><span class="nv">gateway</span><span class="k">}</span>
+</span><span class='line'>  <span class="nv">ExecStop</span><span class="o">=</span>/sbin/ip addr flush dev <span class="k">${</span><span class="nv">interface</span><span class="k">}</span>
+</span><span class='line'>  <span class="nv">ExecStop</span><span class="o">=</span>/sbin/ip link <span class="nb">set </span>dev <span class="k">${</span><span class="nv">interface</span><span class="k">}</span> down
+</span><span class='line'>  <span class="o">[</span>Install<span class="o">]</span>
+</span><span class='line'>  <span class="nv">WantedBy</span><span class="o">=</span>multi-user.target
+</span><span class='line'>vi /etc/resolve.conf
+</span><span class='line'>  nameserver 143.90.130.165
+</span><span class='line'>  nameserver 143.90.130.39
+</span><span class='line'>systemctl disable dhcpcd@eth0.service
+</span><span class='line'>systemctl <span class="nb">enable </span>network.service
+</span><span class='line'>
+</span><span class='line'><span class="c"># ssh, sshd周り</span>
+</span><span class='line'>vi /etc/ssh/sshd_config
+</span><span class='line'>  PermitRootLogin no
+</span><span class='line'>  PubkeyAuthentication yes
+</span><span class='line'>  PasswordAuthentication no
+</span><span class='line'>  Port xxxxx
+</span><span class='line'>systemctl restart sshd.service
+</span><span class='line'>su ebith
+</span><span class='line'>ssh-keygen  <span class="c"># ローカルにコピーしたり~/.ssh/config設定したりしとく</span>
+</span><span class='line'>cat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys
+</span><span class='line'>
+</span><span class='line'><span class="c"># DDNS</span>
+</span><span class='line'>vi ~/.crontab
+</span><span class='line'>  curl <span class="s1">&#39;http://dynamic.name-services.com/interface.asp?Command=SetDNSHost&amp;HostName=home&amp;Zone=feelmy.net&amp;DomainPassword=xxxxx&#39;</span>
+</span><span class='line'>crontab ~/.crontab
+</span><span class='line'>
+</span><span class='line'><span class="c"># ロケール</span>
+</span><span class='line'>sudo vi /etc/locale.gen
+</span><span class='line'>  ja_JP.UTF-8 UTF-8
+</span><span class='line'>sudo locale-gen
+</span><span class='line'>sudo vi /etc/locale.conf
+</span><span class='line'>  <span class="nv">LANG</span><span class="o">=</span>ja_JP.UTF-8
+</span><span class='line'>
+</span><span class='line'><span class="c"># 環境設定</span>
+</span><span class='line'>sudo pacman -S git rsync vim zsh
+</span><span class='line'>git clone git@github.com:ebith/dotfiles.git
+</span><span class='line'><span class="nb">cd </span>dotfiles
+</span><span class='line'>git sm init
+</span><span class='line'>git sm update
+</span><span class='line'><span class="nb">cd</span>
+</span><span class='line'>./dotfiles/create_link.sh
+</span><span class='line'>chsh -s /bin/zsh
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="http://d.hatena.ne.jp/mickey24/20120911/air_conditioner_with_arduino" title="うちのbotがエアコンの操作方法を覚えた - ぬいぐるみライフ(仮)">うちのbotがエアコンの操作方法を覚えた - ぬいぐるみライフ(仮)</a>とかすごく楽しそうなのでUSBの赤外線リモコン繋いだら簡単に似たようなことできるのかなとか思ったけど、調度良さそうなのが見つからないしそう簡単な話ではなかった。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/09/23/keepass2-for-osx/">KeePass2のkdbxをMacでも快適に読めるようにした</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-23T04:21:00+09:00" pubdate data-updated="true">Sep 23<span>rd</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Macbook触ってる時間が長くなってくるとKeePass2がまともに動かないのが凄く気になってきたし、<br/>
+かと言って1Passwordは凄く高いのでどうにかしたくて右往左往してたらkdbxを読めるPerlモジュールを見つけたので頑張った。</p>
+
+<p>PerlのFile::KeePassとIO::Prompter、<a href="https://github.com/mooz/percol" title="mooz/percol">mooz/percol</a>が必要。</p>
+
+<div><script src='https://gist.github.com/3767494.js'></script>
+<noscript><pre><code>#!/usr/bin/env perl
+use strict;
+use warnings;
+use utf8;
+
+use File::KeePass;
+use IO::Prompter;
+use Encode;
+
+my $file = shift @ARGV;
+my $pass = prompt('Password: ', -e =&gt; '');
+
+my $k = File::KeePass-&gt;new;
+
+$k-&gt;load_db($file, $pass);
+
+$k-&gt;unlock;
+
+my @entries = $k-&gt;find_entries({});
+
+open(OUT, '| percol | awk \'BEGIN { FS = &quot; :: &quot;} { printf $2 }\' | pbcopy ');
+foreach my $entry (@entries) {
+  next unless ($entry-&gt;{title} &amp;&amp; $entry-&gt;{password});
+  print OUT encode_utf8(&quot;$entry-&gt;{title} :: $entry-&gt;{password}\n&quot;);
+}
+close(OUT);
+
+$k-&gt;clear;</code></pre></noscript></div>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>./keepass.pl ~/ebith.kdbx
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>みたいな感じで使う。
+percolのお陰で絞込み検索が素晴らしい感じなので便利。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/09/18/use-7-zip-from-a-filer/">ファイラから7-zip(7zG.exe)使うようにすると捗る</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-18T00:10:00+09:00" pubdate data-updated="true">Sep 18<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Windowsではずっと統合アーカイバプロジェクトのDLL群とそれらを使うアーカイバにお世話になってきたけど、<br/>
+<a href="http://sevenzip.sourceforge.jp/" title="7-Zip">7-Zip</a>のほうが速いので7-Zip付属の7zG.exe, 7z.exeとB2E(Bridge To Executables)に移行することにした。<br/>
+B2Eの本家は<a href="http://www.kmonos.net/lib/noah.ja.html" title="Noah - kMonos.NET">Noah</a>だけど、<a href="http://claybird.sakura.ne.jp/garage/lhaforge/" title="泥巣 : 作品庫 - LhaForge">LhaForge</a>の方がコマンドラインオプションが充実していて使いやすいのでそっちを使う。</p>
+
+<div><script src='https://gist.github.com/3737689.js'></script>
+<noscript><pre><code>load:
+  (name 7zG.exe)
+  (type 7z LZMA *LZMA2)
+
+encode:
+  (if (method 1) (cmd a -t7z -m0=LZMA (arc.7z) (list\*)))
+  (if (method 2) (cmd a -t7z -m0=LZMA2 (arc.7z) (list\*)))</code></pre></noscript></div>
+
+
+<p>zip, 7z圧縮用と展開用のスクリプト。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  C:\usr\app\lfarchive\LhaForge.exe /b2e /e                   #展開
+</span><span class='line'>  C:\usr\app\lfarchive\LhaForge.exe /b2e /c:zip /method:Store #圧縮(Zip Store)
+</span><span class='line'>  C:\usr\app\lfarchive\LhaForge.exe /b2e /c:7z /method:LZMA2  #圧縮(7z LZMA2)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>LhaForgeをファイラから呼ぶ場合こんな感じ。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/09/17/server-backup-to-dropbox/">VPSのバックアップをDropboxに取る</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-17T09:30:00+09:00" pubdate data-updated="true">Sep 17<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>簡易的なバックアップで良いので取っておきたかったので、<br/>
+tarで固めてlzoで圧縮してDropboxに送るバックアップスクリプト書いた。<br/>
+<a href="http://www.andreafabrizi.it/?dropbox_uploader" title="BASH Dropbox Uploader">BASH Dropbox Uploader</a>が必要。</p>
+
+<div><script src='https://gist.github.com/3735146.js'></script>
+<noscript><pre><code>#!/bin/bash
+
+# バックアップ対象ディレクトリ
+target=&quot;/etc /home/ebith&quot;
+
+# 除外パターン
+exclude=(sites/www/rep2 .cpanm .rbenv)
+
+# 一時ファイル
+tempfile=&quot;/tmp/backup.tar.lzo&quot;
+
+for v in ${exclude[@]}; do
+  e=&quot;$e --exclude=$v&quot;
+done
+
+tar --lzop -cf $tempfile $target $e
+
+./dropbox_uploader.sh upload $tempfile /backup/`basename $tempfile`</code></pre></noscript></div>
+
+
+<p>DropboxのAPIからのアップロードが1ファイル150MBまでなので<br/>
+ファイル分割とかできるといいかもしれないけど今んとこ必要ないので付いてない。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/09/12/install-windows-7/">新PCにWindows 7入れた</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-12T21:43:00+09:00" pubdate data-updated="true">Sep 12<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Windows 7のインストールは3回目ぐらい、XPの頃と比べると本当に楽になった。<br/>
+OSのインストール後の流れをメモっておく。</p>
+
+<h2>ドライバのインストール</h2>
+
+<ul>
+<li>マザーボード系
+
+<ul>
+<li>チップセット</li>
+<li>LAN</li>
+<li>USB3</li>
+</ul>
+</li>
+<li>GPU</li>
+<li>サウンドカード</li>
+</ul>
+
+
+<h2>設定</h2>
+
+<ul>
+<li>サービスの停止
+
+<ul>
+<li>Superfetch</li>
+<li>Windows Search</li>
+</ul>
+</li>
+<li>SNP: 無効(<a href="http://itpro.nikkeibp.co.jp/article/COLUMN/20100824/351391/" title="ITアーキテクトの「やってはいけない」 - ［Windows 7編］ネットワーク設定を標準で使ってはいけない：ITpro">ITアーキテクトの「やってはいけない」 - ［Windows 7編］ネットワーク設定を標準で使ってはいけない：ITpro</a>)</li>
+<li>システムの復元: 無効</li>
+<li>ページングファイル: 最小</li>
+<li>ハイバネーション: オフ</li>
+<li>バックアップ: 週1に設定</li>
+</ul>
+
+
+<h2>ソフトのインストール</h2>
+
+<ul>
+<li><a href="http://www.comodo.com/home/internet-security/free-internet-security.php" title="Free Internet Security, Download Internet Security Software Suite - Comodo">COMODO Internet Security</a>
+
+<ul>
+<li>インストールに関しては2chのテンプレが詳しい(<a href="http://find.2ch.net/?STR=comodo+internet+security" title="2ch検索: [comodo internet security]">2ch検索: [comodo internet security]</a>)</li>
+<li>日本語化(<a href="http://torichuu.blog69.fc2.com/" title="NipsuのBlog">NipsuのBlog</a>)</li>
+</ul>
+</li>
+<li><a href="https://www.dropbox.com/" title="Dropbox - 生活をシンプルに">Dropbox</a></li>
+<li><a href="http://www.fraps.com/" title="FRAPS show fps, record video game movies, screen capture software">FRAPS</a></li>
+<li><a href="http://www.mozilla.jp/firefox/" title="次世代ブラウザ Firefox — 高速・安全・カスタマイズ自在な無料ブラウザ">Firefox</a></li>
+<li><a href="http://www.google.co.jp/ime/" title="Google 日本語入力 - ダウンロード">Google 日本語入力</a></li>
+<li><a href="http://www.growlforwindows.com/gfw/" title="Growl for Windows">Growl for Windows</a></li>
+<li><a href="http://www.apple.com/jp/itunes/download/" title="アップル - iTunes - iTunesを今すぐダウンロード">iTunes</a>
+
+<ul>
+<li><a href="http://www.apple.com/jp/support/iphone/enterprise/" title="Apple - サポート - iPhone - エンタープライズ">iPhone 構成ユーティリティ</a></li>
+<li>C:\Users\ebith\AppData\Roaming\Apple Computer\MobileSyncとC:\Users\ebith\Music\iTunesをデータドライブに移動してシンボリックリンクをはっておく</li>
+</ul>
+</li>
+<li><a href="http://schinagl.priv.at/nt/hardlinkshellext/hardlinkshellext.html" title="Link Shell Extension">Link Shell Extension</a></li>
+<li><a href="http://www.skype.com/intl/ja/home" title="オンラインで無料のSkypeインスタント通話と固定電話への格安通話 - Skype">Skype</a></li>
+<li><a href="http://store.steampowered.com/" title="Steam へようこそ">Steam</a></li>
+<li><a href="http://www.truecrypt.org/" title="TrueCrypt - Free Open-Source On-The-Fly Disk Encryption Software for Windows 7/Vista/XP, Mac OS X and Linux">TrueCrypt</a></li>
+<li><a href="https://www.virtualbox.org/" title="Oracle VM VirtualBox">VirtualBox</a>
+
+<ul>
+<li><a href="http://www.toptensoftware.com/VBoxHeadlessTray/" title="Topten Software">VBoxHeadlessTray</a></li>
+</ul>
+</li>
+<li><a href="http://www.appletkan.com/nodoka.htm" title="汎用キーバインディング変更ソフト「のどか」">のどか</a></li>
+</ul>
+
+
+<p>その他のファイルはバックアップからコピーして戻す。<br/>
+ソフト自体はポータブルなのにインストーラー版しか提供しないソフトが多くてこういう時すごく面倒くさいよね。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/09/11/muesli-cookies/">ミューズリーのクッキー</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-11T11:40:00+09:00" pubdate data-updated="true">Sep 11<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://www.flickr.com/photos/ebith/7975028474/" title="ミューズリーのクッキー by Ebith, on Flickr"><img src="http://farm9.staticflickr.com/8302/7975028474_740036360a_n.jpg" width="320" height="239" alt="ミューズリーのクッキー"></a><br/>
+<a href="http://hnycamera.exblog.jp/13661996" title="ミューズリーのクッキー : ハチミツカメラ">ミューズリーのクッキー : ハチミツカメラ</a>より。<br/>
+はちみつじゃなくてメープルシロップだったり、水分やや大目だったりする程度のアレンジ。<br/>
+バキバキと硬くて食べごたえのあるクッキーができるのでお気に入り。</p>
+
+<h2>材料</h2>
+
+<ul>
+<li>A
+
+<ul>
+<li>ミューズリー 140g</li>
+<li>薄力粉 60g</li>
+<li>きび砂糖 20g</li>
+</ul>
+</li>
+<li>B
+
+<ul>
+<li>メープルシロップ 大さじ2</li>
+<li>サラダ油 大さじ4</li>
+<li>水 大さじ3</li>
+</ul>
+</li>
+</ul>
+
+
+<h2>手順</h2>
+
+<ol>
+<li>Aをフードプロセッサーに入れて軽く回す</li>
+<li>Bも入れて回す</li>
+<li>天板に適当なサイズで落として指で押し広げる</li>
+<li>160度のオーブンで30分焼く</li>
+</ol>
+
+
+<p><a href="https://gist.github.com/3706093" title="ミューズリーのクッキー — Gist">最新のレシピ</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/09/07/new-gaming-pc/">ゲーム用の新PC組んだ</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-07T21:00:00+09:00" pubdate data-updated="true">Sep 7<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://flic.kr/p/d7tBTJ" title="New gaming pc 1/2 by Ebith, on Flickr"><img src="http://farm9.staticflickr.com/8037/7949568956_1d55933fa2_n.jpg" alt="New gaming pc 1/2" /></a>
+<a href="http://flic.kr/p/d7tMUJ" title="New gaming pc 2/2 by Ebith, on Flickr"><img src="http://farm9.staticflickr.com/8035/7949602654_782f691be0_n.jpg" alt="New gaming pc 2/2" /></a></p>
+
+<h2>構成</h2>
+
+<ul>
+<li>ケース
+
+<ul>
+<li><a href="http://www.links.co.jp/items/antec-case/p280.html" title="P280 製品情報 コンピュータ関連製品の代理店事業 ｌ 株式会社リンクスインターナショナル">ANTEC P280</a></li>
+</ul>
+</li>
+<li>電源
+
+<ul>
+<li><a href="http://www.owltech.co.jp/products/power/Seasonic/SS-X2/SS850_760_660_560KM.html" title="Seasonic電源 X-Series SS-850KM SS-760KM SS-660KM SS-560KM">Seasonic XSeries SS-760KM</a></li>
+</ul>
+</li>
+<li>マザーボード
+
+<ul>
+<li><a href="http://www.asus.co.jp/Motherboards/Intel_Socket_1155/P8Z77V_PRO/" title="ASUS - マザーボード- ASUS P8Z77-V PRO">ASUS P8Z77-V PRO</a></li>
+</ul>
+</li>
+<li>CPU
+
+<ul>
+<li><a href="http://ark.intel.com/ja/products/65520" title="ARK | Intel® Core™ i5-3570K Processor (6M Cache, up to 3.80 GHz)">Intel Core i5 3570K</a></li>
+</ul>
+</li>
+<li>CPUクーラー
+
+<ul>
+<li><a href="http://www.scythe.co.jp/cooler/ninja3-revb.html" title="株式会社サイズ ｜ 商品詳細 ｜忍者参リビジョンB">SCYTHE 忍者参リビジョンB</a></li>
+</ul>
+</li>
+<li>メモリ
+
+<ul>
+<li><a href="http://www.avexir.com/product/platinumspec.htm" title="AVEXIR">AVEXIR AVD3U16001108G-2MW</a></li>
+</ul>
+</li>
+<li>GPU
+
+<ul>
+<li><a href="http://www.gigabyte.jp/products/product-page.aspx?pid=4211#ov" title="GIGABYTE - グラフィックスカード - NVIDIA - PCI Express Solution - GeForce 600 Series - GV-N670OC-2GD">GIGABYTE GV-N670OC-2GD</a></li>
+</ul>
+</li>
+<li>ストレージ
+
+<ul>
+<li><a href="http://www.links.co.jp/item/px-256m3p/" title="PX-256M3P | コンピュータ関連製品の代理店事業 ｌ 株式会社リンクスインターナショナル">PLEXTOR PX-256M3P</a></li>
+<li><a href="http://www.semicon.toshiba.co.jp/product/storage/selection/built-in/client_hdd35/DT01ACAxxx.html" title="クライアントHDD(3.5型)｜クライアントHDD(3.5型)｜東芝 セミコンダクター＆ストレージ社">TOSHIBA DT01ACA200</a></li>
+</ul>
+</li>
+<li>光学ドライブ
+
+<ul>
+<li><a href="http://www.pioneerelectronics.com/PUSA/Computer/Computer+Drives/BDR-207DBK" title="BDR-207DBK - 12x Internal BD/DVD/CD Burner. SATA Interface. | Pioneer Electronics USA">Pioneer BDR-207DBK</a></li>
+</ul>
+</li>
+<li>その他
+
+<ul>
+<li><a href="http://www.ainex.jp/products/as-05.htm" title="Ainex | AS-05">Ainex AS-05 シルバーグリス</a></li>
+<li><a href="http://www.ainex.jp/products/bz-01.htm" title="Ainex | BZ-01">Ainex BZ-01 ブザーユニット</a></li>
+</ul>
+</li>
+<li>流用品
+
+<ul>
+<li><a href="http://jp.creative.com/products/product.asp?category=209&amp;subcategory=669&amp;product=15853" title="Sound Blaster X-Fi XtremeGamer">CREATIVE Sound Blaster X-Fi XtremeGamer</a></li>
+<li><a href="http://www.jp.onkyo.com/pcaudio/pcidigitalaudioboard/se90pci/index.htm" title="ONKYO PCオーディオ製品情報：SE-90PCI - PCIe/PCIデジタルオーディオボード | オンキヨー株式会社">ONKYO SE-90PCI</a></li>
+<li><a href="http://www.scythe.co.jp/cooler/kaze-juni.html" title="株式会社サイズ ｜ 商品詳細 ｜KAZE-JYUNI">SCYTHE KAZE-JYUNI 800rpm SY1225SL12L</a> * 2</li>
+</ul>
+</li>
+<li>合計 ￥151140</li>
+</ul>
+
+
+<h2>感想</h2>
+
+<p>ちょっと電源にお金割きすぎた感じあるのでCorsairの750AXみたいなもうちょい安いのでも良かったかもしれない。<br/>
+光学ドライブ無し予定だったけどブルーレイドライブ6500円だったので使い道無いのに付けてしまった。<br/>
+<a href="www.antecindia.co.in/pdf/manuals/P280_Manual_JP.pdf">P280のマニュアル</a>にネジの説明がカラー写真付きで載っていて素晴らしい。<br/>
+高級グリス塗るの初めてやったけど<a href="http://www.ainex.jp/data/as-05_mnl_web.pdf">AS-05のマニュアル</a>が詳しくて良かった。<br/>
+SSDはずっとX25-Mを使っていて速いなーと思っていたけどM3PはWindows 7の起動が15秒足らずとかでそれどころじゃなかった。<br/>
+BIOSまじグラフィカルやし、パッと見わかりやすくなっててBIOSとにらめっこする時間減ったし、USBメモリ挿すだけでアップデートできるとかすごい。<br/>
+Dark Souls: Prepare to Die Editionとっても楽しい。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/09/07/gyamblr-for-osx%28tumblr-api-v2%29/">Gyazoのアップロード先をTumblrにするやつ(Gyamblr) API V2版 for OS X</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-07T01:22:00+09:00" pubdate data-updated="true">Sep 7<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>気づいたらAPI v1の提供が終了したとかでアップロードできなくなっていたのでv2版書きました。</p>
+
+<h2>使い方</h2>
+
+<p>scriptをGyazoのものと差し替えれば動きますが、tumblifeのgemが必要だったりOAuthの例に漏れず各種トークンが必要だったりするのでよしなにしてください。<br/>
+トークン類は<a href="http://www.tumblr.com/oauth/apps" title="Tumblr">Tumblr</a>でアプリを登録して、oauth.rbを使うと良いと思います。</p>
+
+<div><script src='https://gist.github.com/3657917.js'></script>
+<noscript><pre><code>#!/usr/bin/env ruby
+require 'oauth'
+
+consumer = OAuth::Consumer.new(
+  'consumer_key',
+  'consumer_secret',
+  {
+    site: 'http://api.tumblr.com',
+    request_token_url: &quot;http://www.tumblr.com/oauth/request_token&quot;,
+    authorize_url: &quot;http://www.tumblr.com/oauth/authorize&quot;,
+    access_token_url: &quot;http://www.tumblr.com/oauth/access_token&quot;
+  }
+)
+request_token = consumer.get_request_token
+system('open ' + request_token.authorize_url)
+
+p 'enter oauth_verifier'
+oauth_verifier = gets.chomp!
+access_token = request_token.get_access_token(:oauth_verifier =&gt; oauth_verifier)
+
+p 'oauth_token : ' + access_token.token
+p 'oauth_token_secret : ' + access_token.secret</code></pre></noscript></div>
+
+
+
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/page/3/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/02/01/hubot-irc/">HubotでIRC Botを作る</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/01/31/played-games/">今月遊んだゲーム</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/01/10/holiday-sale/">年末年始にゲーム35本買ったのでその一覧</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/01/05/terraria-server-with-ubuntu-server-12.04/">さくらのVPS 2G(Ubuntu 12.04)でTerrariaServer(TShock)を動かす</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/12/22/useful-tips-for-vimperator/">Vimperatorを便利に使うためのtips</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("ebith", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <p>Follow <a href="http://twitter.com/ebith">@ebith</a></p>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - ebith -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'ebith';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

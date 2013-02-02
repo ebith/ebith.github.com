@@ -1,0 +1,301 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Octopressを試す - おいら屋ファクトリー</title>
+  <meta name="author" content="ebith">
+
+  
+  <meta name="description" content="はてなダイアリーも広告が入るようになってしまったので、これを機会にGithub+Octopressも試してみる。
+TumblrとかLokkaとか、WordPressに出戻りも考慮したけどどれもしっくりこないので期待。 参考にしたページとか Big Sky :: &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-site-verification" content="2weq-haP9jiK3brxIN6DELbPYBYT4Q2eaW_-miG8pII">
+
+  
+  <link rel="canonical" href="http://ebith.github.com/2012/08/25/try-octopress/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="おいら屋ファクトリー" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34280150-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">おいら屋ファクトリー</a></h1>
+  
+    <h2>PC関係、ゲームや料理にiPhoneとか</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.co.jp/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:ebith.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Octopressを試す</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-25T05:53:00+09:00" pubdate data-updated="true">Aug 25<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>はてなダイアリーも広告が入るようになってしまったので、これを機会にGithub+Octopressも試してみる。<br/>
+TumblrとかLokkaとか、WordPressに出戻りも考慮したけどどれもしっくりこないので期待。</p>
+
+<h2>参考にしたページとか</h2>
+
+<p><a href="http://mattn.kaoriya.net/software/lang/ruby/20111017205717.htm" title="Big Sky :: githubとjekyllとoctopressで作る簡単でモダンなブログ">Big Sky :: githubとjekyllとoctopressで作る簡単でモダンなブログ</a><br/>
+<a href="http://blog.glidenote.com/blog/2011/11/07/install-octopress-on-github/" title="GithubとOctopressでモダンな技術系ブログを作ってみる - Glide Note - グライドノート">GithubとOctopressでモダンな技術系ブログを作ってみる - Glide Note - グライドノート</a><br/>
+<a href="http://nowelium.github.com/blog/2012/03/26/octopress-diff.html" title="octopress でブログを書いてみる - ハタさんのブログ(出張版)">octopress でブログを書いてみる - ハタさんのブログ(出張版)</a><br/>
+<a href="http://tokkonopapa.github.com/blog/2012/01/04/octopress-plugin-for-categories-cloud/" title="Octopress用Tag Cloudプラグインをリリースします - T.I.D.">Octopress用Tag Cloudプラグインをリリースします - T.I.D.</a></p>
+
+<h2>それ以外にやったこと</h2>
+
+<p><a href="http://blog.glidenote.com/blog/2012/04/02/octoeditor.vim/" title="Octopressの記事管理用プラグイン、Octoeditor.vimを作った - Glide Note - グライドノート">Octopressの記事管理用プラグイン、Octoeditor.vimを作った - Glide Note - グライドノート</a>を導入したり</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='vim'><span class='line'><span class="nb">nnoremap</span> <span class="p">&lt;</span>Leader<span class="p">&gt;</span>of :Unite file_rec:<span class="p">&lt;</span>C<span class="p">-</span><span class="k">r</span><span class="p">&gt;=</span>expand<span class="p">(</span><span class="k">g</span>:octopress_path.<span class="s2">&quot;/source/_posts/&quot;</span><span class="p">)&lt;</span>CR<span class="p">&gt;&lt;</span>CR<span class="p">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Unite.vimで記事一覧開くのマッピングしたり</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>pip install pygments
+</span><span class='line'>vim _config.yml
+</span><span class='line'>  pygments: <span class="nb">true</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>シンタックスハイライト用にPygments入れたり</p>
+
+<h2>雑感</h2>
+
+<p> やっぱ普通にエディタで書けるの便利。<br/>
+vimperator使ってるとテキストエリアで外部エディタ使えるけど、
+なんかの拍子に吹っ飛んでっちゃったことがあってそれ以来あんまり使わなくなってたので。</p>
+
+<p>配布されてるテーマ少ないので慣れないCSSとか画像とか触るはめになってつらい。<br/>
+<code>rake install['theme']</code>するとそのたびにファイルが上書きされるみたいで色々試すとなんかグチャグチャになってしまったりとか。</p>
+
+<h2>TODO</h2>
+
+<p>適当に書き足したCSSが悲しい事になってるのどうにかして欲しい。<br/>
+Favicon欲しい。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">ebith</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-25T05:53:00+09:00" pubdate data-updated="true">Aug 25<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/octopress/'>Octopress</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+      
+        <a class="basic-alignment right" href="/2012/09/07/gyamblr-for-osx%28tumblr-api-v2%29/" title="Next Post: Gyazoのアップロード先をTumblrにするやつ(Gyamblr) API v2版 for OS X">Gyazoのアップロード先をTumblrにするやつ(Gyamblr) API v2版 for OS X &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/02/01/hubot-irc/">HubotでIRC Botを作る</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/01/31/played-games/">今月遊んだゲーム</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/01/10/holiday-sale/">年末年始にゲーム35本買ったのでその一覧</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/01/05/terraria-server-with-ubuntu-server-12.04/">さくらのVPS 2G(Ubuntu 12.04)でTerrariaServer(TShock)を動かす</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/12/22/useful-tips-for-vimperator/">Vimperatorを便利に使うためのtips</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("ebith", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <p>Follow <a href="http://twitter.com/ebith">@ebith</a></p>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - ebith -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'ebith';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://ebith.github.com/2012/08/25/try-octopress/';
+        var disqus_url = 'http://ebith.github.com/2012/08/25/try-octopress/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

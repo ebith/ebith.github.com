@@ -1,0 +1,309 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Vimperatorプラグインを書いてみたい人のためのtips - おいら屋ファクトリー</title>
+  <meta name="author" content="ebith">
+
+  
+  <meta name="description" content="Vimperator Advent Calendar 2012 4日目のebithです。
+今日はVimperatorプラグインを書いてみたい、もしくは書こうとは思ったけど良くわからなかった人向けの情報などを紹介します。
+だいたいは僕がプラグインを作り始めた時に困ったりハマったりしたことですが、 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-site-verification" content="2weq-haP9jiK3brxIN6DELbPYBYT4Q2eaW_-miG8pII">
+
+  
+  <link rel="canonical" href="http://ebith.github.com/2012/12/04/vimperator-plugin-dev-tips/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="おいら屋ファクトリー" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34280150-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">おいら屋ファクトリー</a></h1>
+  
+    <h2>PC関係、ゲームや料理にiPhoneとか</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.co.jp/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:ebith.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Vimperatorプラグインを書いてみたい人のためのtips</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-04T00:00:00+09:00" pubdate data-updated="true">Dec 4<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><a href="http://atnd.org/events/34070" title="Vimperator Advent Calendar 2012 : ATND">Vimperator Advent Calendar 2012</a> 4日目のebithです。<br/>
+今日はVimperatorプラグインを書いてみたい、もしくは書こうとは思ったけど良くわからなかった人向けの情報などを紹介します。<br/>
+だいたいは僕がプラグインを作り始めた時に困ったりハマったりしたことですが、お役に立てれば幸いです。</p>
+
+<h2>そもそもどう書けば良いの</h2>
+
+<p><a href="https://github.com/vimpr/vimperator-plugins/blob/master/function-template.js" title="vimperator-plugins/function-template.js at master · vimpr/vimperator-plugins">サンプル用のプラグイン</a>にプラグインには欠かせないコマンドやマッピングなどの定義例が書いてあります。<br/>
+また、<a href="https://github.com/vimpr/vimperator-plugins" title="vimpr/vimperator-plugins">vimpr/vimperator-plugins</a>には200近いプラグインがあるので参考になるはずです。</p>
+
+<h2>プラグイン作るときに便利なやつ</h2>
+
+<h3>ライブラリ</h3>
+
+<p>Vimperator組込みの<code>util</code>や<a href="https://github.com/vimpr/vimperator-plugins/blob/master/_libly.js" title="vimperator-plugins/_libly.js at master · vimpr/vimperator-plugins">_libly.js</a>があります。</p>
+
+<h3>コマンド</h3>
+
+<p><code>:js</code>や<code>:echo</code>を使えば手軽にJavaScriptを実行できます。例) <code>:echo util</code><br/>
+<code>:source</code>がプラグインの再読み込みに使えます。</p>
+
+<h3>プラグイン</h3>
+
+<p><a href="https://github.com/vimpr/vimperator-plugins/blob/master/auto_source.js" title="vimperator-plugins/auto_source.js at master · vimpr/vimperator-plugins">auto_source.js</a> - 指定ファイルが変更されると自動的に:sourceします。<br/>
+<a href="https://github.com/vimpr/vimperator-plugins/blob/master/echopy.js" title="vimperator-plugins/echopy.js at master · vimpr/vimperator-plugins">echopy.js</a> - echoしつつクリップボードにコピーします。</p>
+
+<!--- [sitesearch](https://github.com/vimpr/vimperator-rc/blob/b6a3ef4de8a7befebbdbad56c1762423bbe1e7f7/anekos/.vimperatorrc.js#L595-L612 "vimperator-rc/anekos/.vimperatorrc.js at b6a3ef4de8a7befebbdbad56c1762423bbe1e7f7 · vimpr/vimperator-rc")
+ Googleのサイト内検索を開く-->
+
+
+<h3>プリントデバッグ</h3>
+
+<p><code>:js!</code>で開くエラーコンソールに、liberator.log()で出力できます。<br/>
+ログに残るタイプのechoであるliberator.echomsg()やliberator.echoerr()も便利です。<code>:messages</code>であとからでも読めます。</p>
+
+<h2>既存の動作を変更するプラグインを書きたい</h2>
+
+<p>_libly.jsの$U.aroundを使います。anekosさんの記事が詳しいです。<br/>
+<a href="http://vimperator.g.hatena.ne.jp/nokturnalmortum/20100120/1263929847" title="Vimperator 本体のメソッドを書き換えるときの指針 - Death to false Web browser! - vimperatorグループ">Vimperator 本体のメソッドを書き換えるときの指針</a>、
+<a href="http://vimperator.g.hatena.ne.jp/nokturnalmortum/20120811/1344688021" title="vimperator で、既存のコマンドにオレオレ動作を差しこむ - Death to false Web browser! - vimperatorグループ">vimperator で、既存のコマンドにオレオレ動作を差しこむ</a></p>
+
+<h2>ググってもググっても情報出てこない</h2>
+
+<p>プラグインに限らずVimperator全体に言えることですが、Googleなどで検索してもまとまった日本語の情報はイマイチ出てきません。<br/>
+<a href="https://github.com/vimpr/vimperator-plugins" title="vimpr/vimperator-plugins">vimpr/vimperator-plugins</a>をgrepしたりしてなんとかしましょう。<br/>
+JavaScript自体に関しては<a href="https://developer.mozilla.org/" title="Mozilla Developer Network">Mozilla Developer Network</a>が心強いです。</p>
+
+<h2>最後に</h2>
+
+<p>やってみると案外なんとかなるもので、単なるソフトウェアオタクでも少しはプラグイン書けるようになりました。<br/>
+多くの人がプラグインを書けばそれだけVimperatorが便利になってみんなが幸せなので是非ともチャレンジしてください。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">ebith</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-04T00:00:00+09:00" pubdate data-updated="true">Dec 4<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/vimperator/'>Vimperator</a>, <a class='category' href='/blog/categories/adventcalendar/'>adventCalendar</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2012/11/24/days-since-app/" title="Previous Post: iGoogleのDays Since(あれやってから何日経ったっけを管理するやつ)クローン作った">&laquo; iGoogleのDays Since(あれやってから何日経ったっけを管理するやつ)クローン作った</a>
+      
+      
+        <a class="basic-alignment right" href="/2012/12/13/vimperator-is-a-powerful-twitter-client/" title="Next Post: Vimperatorで快適Twitter">Vimperatorで快適Twitter &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/02/01/hubot-irc/">HubotでIRC Botを作る</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/01/31/played-games/">今月遊んだゲーム</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/01/10/holiday-sale/">年末年始にゲーム35本買ったのでその一覧</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/01/05/terraria-server-with-ubuntu-server-12.04/">さくらのVPS 2G(Ubuntu 12.04)でTerrariaServer(TShock)を動かす</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/12/22/useful-tips-for-vimperator/">Vimperatorを便利に使うためのtips</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("ebith", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <p>Follow <a href="http://twitter.com/ebith">@ebith</a></p>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - ebith -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'ebith';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://ebith.github.com/2012/12/04/vimperator-plugin-dev-tips/';
+        var disqus_url = 'http://ebith.github.com/2012/12/04/vimperator-plugin-dev-tips/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
