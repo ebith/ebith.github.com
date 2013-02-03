@@ -5,11 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: food - おいら屋ファクトリー</title>
+  <title>StartSSLの証明書類を更新する - おいら屋ファクトリー</title>
   <meta name="author" content="ebith">
 
   
-  <meta name="description" content="Category: food">
+  <meta name="description" content="メールアドレスとドメインの検証 Control PanelのAuthenticateからログイン。
+Validations WizardでEmail Address ValidationとDomain Name Validationを行う。
+両方30日で期限切れになるので証明書を更新するたびに必要 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +21,7 @@
   <meta name="google-site-verification" content="2weq-haP9jiK3brxIN6DELbPYBYT4Q2eaW_-miG8pII">
 
   
-  <link rel="canonical" href="http://ebith.github.comblog/categories/food/">
+  <link rel="canonical" href="http://ebith.github.com/2013/02/03/update-startssl-certs/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -76,36 +78,99 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Food</h1>
+    
+      <h1 class="entry-title">StartSSLの証明書類を更新する</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-03T05:55:00+09:00" pubdate data-updated="true">Feb 3<span>rd</span>, 2013</time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><h2>メールアドレスとドメインの検証</h2>
 
-  
-  <h2>2012</h2>
+<p><a href="https://www.startssl.com/?app=12" title="StartSSL™ Certificates &amp; Public Key Infrastructure">Control Panel</a>の<code>Authenticate</code>からログイン。<br/>
+<code>Validations Wizard</code>で<code>Email Address Validation</code>と<code>Domain Name Validation</code>を行う。<br/>
+両方30日で期限切れになるので証明書を更新するたびに必要。</p>
 
-<article>
-  
-<h1><a href="/2012/09/11/muesli-cookies/">ミューズリーのクッキー</a></h1>
-<time datetime="2012-09-11T11:40:00+09:00" pubdate><span class='month'>Sep</span> <span class='day'>11</span> <span class='year'>2012</span></time>
+<h2>クライアント認証書の更新</h2>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/food/'>food</a>, <a class='category' href='/blog/categories/recipe/'>recipe</a></span>
-</footer>
+<p><code>S/MIME and Authentication Certificate</code>を選んで進めて行くと使用中のブラウザに証明書がインストールされるのでバックアップしておく。</p>
 
+<h2>サーバー証明書の更新</h2>
 
-</article>
+<p><code>Web Server SSL/TLS Certificate</code>を選んで秘密鍵を作り、サブドメインを決めて証明書を得る。</p>
 
+<h2>その他</h2>
+
+<p>サーバー証明書のところの秘密鍵は既にあるやつを持ってきても良いはずだけどなんだかうまく行かなかった。</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">ebith</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-03T05:55:00+09:00" pubdate data-updated="true">Feb 3<span>rd</span>, 2013</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2013/02/03/hubot-irc/" title="Previous Post: HubotでIRC Botを作る">&laquo; HubotでIRC Botを作る</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -177,7 +242,10 @@
       var disqus_shortname = 'ebith';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://ebith.github.com/2013/02/03/update-startssl-certs/';
+        var disqus_url = 'http://ebith.github.com/2013/02/03/update-startssl-certs/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
