@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[おいら屋ファクトリー]]></title>
-  <link href="http://ebith.github.com/atom.xml" rel="self"/>
-  <link href="http://ebith.github.com/"/>
-  <updated>2013-02-03T20:37:25+09:00</updated>
-  <id>http://ebith.github.com/</id>
+  <link href="http://blog.feelmy.net/atom.xml" rel="self"/>
+  <link href="http://blog.feelmy.net/"/>
+  <updated>2013-02-15T22:05:38+09:00</updated>
+  <id>http://blog.feelmy.net/</id>
   <author>
     <name><![CDATA[ebith]]></name>
     
@@ -14,10 +14,48 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Tiarraのログをブラウザから見たり検索したりできるやつ作った]]></title>
+    <link href="http://blog.feelmy.net/2013/02/15/tlv-js/"/>
+    <updated>2013-02-15T22:00:00+09:00</updated>
+    <id>http://blog.feelmy.net/2013/02/15/tlv-js</id>
+    <content type="html"><![CDATA[<h2><a href="https://github.com/ebith/TLV.js" title="ebith/TLV.js · GitHub">TLV.js</a></h2>
+
+<p><a href="http://www.flickr.com/photos/ebith/8475029653/" title="tlv01 by Ebith, on Flickr"><img src="http://farm9.staticflickr.com/8111/8475029653_055048fbb4_n.jpg" width="320" height="240" alt="tlv01"></a>
+<a href="http://www.flickr.com/photos/ebith/8475029689/" title="tlv02 by Ebith, on Flickr"><img src="http://farm9.staticflickr.com/8246/8475029689_ba2e947ac5_n.jpg" width="320" height="240" alt="tlv02"></a><br/>
+画像はTwitterのPublic TimelineをIRCのログ代わりにしたやつ。<br/>
+古いログをひたすら継ぎ足して表示したり、検索したり、とある日のログを読んだりできる。</p>
+
+<h2>試してみる</h2>
+
+<p>MongoDBは動いてる前提。インストールするなら<a href="http://docs.mongodb.org/manual/installation/" title="Installing MongoDB — MongoDB Manual">Installing MongoDB</a>が詳しい。<br/>
+Mongo.pmを<code>tiarra-path/module/Log/</code>に配置、confの例は以下に。<br/>
+必要に応じて<code>cpanm MongoDB</code>したのち<code>/load</code>か再起動でMongo.pmを読み込む。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>+ Log::Mongo {
+</span><span class='line'>  charset: utf8
+</span><span class='line'>  channel: *
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Node.jsとcoffee-scriptが入っていれば<code>npm install</code>して<code>coffee app.coffee</code>で動き出す。<br/>
+<code>http://localhost:3000</code>にアクセス！</p>
+
+<h2>その他</h2>
+
+<p>環境変数NODE_ENVを<code>production</code>に設定するとSSL+BASIC認証で起動する。_run.sh参照。<br/>
+あとから見返したいチャンネルが1つだけだったのでチャンネル名を考慮していない。全部混ざって表示されるはず。</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[HubotでIRC Botを作る]]></title>
-    <link href="http://ebith.github.com/2013/02/03/hubot-irc/"/>
+    <link href="http://blog.feelmy.net/2013/02/03/hubot-irc/"/>
     <updated>2013-02-03T01:09:00+09:00</updated>
-    <id>http://ebith.github.com/2013/02/03/hubot-irc</id>
+    <id>http://blog.feelmy.net/2013/02/03/hubot-irc</id>
     <content type="html"><![CDATA[<h2>Node.jsのインストールと下準備</h2>
 
 <p>Node.jsの管理には<a href="https://github.com/hokaccha/nodebrew" title="hokaccha/nodebrew · GitHub">Nodebrew</a>を使う。<br/>
@@ -200,9 +238,9 @@ index 1cd6be3..dbfb495 100644
   
   <entry>
     <title type="html"><![CDATA[今月遊んだゲーム]]></title>
-    <link href="http://ebith.github.com/2013/01/31/played-games/"/>
+    <link href="http://blog.feelmy.net/2013/01/31/played-games/"/>
     <updated>2013-01-31T22:00:00+09:00</updated>
-    <id>http://ebith.github.com/2013/01/31/played-games</id>
+    <id>http://blog.feelmy.net/2013/01/31/played-games</id>
     <content type="html"><![CDATA[<h2><a href="http://store.steampowered.com/app/107100/">Bastion</a> ¥327</h2>
 
 <p>楽しいアクションゲームだった。見た目も綺麗。<br/>
@@ -262,9 +300,9 @@ Coop誘うのSteamじゃなくてGames for Windows Live経由なのがダルい�
   
   <entry>
     <title type="html"><![CDATA[年末年始にゲーム35本買ったのでその一覧]]></title>
-    <link href="http://ebith.github.com/2013/01/10/holiday-sale/"/>
+    <link href="http://blog.feelmy.net/2013/01/10/holiday-sale/"/>
     <updated>2013-01-10T00:00:00+09:00</updated>
-    <id>http://ebith.github.com/2013/01/10/holiday-sale</id>
+    <id>http://blog.feelmy.net/2013/01/10/holiday-sale</id>
     <content type="html"><![CDATA[<h2>DRM: Origin</h2>
 
 <ul>
@@ -335,9 +373,9 @@ Terrariaのマルチが思っていた以上に楽しくて年末年始はずっ
   
   <entry>
     <title type="html"><![CDATA[さくらのVPS 2G(Ubuntu 12.04)でTerrariaServer(TShock)を動かす]]></title>
-    <link href="http://ebith.github.com/2013/01/05/terraria-server-with-ubuntu-server-12.04/"/>
+    <link href="http://blog.feelmy.net/2013/01/05/terraria-server-with-ubuntu-server-12.04/"/>
     <updated>2013-01-05T20:33:00+09:00</updated>
-    <id>http://ebith.github.com/2013/01/05/terraria-server-with-ubuntu-server-12.04</id>
+    <id>http://blog.feelmy.net/2013/01/05/terraria-server-with-ubuntu-server-12.04</id>
     <content type="html"><![CDATA[<h2>サーバーのセットアップ</h2>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -379,9 +417,9 @@ Terrariaのマルチが思っていた以上に楽しくて年末年始はずっ
   
   <entry>
     <title type="html"><![CDATA[Vimperatorを便利に使うためのtips]]></title>
-    <link href="http://ebith.github.com/2012/12/22/useful-tips-for-vimperator/"/>
+    <link href="http://blog.feelmy.net/2012/12/22/useful-tips-for-vimperator/"/>
     <updated>2012-12-22T00:00:00+09:00</updated>
-    <id>http://ebith.github.com/2012/12/22/useful-tips-for-vimperator</id>
+    <id>http://blog.feelmy.net/2012/12/22/useful-tips-for-vimperator</id>
     <content type="html"><![CDATA[<p><a href="http://atnd.org/events/34070" title="Vimperator Advent Calendar 2012 : ATND">Vimperator Advent Calendar 2012</a> 22日目担当のebithです。<br/>
 今日はgistで公開されているプラグインや各ユーザのrcにある便利な設定など、<a href="http://vimpr.github.com/" title="Welcome to vimpr!">vimpr</a>のプラグインリポジトリ外のものを紹介します。</p>
 
@@ -547,9 +585,9 @@ autocmdは自動処理のためのもので<code>:help :autocmd</code>に詳し�
   
   <entry>
     <title type="html"><![CDATA[Vimperatorで快適Twitter]]></title>
-    <link href="http://ebith.github.com/2012/12/13/vimperator-is-a-powerful-twitter-client/"/>
+    <link href="http://blog.feelmy.net/2012/12/13/vimperator-is-a-powerful-twitter-client/"/>
     <updated>2012-12-13T00:00:00+09:00</updated>
-    <id>http://ebith.github.com/2012/12/13/vimperator-is-a-powerful-twitter-client</id>
+    <id>http://blog.feelmy.net/2012/12/13/vimperator-is-a-powerful-twitter-client</id>
     <content type="html"><![CDATA[<p><a href="http://atnd.org/events/34070" title="Vimperator Advent Calendar 2012 : ATND">Vimperator Advent Calendar 2012</a> 13日目、二週目に突入のebithです。<br/>
 今日はVimperatorプラグインの中でお気に入りの一つであるTwittperatorとそのプラグイン群の紹介をしたいと思います。</p>
 
@@ -665,9 +703,9 @@ autocmdは自動処理のためのもので<code>:help :autocmd</code>に詳し�
   
   <entry>
     <title type="html"><![CDATA[Vimperatorプラグインを書いてみたい人のためのtips]]></title>
-    <link href="http://ebith.github.com/2012/12/04/vimperator-plugin-dev-tips/"/>
+    <link href="http://blog.feelmy.net/2012/12/04/vimperator-plugin-dev-tips/"/>
     <updated>2012-12-04T00:00:00+09:00</updated>
-    <id>http://ebith.github.com/2012/12/04/vimperator-plugin-dev-tips</id>
+    <id>http://blog.feelmy.net/2012/12/04/vimperator-plugin-dev-tips</id>
     <content type="html"><![CDATA[<p><a href="http://atnd.org/events/34070" title="Vimperator Advent Calendar 2012 : ATND">Vimperator Advent Calendar 2012</a> 4日目のebithです。<br/>
 今日はVimperatorプラグインを書いてみたい、もしくは書こうとは思ったけど良くわからなかった人向けの情報などを紹介します。<br/>
 だいたいは僕がプラグインを作り始めた時に困ったりハマったりしたことですが、お役に立てれば幸いです。</p>
@@ -723,9 +761,9 @@ JavaScript自体に関しては<a href="https://developer.mozilla.org/" title="M
   
   <entry>
     <title type="html"><![CDATA[iGoogleのDays Since(あれやってから何日経ったっけを管理するやつ)クローン作った]]></title>
-    <link href="http://ebith.github.com/2012/11/24/days-since-app/"/>
+    <link href="http://blog.feelmy.net/2012/11/24/days-since-app/"/>
     <updated>2012-11-24T22:43:00+09:00</updated>
-    <id>http://ebith.github.com/2012/11/24/days-since-app</id>
+    <id>http://blog.feelmy.net/2012/11/24/days-since-app</id>
     <content type="html"><![CDATA[<p><img src="https://raw.github.com/ebith/DaysSince/master/public/images/sample.png" alt="" /><br/>
 こういうやつ。<br/>
 オリジナルは<a href="http://leancode.com/dayssince/" title="Days Since | Leancode">Days Since | Leancode</a>で、今回作ったのが<a href="http://dayssince.feelmy.net/" title="Days Since">Days Since</a>。</p>
@@ -739,9 +777,9 @@ JavaScript自体に関しては<a href="https://developer.mozilla.org/" title="M
   
   <entry>
     <title type="html"><![CDATA[ブレイブリーデフォルトクリアした]]></title>
-    <link href="http://ebith.github.com/2012/11/04/bravely-default-flying-fairy/"/>
+    <link href="http://blog.feelmy.net/2012/11/04/bravely-default-flying-fairy/"/>
     <updated>2012-11-04T05:23:00+09:00</updated>
-    <id>http://ebith.github.com/2012/11/04/bravely-default-flying-fairy</id>
+    <id>http://blog.feelmy.net/2012/11/04/bravely-default-flying-fairy</id>
     <content type="html"><![CDATA[<div class="hatena-asin-detail">
   <a href="http://www.amazon.co.jp/%E3%82%B9%E3%82%AF%E3%82%A6%E3%82%A7%E3%82%A2%E3%83%BB%E3%82%A8%E3%83%8B%E3%83%83%E3%82%AF%E3%82%B9-%E3%83%96%E3%83%AC%E3%82%A4%E3%83%96%E3%83%AA%E3%83%BC%E3%83%87%E3%83%95%E3%82%A9%E3%83%AB%E3%83%88/dp/B008F29CRM%3FSubscriptionId%3DAKIAJVATSFYOD4ND3TIA%26tag%3Debith-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB008F29CRM"><img src="http://ecx.images-amazon.com/images/I/51BdKmAou-L._SL160_.jpg" class="hatena-asin-detail-image" alt="ブレイブリーデフォルト" title="ブレイブリーデフォルト"></a>
   <div class="hatena-asin-detail-info">
@@ -782,9 +820,9 @@ JavaScript自体に関しては<a href="https://developer.mozilla.org/" title="M
   
   <entry>
     <title type="html"><![CDATA[Chromeのロールトップ バックパック買った]]></title>
-    <link href="http://ebith.github.com/2012/10/25/i-bought-a-chrome-pawn-rolltop-pack/"/>
+    <link href="http://blog.feelmy.net/2012/10/25/i-bought-a-chrome-pawn-rolltop-pack/"/>
     <updated>2012-10-25T22:16:00+09:00</updated>
-    <id>http://ebith.github.com/2012/10/25/i-bought-a-chrome-pawn-rolltop-pack</id>
+    <id>http://blog.feelmy.net/2012/10/25/i-bought-a-chrome-pawn-rolltop-pack</id>
     <content type="html"><![CDATA[<p>普段からChromeのメッセンジャーバッグを使っていてお気に入りなんだけど、<br/>
 バックパックも欲しくなったので <a href="http://www.chromebagsstore.com/bags/packs/pawn-rolltop-pack.html" title="Chrome Pawn Roll-Top Backpack | Chrome Industries">Chrome Pawn Roll-Top Backpack</a>と<a href="http://www.chromebagsstore.com/bags/accessories/accessory-pouch.html" title="Chrome Accessory Pouch | Chrome Industries">Chrome Accessory Pouch</a>を買った。<br/>
 $170+$10(ポーチ10ドル値引きされた)+送料$65の$245で2万円。</p>
@@ -823,9 +861,9 @@ $170+$10(ポーチ10ドル値引きされた)+送料$65の$245で2万円。</p>
   
   <entry>
     <title type="html"><![CDATA[Livedoor Readerのサブアカウントを切り替えるためのVimperatorプラグイン]]></title>
-    <link href="http://ebith.github.com/2012/10/19/ldr-subaccount-switcher-for-vimperator/"/>
+    <link href="http://blog.feelmy.net/2012/10/19/ldr-subaccount-switcher-for-vimperator/"/>
     <updated>2012-10-19T02:30:00+09:00</updated>
-    <id>http://ebith.github.com/2012/10/19/ldr-subaccount-switcher-for-vimperator</id>
+    <id>http://blog.feelmy.net/2012/10/19/ldr-subaccount-switcher-for-vimperator</id>
     <content type="html"><![CDATA[<div><script src='https://gist.github.com/3913442.js'></script>
 <noscript><pre><code>(function(){
 
@@ -898,9 +936,9 @@ $170+$10(ポーチ10ドル値引きされた)+送料$65の$245で2万円。</p>
   
   <entry>
     <title type="html"><![CDATA[HDDのデータを念入りに消去する]]></title>
-    <link href="http://ebith.github.com/2012/10/09/permanently-erase-disk/"/>
+    <link href="http://blog.feelmy.net/2012/10/09/permanently-erase-disk/"/>
     <updated>2012-10-09T10:38:00+09:00</updated>
-    <id>http://ebith.github.com/2012/10/09/permanently-erase-disk</id>
+    <id>http://blog.feelmy.net/2012/10/09/permanently-erase-disk</id>
     <content type="html"><![CDATA[<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class='sh'><span class='line'>sfdisk -l                   <span class="c"># 消したいディスクを確認する</span>
@@ -914,9 +952,9 @@ $170+$10(ポーチ10ドル値引きされた)+送料$65の$245で2万円。</p>
   
   <entry>
     <title type="html"><![CDATA[ラズベリーパイを手に入れた！]]></title>
-    <link href="http://ebith.github.com/2012/10/01/i-got-raspberry-pi/"/>
+    <link href="http://blog.feelmy.net/2012/10/01/i-got-raspberry-pi/"/>
     <updated>2012-10-01T09:02:00+09:00</updated>
-    <id>http://ebith.github.com/2012/10/01/i-got-raspberry-pi</id>
+    <id>http://blog.feelmy.net/2012/10/01/i-got-raspberry-pi</id>
     <content type="html"><![CDATA[<p><a href="http://www.flickr.com/photos/ebith/8038651368/" title="Raspberry Pi 1/2 by Ebith, on Flickr"><img src="http://farm9.staticflickr.com/8462/8038651368_d716208375_n.jpg" width="320" height="239" alt="Raspberry Pi 1/2"></a><a href="http://www.flickr.com/photos/ebith/8038648103/" title="Raspberry Pi 2/2 by Ebith, on Flickr"><img src="http://farm9.staticflickr.com/8316/8038648103_f163c4d92a_n.jpg" width="320" height="239" alt="Raspberry Pi 2/2"></a><br/>
 6月末にRSに注文したものの、届く気配もなかったのでModMyPiに頼んでみると1週間で到着。<br/>
 残念ながらRev1だったけど、Arch Linuxを入れてHeadless運用でしばらく遊ぶことにする。</p>
@@ -1084,9 +1122,9 @@ $170+$10(ポーチ10ドル値引きされた)+送料$65の$245で2万円。</p>
   
   <entry>
     <title type="html"><![CDATA[KeePass2のkdbxをMacでも快適に読めるようにした]]></title>
-    <link href="http://ebith.github.com/2012/09/23/keepass2-for-osx/"/>
+    <link href="http://blog.feelmy.net/2012/09/23/keepass2-for-osx/"/>
     <updated>2012-09-23T04:21:00+09:00</updated>
-    <id>http://ebith.github.com/2012/09/23/keepass2-for-osx</id>
+    <id>http://blog.feelmy.net/2012/09/23/keepass2-for-osx</id>
     <content type="html"><![CDATA[<p>Macbook触ってる時間が長くなってくるとKeePass2がまともに動かないのが凄く気になってきたし、<br/>
 かと言って1Passwordは凄く高いのでどうにかしたくて右往左往してたらkdbxを読めるPerlモジュールを見つけたので頑張った。</p>
 
@@ -1137,9 +1175,9 @@ percolのお陰で絞込み検索が素晴らしい感じなので便利。</p>
   
   <entry>
     <title type="html"><![CDATA[ファイラから7-zip(7zG.exe)使うようにすると捗る]]></title>
-    <link href="http://ebith.github.com/2012/09/18/use-7-zip-from-a-filer/"/>
+    <link href="http://blog.feelmy.net/2012/09/18/use-7-zip-from-a-filer/"/>
     <updated>2012-09-18T00:10:00+09:00</updated>
-    <id>http://ebith.github.com/2012/09/18/use-7-zip-from-a-filer</id>
+    <id>http://blog.feelmy.net/2012/09/18/use-7-zip-from-a-filer</id>
     <content type="html"><![CDATA[<p>Windowsではずっと統合アーカイバプロジェクトのDLL群とそれらを使うアーカイバにお世話になってきたけど、<br/>
 <a href="http://sevenzip.sourceforge.jp/" title="7-Zip">7-Zip</a>のほうが速いので7-Zip付属の7zG.exe, 7z.exeとB2E(Bridge To Executables)に移行することにした。<br/>
 B2Eの本家は<a href="http://www.kmonos.net/lib/noah.ja.html" title="Noah - kMonos.NET">Noah</a>だけど、<a href="http://claybird.sakura.ne.jp/garage/lhaforge/" title="泥巣 : 作品庫 - LhaForge">LhaForge</a>の方がコマンドラインオプションが充実していて使いやすいのでそっちを使う。</p>
@@ -1170,9 +1208,9 @@ encode:
   
   <entry>
     <title type="html"><![CDATA[VPSのバックアップをDropboxに取る]]></title>
-    <link href="http://ebith.github.com/2012/09/17/server-backup-to-dropbox/"/>
+    <link href="http://blog.feelmy.net/2012/09/17/server-backup-to-dropbox/"/>
     <updated>2012-09-17T09:30:00+09:00</updated>
-    <id>http://ebith.github.com/2012/09/17/server-backup-to-dropbox</id>
+    <id>http://blog.feelmy.net/2012/09/17/server-backup-to-dropbox</id>
     <content type="html"><![CDATA[<p>簡易的なバックアップで良いので取っておきたかったので、<br/>
 tarで固めてlzoで圧縮してDropboxに送るバックアップスクリプト書いた。<br/>
 <a href="http://www.andreafabrizi.it/?dropbox_uploader" title="BASH Dropbox Uploader">BASH Dropbox Uploader</a>が必要。</p>
@@ -1205,9 +1243,9 @@ tar --lzop -cf $tempfile $target $e
   
   <entry>
     <title type="html"><![CDATA[新PCにWindows 7入れた]]></title>
-    <link href="http://ebith.github.com/2012/09/12/install-windows-7/"/>
+    <link href="http://blog.feelmy.net/2012/09/12/install-windows-7/"/>
     <updated>2012-09-12T21:43:00+09:00</updated>
-    <id>http://ebith.github.com/2012/09/12/install-windows-7</id>
+    <id>http://blog.feelmy.net/2012/09/12/install-windows-7</id>
     <content type="html"><![CDATA[<p>Windows 7のインストールは3回目ぐらい、XPの頃と比べると本当に楽になった。<br/>
 OSのインストール後の流れをメモっておく。</p>
 
@@ -1288,9 +1326,9 @@ OSのインストール後の流れをメモっておく。</p>
   
   <entry>
     <title type="html"><![CDATA[ミューズリーのクッキー]]></title>
-    <link href="http://ebith.github.com/2012/09/11/muesli-cookies/"/>
+    <link href="http://blog.feelmy.net/2012/09/11/muesli-cookies/"/>
     <updated>2012-09-11T11:40:00+09:00</updated>
-    <id>http://ebith.github.com/2012/09/11/muesli-cookies</id>
+    <id>http://blog.feelmy.net/2012/09/11/muesli-cookies</id>
     <content type="html"><![CDATA[<p><a href="http://www.flickr.com/photos/ebith/7975028474/" title="ミューズリーのクッキー by Ebith, on Flickr"><img src="http://farm9.staticflickr.com/8302/7975028474_740036360a_n.jpg" width="320" height="239" alt="ミューズリーのクッキー"></a><br/>
 <a href="http://hnycamera.exblog.jp/13661996" title="ミューズリーのクッキー : ハチミツカメラ">ミューズリーのクッキー : ハチミツカメラ</a>より。<br/>
 はちみつじゃなくてメープルシロップだったり、水分やや大目だったりする程度のアレンジ。<br/>
@@ -1334,9 +1372,9 @@ OSのインストール後の流れをメモっておく。</p>
   
   <entry>
     <title type="html"><![CDATA[ゲーム用の新PC組んだ]]></title>
-    <link href="http://ebith.github.com/2012/09/07/new-gaming-pc/"/>
+    <link href="http://blog.feelmy.net/2012/09/07/new-gaming-pc/"/>
     <updated>2012-09-07T21:00:00+09:00</updated>
-    <id>http://ebith.github.com/2012/09/07/new-gaming-pc</id>
+    <id>http://blog.feelmy.net/2012/09/07/new-gaming-pc</id>
     <content type="html"><![CDATA[<p><a href="http://flic.kr/p/d7tBTJ" title="New gaming pc 1/2 by Ebith, on Flickr"><img src="http://farm9.staticflickr.com/8037/7949568956_1d55933fa2_n.jpg" alt="New gaming pc 1/2" /></a>
 <a href="http://flic.kr/p/d7tMUJ" title="New gaming pc 2/2 by Ebith, on Flickr"><img src="http://farm9.staticflickr.com/8035/7949602654_782f691be0_n.jpg" alt="New gaming pc 2/2" /></a></p>
 
@@ -1426,47 +1464,6 @@ OSのインストール後の流れをメモっておく。</p>
 SSDはずっとX25-Mを使っていて速いなーと思っていたけどM3PはWindows 7の起動が15秒足らずとかでそれどころじゃなかった。<br/>
 BIOSまじグラフィカルやし、パッと見わかりやすくなっててBIOSとにらめっこする時間減ったし、USBメモリ挿すだけでアップデートできるとかすごい。<br/>
 Dark Souls: Prepare to Die Editionとっても楽しい。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Gyazoのアップロード先をTumblrにするやつ(Gyamblr) API v2版 for OS X]]></title>
-    <link href="http://ebith.github.com/2012/09/07/gyamblr-for-osx%28tumblr-api-v2%29/"/>
-    <updated>2012-09-07T01:22:00+09:00</updated>
-    <id>http://ebith.github.com/2012/09/07/gyamblr-for-osx(tumblr-api-v2)</id>
-    <content type="html"><![CDATA[<p>気づいたらAPI v1の提供が終了したとかでアップロードできなくなっていたのでv2版書きました。</p>
-
-<h2>使い方</h2>
-
-<p>scriptをGyazoのものと差し替えれば動きますが、tumblifeのgemが必要だったりOAuthの例に漏れず各種トークンが必要だったりするのでよしなにしてください。<br/>
-トークン類は<a href="http://www.tumblr.com/oauth/apps" title="Tumblr">Tumblr</a>でアプリを登録して、oauth.rbを使うと良いと思います。</p>
-
-<div><script src='https://gist.github.com/3657917.js'></script>
-<noscript><pre><code>#!/usr/bin/env ruby
-require 'oauth'
-
-consumer = OAuth::Consumer.new(
-  'consumer_key',
-  'consumer_secret',
-  {
-    site: 'http://api.tumblr.com',
-    request_token_url: &quot;http://www.tumblr.com/oauth/request_token&quot;,
-    authorize_url: &quot;http://www.tumblr.com/oauth/authorize&quot;,
-    access_token_url: &quot;http://www.tumblr.com/oauth/access_token&quot;
-  }
-)
-request_token = consumer.get_request_token
-system('open ' + request_token.authorize_url)
-
-p 'enter oauth_verifier'
-oauth_verifier = gets.chomp!
-access_token = request_token.get_access_token(:oauth_verifier =&gt; oauth_verifier)
-
-p 'oauth_token : ' + access_token.token
-p 'oauth_token_secret : ' + access_token.secret</code></pre></noscript></div>
-
-
-
 ]]></content>
   </entry>
   

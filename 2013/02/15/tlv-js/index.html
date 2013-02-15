@@ -5,11 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: Vimperator - おいら屋ファクトリー</title>
+  <title>Tiarraのログをブラウザから見たり検索したりできるやつ作った - おいら屋ファクトリー</title>
   <meta name="author" content="ebith">
 
   
-  <meta name="description" content="Category: Vimperator">
+  <meta name="description" content="TLV.js 画像はTwitterのPublic TimelineをIRCのログ代わりにしたやつ。
+古いログをひたすら継ぎ足して表示したり、検索したり、とある日のログを読んだりできる。 試してみる MongoDBは動いてる前提。インストールするならInstalling MongoDBが詳しい。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +20,7 @@
   <meta name="google-site-verification" content="2weq-haP9jiK3brxIN6DELbPYBYT4Q2eaW_-miG8pII">
 
   
-  <link rel="canonical" href="http://blog.feelmy.netblog/categories/vimperator/">
+  <link rel="canonical" href="http://blog.feelmy.net/2013/02/15/tlv-js/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -76,78 +77,118 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Vimperator</h1>
+    
+      <h1 class="entry-title">Tiarraのログをブラウザから見たり検索したりできるやつ作った</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-15T22:00:00+09:00" pubdate data-updated="true">Feb 15<span>th</span>, 2013</time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><h2><a href="https://github.com/ebith/TLV.js" title="ebith/TLV.js · GitHub">TLV.js</a></h2>
 
-  
-  <h2>2012</h2>
+<p><a href="http://www.flickr.com/photos/ebith/8475029653/" title="tlv01 by Ebith, on Flickr"><img src="http://farm9.staticflickr.com/8111/8475029653_055048fbb4_n.jpg" width="320" height="240" alt="tlv01"></a>
+<a href="http://www.flickr.com/photos/ebith/8475029689/" title="tlv02 by Ebith, on Flickr"><img src="http://farm9.staticflickr.com/8246/8475029689_ba2e947ac5_n.jpg" width="320" height="240" alt="tlv02"></a><br/>
+画像はTwitterのPublic TimelineをIRCのログ代わりにしたやつ。<br/>
+古いログをひたすら継ぎ足して表示したり、検索したり、とある日のログを読んだりできる。</p>
 
-<article>
-  
-<h1><a href="/2012/12/22/useful-tips-for-vimperator/">Vimperatorを便利に使うためのtips</a></h1>
-<time datetime="2012-12-22T00:00:00+09:00" pubdate><span class='month'>Dec</span> <span class='day'>22</span> <span class='year'>2012</span></time>
+<h2>試してみる</h2>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/vimperator/'>Vimperator</a>, <a class='category' href='/blog/categories/adventcalendar/'>adventCalendar</a></span>
-</footer>
+<p>MongoDBは動いてる前提。インストールするなら<a href="http://docs.mongodb.org/manual/installation/" title="Installing MongoDB — MongoDB Manual">Installing MongoDB</a>が詳しい。<br/>
+Mongo.pmを<code>tiarra-path/module/Log/</code>に配置、confの例は以下に。<br/>
+必要に応じて<code>cpanm MongoDB</code>したのち<code>/load</code>か再起動でMongo.pmを読み込む。</p>
 
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/2012/12/13/vimperator-is-a-powerful-twitter-client/">Vimperatorで快適Twitter</a></h1>
-<time datetime="2012-12-13T00:00:00+09:00" pubdate><span class='month'>Dec</span> <span class='day'>13</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/vimperator/'>Vimperator</a>, <a class='category' href='/blog/categories/adventcalendar/'>adventCalendar</a></span>
-</footer>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>+ Log::Mongo {
+</span><span class='line'>  charset: utf8
+</span><span class='line'>  channel: *
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
 
 
-</article>
+<p>Node.jsとcoffee-scriptが入っていれば<code>npm install</code>して<code>coffee app.coffee</code>で動き出す。<br/>
+<code>http://localhost:3000</code>にアクセス！</p>
 
+<h2>その他</h2>
 
-
-<article>
-  
-<h1><a href="/2012/12/04/vimperator-plugin-dev-tips/">Vimperatorプラグインを書いてみたい人のためのtips</a></h1>
-<time datetime="2012-12-04T00:00:00+09:00" pubdate><span class='month'>Dec</span> <span class='day'>04</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/vimperator/'>Vimperator</a>, <a class='category' href='/blog/categories/adventcalendar/'>adventCalendar</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/2012/10/19/ldr-subaccount-switcher-for-vimperator/">Livedoor Readerのサブアカウントを切り替えるためのVimperatorプラグイン</a></h1>
-<time datetime="2012-10-19T02:30:00+09:00" pubdate><span class='month'>Oct</span> <span class='day'>19</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/javascript/'>JavaScript</a>, <a class='category' href='/blog/categories/vimperator/'>Vimperator</a></span>
-</footer>
-
-
-</article>
-
+<p>環境変数NODE_ENVを<code>production</code>に設定するとSSL+BASIC認証で起動する。_run.sh参照。<br/>
+あとから見返したいチャンネルが1つだけだったのでチャンネル名を考慮していない。全部混ざって表示されるはず。</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">ebith</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-15T22:00:00+09:00" pubdate data-updated="true">Feb 15<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/irc/'>IRC</a>, <a class='category' href='/blog/categories/node-js/'>Node.js</a>, <a class='category' href='/blog/categories/software/'>software</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2013/02/03/hubot-irc/" title="Previous Post: HubotでIRC Botを作る">&laquo; HubotでIRC Botを作る</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -239,7 +280,10 @@
       var disqus_shortname = 'ebith';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.feelmy.net/2013/02/15/tlv-js/';
+        var disqus_url = 'http://blog.feelmy.net/2013/02/15/tlv-js/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Hubot | おいら屋ファクトリー]]></title>
-  <link href="http://blog.feelmy.net/blog/categories/hubot/atom.xml" rel="self"/>
+  <title><![CDATA[Category: IRC | おいら屋ファクトリー]]></title>
+  <link href="http://blog.feelmy.net/blog/categories/irc/atom.xml" rel="self"/>
   <link href="http://blog.feelmy.net/"/>
   <updated>2013-02-15T22:05:38+09:00</updated>
   <id>http://blog.feelmy.net/</id>
@@ -12,6 +12,39 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Tiarraのログをブラウザから見たり検索したりできるやつ作った]]></title>
+    <link href="http://blog.feelmy.net/2013/02/15/tlv-js/"/>
+    <updated>2013-02-15T22:00:00+09:00</updated>
+    <id>http://blog.feelmy.net/2013/02/15/tlv-js</id>
+    <content type="html"><![CDATA[<h2><a href="https://github.com/ebith/TLV.js" title="ebith/TLV.js · GitHub">TLV.js</a></h2>
+
+<p><a href="http://www.flickr.com/photos/ebith/8475029653/" title="tlv01 by Ebith, on Flickr"><img src="http://farm9.staticflickr.com/8111/8475029653_055048fbb4_n.jpg" width="320" height="240" alt="tlv01"></a>
+<a href="http://www.flickr.com/photos/ebith/8475029689/" title="tlv02 by Ebith, on Flickr"><img src="http://farm9.staticflickr.com/8246/8475029689_ba2e947ac5_n.jpg" width="320" height="240" alt="tlv02"></a><br/>
+画像はTwitterのPublic TimelineをIRCのログ代わりにしたやつ。<br/>
+古いログをひたすら継ぎ足して表示したり、検索したり、とある日のログを読んだりできる。</p>
+
+<h2>試してみる</h2>
+
+<p>MongoDBは動いてる前提。インストールするなら<a href="http://docs.mongodb.org/manual/installation/" title="Installing MongoDB — MongoDB Manual">Installing MongoDB</a>が詳しい。<br/>
+Mongo.pmを<code>tiarra-path/module/Log/</code>に配置、confの例は以下に。<br/>
+必要に応じて<code>cpanm MongoDB</code>したのち<code>/load</code>か再起動でMongo.pmを読み込む。
+<code>
++ Log::Mongo {
+  charset: utf8
+  channel: *
+}
+</code>
+Node.jsとcoffee-scriptが入っていれば<code>npm install</code>して<code>coffee app.coffee</code>で動き出す。<br/>
+<code>http://localhost:3000</code>にアクセス！</p>
+
+<h2>その他</h2>
+
+<p>環境変数NODE_ENVを<code>production</code>に設定するとSSL+BASIC認証で起動する。_run.sh参照。<br/>
+あとから見返したいチャンネルが1つだけだったのでチャンネル名を考慮していない。全部混ざって表示されるはず。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[HubotでIRC Botを作る]]></title>

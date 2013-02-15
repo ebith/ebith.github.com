@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: linux | おいら屋ファクトリー]]></title>
-  <link href="http://ebith.github.com/blog/categories/linux/atom.xml" rel="self"/>
-  <link href="http://ebith.github.com/"/>
-  <updated>2013-02-03T20:37:25+09:00</updated>
-  <id>http://ebith.github.com/</id>
+  <link href="http://blog.feelmy.net/blog/categories/linux/atom.xml" rel="self"/>
+  <link href="http://blog.feelmy.net/"/>
+  <updated>2013-02-15T22:05:38+09:00</updated>
+  <id>http://blog.feelmy.net/</id>
   <author>
     <name><![CDATA[ebith]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[HDDのデータを念入りに消去する]]></title>
-    <link href="http://ebith.github.com/2012/10/09/permanently-erase-disk/"/>
+    <link href="http://blog.feelmy.net/2012/10/09/permanently-erase-disk/"/>
     <updated>2012-10-09T10:38:00+09:00</updated>
-    <id>http://ebith.github.com/2012/10/09/permanently-erase-disk</id>
+    <id>http://blog.feelmy.net/2012/10/09/permanently-erase-disk</id>
     <content type="html"><![CDATA[<p><code>sh
 sfdisk -l                   # 消したいディスクを確認する
 shred -v -n 3 -z /dev/hoge  # ランダムデータを3回書き込んだのちゼロフィル
@@ -28,9 +28,9 @@ shred -v -n 3 -z /dev/hoge  # ランダムデータを3回書き込んだのち�
   
   <entry>
     <title type="html"><![CDATA[VPSのバックアップをDropboxに取る]]></title>
-    <link href="http://ebith.github.com/2012/09/17/server-backup-to-dropbox/"/>
+    <link href="http://blog.feelmy.net/2012/09/17/server-backup-to-dropbox/"/>
     <updated>2012-09-17T09:30:00+09:00</updated>
-    <id>http://ebith.github.com/2012/09/17/server-backup-to-dropbox</id>
+    <id>http://blog.feelmy.net/2012/09/17/server-backup-to-dropbox</id>
     <content type="html"><![CDATA[<p>簡易的なバックアップで良いので取っておきたかったので、<br/>
 tarで固めてlzoで圧縮してDropboxに送るバックアップスクリプト書いた。<br/>
 <a href="http://www.andreafabrizi.it/?dropbox_uploader" title="BASH Dropbox Uploader">BASH Dropbox Uploader</a>が必要。</p>

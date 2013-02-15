@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: food | おいら屋ファクトリー]]></title>
-  <link href="http://ebith.github.com/blog/categories/food/atom.xml" rel="self"/>
-  <link href="http://ebith.github.com/"/>
-  <updated>2013-02-03T20:37:25+09:00</updated>
-  <id>http://ebith.github.com/</id>
+  <link href="http://blog.feelmy.net/blog/categories/food/atom.xml" rel="self"/>
+  <link href="http://blog.feelmy.net/"/>
+  <updated>2013-02-15T22:05:38+09:00</updated>
+  <id>http://blog.feelmy.net/</id>
   <author>
     <name><![CDATA[ebith]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[ミューズリーのクッキー]]></title>
-    <link href="http://ebith.github.com/2012/09/11/muesli-cookies/"/>
+    <link href="http://blog.feelmy.net/2012/09/11/muesli-cookies/"/>
     <updated>2012-09-11T11:40:00+09:00</updated>
-    <id>http://ebith.github.com/2012/09/11/muesli-cookies</id>
+    <id>http://blog.feelmy.net/2012/09/11/muesli-cookies</id>
     <content type="html"><![CDATA[<p><a href="http://www.flickr.com/photos/ebith/7975028474/" title="ミューズリーのクッキー by Ebith, on Flickr"><img src="http://farm9.staticflickr.com/8302/7975028474_740036360a_n.jpg" width="320" height="239" alt="ミューズリーのクッキー"></a><br/>
 <a href="http://hnycamera.exblog.jp/13661996" title="ミューズリーのクッキー : ハチミツカメラ">ミューズリーのクッキー : ハチミツカメラ</a>より。<br/>
 はちみつじゃなくてメープルシロップだったり、水分やや大目だったりする程度のアレンジ。<br/>

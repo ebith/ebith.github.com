@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Win | おいら屋ファクトリー]]></title>
-  <link href="http://ebith.github.com/blog/categories/win/atom.xml" rel="self"/>
-  <link href="http://ebith.github.com/"/>
-  <updated>2013-02-03T20:37:25+09:00</updated>
-  <id>http://ebith.github.com/</id>
+  <link href="http://blog.feelmy.net/blog/categories/win/atom.xml" rel="self"/>
+  <link href="http://blog.feelmy.net/"/>
+  <updated>2013-02-15T22:05:38+09:00</updated>
+  <id>http://blog.feelmy.net/</id>
   <author>
     <name><![CDATA[ebith]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[ファイラから7-zip(7zG.exe)使うようにすると捗る]]></title>
-    <link href="http://ebith.github.com/2012/09/18/use-7-zip-from-a-filer/"/>
+    <link href="http://blog.feelmy.net/2012/09/18/use-7-zip-from-a-filer/"/>
     <updated>2012-09-18T00:10:00+09:00</updated>
-    <id>http://ebith.github.com/2012/09/18/use-7-zip-from-a-filer</id>
+    <id>http://blog.feelmy.net/2012/09/18/use-7-zip-from-a-filer</id>
     <content type="html"><![CDATA[<p>Windowsではずっと統合アーカイバプロジェクトのDLL群とそれらを使うアーカイバにお世話になってきたけど、<br/>
 <a href="http://sevenzip.sourceforge.jp/" title="7-Zip">7-Zip</a>のほうが速いので7-Zip付属の7zG.exe, 7z.exeとB2E(Bridge To Executables)に移行することにした。<br/>
 B2Eの本家は<a href="http://www.kmonos.net/lib/noah.ja.html" title="Noah - kMonos.NET">Noah</a>だけど、<a href="http://claybird.sakura.ne.jp/garage/lhaforge/" title="泥巣 : 作品庫 - LhaForge">LhaForge</a>の方がコマンドラインオプションが充実していて使いやすいのでそっちを使う。</p>
