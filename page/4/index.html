@@ -9,9 +9,8 @@
   <meta name="author" content="ebith">
 
   
-  <meta name="description" content="Windowsではずっと統合アーカイバプロジェクトのDLL群とそれらを使うアーカイバにお世話になってきたけど、
-7-Zipのほうが速いので7-Zip付属の7zG.exe, 7z.exeとB2E(Bridge To Executables)に移行することにした。
-B2Eの本家はNoahだけど、 &hellip;">
+  <meta name="description" content="Macbook触ってる時間が長くなってくるとKeePass2がまともに動かないのが凄く気になってきたし、
+かと言って1Passwordは凄く高いのでどうにかしたくて右往左往してたらkdbxを読めるPerlモジュールを見つけたので頑張った。 PerlのFile::KeePassとIO:: &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +78,86 @@ B2Eの本家はNoahだけど、 &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/09/23/keepass2-for-osx/">KeePass2のkdbxをMacでも快適に読めるようにした</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-23T04:21:00+09:00" pubdate data-updated="true">Sep 23<span>rd</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Macbook触ってる時間が長くなってくるとKeePass2がまともに動かないのが凄く気になってきたし、<br/>
+かと言って1Passwordは凄く高いのでどうにかしたくて右往左往してたらkdbxを読めるPerlモジュールを見つけたので頑張った。</p>
+
+<p>PerlのFile::KeePassとIO::Prompter、<a href="https://github.com/mooz/percol" title="mooz/percol">mooz/percol</a>が必要。</p>
+
+<div><script src='https://gist.github.com/3767494.js'></script>
+<noscript><pre><code>#!/usr/bin/env perl
+use strict;
+use warnings;
+use utf8;
+
+use File::KeePass;
+use IO::Prompter;
+use Encode;
+
+my $file = shift @ARGV;
+my $pass = prompt('Password: ', -e =&gt; '');
+
+my $k = File::KeePass-&gt;new;
+
+$k-&gt;load_db($file, $pass);
+
+$k-&gt;unlock;
+
+my @entries = $k-&gt;find_entries({});
+
+open(OUT, '| percol | awk \'BEGIN { FS = &quot; :: &quot;} { printf $2 }\' | pbcopy ');
+foreach my $entry (@entries) {
+  next unless ($entry-&gt;{title} &amp;&amp; $entry-&gt;{password});
+  print OUT encode_utf8(&quot;$entry-&gt;{title} :: $entry-&gt;{password}\n&quot;);
+}
+close(OUT);
+
+$k-&gt;clear;</code></pre></noscript></div>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>./keepass.pl ~/ebith.kdbx
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>みたいな感じで使う。
+percolのお陰で絞込み検索が素晴らしい感じなので便利。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -385,130 +464,6 @@ OSのインストール後の流れをメモっておく。</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/09/07/new-gaming-pc/">ゲーム用の新PC組んだ</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-09-07T21:00:00+09:00" pubdate data-updated="true">Sep 7<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://flic.kr/p/d7tBTJ" title="New gaming pc 1/2 by Ebith, on Flickr"><img src="http://farm9.staticflickr.com/8037/7949568956_1d55933fa2_n.jpg" alt="New gaming pc 1/2" /></a>
-<a href="http://flic.kr/p/d7tMUJ" title="New gaming pc 2/2 by Ebith, on Flickr"><img src="http://farm9.staticflickr.com/8035/7949602654_782f691be0_n.jpg" alt="New gaming pc 2/2" /></a></p>
-
-<h2>構成</h2>
-
-<ul>
-<li>ケース
-
-<ul>
-<li><a href="http://www.links.co.jp/items/antec-case/p280.html" title="P280 製品情報 コンピュータ関連製品の代理店事業 ｌ 株式会社リンクスインターナショナル">ANTEC P280</a></li>
-</ul>
-</li>
-<li>電源
-
-<ul>
-<li><a href="http://www.owltech.co.jp/products/power/Seasonic/SS-X2/SS850_760_660_560KM.html" title="Seasonic電源 X-Series SS-850KM SS-760KM SS-660KM SS-560KM">Seasonic XSeries SS-760KM</a></li>
-</ul>
-</li>
-<li>マザーボード
-
-<ul>
-<li><a href="http://www.asus.co.jp/Motherboards/Intel_Socket_1155/P8Z77V_PRO/" title="ASUS - マザーボード- ASUS P8Z77-V PRO">ASUS P8Z77-V PRO</a></li>
-</ul>
-</li>
-<li>CPU
-
-<ul>
-<li><a href="http://ark.intel.com/ja/products/65520" title="ARK | Intel® Core™ i5-3570K Processor (6M Cache, up to 3.80 GHz)">Intel Core i5 3570K</a></li>
-</ul>
-</li>
-<li>CPUクーラー
-
-<ul>
-<li><a href="http://www.scythe.co.jp/cooler/ninja3-revb.html" title="株式会社サイズ ｜ 商品詳細 ｜忍者参リビジョンB">SCYTHE 忍者参リビジョンB</a></li>
-</ul>
-</li>
-<li>メモリ
-
-<ul>
-<li><a href="http://www.avexir.com/product/platinumspec.htm" title="AVEXIR">AVEXIR AVD3U16001108G-2MW</a></li>
-</ul>
-</li>
-<li>GPU
-
-<ul>
-<li><a href="http://www.gigabyte.jp/products/product-page.aspx?pid=4211#ov" title="GIGABYTE - グラフィックスカード - NVIDIA - PCI Express Solution - GeForce 600 Series - GV-N670OC-2GD">GIGABYTE GV-N670OC-2GD</a></li>
-</ul>
-</li>
-<li>ストレージ
-
-<ul>
-<li><a href="http://www.links.co.jp/item/px-256m3p/" title="PX-256M3P | コンピュータ関連製品の代理店事業 ｌ 株式会社リンクスインターナショナル">PLEXTOR PX-256M3P</a></li>
-<li><a href="http://www.semicon.toshiba.co.jp/product/storage/selection/built-in/client_hdd35/DT01ACAxxx.html" title="クライアントHDD(3.5型)｜クライアントHDD(3.5型)｜東芝 セミコンダクター＆ストレージ社">TOSHIBA DT01ACA200</a></li>
-</ul>
-</li>
-<li>光学ドライブ
-
-<ul>
-<li><a href="http://www.pioneerelectronics.com/PUSA/Computer/Computer+Drives/BDR-207DBK" title="BDR-207DBK - 12x Internal BD/DVD/CD Burner. SATA Interface. | Pioneer Electronics USA">Pioneer BDR-207DBK</a></li>
-</ul>
-</li>
-<li>その他
-
-<ul>
-<li><a href="http://www.ainex.jp/products/as-05.htm" title="Ainex | AS-05">Ainex AS-05 シルバーグリス</a></li>
-<li><a href="http://www.ainex.jp/products/bz-01.htm" title="Ainex | BZ-01">Ainex BZ-01 ブザーユニット</a></li>
-</ul>
-</li>
-<li>流用品
-
-<ul>
-<li><a href="http://jp.creative.com/products/product.asp?category=209&amp;subcategory=669&amp;product=15853" title="Sound Blaster X-Fi XtremeGamer">CREATIVE Sound Blaster X-Fi XtremeGamer</a></li>
-<li><a href="http://www.jp.onkyo.com/pcaudio/pcidigitalaudioboard/se90pci/index.htm" title="ONKYO PCオーディオ製品情報：SE-90PCI - PCIe/PCIデジタルオーディオボード | オンキヨー株式会社">ONKYO SE-90PCI</a></li>
-<li><a href="http://www.scythe.co.jp/cooler/kaze-juni.html" title="株式会社サイズ ｜ 商品詳細 ｜KAZE-JYUNI">SCYTHE KAZE-JYUNI 800rpm SY1225SL12L</a> * 2</li>
-</ul>
-</li>
-<li>合計 ￥151140</li>
-</ul>
-
-
-<h2>感想</h2>
-
-<p>ちょっと電源にお金割きすぎた感じあるのでCorsairの750AXみたいなもうちょい安いのでも良かったかもしれない。<br/>
-光学ドライブ無し予定だったけどブルーレイドライブ6500円だったので使い道無いのに付けてしまった。<br/>
-<a href="www.antecindia.co.in/pdf/manuals/P280_Manual_JP.pdf">P280のマニュアル</a>にネジの説明がカラー写真付きで載っていて素晴らしい。<br/>
-高級グリス塗るの初めてやったけど<a href="http://www.ainex.jp/data/as-05_mnl_web.pdf">AS-05のマニュアル</a>が詳しくて良かった。<br/>
-SSDはずっとX25-Mを使っていて速いなーと思っていたけどM3PはWindows 7の起動が15秒足らずとかでそれどころじゃなかった。<br/>
-BIOSまじグラフィカルやし、パッと見わかりやすくなっててBIOSとにらめっこする時間減ったし、USBメモリ挿すだけでアップデートできるとかすごい。<br/>
-Dark Souls: Prepare to Die Editionとっても楽しい。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/5/">&larr; Older</a>
@@ -524,6 +479,10 @@ Dark Souls: Prepare to Die Editionとっても楽しい。</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/02/28/played-games/">今月遊んだゲーム</a>
+      </li>
     
       <li class="post">
         <a href="/2013/02/15/tlv-js/">Tiarraのログをブラウザから見たり検索したりできるやつ作った</a>
@@ -561,15 +520,11 @@ Dark Souls: Prepare to Die Editionとっても楽しい。</p>
         <a href="/2012/11/24/days-since-app/">iGoogleのDays Since(あれやってから何日経ったっけを管理するやつ)クローン作った</a>
       </li>
     
-      <li class="post">
-        <a href="/2012/11/04/bravely-default-flying-fairy/">ブレイブリーデフォルトクリアした</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-  <span id="tag-cloud"><a href='/blog/categories/3ds' style='font-size: 110.0%'>3DS(1)</a> <a href='/blog/categories/adventcalendar' style='font-size: 130.0%'>adventCalendar(3)</a> <a href='/blog/categories/archlinux' style='font-size: 110.0%'>ArchLinux(1)</a> <a href='/blog/categories/bag' style='font-size: 110.0%'>bag(1)</a> <a href='/blog/categories/done' style='font-size: 110.0%'>done(1)</a> <a href='/blog/categories/food' style='font-size: 110.0%'>food(1)</a> <a href='/blog/categories/game' style='font-size: 140.0%'>game(4)</a> <a href='/blog/categories/hardware' style='font-size: 120.0%'>hardware(2)</a> <a href='/blog/categories/hubot' style='font-size: 110.0%'>Hubot(1)</a> <a href='/blog/categories/irc' style='font-size: 120.0%'>IRC(2)</a> <a href='/blog/categories/javascript' style='font-size: 110.0%'>JavaScript(1)</a> <a href='/blog/categories/linux' style='font-size: 120.0%'>linux(2)</a> <a href='/blog/categories/mac' style='font-size: 110.0%'>Mac(1)</a> <a href='/blog/categories/macintosh' style='font-size: 110.0%'>Macintosh(1)</a> <a href='/blog/categories/node-js' style='font-size: 120.0%'>Node.js(2)</a> <a href='/blog/categories/octopress' style='font-size: 110.0%'>Octopress(1)</a> <a href='/blog/categories/raspberrypi' style='font-size: 110.0%'>RaspberryPi(1)</a> <a href='/blog/categories/recipe' style='font-size: 110.0%'>recipe(1)</a> <a href='/blog/categories/ruby' style='font-size: 110.0%'>Ruby(1)</a> <a href='/blog/categories/software' style='font-size: 160.0%'>software(6)</a> <a href='/blog/categories/terraria' style='font-size: 110.0%'>Terraria(1)</a> <a href='/blog/categories/ubuntu' style='font-size: 110.0%'>Ubuntu(1)</a> <a href='/blog/categories/vimperator' style='font-size: 140.0%'>Vimperator(4)</a> <a href='/blog/categories/vps' style='font-size: 110.0%'>VPS(1)</a> <a href='/blog/categories/win' style='font-size: 110.0%'>Win(1)</a> <a href='/blog/categories/windows' style='font-size: 110.0%'>Windows(1)</a> </span>
+  <span id="tag-cloud"><a href='/blog/categories/3ds' style='font-size: 110.0%'>3DS(1)</a> <a href='/blog/categories/adventcalendar' style='font-size: 130.0%'>adventCalendar(3)</a> <a href='/blog/categories/archlinux' style='font-size: 110.0%'>ArchLinux(1)</a> <a href='/blog/categories/bag' style='font-size: 110.0%'>bag(1)</a> <a href='/blog/categories/done' style='font-size: 110.0%'>done(1)</a> <a href='/blog/categories/food' style='font-size: 110.0%'>food(1)</a> <a href='/blog/categories/game' style='font-size: 150.0%'>game(5)</a> <a href='/blog/categories/hardware' style='font-size: 120.0%'>hardware(2)</a> <a href='/blog/categories/hubot' style='font-size: 110.0%'>Hubot(1)</a> <a href='/blog/categories/irc' style='font-size: 120.0%'>IRC(2)</a> <a href='/blog/categories/javascript' style='font-size: 110.0%'>JavaScript(1)</a> <a href='/blog/categories/linux' style='font-size: 120.0%'>linux(2)</a> <a href='/blog/categories/mac' style='font-size: 110.0%'>Mac(1)</a> <a href='/blog/categories/macintosh' style='font-size: 110.0%'>Macintosh(1)</a> <a href='/blog/categories/node-js' style='font-size: 120.0%'>Node.js(2)</a> <a href='/blog/categories/octopress' style='font-size: 110.0%'>Octopress(1)</a> <a href='/blog/categories/raspberrypi' style='font-size: 110.0%'>RaspberryPi(1)</a> <a href='/blog/categories/recipe' style='font-size: 110.0%'>recipe(1)</a> <a href='/blog/categories/ruby' style='font-size: 110.0%'>Ruby(1)</a> <a href='/blog/categories/software' style='font-size: 160.0%'>software(6)</a> <a href='/blog/categories/terraria' style='font-size: 110.0%'>Terraria(1)</a> <a href='/blog/categories/ubuntu' style='font-size: 110.0%'>Ubuntu(1)</a> <a href='/blog/categories/vimperator' style='font-size: 140.0%'>Vimperator(4)</a> <a href='/blog/categories/vps' style='font-size: 110.0%'>VPS(1)</a> <a href='/blog/categories/win' style='font-size: 110.0%'>Win(1)</a> <a href='/blog/categories/windows' style='font-size: 110.0%'>Windows(1)</a> </span>
 </section>
 
 <section>

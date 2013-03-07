@@ -4,7 +4,7 @@
   <title><![CDATA[Category: IRC | おいら屋ファクトリー]]></title>
   <link href="http://blog.feelmy.net/blog/categories/irc/atom.xml" rel="self"/>
   <link href="http://blog.feelmy.net/"/>
-  <updated>2013-02-15T22:05:38+09:00</updated>
+  <updated>2013-03-08T05:02:10+09:00</updated>
   <id>http://blog.feelmy.net/</id>
   <author>
     <name><![CDATA[ebith]]></name>
@@ -28,7 +28,7 @@
 <h2>試してみる</h2>
 
 <p>MongoDBは動いてる前提。インストールするなら<a href="http://docs.mongodb.org/manual/installation/" title="Installing MongoDB — MongoDB Manual">Installing MongoDB</a>が詳しい。<br/>
-Mongo.pmを<code>tiarra-path/module/Log/</code>に配置、confの例は以下に。<br/>
+Mongo.pmをtiarraPath/module/Log/に配置、confの例は以下に。<br/>
 必要に応じて<code>cpanm MongoDB</code>したのち<code>/load</code>か再起動でMongo.pmを読み込む。
 <code>
 + Log::Mongo {
@@ -37,7 +37,7 @@ Mongo.pmを<code>tiarra-path/module/Log/</code>に配置、confの例は以下�
 }
 </code>
 Node.jsとcoffee-scriptが入っていれば<code>npm install</code>して<code>coffee app.coffee</code>で動き出す。<br/>
-<code>http://localhost:3000</code>にアクセス！</p>
+http://localhost:3000にアクセス！</p>
 
 <h2>その他</h2>
 

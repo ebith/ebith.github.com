@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: 3DS - おいら屋ファクトリー</title>
+  <title>おいら屋ファクトリー</title>
   <meta name="author" content="ebith">
 
   
-  <meta name="description" content="Category: 3DS">
+  <meta name="description" content="Blog Archives Recent Posts 今月遊んだゲーム Tiarraのログをブラウザから見たり検索したりできるやつ作った HubotでIRC Botを作る 今月遊んだゲーム 年末年始にゲーム35本買ったのでその一覧 さくらのVPS 2G(Ubuntu 12.04) &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@
   <meta name="google-site-verification" content="2weq-haP9jiK3brxIN6DELbPYBYT4Q2eaW_-miG8pII">
 
   
-  <link rel="canonical" href="http://blog.feelmy.netblog/categories/3ds/">
+  <link rel="canonical" href="http://blog.feelmy.net/.orig">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -75,40 +75,15 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div>
-<article role="article">
+      <div class="blog-index">
   
-  <header>
-    <h1 class="entry-title">Category: 3DS</h1>
+  
+  <div class="pagination">
     
-  </header>
-  
-  <div id="blog-archives" class="category">
-
-
-
-  
-  <h2>2012</h2>
-
-<article>
-  
-<h1><a href="/2012/11/04/bravely-default-flying-fairy/">ブレイブリーデフォルトクリアした</a></h1>
-<time datetime="2012-11-04T05:23:00+09:00" pubdate><span class='month'>Nov</span> <span class='day'>04</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/3ds/'>3DS</a>, <a class='category' href='/blog/categories/done/'>done</a>, <a class='category' href='/blog/categories/game/'>game</a></span>
-</footer>
-
-
-</article>
-
+    <a href="/blog/archives">Blog Archives</a>
+    
+  </div>
 </div>
-
-  
-</article>
-
-</div>
-
 <aside class="sidebar">
   
     <section>
@@ -181,7 +156,6 @@
 
   
 </aside>
-
 
     </div>
   </div>
