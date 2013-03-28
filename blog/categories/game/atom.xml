@@ -4,7 +4,7 @@
   <title><![CDATA[Category: game | おいら屋ファクトリー]]></title>
   <link href="http://blog.feelmy.net/blog/categories/game/atom.xml" rel="self"/>
   <link href="http://blog.feelmy.net/"/>
-  <updated>2013-03-29T00:49:25+09:00</updated>
+  <updated>2013-03-29T00:50:36+09:00</updated>
   <id>http://blog.feelmy.net/</id>
   <author>
     <name><![CDATA[ebith]]></name>
@@ -12,6 +12,26 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[今月遊んだゲーム]]></title>
+    <link href="http://blog.feelmy.net/2013/03/29/played-games/"/>
+    <updated>2013-03-29T00:00:00+09:00</updated>
+    <id>http://blog.feelmy.net/2013/03/29/played-games</id>
+    <content type="html"><![CDATA[<h2><a href="http://store.steampowered.com/app/23530">Earth Defense Force: Insect Armageddon</a> ¥185</h2>
+
+<p>オンラインCoopがある地球防衛軍。</p>
+
+<h2><a href="http://store.steampowered.com/agecheck/app/202170/">Sleeping Dogs</a> ¥723</h2>
+
+<p>面白くないわけじゃないけどGTAで良いやんという結論。</p>
+
+<h2><a href="http://amazon.jp/dp/B00A8E0L4S?tag=ebith-22">マクロス30 銀河を繋ぐ歌声</a> ¥6722</h2>
+
+<p>でかい画面でバルキリー動かせるの楽しい。機体も豊富。アクションRPGであることを受け入れられるなら楽しめる。<br/>
+50時間で2回フリーズした。低い空、機体ステータスの一部が見られない、インベントリの容量が小さすぎる、ちゃちなダンジョン、荒い機体テクスチャなど残念な仕様や要素も多い。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[今月遊んだゲーム]]></title>
@@ -202,48 +222,6 @@ mono TerrariaServer.exe
 サーバーの基本的な設定は<code>tshock/config.json</code>を直接書き換える。<a href="https://tshock.atlassian.net/wiki/display/TSHOCKPLUGINS/Configuration+File+Docs" title="Configuration File Docs - TShock Documentation - Confluence">Configuration File Docs</a>を参照。<br/>
 <code>group perm guest</code>でguestユーザが使えるコマンド一覧が表示される。<code>modgroup (add|del) guest hoge</code>で権限操作。<a href="https://tshock.atlassian.net/wiki/pages/viewpage.action?pageId=3047433" title="Commands/Permissions list - TShock Documentation - Confluence">Commands/Permissions list</a>がコマンド一覧。<br/>
 サーバーに接続しただけの未登録ユーザはguestに所属する。身内向けならサーバーパスワード有りにして管理者以外は全員guestが楽そう。権限管理的な意味で。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[ブレイブリーデフォルトクリアした]]></title>
-    <link href="http://blog.feelmy.net/2012/11/04/bravely-default-flying-fairy/"/>
-    <updated>2012-11-04T05:23:00+09:00</updated>
-    <id>http://blog.feelmy.net/2012/11/04/bravely-default-flying-fairy</id>
-    <content type="html"><![CDATA[<p><div class="hatena-asin-detail">
-  <a href="http://www.amazon.co.jp/%E3%82%B9%E3%82%AF%E3%82%A6%E3%82%A7%E3%82%A2%E3%83%BB%E3%82%A8%E3%83%8B%E3%83%83%E3%82%AF%E3%82%B9-%E3%83%96%E3%83%AC%E3%82%A4%E3%83%96%E3%83%AA%E3%83%BC%E3%83%87%E3%83%95%E3%82%A9%E3%83%AB%E3%83%88/dp/B008F29CRM%3FSubscriptionId%3DAKIAJVATSFYOD4ND3TIA%26tag%3Debith-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB008F29CRM"><img src="http://ecx.images-amazon.com/images/I/51BdKmAou-L._SL160_.jpg" class="hatena-asin-detail-image" alt="ブレイブリーデフォルト" title="ブレイブリーデフォルト"></a>
-  <div class="hatena-asin-detail-info">
-    <p class="hatena-asin-detail-title"><a href="http://www.amazon.co.jp/%E3%82%B9%E3%82%AF%E3%82%A6%E3%82%A7%E3%82%A2%E3%83%BB%E3%82%A8%E3%83%8B%E3%83%83%E3%82%AF%E3%82%B9-%E3%83%96%E3%83%AC%E3%82%A4%E3%83%96%E3%83%AA%E3%83%BC%E3%83%87%E3%83%95%E3%82%A9%E3%83%AB%E3%83%88/dp/B008F29CRM%3FSubscriptionId%3DAKIAJVATSFYOD4ND3TIA%26tag%3Debith-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB008F29CRM">ブレイブリーデフォルト</a></p>
-    <ul>
-
-      <li><span class="hatena-asin-detail-label">出版社/メーカー:</span> スクウェア・エニックス</li>
-      <li><span class="hatena-asin-detail-label">発売日:</span> 2012-10-11</li>
-      <li><span class="hatena-asin-detail-label">メディア:</span> Video Game</li>
-      <li><a href="http://www.amazon.co.jp/review/product/B008F29CRM%3FSubscriptionId%3DAKIAJVATSFYOD4ND3TIA%26tag%3Debith-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D5143%26creativeASIN%3DB008F29CRM">Amazon のレビューを見る</a></li>
-    </ul>
-  </div>
-  <div class="hatena-asin-detail-foot"></div>
-</div></p>
-
-<p>よくできたJPRGって感じでそこそこ楽しんだ。<br/>
-誰にでもオススメできるわけじゃないけどFFっぽいRPGやりたいならアリなんじゃないかな。<br/>
-9999*2(刀流)*5(回行動)*2(人)を毎ターンできるのとか楽しい。</p>
-
-<h3>良かったとこ</h3>
-
-<ul>
-<li>安定のジョブシステム</li>
-<li>ブレイブシステムでテンポ良い戦闘</li>
-</ul>
-
-
-<h3>悪かったとこ</h3>
-
-<ul>
-<li>主人公たちの性格とか会話がイマイチに感じた。ストーリー外の話とかだと違和感無かったんでなんか勿体ない感じ。</li>
-<li>中盤以降ストーリーの盛り上がりに欠ける上に徒歩移動が増えて、エンカウント率の高さも相まってストレス。</li>
-</ul>
-
 ]]></content>
   </entry>
   
