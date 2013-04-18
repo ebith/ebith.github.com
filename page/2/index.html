@@ -9,12 +9,9 @@
   <meta name="author" content="ebith">
 
   
-  <meta name="description" content="Node.jsのインストールと下準備 Node.jsの管理にはNodebrewを使う。
-Readmeに従ってインストールして、Nodebrew経由でNodeのバイナリを入れる。
-更にcoffee-script必要らしいのとforeverあると便利らしいので入れとく。 1
-2
-3
-4 &hellip;">
+  <meta name="description" content="Bastion ¥327 楽しいアクションゲームだった。見た目も綺麗。
+ストーリーはイミフ。 Castle Crashers ¥339 Coopすべく買ったが難しいのでやらなくなってしまった。
+糞ゲー(汚い意味で) Hotline Miami ¥222 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -82,218 +79,6 @@ Readmeに従ってインストールして、Nodebrew経由でNodeのバイナ�
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/02/03/hubot-irc/">HubotでIRC Botを作る</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-02-03T01:09:00+09:00" pubdate data-updated="true">Feb 3<span>rd</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>Node.jsのインストールと下準備</h2>
-
-<p>Node.jsの管理には<a href="https://github.com/hokaccha/nodebrew" title="hokaccha/nodebrew · GitHub">Nodebrew</a>を使う。<br/>
-Readmeに従ってインストールして、Nodebrew経由でNodeのバイナリを入れる。<br/>
-更にcoffee-script必要らしいのとforeverあると便利らしいので入れとく。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>nodebrew install-binary stable
-</span><span class='line'>nodebrew use v0.8.17
-</span><span class='line'>npm install -g forever
-</span><span class='line'>npm install -g coffee-script
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Bot作る</h2>
-
-<p>フォルダ構成はこんなの。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>bot/
-</span><span class='line'>├── node_modules
-</span><span class='line'>├── scripts
-</span><span class='line'>│   ├── colorful-ping.coffee
-</span><span class='line'>│   ├── config.coffee
-</span><span class='line'>│   ├── fetch-title.coffee
-</span><span class='line'>│   ├── rating.coffee
-</span><span class='line'>│   ├── reddit-gamedeals.coffee
-</span><span class='line'>│   ├── upgrade.coffee
-</span><span class='line'>│   └── vpn-manager.coffee
-</span><span class='line'>├── hubot-scripts.json
-</span><span class='line'>├── package.json
-</span><span class='line'>└── run.sh
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>こんな感じにpackage.json書いてnpm installするとややこしいことなくインストール完了。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;ebithubot&quot;</span><span class="p">,</span>
-</span><span class='line'>  <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;0.0.1&quot;</span><span class="p">,</span>
-</span><span class='line'>  <span class="nt">&quot;dependencies&quot;</span><span class="p">:</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nt">&quot;hubot&quot;</span><span class="p">:</span> <span class="s2">&quot;2.3.5&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;hubot-irc&quot;</span><span class="p">:</span> <span class="s2">&quot;0.1.4&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;hubot-scripts&quot;</span><span class="p">:</span> <span class="s2">&quot;2.2.2&quot;</span><span class="p">,</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nt">&quot;cron&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;request&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;iconv-jp&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;request&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;cheerio&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;aws-sdk&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;ntwitter&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>あとは好きなだけスクリプトを書いてBotの機能強化に励む。<br/>
-<a href="https://github.com/github/hubot/tree/master/src/scripts" title="hubot/src/scripts at master · github/hubot · GitHub">Hubot付属のscript</a>が良い例。</p>
-
-<h2>運用において</h2>
-
-<p>スクリプトのリロード機能が無くて、毎回再起動するしかないのでIRC Proxy無しでの運用は厳しい。<br/>
-かといって普段使いのProxyに繋ぐと入ってるチャンネル全部のメッセージを処理対象にしてしまうのでイマイチ。</p>
-
-<h3>起動スクリプト</h3>
-
-<p>設定類は環境変数で行うのが基本らしいのでシェルスクリプトに<code>export</code>を並び立てる。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c">#!/usr/bin/env bash</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># hubot</span>
-</span><span class='line'><span class="nb">export </span><span class="nv">PORT</span><span class="o">=</span>8889
-</span><span class='line'>
-</span><span class='line'><span class="c"># hubot-irc</span>
-</span><span class='line'><span class="nb">export </span><span class="nv">HUBOT_IRC_UNFLOOD</span><span class="o">=</span><span class="s2">&quot;true&quot;</span>
-</span><span class='line'><span class="nb">export </span><span class="nv">HUBOT_IRC_NICK</span><span class="o">=</span><span class="s2">&quot;ebithubot&quot;</span>
-</span><span class='line'><span class="nb">export </span><span class="nv">HUBOT_IRC_PORT</span><span class="o">=</span><span class="s2">&quot;6669&quot;</span>
-</span><span class='line'><span class="nb">export </span><span class="nv">HUBOT_IRC_SERVER</span><span class="o">=</span><span class="s2">&quot;localhost&quot;</span>
-</span><span class='line'><span class="nb">export </span><span class="nv">HUBOT_IRC_ROOMS</span><span class="o">=</span><span class="s2">&quot;#ebithubot&quot;</span>
-</span><span class='line'>
-</span><span class='line'>forever start -c coffee node_modules/hubot/bin/hubot -a irc
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Notice使いたい</h3>
-
-<p><a href="http://blog.fumiz.me/2012/08/05/hubot-irc-bot-script/#notice" title="hubotスクリプトの書き方とサンプル集 | mitc">hubotスクリプトの書き方とサンプル集 | mitc</a>によると互換性のために削除されたらしい。<br/>
-hubot-ircにパッチを当てて復活させる。v0.1.4向け。</p>
-
-<div><script src='https://gist.github.com/4505583.js'></script>
-<noscript><pre><code>diff --git a/src/irc.coffee b/src/irc.coffee
-index 1cd6be3..dbfb495 100644
---- a/src/irc.coffee
-+++ b/src/irc.coffee
-@@ -5,6 +5,12 @@
- Irc = require 'irc'
- 
- class IrcBot extends Adapter
-+  constructor: (@robot) -&gt;
-+    super @robot
-+    @robot.notice = (user, strings...) -&gt;
-+      @adapter.notice user, strings...
-+    @robot.Response = IrcResponse
-+
-   send: (user, strings...) -&gt;
-     for str in strings
-       if not str?
-@@ -176,5 +182,9 @@ class IrcBot extends Adapter
- 
-     self.emit &quot;connected&quot;
- 
-+class IrcResponse extends Response
-+  notice: (strings...) -&gt;
-+    @robot.adapter.notice @message.user, strings...
-+
- exports.use = (robot) -&gt;
-   new IrcBot robot</code></pre></noscript></div>
-
-
-<h3>データの永続化</h3>
-
-<p>データの永続化はオプションになっていて、Redis以外にもMongoDBやAmazon S3とかファイルも選べるようになってる。<br/>
-どれもhubot-scriptsのリポジトリに入っているので<code>hubot-scripts.json</code>に<code>["redis-brain.coffee"]</code>とか書く。<br/>
-永続化のための*-brain.coffeeが読み込まれるとrobot.brain.dataが5秒おきに自動保存されるようになる。</p>
-
-<p>ただし02/01/2013現在npm上で最新のhubot-scripts 2.4.1に入ってるredis-brain.coffeeは壊れてるので一つ前の2.2.2とか使うべき。</p>
-
-<h3>forever</h3>
-
-<p>簡単なdaemontoolsみたいなので便利なんだけど、logrotateの仕組みが無いのでログをいっぱい吐いてるとディスクを圧迫する。<br/>
-かといってログをrmとかしちゃうとそこで書き込みが止まってしまうのでアレ。</p>
-</div>
-  
-  
-
-
-    </article>
   
   
     <article>
@@ -750,6 +535,151 @@ autocmdは自動処理のためのもので<code>:help :autocmd</code>に詳し�
 
     </article>
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/12/13/vimperator-is-a-powerful-twitter-client/">Vimperatorで快適Twitter</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-13T00:00:00+09:00" pubdate data-updated="true">Dec 13<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://atnd.org/events/34070" title="Vimperator Advent Calendar 2012 : ATND">Vimperator Advent Calendar 2012</a> 13日目、二週目に突入のebithです。<br/>
+今日はVimperatorプラグインの中でお気に入りの一つであるTwittperatorとそのプラグイン群の紹介をしたいと思います。</p>
+
+<h2>Twittperatorとは</h2>
+
+<p>Streamimg APIにいち早く対応したTwitterクライアントであり、Vimperatorのプラグインでもあります。<br/>
+ツイートすることやタイムラインの表示の他にRTやFavはもちろん、会話(in_reply_to)を辿ったり、Twitterを検索したり、特定のツイート(status)のページや誰かのホームを開いたりと言ったことがコマンドラインから可能です。<br/>
+また、プラグインを作ることによって自由度の高い拡張が可能で既に幾つものプラグインが存在しています。</p>
+
+<h2>使ってみる</h2>
+
+<p><a href="https://raw.github.com/vimpr/vimperator-plugins/master/twittperator.js">twittperator.js</a>を読み込み、<code>:tw -getPIN</code>で得たPINコードを<code>:tw -setPIN</code>でセットすることで使えるようになります。<br/>
+基本的な使い方は<code>:tw</code>コマンドからの補完や<code>:help twittperator</code>を参考にしてください。<br/>
+また、一例として少しだけ設定を書いておくので必要に応じて.vimperatorrcに書き足すと良いと思います。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='vim'><span class='line'><span class="c">&quot; Twitterへの接続がSSLのみになったので、Twittperator側でもSSLを使うように</span>
+</span><span class='line'><span class="k">let</span> <span class="k">g</span>:twittperator_use_ssl_connection_for_api_ep <span class="p">=</span> <span class="m">1</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">&quot; Streaming APIを使う</span>
+</span><span class='line'><span class="k">let</span> <span class="k">g</span>:twittperator_use_chirp <span class="p">=</span> <span class="m">1</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">&quot; 特定の単語を含むツイートを追いかける</span>
+</span><span class='line'><span class="k">let</span> <span class="k">g</span>:twittperator_track_words <span class="p">=</span> <span class="s2">&quot;vimp,vimperator,twittperator,ついっぺ,ツイッペ&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">&quot; Twitter IDの設定。いくつかのプラグインで必要</span>
+</span><span class='line'><span class="k">let</span> <span class="k">g</span>:twittperator_screen_name <span class="p">=</span> <span class="s2">&quot;ebith&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">&quot; タイムラインの表示</span>
+</span><span class='line'><span class="nb">nnoremap</span> <span class="p">,</span>wl :<span class="nb">tw</span><span class="p">&lt;</span>CR<span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">&quot; ツイートする</span>
+</span><span class='line'><span class="nb">nnoremap</span> <span class="p">,</span><span class="nb">ww</span> :<span class="nb">tw</span><span class="p">&lt;</span>Space<span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">&quot; 返信する</span>
+</span><span class='line'><span class="nb">nnoremap</span> <span class="p">,</span>wr :<span class="nb">tw</span><span class="p">&lt;</span>Space<span class="p">&gt;</span>@
+</span><span class='line'>
+</span><span class='line'><span class="c">&quot; ツイートに含まれるURLを開く</span>
+</span><span class='line'><span class="nb">nnoremap</span> <span class="p">,</span><span class="k">w</span><span class="sr">/ :tw!/</span><span class="p">&lt;</span>Tab<span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">&quot; 会話を辿る</span>
+</span><span class='line'><span class="nb">nnoremap</span> <span class="p">,</span>wt :<span class="nb">tw</span><span class="p">!</span>thread<span class="p">&lt;</span>Space<span class="p">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>個性あふれるプラグイン群</h2>
+
+<p>Twittperatorには数々の便利なプラグインが提供されています。<br/>
+ここでそれらの一部を紹介します。<br/>
+<a href="https://github.com/vimpr/vimperator-plugins/tree/master/twittperator" title="vimperator-plugins/twittperator at master · vimpr/vimperator-plugins · GitHub">https://github.com/vimpr/vimperator-plugins/tree/master/twittperator</a>からダウンロード可能です。</p>
+
+<h3>add-url-completer</h3>
+
+<p><a href="http://vimperator.g.hatena.ne.jp/nokturnalmortum/20110704/1309706089" title="Twittperator の履歴から URL を取り出して、:tabopen などで補完できるようにする - Death to false Web browser! - vimperatorグループ">Twittperator の履歴から URL を取り出して、:tabopen などで補完できるようにする</a></p>
+
+<h3>colorful-log-writer</h3>
+
+<p><a href="http://www.flickr.com/photos/ebith/5674571479/" title="colorful-log-writer | Flickr - Photo Sharing!">tail -fするとカラフルなTLが流れてくるファイルを書き出すTwittperatorプラグイン</a></p>
+
+<h3>eject-alert</h3>
+
+<p><a href="http://vimperator.g.hatena.ne.jp/nokturnalmortum/20120317/1331979169" title="音を鳴らしたりできない環境で、reply に気づけるようにする便利な Twittperator プラグイン - Death to false Web browser! - vimperatorグループ">音を鳴らしたりできない環境で、reply に気づけるようにする便利な Twittperator プラグイン</a></p>
+
+<h3>pong</h3>
+
+<p><a href="http://vimperator.g.hatena.ne.jp/nokturnalmortum/20110330/1301495775" title="Twitter で超反応するための Twittperator 用プラグイン - Death to false Web browser! - vimperatorグループ">Twitter で超反応するための Twittperator 用プラグイン</a></p>
+
+<h3>twsidebar</h3>
+
+<p><a href="http://vimperator.g.hatena.ne.jp/nokturnalmortum/20111102/1320245517" title="サイドバーにTL表示をするプラグイン - Death to false Web browser! - vimperatorグループ">サイドバーにTL表示をするプラグイン</a></p>
+
+<h3>twsidebar-expand-url</h3>
+
+<p><a href="http://d.hatena.ne.jp/ebith/20120808/1344429639" title="短縮URLを展開するTwittperatorプラグイン(twsidebar向け) - おいら屋ファクトリー">短縮URLを展開するTwittperatorプラグイン(twsidebar向け)</a><br/>
+画像のサムネイルを表示したり、ツイートを展開表示する機能も付いています</p>
+
+<h3>urusai-namakubi</h3>
+
+<p><a href="http://chi.usamimi.info/Program/Application/BouyomiChan/" title="棒読みちゃん ～ 音声合成で日本語文章を読み上げるツール">棒読みちゃん</a>にタイムラインを読み上げさせるプラグイン。namakubi.js(Vimperatorプラグイン)も必要になります</p>
+
+<h2>最後に</h2>
+
+<p>普段はtwsidebar+twsidebar-expand-urlでタイムラインを流しながらブラウジングして、目に付くツイートがあればコマンドラインからURLを開いたり会話を辿ったりしています。<br/>
+僕の.vimperatorrcのTwittperator関連部分を抜き出したものも用意しておきましたので良ければ参考にしてください。<br/>
+<a href="https://gist.github.com/4264015">https://gist.github.com/4264015</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
   <div class="pagination">
     
       <a class="prev" href="/page/3/">&larr; Older</a>
@@ -765,10 +695,6 @@ autocmdは自動処理のためのもので<code>:help :autocmd</code>に詳し�
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/2013/04/11/played-games/">今月遊んだゲーム</a>
-      </li>
     
       <li class="post">
         <a href="/2013/04/05/self-signed-certificate/">オレオレ認証局をたててオレオレ証明書を発行する</a>
@@ -806,11 +732,15 @@ autocmdは自動処理のためのもので<code>:help :autocmd</code>に詳し�
         <a href="/2012/12/22/useful-tips-for-vimperator/">Vimperatorを便利に使うためのtips</a>
       </li>
     
+      <li class="post">
+        <a href="/2012/12/13/vimperator-is-a-powerful-twitter-client/">Vimperatorで快適Twitter</a>
+      </li>
+    
   </ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-  <span id="tag-cloud"><a href='/categories/3ds' style='font-size: 108.57142857142857%'>3DS(1)</a> <a href='/categories/adventcalendar' style='font-size: 125.71428571428572%'>adventCalendar(3)</a> <a href='/categories/archlinux' style='font-size: 108.57142857142857%'>ArchLinux(1)</a> <a href='/categories/bag' style='font-size: 108.57142857142857%'>bag(1)</a> <a href='/categories/done' style='font-size: 108.57142857142857%'>done(1)</a> <a href='/categories/food' style='font-size: 108.57142857142857%'>food(1)</a> <a href='/categories/game' style='font-size: 160.0%'>game(7)</a> <a href='/categories/hardware' style='font-size: 117.14285714285714%'>hardware(2)</a> <a href='/categories/hubot' style='font-size: 108.57142857142857%'>Hubot(1)</a> <a href='/categories/irc' style='font-size: 117.14285714285714%'>IRC(2)</a> <a href='/categories/javascript' style='font-size: 108.57142857142857%'>JavaScript(1)</a> <a href='/categories/linux' style='font-size: 125.71428571428572%'>linux(3)</a> <a href='/categories/mac' style='font-size: 108.57142857142857%'>Mac(1)</a> <a href='/categories/maci' style='font-size: 108.57142857142857%'>Maci(1)</a> <a href='/categories/node-js' style='font-size: 117.14285714285714%'>Node.js(2)</a> <a href='/categories/octopress' style='font-size: 108.57142857142857%'>Octopress(1)</a> <a href='/categories/raspberrypi' style='font-size: 108.57142857142857%'>RaspberryPi(1)</a> <a href='/categories/recipe' style='font-size: 108.57142857142857%'>recipe(1)</a> <a href='/categories/ruby' style='font-size: 108.57142857142857%'>Ruby(1)</a> <a href='/categories/software' style='font-size: 151.42857142857144%'>software(6)</a> <a href='/categories/ssl' style='font-size: 108.57142857142857%'>ssl(1)</a> <a href='/categories/terraria' style='font-size: 108.57142857142857%'>Terraria(1)</a> <a href='/categories/ubuntu' style='font-size: 108.57142857142857%'>Ubuntu(1)</a> <a href='/categories/vimperator' style='font-size: 134.28571428571428%'>Vimperator(4)</a> <a href='/categories/vps' style='font-size: 108.57142857142857%'>VPS(1)</a> <a href='/categories/win' style='font-size: 117.14285714285714%'>Win(2)</a> </span>
+  <span id="tag-cloud"><a href='/categories/3ds' style='font-size: 110.0%'>3DS(1)</a> <a href='/categories/adventcalendar' style='font-size: 130.0%'>adventCalendar(3)</a> <a href='/categories/archlinux' style='font-size: 110.0%'>ArchLinux(1)</a> <a href='/categories/bag' style='font-size: 110.0%'>bag(1)</a> <a href='/categories/done' style='font-size: 110.0%'>done(1)</a> <a href='/categories/food' style='font-size: 110.0%'>food(1)</a> <a href='/categories/game' style='font-size: 160.0%'>game(6)</a> <a href='/categories/hardware' style='font-size: 120.0%'>hardware(2)</a> <a href='/categories/hubot' style='font-size: 110.0%'>Hubot(1)</a> <a href='/categories/irc' style='font-size: 120.0%'>IRC(2)</a> <a href='/categories/javascript' style='font-size: 110.0%'>JavaScript(1)</a> <a href='/categories/linux' style='font-size: 130.0%'>linux(3)</a> <a href='/categories/mac' style='font-size: 110.0%'>Mac(1)</a> <a href='/categories/maci' style='font-size: 110.0%'>Maci(1)</a> <a href='/categories/node-js' style='font-size: 120.0%'>Node.js(2)</a> <a href='/categories/octopress' style='font-size: 110.0%'>Octopress(1)</a> <a href='/categories/raspberrypi' style='font-size: 110.0%'>RaspberryPi(1)</a> <a href='/categories/recipe' style='font-size: 110.0%'>recipe(1)</a> <a href='/categories/ruby' style='font-size: 110.0%'>Ruby(1)</a> <a href='/categories/software' style='font-size: 160.0%'>software(6)</a> <a href='/categories/ssl' style='font-size: 110.0%'>ssl(1)</a> <a href='/categories/terraria' style='font-size: 110.0%'>Terraria(1)</a> <a href='/categories/ubuntu' style='font-size: 110.0%'>Ubuntu(1)</a> <a href='/categories/vimperator' style='font-size: 140.0%'>Vimperator(4)</a> <a href='/categories/vps' style='font-size: 110.0%'>VPS(1)</a> <a href='/categories/win' style='font-size: 120.0%'>Win(2)</a> </span>
 </section>
 
 <section>

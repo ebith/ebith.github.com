@@ -9,8 +9,9 @@
   <meta name="author" content="ebith">
 
   
-  <meta name="description" content="Vimperator Advent Calendar 2012 13日目、二週目に突入のebithです。
-今日はVimperatorプラグインの中でお気に入りの一つであるTwittperatorとそのプラグイン群の紹介をしたいと思います。 Twittperatorとは Streamimg &hellip;">
+  <meta name="description" content="Vimperator Advent Calendar 2012 4日目のebithです。
+今日はVimperatorプラグインを書いてみたい、もしくは書こうとは思ったけど良くわからなかった人向けの情報などを紹介します。
+だいたいは僕がプラグインを作り始めた時に困ったりハマったりしたことですが、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,151 +79,6 @@
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/12/13/vimperator-is-a-powerful-twitter-client/">Vimperatorで快適Twitter</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-12-13T00:00:00+09:00" pubdate data-updated="true">Dec 13<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://atnd.org/events/34070" title="Vimperator Advent Calendar 2012 : ATND">Vimperator Advent Calendar 2012</a> 13日目、二週目に突入のebithです。<br/>
-今日はVimperatorプラグインの中でお気に入りの一つであるTwittperatorとそのプラグイン群の紹介をしたいと思います。</p>
-
-<h2>Twittperatorとは</h2>
-
-<p>Streamimg APIにいち早く対応したTwitterクライアントであり、Vimperatorのプラグインでもあります。<br/>
-ツイートすることやタイムラインの表示の他にRTやFavはもちろん、会話(in_reply_to)を辿ったり、Twitterを検索したり、特定のツイート(status)のページや誰かのホームを開いたりと言ったことがコマンドラインから可能です。<br/>
-また、プラグインを作ることによって自由度の高い拡張が可能で既に幾つものプラグインが存在しています。</p>
-
-<h2>使ってみる</h2>
-
-<p><a href="https://raw.github.com/vimpr/vimperator-plugins/master/twittperator.js">twittperator.js</a>を読み込み、<code>:tw -getPIN</code>で得たPINコードを<code>:tw -setPIN</code>でセットすることで使えるようになります。<br/>
-基本的な使い方は<code>:tw</code>コマンドからの補完や<code>:help twittperator</code>を参考にしてください。<br/>
-また、一例として少しだけ設定を書いておくので必要に応じて.vimperatorrcに書き足すと良いと思います。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-</pre></td><td class='code'><pre><code class='vim'><span class='line'><span class="c">&quot; Twitterへの接続がSSLのみになったので、Twittperator側でもSSLを使うように</span>
-</span><span class='line'><span class="k">let</span> <span class="k">g</span>:twittperator_use_ssl_connection_for_api_ep <span class="p">=</span> <span class="m">1</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">&quot; Streaming APIを使う</span>
-</span><span class='line'><span class="k">let</span> <span class="k">g</span>:twittperator_use_chirp <span class="p">=</span> <span class="m">1</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">&quot; 特定の単語を含むツイートを追いかける</span>
-</span><span class='line'><span class="k">let</span> <span class="k">g</span>:twittperator_track_words <span class="p">=</span> <span class="s2">&quot;vimp,vimperator,twittperator,ついっぺ,ツイッペ&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">&quot; Twitter IDの設定。いくつかのプラグインで必要</span>
-</span><span class='line'><span class="k">let</span> <span class="k">g</span>:twittperator_screen_name <span class="p">=</span> <span class="s2">&quot;ebith&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">&quot; タイムラインの表示</span>
-</span><span class='line'><span class="nb">nnoremap</span> <span class="p">,</span>wl :<span class="nb">tw</span><span class="p">&lt;</span>CR<span class="p">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">&quot; ツイートする</span>
-</span><span class='line'><span class="nb">nnoremap</span> <span class="p">,</span><span class="nb">ww</span> :<span class="nb">tw</span><span class="p">&lt;</span>Space<span class="p">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">&quot; 返信する</span>
-</span><span class='line'><span class="nb">nnoremap</span> <span class="p">,</span>wr :<span class="nb">tw</span><span class="p">&lt;</span>Space<span class="p">&gt;</span>@
-</span><span class='line'>
-</span><span class='line'><span class="c">&quot; ツイートに含まれるURLを開く</span>
-</span><span class='line'><span class="nb">nnoremap</span> <span class="p">,</span><span class="k">w</span><span class="sr">/ :tw!/</span><span class="p">&lt;</span>Tab<span class="p">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">&quot; 会話を辿る</span>
-</span><span class='line'><span class="nb">nnoremap</span> <span class="p">,</span>wt :<span class="nb">tw</span><span class="p">!</span>thread<span class="p">&lt;</span>Space<span class="p">&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>個性あふれるプラグイン群</h2>
-
-<p>Twittperatorには数々の便利なプラグインが提供されています。<br/>
-ここでそれらの一部を紹介します。<br/>
-<a href="https://github.com/vimpr/vimperator-plugins/tree/master/twittperator" title="vimperator-plugins/twittperator at master · vimpr/vimperator-plugins · GitHub">https://github.com/vimpr/vimperator-plugins/tree/master/twittperator</a>からダウンロード可能です。</p>
-
-<h3>add-url-completer</h3>
-
-<p><a href="http://vimperator.g.hatena.ne.jp/nokturnalmortum/20110704/1309706089" title="Twittperator の履歴から URL を取り出して、:tabopen などで補完できるようにする - Death to false Web browser! - vimperatorグループ">Twittperator の履歴から URL を取り出して、:tabopen などで補完できるようにする</a></p>
-
-<h3>colorful-log-writer</h3>
-
-<p><a href="http://www.flickr.com/photos/ebith/5674571479/" title="colorful-log-writer | Flickr - Photo Sharing!">tail -fするとカラフルなTLが流れてくるファイルを書き出すTwittperatorプラグイン</a></p>
-
-<h3>eject-alert</h3>
-
-<p><a href="http://vimperator.g.hatena.ne.jp/nokturnalmortum/20120317/1331979169" title="音を鳴らしたりできない環境で、reply に気づけるようにする便利な Twittperator プラグイン - Death to false Web browser! - vimperatorグループ">音を鳴らしたりできない環境で、reply に気づけるようにする便利な Twittperator プラグイン</a></p>
-
-<h3>pong</h3>
-
-<p><a href="http://vimperator.g.hatena.ne.jp/nokturnalmortum/20110330/1301495775" title="Twitter で超反応するための Twittperator 用プラグイン - Death to false Web browser! - vimperatorグループ">Twitter で超反応するための Twittperator 用プラグイン</a></p>
-
-<h3>twsidebar</h3>
-
-<p><a href="http://vimperator.g.hatena.ne.jp/nokturnalmortum/20111102/1320245517" title="サイドバーにTL表示をするプラグイン - Death to false Web browser! - vimperatorグループ">サイドバーにTL表示をするプラグイン</a></p>
-
-<h3>twsidebar-expand-url</h3>
-
-<p><a href="http://d.hatena.ne.jp/ebith/20120808/1344429639" title="短縮URLを展開するTwittperatorプラグイン(twsidebar向け) - おいら屋ファクトリー">短縮URLを展開するTwittperatorプラグイン(twsidebar向け)</a><br/>
-画像のサムネイルを表示したり、ツイートを展開表示する機能も付いています</p>
-
-<h3>urusai-namakubi</h3>
-
-<p><a href="http://chi.usamimi.info/Program/Application/BouyomiChan/" title="棒読みちゃん ～ 音声合成で日本語文章を読み上げるツール">棒読みちゃん</a>にタイムラインを読み上げさせるプラグイン。namakubi.js(Vimperatorプラグイン)も必要になります</p>
-
-<h2>最後に</h2>
-
-<p>普段はtwsidebar+twsidebar-expand-urlでタイムラインを流しながらブラウジングして、目に付くツイートがあればコマンドラインからURLを開いたり会話を辿ったりしています。<br/>
-僕の.vimperatorrcのTwittperator関連部分を抜き出したものも用意しておきましたので良ければ参考にしてください。<br/>
-<a href="https://gist.github.com/4264015">https://gist.github.com/4264015</a></p>
-</div>
-  
-  
-
-
-    </article>
   
   
     <article>
@@ -490,6 +346,108 @@ $170+$10(ポーチ10ドル値引きされた)+送料$65の$245で2万円。</p>
 
     </article>
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/10/19/ldr-subaccount-switcher-for-vimperator/">Livedoor Readerのサブアカウントを切り替えるためのVimperatorプラグイン</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-19T02:30:00+09:00" pubdate data-updated="true">Oct 19<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div><script src='https://gist.github.com/3913442.js'></script>
+<noscript><pre><code>(function(){
+
+ let libly = plugins.libly;
+ let apiKey;
+
+ commands.addUserCommand(
+   ['ldrSwitch'],
+   'Livedoor Readerのサブアカウントを切り替える',
+   function (args) {
+    if (!args.length) {
+      getAcc(function (accList) {
+        switchAcc(apiKey, accList[0][0]);
+      });
+    } else {
+      switchAcc(apiKey, args.literalArg);
+    }
+   },
+   {
+      literal: 0,
+      completer: function (context) {
+        context.incomplete = true;
+        context.title = ['account'];
+        context.compare = void 0;
+
+        getAcc (function (accList) {
+          context.completions = accList;
+          context.incomplete = false;
+        });
+
+      }
+    },
+    true
+  );
+
+  function switchAcc (apiKey, acc) {
+    let url = 'http://reader.livedoor.com/account/switch';
+    let req = new libly.Request(url, null, {postBody: 'ApiKey=' + apiKey + '&amp;switch_to=' + acc});
+    req.addEventListener('onSuccess', function (res) {
+      liberator.echo('account switched: ' + acc);
+    });
+    req.post();
+  }
+
+  function getAcc (callback) {
+    let url = 'http://reader.livedoor.com/subaccount';
+    let req = new libly.Request(url);
+    let accList = [];
+    req.addEventListener('onSuccess', function (res) {
+      apiKey = res.getHTMLDocument('//input[@name=&quot;ApiKey&quot;]')[0].value;
+      res.getHTMLDocument('//input[@name=&quot;switch_to&quot;]').forEach(function (acc) {
+        accList.push([acc.value, acc.value]);
+      });
+      callback(accList);
+    });
+    req.get();
+  }
+
+})();
+</code></pre></noscript></div>
+
+
+<p><code>ldrSwitch</code>コマンドが追加されるのでよしなにしてください。</p>
+
+<h3>TODO?</h3>
+
+<p>JSのエラーコンソールにやたらとセキュリティエラーが出ちゃうんだけどよくわからないのでそのままになってる。</p>
+</div>
+  
+  
+
+
+    </article>
+  
   <div class="pagination">
     
       <a class="prev" href="/page/4/">&larr; Older</a>
@@ -505,10 +463,6 @@ $170+$10(ポーチ10ドル値引きされた)+送料$65の$245で2万円。</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/2013/04/11/played-games/">今月遊んだゲーム</a>
-      </li>
     
       <li class="post">
         <a href="/2013/04/05/self-signed-certificate/">オレオレ認証局をたててオレオレ証明書を発行する</a>
@@ -546,11 +500,15 @@ $170+$10(ポーチ10ドル値引きされた)+送料$65の$245で2万円。</p>
         <a href="/2012/12/22/useful-tips-for-vimperator/">Vimperatorを便利に使うためのtips</a>
       </li>
     
+      <li class="post">
+        <a href="/2012/12/13/vimperator-is-a-powerful-twitter-client/">Vimperatorで快適Twitter</a>
+      </li>
+    
   </ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-  <span id="tag-cloud"><a href='/categories/3ds' style='font-size: 108.57142857142857%'>3DS(1)</a> <a href='/categories/adventcalendar' style='font-size: 125.71428571428572%'>adventCalendar(3)</a> <a href='/categories/archlinux' style='font-size: 108.57142857142857%'>ArchLinux(1)</a> <a href='/categories/bag' style='font-size: 108.57142857142857%'>bag(1)</a> <a href='/categories/done' style='font-size: 108.57142857142857%'>done(1)</a> <a href='/categories/food' style='font-size: 108.57142857142857%'>food(1)</a> <a href='/categories/game' style='font-size: 160.0%'>game(7)</a> <a href='/categories/hardware' style='font-size: 117.14285714285714%'>hardware(2)</a> <a href='/categories/hubot' style='font-size: 108.57142857142857%'>Hubot(1)</a> <a href='/categories/irc' style='font-size: 117.14285714285714%'>IRC(2)</a> <a href='/categories/javascript' style='font-size: 108.57142857142857%'>JavaScript(1)</a> <a href='/categories/linux' style='font-size: 125.71428571428572%'>linux(3)</a> <a href='/categories/mac' style='font-size: 108.57142857142857%'>Mac(1)</a> <a href='/categories/maci' style='font-size: 108.57142857142857%'>Maci(1)</a> <a href='/categories/node-js' style='font-size: 117.14285714285714%'>Node.js(2)</a> <a href='/categories/octopress' style='font-size: 108.57142857142857%'>Octopress(1)</a> <a href='/categories/raspberrypi' style='font-size: 108.57142857142857%'>RaspberryPi(1)</a> <a href='/categories/recipe' style='font-size: 108.57142857142857%'>recipe(1)</a> <a href='/categories/ruby' style='font-size: 108.57142857142857%'>Ruby(1)</a> <a href='/categories/software' style='font-size: 151.42857142857144%'>software(6)</a> <a href='/categories/ssl' style='font-size: 108.57142857142857%'>ssl(1)</a> <a href='/categories/terraria' style='font-size: 108.57142857142857%'>Terraria(1)</a> <a href='/categories/ubuntu' style='font-size: 108.57142857142857%'>Ubuntu(1)</a> <a href='/categories/vimperator' style='font-size: 134.28571428571428%'>Vimperator(4)</a> <a href='/categories/vps' style='font-size: 108.57142857142857%'>VPS(1)</a> <a href='/categories/win' style='font-size: 117.14285714285714%'>Win(2)</a> </span>
+  <span id="tag-cloud"><a href='/categories/3ds' style='font-size: 110.0%'>3DS(1)</a> <a href='/categories/adventcalendar' style='font-size: 130.0%'>adventCalendar(3)</a> <a href='/categories/archlinux' style='font-size: 110.0%'>ArchLinux(1)</a> <a href='/categories/bag' style='font-size: 110.0%'>bag(1)</a> <a href='/categories/done' style='font-size: 110.0%'>done(1)</a> <a href='/categories/food' style='font-size: 110.0%'>food(1)</a> <a href='/categories/game' style='font-size: 160.0%'>game(6)</a> <a href='/categories/hardware' style='font-size: 120.0%'>hardware(2)</a> <a href='/categories/hubot' style='font-size: 110.0%'>Hubot(1)</a> <a href='/categories/irc' style='font-size: 120.0%'>IRC(2)</a> <a href='/categories/javascript' style='font-size: 110.0%'>JavaScript(1)</a> <a href='/categories/linux' style='font-size: 130.0%'>linux(3)</a> <a href='/categories/mac' style='font-size: 110.0%'>Mac(1)</a> <a href='/categories/maci' style='font-size: 110.0%'>Maci(1)</a> <a href='/categories/node-js' style='font-size: 120.0%'>Node.js(2)</a> <a href='/categories/octopress' style='font-size: 110.0%'>Octopress(1)</a> <a href='/categories/raspberrypi' style='font-size: 110.0%'>RaspberryPi(1)</a> <a href='/categories/recipe' style='font-size: 110.0%'>recipe(1)</a> <a href='/categories/ruby' style='font-size: 110.0%'>Ruby(1)</a> <a href='/categories/software' style='font-size: 160.0%'>software(6)</a> <a href='/categories/ssl' style='font-size: 110.0%'>ssl(1)</a> <a href='/categories/terraria' style='font-size: 110.0%'>Terraria(1)</a> <a href='/categories/ubuntu' style='font-size: 110.0%'>Ubuntu(1)</a> <a href='/categories/vimperator' style='font-size: 140.0%'>Vimperator(4)</a> <a href='/categories/vps' style='font-size: 110.0%'>VPS(1)</a> <a href='/categories/win' style='font-size: 120.0%'>Win(2)</a> </span>
 </section>
 
 <section>
