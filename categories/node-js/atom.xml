@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Node.js | おいら屋ファクトリー]]></title>
+  <link href="http://blog.feelmy.net/categories/node-js/atom.xml" rel="self"/>
+  <link href="http://blog.feelmy.net/"/>
+  <updated>2013-04-18T21:54:22+09:00</updated>
+  <id>http://blog.feelmy.net/</id>
+  <author>
+    <name><![CDATA[ebith]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Tiarraのログをブラウザから見たり検索したりできるやつ作った]]></title>
+    <link href="http://blog.feelmy.net/2013/02/15/tlv-js/"/>
+    <updated>2013-02-15T22:00:00+09:00</updated>
+    <id>http://blog.feelmy.net/2013/02/15/tlv-js</id>
+    <content type="html"><![CDATA[<h2><a href="https://github.com/ebith/TLV.js" title="ebith/TLV.js · GitHub">TLV.js</a></h2>
+
+<p><a href="http://www.flickr.com/photos/ebith/8475029653/" title="tlv01 by Ebith, on Flickr"><img src="http://farm9.staticflickr.com/8111/8475029653_055048fbb4_n.jpg" width="320" height="240" alt="tlv01"></a>
+<a href="http://www.flickr.com/photos/ebith/8475029689/" title="tlv02 by Ebith, on Flickr"><img src="http://farm9.staticflickr.com/8246/8475029689_ba2e947ac5_n.jpg" width="320" height="240" alt="tlv02"></a><br/>
+画像はTwitterのPublic TimelineをIRCのログ代わりにしたやつ。<br/>
+古いログをひたすら継ぎ足して表示したり、検索したり、とある日のログを読んだりできる。</p>
+
+<h2>試してみる</h2>
+
+<p>MongoDBは動いてる前提。インストールするなら<a href="http://docs.mongodb.org/manual/installation/" title="Installing MongoDB — MongoDB Manual">Installing MongoDB</a>が詳しい。<br/>
+Mongo.pmをtiarraPath/module/Log/に配置、confの例は以下に。<br/>
+必要に応じて<code>cpanm MongoDB</code>したのち<code>/load</code>か再起動でMongo.pmを読み込む。
+<code>
++ Log::Mongo {
+  charset: utf8
+  channel: *
+}
+</code>
+Node.jsとcoffee-scriptが入っていれば<code>npm install</code>して<code>coffee app.coffee</code>で動き出す。<br/>
+http://localhost:3000にアクセス！</p>
+
+<h2>その他</h2>
+
+<p>環境変数NODE_ENVを<code>production</code>に設定するとSSL+BASIC認証で起動する。_run.sh参照。<br/>
+あとから見返したいチャンネルが1つだけだったのでチャンネル名を考慮していない。全部混ざって表示されるはず。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[HubotでIRC Botを作る]]></title>
+    <link href="http://blog.feelmy.net/2013/02/03/hubot-irc/"/>
+    <updated>2013-02-03T01:09:00+09:00</updated>
+    <id>http://blog.feelmy.net/2013/02/03/hubot-irc</id>
+    <content type="html"><![CDATA[<h2>Node.jsのインストールと下準備</h2>
+
+<p>Node.jsの管理には<a href="https://github.com/hokaccha/nodebrew" title="hokaccha/nodebrew · GitHub">Nodebrew</a>を使う。<br/>
+Readmeに従ってインストールして、Nodebrew経由でNodeのバイナリを入れる。<br/>
+更にcoffee-script必要らしいのとforeverあると便利らしいので入れとく。
+<code>sh
+nodebrew install-binary stable
+nodebrew use v0.8.17
+npm install -g forever
+npm install -g coffee-script
+</code></p>
+
+<h2>Bot作る</h2>
+
+<p>フォルダ構成はこんなの。
+<code>
+bot/
+├── node_modules
+├── scripts
+│   ├── colorful-ping.coffee
+│   ├── config.coffee
+│   ├── fetch-title.coffee
+│   ├── rating.coffee
+│   ├── reddit-gamedeals.coffee
+│   ├── upgrade.coffee
+│   └── vpn-manager.coffee
+├── hubot-scripts.json
+├── package.json
+└── run.sh
+</code></p>
+
+<p>こんな感じにpackage.json書いてnpm installするとややこしいことなくインストール完了。
+```json
+{
+  "name": "ebithubot",
+  "version": "0.0.1",
+  "dependencies": {</p>
+
+<pre><code>"hubot": "2.3.5",
+"hubot-irc": "0.1.4",
+"hubot-scripts": "2.2.2",
+
+"cron": "*",
+"request": "*",
+"iconv-jp": "*",
+"request": "*",
+"cheerio": "*",
+"aws-sdk": "*",
+"ntwitter": "*"
+</code></pre>
+
+<p>  }
+}
+```</p>
+
+<p>あとは好きなだけスクリプトを書いてBotの機能強化に励む。<br/>
+<a href="https://github.com/github/hubot/tree/master/src/scripts" title="hubot/src/scripts at master · github/hubot · GitHub">Hubot付属のscript</a>が良い例。</p>
+
+<h2>運用において</h2>
+
+<p>スクリプトのリロード機能が無くて、毎回再起動するしかないのでIRC Proxy無しでの運用は厳しい。<br/>
+かといって普段使いのProxyに繋ぐと入ってるチャンネル全部のメッセージを処理対象にしてしまうのでイマイチ。</p>
+
+<h3>起動スクリプト</h3>
+
+<p>設定類は環境変数で行うのが基本らしいのでシェルスクリプトに<code>export</code>を並び立てる。<br/>
+```sh</p>
+
+<h1>!/usr/bin/env bash</h1>
+
+<h1>hubot</h1>
+
+<p>export PORT=8889</p>
+
+<h1>hubot-irc</h1>
+
+<p>export HUBOT_IRC_UNFLOOD="true"
+export HUBOT_IRC_NICK="ebithubot"
+export HUBOT_IRC_PORT="6669"
+export HUBOT_IRC_SERVER="localhost"
+export HUBOT_IRC_ROOMS="#ebithubot"</p>
+
+<p>forever start -c coffee node_modules/hubot/bin/hubot -a irc
+```</p>
+
+<h3>Notice使いたい</h3>
+
+<p><a href="http://blog.fumiz.me/2012/08/05/hubot-irc-bot-script/#notice" title="hubotスクリプトの書き方とサンプル集 | mitc">hubotスクリプトの書き方とサンプル集 | mitc</a>によると互換性のために削除されたらしい。<br/>
+hubot-ircにパッチを当てて復活させる。v0.1.4向け。
+<div><script src='https://gist.github.com/4505583.js'></script>
+<noscript><pre><code>diff --git a/src/irc.coffee b/src/irc.coffee
+index 1cd6be3..dbfb495 100644
+--- a/src/irc.coffee
++++ b/src/irc.coffee
+@@ -5,6 +5,12 @@
+ Irc = require 'irc'
+ 
+ class IrcBot extends Adapter
++  constructor: (@robot) -&gt;
++    super @robot
++    @robot.notice = (user, strings...) -&gt;
++      @adapter.notice user, strings...
++    @robot.Response = IrcResponse
++
+   send: (user, strings...) -&gt;
+     for str in strings
+       if not str?
+@@ -176,5 +182,9 @@ class IrcBot extends Adapter
+ 
+     self.emit &quot;connected&quot;
+ 
++class IrcResponse extends Response
++  notice: (strings...) -&gt;
++    @robot.adapter.notice @message.user, strings...
++
+ exports.use = (robot) -&gt;
+   new IrcBot robot</code></pre></noscript></div>
+</p>
+
+<h3>データの永続化</h3>
+
+<p>データの永続化はオプションになっていて、Redis以外にもMongoDBやAmazon S3とかファイルも選べるようになってる。<br/>
+どれもhubot-scriptsのリポジトリに入っているので<code>hubot-scripts.json</code>に<code>["redis-brain.coffee"]</code>とか書く。<br/>
+永続化のための*-brain.coffeeが読み込まれるとrobot.brain.dataが5秒おきに自動保存されるようになる。</p>
+
+<p>ただし02/01/2013現在npm上で最新のhubot-scripts 2.4.1に入ってるredis-brain.coffeeは壊れてるので一つ前の2.2.2とか使うべき。</p>
+
+<h3>forever</h3>
+
+<p>簡単なdaemontoolsみたいなので便利なんだけど、logrotateの仕組みが無いのでログをいっぱい吐いてるとディスクを圧迫する。<br/>
+かといってログをrmとかしちゃうとそこで書き込みが止まってしまうのでアレ。</p>
+]]></content>
+  </entry>
+  
+</feed>

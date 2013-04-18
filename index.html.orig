@@ -9,7 +9,7 @@
   <meta name="author" content="ebith">
 
   
-  <meta name="description" content="Blog Archives Recent Posts オレオレ認証局をたててオレオレ証明書を発行する 今月遊んだゲーム 今月遊んだゲーム Tiarraのログをブラウザから見たり検索したりできるやつ作った HubotでIRC Botを作る 今月遊んだゲーム 年末年始にゲーム35本買ったのでその一覧 &hellip;">
+  <meta name="description" content="Blog Archives Recent Posts 今月遊んだゲーム オレオレ認証局をたててオレオレ証明書を発行する 今月遊んだゲーム 今月遊んだゲーム Tiarraのログをブラウザから見たり検索したりできるやつ作った HubotでIRC Botを作る 今月遊んだゲーム &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,7 +69,7 @@
   
 <ul class="main-navigation">
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/archives">Archives</a></li>
 </ul>
 
 </nav>
@@ -89,6 +89,10 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/04/11/played-games/">今月遊んだゲーム</a>
+      </li>
     
       <li class="post">
         <a href="/2013/04/05/self-signed-certificate/">オレオレ認証局をたててオレオレ証明書を発行する</a>
@@ -126,15 +130,11 @@
         <a href="/2012/12/22/useful-tips-for-vimperator/">Vimperatorを便利に使うためのtips</a>
       </li>
     
-      <li class="post">
-        <a href="/2012/12/13/vimperator-is-a-powerful-twitter-client/">Vimperatorで快適Twitter</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-  <span id="tag-cloud"><a href='/blog/categories/3ds' style='font-size: 110.0%'>3DS(1)</a> <a href='/blog/categories/adventcalendar' style='font-size: 130.0%'>adventCalendar(3)</a> <a href='/blog/categories/archlinux' style='font-size: 110.0%'>ArchLinux(1)</a> <a href='/blog/categories/bag' style='font-size: 110.0%'>bag(1)</a> <a href='/blog/categories/done' style='font-size: 110.0%'>done(1)</a> <a href='/blog/categories/food' style='font-size: 110.0%'>food(1)</a> <a href='/blog/categories/game' style='font-size: 160.0%'>game(6)</a> <a href='/blog/categories/hardware' style='font-size: 120.0%'>hardware(2)</a> <a href='/blog/categories/hubot' style='font-size: 110.0%'>Hubot(1)</a> <a href='/blog/categories/irc' style='font-size: 120.0%'>IRC(2)</a> <a href='/blog/categories/javascript' style='font-size: 110.0%'>JavaScript(1)</a> <a href='/blog/categories/linux' style='font-size: 120.0%'>linux(2)</a> <a href='/blog/categories/mac' style='font-size: 110.0%'>Mac(1)</a> <a href='/blog/categories/maci' style='font-size: 110.0%'>Maci(1)</a> <a href='/blog/categories/node-js' style='font-size: 120.0%'>Node.js(2)</a> <a href='/blog/categories/octopress' style='font-size: 110.0%'>Octopress(1)</a> <a href='/blog/categories/raspberrypi' style='font-size: 110.0%'>RaspberryPi(1)</a> <a href='/blog/categories/recipe' style='font-size: 110.0%'>recipe(1)</a> <a href='/blog/categories/ruby' style='font-size: 110.0%'>Ruby(1)</a> <a href='/blog/categories/software' style='font-size: 160.0%'>software(6)</a> <a href='/blog/categories/ssl' style='font-size: 110.0%'>SSL(1)</a> <a href='/blog/categories/terraria' style='font-size: 110.0%'>Terraria(1)</a> <a href='/blog/categories/ubuntu' style='font-size: 120.0%'>Ubuntu(2)</a> <a href='/blog/categories/vimperator' style='font-size: 140.0%'>Vimperator(4)</a> <a href='/blog/categories/vps' style='font-size: 110.0%'>VPS(1)</a> <a href='/blog/categories/win' style='font-size: 120.0%'>Win(2)</a> </span>
+  <span id="tag-cloud"><a href='/categories/3ds' style='font-size: 108.57142857142857%'>3DS(1)</a> <a href='/categories/adventcalendar' style='font-size: 125.71428571428572%'>adventCalendar(3)</a> <a href='/categories/archlinux' style='font-size: 108.57142857142857%'>ArchLinux(1)</a> <a href='/categories/bag' style='font-size: 108.57142857142857%'>bag(1)</a> <a href='/categories/done' style='font-size: 108.57142857142857%'>done(1)</a> <a href='/categories/food' style='font-size: 108.57142857142857%'>food(1)</a> <a href='/categories/game' style='font-size: 160.0%'>game(7)</a> <a href='/categories/hardware' style='font-size: 117.14285714285714%'>hardware(2)</a> <a href='/categories/hubot' style='font-size: 108.57142857142857%'>Hubot(1)</a> <a href='/categories/irc' style='font-size: 117.14285714285714%'>IRC(2)</a> <a href='/categories/javascript' style='font-size: 108.57142857142857%'>JavaScript(1)</a> <a href='/categories/linux' style='font-size: 125.71428571428572%'>linux(3)</a> <a href='/categories/mac' style='font-size: 108.57142857142857%'>Mac(1)</a> <a href='/categories/maci' style='font-size: 108.57142857142857%'>Maci(1)</a> <a href='/categories/node-js' style='font-size: 117.14285714285714%'>Node.js(2)</a> <a href='/categories/octopress' style='font-size: 108.57142857142857%'>Octopress(1)</a> <a href='/categories/raspberrypi' style='font-size: 108.57142857142857%'>RaspberryPi(1)</a> <a href='/categories/recipe' style='font-size: 108.57142857142857%'>recipe(1)</a> <a href='/categories/ruby' style='font-size: 108.57142857142857%'>Ruby(1)</a> <a href='/categories/software' style='font-size: 151.42857142857144%'>software(6)</a> <a href='/categories/ssl' style='font-size: 108.57142857142857%'>ssl(1)</a> <a href='/categories/terraria' style='font-size: 108.57142857142857%'>Terraria(1)</a> <a href='/categories/ubuntu' style='font-size: 108.57142857142857%'>Ubuntu(1)</a> <a href='/categories/vimperator' style='font-size: 134.28571428571428%'>Vimperator(4)</a> <a href='/categories/vps' style='font-size: 108.57142857142857%'>VPS(1)</a> <a href='/categories/win' style='font-size: 117.14285714285714%'>Win(2)</a> </span>
 </section>
 
 <section>

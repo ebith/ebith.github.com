@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Ruby | おいら屋ファクトリー]]></title>
+  <link href="http://blog.feelmy.net/categories/ruby/atom.xml" rel="self"/>
+  <link href="http://blog.feelmy.net/"/>
+  <updated>2013-04-18T21:54:22+09:00</updated>
+  <id>http://blog.feelmy.net/</id>
+  <author>
+    <name><![CDATA[ebith]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[iGoogleのDays Since(あれやってから何日経ったっけを管理するやつ)クローン作った]]></title>
+    <link href="http://blog.feelmy.net/2012/11/24/days-since-app/"/>
+    <updated>2012-11-24T22:43:00+09:00</updated>
+    <id>http://blog.feelmy.net/2012/11/24/days-since-app</id>
+    <content type="html"><![CDATA[<p><img src="https://raw.github.com/ebith/DaysSince/master/public/images/sample.png" alt="" /><br/>
+こういうやつ。<br/>
+オリジナルは<a href="http://leancode.com/dayssince/" title="Days Since | Leancode">Days Since | Leancode</a>で、今回作ったのが<a href="http://dayssince.feelmy.net/" title="Days Since">Days Since</a>。</p>
+
+<p>Webアプリ的なやつ形にするのって8年ぶりとかな気がするけど便利なフレームワークとかのおかげでググりまくるだけでそれっぽくできたし素晴らしい時代になった。<br/>
+今回お世話になったのはPadrino, ActiveRecord, SQLite, Slim, jQuery, Twitter Bootstrapその他いっぱい。</p>
+
+<p>リポジトリは<a href="https://github.com/ebith/DaysSince" title="ebith/DaysSince · GitHub">こっち</a>。</p>
+]]></content>
+  </entry>
+  
+</feed>

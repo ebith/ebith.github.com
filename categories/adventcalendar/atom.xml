@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: adventCalendar | おいら屋ファクトリー]]></title>
+  <link href="http://blog.feelmy.net/categories/adventcalendar/atom.xml" rel="self"/>
+  <link href="http://blog.feelmy.net/"/>
+  <updated>2013-04-18T21:54:22+09:00</updated>
+  <id>http://blog.feelmy.net/</id>
+  <author>
+    <name><![CDATA[ebith]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Vimperatorを便利に使うためのtips]]></title>
+    <link href="http://blog.feelmy.net/2012/12/22/useful-tips-for-vimperator/"/>
+    <updated>2012-12-22T00:00:00+09:00</updated>
+    <id>http://blog.feelmy.net/2012/12/22/useful-tips-for-vimperator</id>
+    <content type="html"><![CDATA[<p><a href="http://atnd.org/events/34070" title="Vimperator Advent Calendar 2012 : ATND">Vimperator Advent Calendar 2012</a> 22日目担当のebithです。<br/>
+今日はgistで公開されているプラグインや各ユーザのrcにある便利な設定など、<a href="http://vimpr.github.com/" title="Welcome to vimpr!">vimpr</a>のプラグインリポジトリ外のものを紹介します。</p>
+
+<h2>QB.js (<a href="https://gist.github.com/1766649" title="QB.js 2012/02/08 現在使っているバージョン">https://gist.github.com/1766649</a>)</h2>
+
+<p>コマンドラインへメッセージを表示するechoをGrowlへの通知に変更するプラグインです。<br/>
+<a href="https://addons.mozilla.org/ja/firefox/addon/growlgntp/" title="Growl/GNTP :: Add-ons for Firefox">Growl/GNTP</a>のアドオンが必要になりますがWindows/Linux/Macなど各種OSで使用できます。<br/>
+webサービスを利用するためのプラグインはコマンドの正否にechoが使われることが多いので、そういったプラグインを入れている人にはオススメです。</p>
+
+<h2>コマンドラインを <Esc> でもあなたのこと、忘れない!! (<a href="https://gist.github.com/2944628" title="コマンドラインを &lt;Esc&gt; でもあなたのこと、忘れない!!">https://gist.github.com/2944628</a>)</h2>
+
+<p>途中でESCを押して消してしまった入力を履歴に残します。<br/>
+入力途中にググりたくなっても安心です。</p>
+
+<h2>lazy command</h2>
+
+<p>コマンドを遅延実行します。<br/>
+プラグインが読み込まれないと実行できないコマンドを.vimperatorrcに書けるようになります。
+```</p>
+
+<h1>lazyコマンドを定義</h1>
+
+<p>command! -nargs=+ lazy autocmd VimperatorEnter .* <args></p>
+
+<h1>URL補完の設定。はてなブックマーク拡張のHとadd-url-completer.twのTに遅延実行が必要</h1>
+
+<p>lazy set complete=slHT</p>
+
+<h1>loginManager.js用。各種Webサービスに自動的にログインする</h1>
+
+<p>lazy :login hatena
+lazy :login livedoor
+lazy :login nicovideo
+```</p>
+
+<h2>autocmd 駆動時のエコーをやめる (<a href="https://gist.github.com/1028562" title="autocmd 駆動時のエコーをやめる">https://gist.github.com/1028562</a>)</h2>
+
+<p>autocmdが静かになります。<br/>
+autocmdは自動処理のためのもので<code>:help :autocmd</code>に詳しく書かれています。
+<code>vim 便利なautocmd一例
+" Gmail/LDR/はてブでは新規タブをバックグラウンドで開く
+autocmd LocationChange '^(?!https?://(mail\.google\.com/(mail|a)/|reader\.livedoor\.com/reader/|b\.hatena\.ne\.jp/(?!(entry|articles|guide))))' :set! browser.tabs.loadDivertedInBackground=false
+autocmd LocationChange '^https?://(mail\.google\.com/(mail|a)/|reader\.livedoor\.com/reader/|b\.hatena\.ne\.jp/(?!(entry|articles|guide)))' :set! browser.tabs.loadDivertedInBackground=true
+</code></p>
+
+<h2>サイト内検索</h2>
+
+<p>Googleを使ってサイト内検索するコマンドです。<br/>
+オリジナルより少し変更を加えていて、ディレクトリ名が必要な@wikiやはてなダイアリーに対応しています。
+``` javascript
+nnoremap ,/ :sitesearch<Space></p>
+
+<p>javascript &lt;&lt;EOM
+commands.addUserCommand(
+  ['sitesearch'],
+  'Search in this site',
+  function (args) {</p>
+
+<pre><code>let url = window.content.location.hostname;
+[
+  /d\.hatena\.ne\.jp/,
+  /www\d+\.atwiki\.jp/,
+].forEach(function(r){
+  url += r.test(url) ? '/' + window.content.location.pathname.split('/')[1] : '';
+});
+liberator.open(
+  'http://www.google.com/search?q=' +
+    encodeURIComponent(args.literalArg) +
+    '+site%3A' +
+    url,
+  liberator.NEW_TAB
+);
+</code></pre>
+
+<p>  },
+  {</p>
+
+<pre><code>completer: function (context) completion.url(context, 'S'),
+literal: 0,
+</code></pre>
+
+<p>  },
+  true
+);
+EOM
+```</p>
+
+<h2>vimpMonkey <a href="http://d.hatena.ne.jp/wlt/20110105/1294204461" title="VimperatorでGreasemonkeyみたいな事をする - wltの日記">http://d.hatena.ne.jp/wlt/20110105/1294204461</a></h2>
+
+<p>VimperatorでGreasemonkeyみたいな事をするためのユーティリティ関数です。<br/>
+例では@wikiのページタイトルの前後を入れ替えています。ツリー型タブユーザにオススメです。
+``` javascript vimpMonkey一例
+javascript &lt;&lt;EOM
+// @wikiのページタイトル - を区切りに前後入れ替え
+vimpMonkey('http://www\d+\.atwiki\.jp', function(){
+  content.document.title = content.document.title.replace(/(.<em>) - (.</em>)/, '$2 - $1');
+});</p>
+
+<p>// VimperatorでGreasemonkeyみたいな事をする - wltの日記 - http://d.hatena.ne.jp/wlt/20110105/1294204461
+function vimpMonkey(urlRegexPattern, func) {
+  var cmd = eval('(function(args) {' +</p>
+
+<pre><code>'var content = tabs.getTab(args.tab - 1).linkedBrowser.contentWindow;' +
+'var unsafeContent = content.wrappedJSObject;' +
+func.toSource() + '();' +
+</code></pre>
+
+<p>  '})');
+  autocommands.add('PageLoad', urlRegexPattern, cmd);
+}
+EOM
+```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Vimperatorで快適Twitter]]></title>
+    <link href="http://blog.feelmy.net/2012/12/13/vimperator-is-a-powerful-twitter-client/"/>
+    <updated>2012-12-13T00:00:00+09:00</updated>
+    <id>http://blog.feelmy.net/2012/12/13/vimperator-is-a-powerful-twitter-client</id>
+    <content type="html"><![CDATA[<p><a href="http://atnd.org/events/34070" title="Vimperator Advent Calendar 2012 : ATND">Vimperator Advent Calendar 2012</a> 13日目、二週目に突入のebithです。<br/>
+今日はVimperatorプラグインの中でお気に入りの一つであるTwittperatorとそのプラグイン群の紹介をしたいと思います。</p>
+
+<h2>Twittperatorとは</h2>
+
+<p>Streamimg APIにいち早く対応したTwitterクライアントであり、Vimperatorのプラグインでもあります。<br/>
+ツイートすることやタイムラインの表示の他にRTやFavはもちろん、会話(in_reply_to)を辿ったり、Twitterを検索したり、特定のツイート(status)のページや誰かのホームを開いたりと言ったことがコマンドラインから可能です。<br/>
+また、プラグインを作ることによって自由度の高い拡張が可能で既に幾つものプラグインが存在しています。</p>
+
+<h2>使ってみる</h2>
+
+<p><a href="https://raw.github.com/vimpr/vimperator-plugins/master/twittperator.js">twittperator.js</a>を読み込み、<code>:tw -getPIN</code>で得たPINコードを<code>:tw -setPIN</code>でセットすることで使えるようになります。<br/>
+基本的な使い方は<code>:tw</code>コマンドからの補完や<code>:help twittperator</code>を参考にしてください。<br/>
+また、一例として少しだけ設定を書いておくので必要に応じて.vimperatorrcに書き足すと良いと思います。
+``` vim
+" Twitterへの接続がSSLのみになったので、Twittperator側でもSSLを使うように
+let g:twittperator_use_ssl_connection_for_api_ep = 1</p>
+
+<p>" Streaming APIを使う
+let g:twittperator_use_chirp = 1</p>
+
+<p>" 特定の単語を含むツイートを追いかける
+let g:twittperator_track_words = "vimp,vimperator,twittperator,ついっぺ,ツイッペ"</p>
+
+<p>" Twitter IDの設定。いくつかのプラグインで必要
+let g:twittperator_screen_name = "ebith"</p>
+
+<p>" タイムラインの表示
+nnoremap ,wl :tw<CR></p>
+
+<p>" ツイートする
+nnoremap ,ww :tw<Space></p>
+
+<p>" 返信する
+nnoremap ,wr :tw<Space>@</p>
+
+<p>" ツイートに含まれるURLを開く
+nnoremap ,w/ :tw!/<Tab></p>
+
+<p>" 会話を辿る
+nnoremap ,wt :tw!thread<Space>
+```</p>
+
+<h2>個性あふれるプラグイン群</h2>
+
+<p>Twittperatorには数々の便利なプラグインが提供されています。<br/>
+ここでそれらの一部を紹介します。<br/>
+<a href="https://github.com/vimpr/vimperator-plugins/tree/master/twittperator" title="vimperator-plugins/twittperator at master · vimpr/vimperator-plugins · GitHub">https://github.com/vimpr/vimperator-plugins/tree/master/twittperator</a>からダウンロード可能です。</p>
+
+<h3>add-url-completer</h3>
+
+<p><a href="http://vimperator.g.hatena.ne.jp/nokturnalmortum/20110704/1309706089" title="Twittperator の履歴から URL を取り出して、:tabopen などで補完できるようにする - Death to false Web browser! - vimperatorグループ">Twittperator の履歴から URL を取り出して、:tabopen などで補完できるようにする</a></p>
+
+<h3>colorful-log-writer</h3>
+
+<p><a href="http://www.flickr.com/photos/ebith/5674571479/" title="colorful-log-writer | Flickr - Photo Sharing!">tail -fするとカラフルなTLが流れてくるファイルを書き出すTwittperatorプラグイン</a></p>
+
+<h3>eject-alert</h3>
+
+<p><a href="http://vimperator.g.hatena.ne.jp/nokturnalmortum/20120317/1331979169" title="音を鳴らしたりできない環境で、reply に気づけるようにする便利な Twittperator プラグイン - Death to false Web browser! - vimperatorグループ">音を鳴らしたりできない環境で、reply に気づけるようにする便利な Twittperator プラグイン</a></p>
+
+<h3>pong</h3>
+
+<p><a href="http://vimperator.g.hatena.ne.jp/nokturnalmortum/20110330/1301495775" title="Twitter で超反応するための Twittperator 用プラグイン - Death to false Web browser! - vimperatorグループ">Twitter で超反応するための Twittperator 用プラグイン</a></p>
+
+<h3>twsidebar</h3>
+
+<p><a href="http://vimperator.g.hatena.ne.jp/nokturnalmortum/20111102/1320245517" title="サイドバーにTL表示をするプラグイン - Death to false Web browser! - vimperatorグループ">サイドバーにTL表示をするプラグイン</a></p>
+
+<h3>twsidebar-expand-url</h3>
+
+<p><a href="http://d.hatena.ne.jp/ebith/20120808/1344429639" title="短縮URLを展開するTwittperatorプラグイン(twsidebar向け) - おいら屋ファクトリー">短縮URLを展開するTwittperatorプラグイン(twsidebar向け)</a><br/>
+画像のサムネイルを表示したり、ツイートを展開表示する機能も付いています</p>
+
+<h3>urusai-namakubi</h3>
+
+<p><a href="http://chi.usamimi.info/Program/Application/BouyomiChan/" title="棒読みちゃん ～ 音声合成で日本語文章を読み上げるツール">棒読みちゃん</a>にタイムラインを読み上げさせるプラグイン。namakubi.js(Vimperatorプラグイン)も必要になります</p>
+
+<h2>最後に</h2>
+
+<p>普段はtwsidebar+twsidebar-expand-urlでタイムラインを流しながらブラウジングして、目に付くツイートがあればコマンドラインからURLを開いたり会話を辿ったりしています。<br/>
+僕の.vimperatorrcのTwittperator関連部分を抜き出したものも用意しておきましたので良ければ参考にしてください。<br/>
+<a href="https://gist.github.com/4264015">https://gist.github.com/4264015</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Vimperatorプラグインを書いてみたい人のためのtips]]></title>
+    <link href="http://blog.feelmy.net/2012/12/04/vimperator-plugin-dev-tips/"/>
+    <updated>2012-12-04T00:00:00+09:00</updated>
+    <id>http://blog.feelmy.net/2012/12/04/vimperator-plugin-dev-tips</id>
+    <content type="html"><![CDATA[<p><a href="http://atnd.org/events/34070" title="Vimperator Advent Calendar 2012 : ATND">Vimperator Advent Calendar 2012</a> 4日目のebithです。<br/>
+今日はVimperatorプラグインを書いてみたい、もしくは書こうとは思ったけど良くわからなかった人向けの情報などを紹介します。<br/>
+だいたいは僕がプラグインを作り始めた時に困ったりハマったりしたことですが、お役に立てれば幸いです。</p>
+
+<h2>そもそもどう書けば良いの</h2>
+
+<p><a href="https://github.com/vimpr/vimperator-plugins/blob/master/function-template.js" title="vimperator-plugins/function-template.js at master · vimpr/vimperator-plugins">サンプル用のプラグイン</a>にプラグインには欠かせないコマンドやマッピングなどの定義例が書いてあります。<br/>
+また、<a href="https://github.com/vimpr/vimperator-plugins" title="vimpr/vimperator-plugins">vimpr/vimperator-plugins</a>には200近いプラグインがあるので参考になるはずです。</p>
+
+<h2>プラグイン作るときに便利なやつ</h2>
+
+<h3>ライブラリ</h3>
+
+<p>Vimperator組込みの<code>util</code>や<a href="https://github.com/vimpr/vimperator-plugins/blob/master/_libly.js" title="vimperator-plugins/_libly.js at master · vimpr/vimperator-plugins">_libly.js</a>があります。</p>
+
+<h3>コマンド</h3>
+
+<p><code>:js</code>や<code>:echo</code>を使えば手軽にJavaScriptを実行できます。例) <code>:echo util</code><br/>
+<code>:source</code>がプラグインの再読み込みに使えます。</p>
+
+<h3>プラグイン</h3>
+
+<p><a href="https://github.com/vimpr/vimperator-plugins/blob/master/auto_source.js" title="vimperator-plugins/auto_source.js at master · vimpr/vimperator-plugins">auto_source.js</a> - 指定ファイルが変更されると自動的に:sourceします。<br/>
+<a href="https://github.com/vimpr/vimperator-plugins/blob/master/echopy.js" title="vimperator-plugins/echopy.js at master · vimpr/vimperator-plugins">echopy.js</a> - echoしつつクリップボードにコピーします。</p>
+
+<!--- [sitesearch](https://github.com/vimpr/vimperator-rc/blob/b6a3ef4de8a7befebbdbad56c1762423bbe1e7f7/anekos/.vimperatorrc.js#L595-L612 "vimperator-rc/anekos/.vimperatorrc.js at b6a3ef4de8a7befebbdbad56c1762423bbe1e7f7 · vimpr/vimperator-rc")
+ Googleのサイト内検索を開く-->
+
+
+<h3>プリントデバッグ</h3>
+
+<p><code>:js!</code>で開くエラーコンソールに、liberator.log()で出力できます。<br/>
+ログに残るタイプのechoであるliberator.echomsg()やliberator.echoerr()も便利です。<code>:messages</code>であとからでも読めます。</p>
+
+<h2>既存の動作を変更するプラグインを書きたい</h2>
+
+<p>_libly.jsの$U.aroundを使います。anekosさんの記事が詳しいです。<br/>
+<a href="http://vimperator.g.hatena.ne.jp/nokturnalmortum/20100120/1263929847" title="Vimperator 本体のメソッドを書き換えるときの指針 - Death to false Web browser! - vimperatorグループ">Vimperator 本体のメソッドを書き換えるときの指針</a>、
+<a href="http://vimperator.g.hatena.ne.jp/nokturnalmortum/20120811/1344688021" title="vimperator で、既存のコマンドにオレオレ動作を差しこむ - Death to false Web browser! - vimperatorグループ">vimperator で、既存のコマンドにオレオレ動作を差しこむ</a></p>
+
+<h2>ググってもググっても情報出てこない</h2>
+
+<p>プラグインに限らずVimperator全体に言えることですが、Googleなどで検索してもまとまった日本語の情報はイマイチ出てきません。<br/>
+<a href="https://github.com/vimpr/vimperator-plugins" title="vimpr/vimperator-plugins">vimpr/vimperator-plugins</a>をgrepしたりしてなんとかしましょう。<br/>
+JavaScript自体に関しては<a href="https://developer.mozilla.org/" title="Mozilla Developer Network">Mozilla Developer Network</a>が心強いです。</p>
+
+<h2>最後に</h2>
+
+<p>やってみると案外なんとかなるもので、単なるソフトウェアオタクでも少しはプラグイン書けるようになりました。<br/>
+多くの人がプラグインを書けばそれだけVimperatorが便利になってみんなが幸せなので是非ともチャレンジしてください。</p>
+]]></content>
+  </entry>
+  
+</feed>
