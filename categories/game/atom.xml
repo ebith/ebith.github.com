@@ -4,7 +4,7 @@
   <title><![CDATA[Category: game | おいら屋ファクトリー]]></title>
   <link href="http://blog.feelmy.net/categories/game/atom.xml" rel="self"/>
   <link href="http://blog.feelmy.net/"/>
-  <updated>2013-04-19T00:03:31+09:00</updated>
+  <updated>2013-04-28T00:34:09+09:00</updated>
   <id>http://blog.feelmy.net/</id>
   <author>
     <name><![CDATA[ebith]]></name>
@@ -12,6 +12,32 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[今月遊んだゲーム]]></title>
+    <link href="http://blog.feelmy.net/2013/04/28/played-games/"/>
+    <updated>2013-04-28T00:15:00+09:00</updated>
+    <id>http://blog.feelmy.net/2013/04/28/played-games</id>
+    <content type="html"><![CDATA[<h2>Kingdoms of Amalur: Reckoning ¥310</h2>
+
+<p>正統派のアクションRPG。続編があれば更に面白そうだけど出ようが無いのが悲しい。これやってるとSkyrimやりたくなる。<br/>
+インベントリとかスキルツリーのシステムがイマイチなのが惜しい。</p>
+
+<h2><a href="http://steamcommunity.com/app/221380">Age of Empires II: HD Edition</a> ¥1469</h2>
+
+<p>まじ名作。Steamからさくっとフレンド誘ってマルチプレイできるの素晴らしい。<br/>
+バグいっぱいのままリリースしてて残念な感じになってる。</p>
+
+<h2><a href="http://steamcommunity.com/app/230410">Warframe</a> F2P</h2>
+
+<p>SF NinjaなMOTPS、F2Pのゲームでオープンベータ中。翻訳途中だけど日本語もあるしTPSのCoopゲーとしても悪くないできっぽい。</p>
+
+<h2><a href="http://tera.hangame.co.jp/">TERA</a> F2P</h2>
+
+<p>DDOより更にTPS寄りで珍しい。ゲーム自体は今となってはごく普通というかありふれた感じする。<br/>
+インストーラーがクソだし、キーバインディング変更ソフトとかを終了させないと遊べないのも酷い。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[今月遊んだゲーム]]></title>
@@ -187,41 +213,6 @@ Terrariaのマルチが思っていた以上に楽しくて年末年始はずっ
 <p>GamersGateで$2.84だったTom Clancy's Ghost Recon: Future Soldierを逃してしまったのを悲しんでいたらその前後のBethesda CollectionとかBorderlands2 4Packとかも合わせて返金騒ぎになってた。</p>
 
 <p>Steamだと日本語字幕入りな代わりにおま値$79.99で買うことはまずないであろうと思っていたSleeping Dogsが、ホリデーセール延長開始時に91%になっていたので飛びついておいた。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[さくらのVPS 2G(Ubuntu 12.04)でTerrariaServer(TShock)を動かす]]></title>
-    <link href="http://blog.feelmy.net/2013/01/05/terraria-server-with-ubuntu-server-12.04/"/>
-    <updated>2013-01-05T20:33:00+09:00</updated>
-    <id>http://blog.feelmy.net/2013/01/05/terraria-server-with-ubuntu-server-12.04</id>
-    <content type="html"><![CDATA[<h2>サーバーのセットアップ</h2>
-
-<p><code>
-sudo apt-get install mono-complete
-wget https://github.com/downloads/TShock/TShock/TShock-4.0.zip
-unzip TShock-4.0.zip
-mv serverplugins ServerPlugins
-mono TerrariaServer.exe
-  # 初期設定ではボス召喚アイテムが使えないので許可する
-  modgroup add guest summonboss
-</code></p>
-
-<h2>クライアントから管理者登録</h2>
-
-<p><code>
-/auth *******
-/user add ebith:******** superadmin
-/login ebith ********
-/auth-verify
-</code></p>
-
-<h2>運用において</h2>
-
-<p><code>tmux new -s terraria</code>とかしておくとでサーバーコンソールがどこからでも使えて便利。<br/>
-サーバーの基本的な設定は<code>tshock/config.json</code>を直接書き換える。<a href="https://tshock.atlassian.net/wiki/display/TSHOCKPLUGINS/Configuration+File+Docs" title="Configuration File Docs - TShock Documentation - Confluence">Configuration File Docs</a>を参照。<br/>
-<code>group perm guest</code>でguestユーザが使えるコマンド一覧が表示される。<code>modgroup (add|del) guest hoge</code>で権限操作。<a href="https://tshock.atlassian.net/wiki/pages/viewpage.action?pageId=3047433" title="Commands/Permissions list - TShock Documentation - Confluence">Commands/Permissions list</a>がコマンド一覧。<br/>
-サーバーに接続しただけの未登録ユーザはguestに所属する。身内向けならサーバーパスワード有りにして管理者以外は全員guestが楽そう。権限管理的な意味で。</p>
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[おいら屋ファクトリー]]></title>
   <link href="http://blog.feelmy.net/atom.xml" rel="self"/>
   <link href="http://blog.feelmy.net/"/>
-  <updated>2013-04-19T00:03:31+09:00</updated>
+  <updated>2013-04-28T00:34:09+09:00</updated>
   <id>http://blog.feelmy.net/</id>
   <author>
     <name><![CDATA[ebith]]></name>
@@ -12,6 +12,32 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[今月遊んだゲーム]]></title>
+    <link href="http://blog.feelmy.net/2013/04/28/played-games/"/>
+    <updated>2013-04-28T00:15:00+09:00</updated>
+    <id>http://blog.feelmy.net/2013/04/28/played-games</id>
+    <content type="html"><![CDATA[<h2>Kingdoms of Amalur: Reckoning ¥310</h2>
+
+<p>正統派のアクションRPG。続編があれば更に面白そうだけど出ようが無いのが悲しい。これやってるとSkyrimやりたくなる。<br/>
+インベントリとかスキルツリーのシステムがイマイチなのが惜しい。</p>
+
+<h2><a href="http://steamcommunity.com/app/221380">Age of Empires II: HD Edition</a> ¥1469</h2>
+
+<p>まじ名作。Steamからさくっとフレンド誘ってマルチプレイできるの素晴らしい。<br/>
+バグいっぱいのままリリースしてて残念な感じになってる。</p>
+
+<h2><a href="http://steamcommunity.com/app/230410">Warframe</a> F2P</h2>
+
+<p>SF NinjaなMOTPS、F2Pのゲームでオープンベータ中。翻訳途中だけど日本語もあるしTPSのCoopゲーとしても悪くないできっぽい。</p>
+
+<h2><a href="http://tera.hangame.co.jp/">TERA</a> F2P</h2>
+
+<p>DDOより更にTPS寄りで珍しい。ゲーム自体は今となってはごく普通というかありふれた感じする。<br/>
+インストーラーがクソだし、キーバインディング変更ソフトとかを終了させないと遊べないのも酷い。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[オレオレ認証局をたててオレオレ証明書を発行する]]></title>
@@ -1389,41 +1415,6 @@ encode:
 
 
 <p>LhaForgeをファイラから呼ぶ場合こんな感じ。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[VPSのバックアップをDropboxに取る]]></title>
-    <link href="http://blog.feelmy.net/2012/09/17/server-backup-to-dropbox/"/>
-    <updated>2012-09-17T09:30:00+09:00</updated>
-    <id>http://blog.feelmy.net/2012/09/17/server-backup-to-dropbox</id>
-    <content type="html"><![CDATA[<p>簡易的なバックアップで良いので取っておきたかったので、<br/>
-tarで固めてlzoで圧縮してDropboxに送るバックアップスクリプト書いた。<br/>
-<a href="http://www.andreafabrizi.it/?dropbox_uploader" title="BASH Dropbox Uploader">BASH Dropbox Uploader</a>が必要。</p>
-
-<div><script src='https://gist.github.com/3735146.js'></script>
-<noscript><pre><code>#!/bin/bash
-
-# バックアップ対象ディレクトリ
-target=&quot;/etc /home/ebith&quot;
-
-# 除外パターン
-exclude=(sites/www/rep2 .cpanm .rbenv)
-
-# 一時ファイル
-tempfile=&quot;/tmp/backup.tar.lzo&quot;
-
-for v in ${exclude[@]}; do
-  e=&quot;$e --exclude=$v&quot;
-done
-
-tar --lzop -cf $tempfile $target $e
-
-./dropbox_uploader.sh upload $tempfile /backup/`basename $tempfile`</code></pre></noscript></div>
-
-
-<p>DropboxのAPIからのアップロードが1ファイル150MBまでなので<br/>
-ファイル分割とかできるといいかもしれないけど今んとこ必要ないので付いてない。</p>
 ]]></content>
   </entry>
   

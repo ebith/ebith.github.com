@@ -9,12 +9,10 @@
   <meta name="author" content="ebith">
 
   
-  <meta name="description" content="Windows 7のインストールは3回目ぐらい、XPの頃と比べると本当に楽になった。
-OSのインストール後の流れをメモっておく。 ドライバのインストール マザーボード系 チップセット
-LAN
-USB3 GPU
-サウンドカード 設定 サービスの停止 Superfetch
-Windows Search &hellip;">
+  <meta name="description" content="簡易的なバックアップで良いので取っておきたかったので、
+tarで固めてlzoで圧縮してDropboxに送るバックアップスクリプト書いた。
+BASH Dropbox Uploaderが必要。 #!/bin/bash # バックアップ対象ディレクトリ
+target=&quot;/etc /home/ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -82,6 +80,68 @@ Windows Search &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/09/17/server-backup-to-dropbox/">VPSのバックアップをDropboxに取る</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-17T09:30:00+09:00" pubdate data-updated="true">Sep 17<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>簡易的なバックアップで良いので取っておきたかったので、<br/>
+tarで固めてlzoで圧縮してDropboxに送るバックアップスクリプト書いた。<br/>
+<a href="http://www.andreafabrizi.it/?dropbox_uploader" title="BASH Dropbox Uploader">BASH Dropbox Uploader</a>が必要。</p>
+
+<div><script src='https://gist.github.com/3735146.js'></script>
+<noscript><pre><code>#!/bin/bash
+
+# バックアップ対象ディレクトリ
+target=&quot;/etc /home/ebith&quot;
+
+# 除外パターン
+exclude=(sites/www/rep2 .cpanm .rbenv)
+
+# 一時ファイル
+tempfile=&quot;/tmp/backup.tar.lzo&quot;
+
+for v in ${exclude[@]}; do
+  e=&quot;$e --exclude=$v&quot;
+done
+
+tar --lzop -cf $tempfile $target $e
+
+./dropbox_uploader.sh upload $tempfile /backup/`basename $tempfile`</code></pre></noscript></div>
+
+
+<p>DropboxのAPIからのアップロードが1ファイル150MBまでなので<br/>
+ファイル分割とかできるといいかもしれないけど今んとこ必要ないので付いてない。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -458,87 +518,9 @@ p 'oauth_token_secret : ' + access_token.secret</code></pre></noscript></div>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/08/25/try-octopress/">Octopressを試す</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-25T05:53:00+09:00" pubdate data-updated="true">Aug 25<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>はてなダイアリーも広告が入るようになってしまったので、これを機会にGithub+Octopressも試してみる。<br/>
-TumblrとかLokkaとか、WordPressに出戻りも考慮したけどどれもしっくりこないので期待。</p>
-
-<h2>参考にしたページとか</h2>
-
-<p><a href="http://mattn.kaoriya.net/software/lang/ruby/20111017205717.htm" title="Big Sky :: githubとjekyllとoctopressで作る簡単でモダンなブログ">Big Sky :: githubとjekyllとoctopressで作る簡単でモダンなブログ</a><br/>
-<a href="http://blog.glidenote.com/blog/2011/11/07/install-octopress-on-github/" title="GithubとOctopressでモダンな技術系ブログを作ってみる - Glide Note - グライドノート">GithubとOctopressでモダンな技術系ブログを作ってみる - Glide Note - グライドノート</a><br/>
-<a href="http://nowelium.github.com/blog/2012/03/26/octopress-diff.html" title="octopress でブログを書いてみる - ハタさんのブログ(出張版)">octopress でブログを書いてみる - ハタさんのブログ(出張版)</a><br/>
-<a href="http://tokkonopapa.github.com/blog/2012/01/04/octopress-plugin-for-categories-cloud/" title="Octopress用Tag Cloudプラグインをリリースします - T.I.D.">Octopress用Tag Cloudプラグインをリリースします - T.I.D.</a></p>
-
-<h2>それ以外にやったこと</h2>
-
-<p><a href="http://blog.glidenote.com/blog/2012/04/02/octoeditor.vim/" title="Octopressの記事管理用プラグイン、Octoeditor.vimを作った - Glide Note - グライドノート">Octopressの記事管理用プラグイン、Octoeditor.vimを作った - Glide Note - グライドノート</a>を導入したり</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='vim'><span class='line'><span class="nb">nnoremap</span> <span class="p">&lt;</span>Leader<span class="p">&gt;</span>of :Unite file_rec:<span class="p">&lt;</span>C<span class="p">-</span><span class="k">r</span><span class="p">&gt;=</span>expand<span class="p">(</span><span class="k">g</span>:octopress_path.<span class="s2">&quot;/source/_posts/&quot;</span><span class="p">)&lt;</span>CR<span class="p">&gt;&lt;</span>CR<span class="p">&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Unite.vimで記事一覧開くのマッピングしたり</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>pip install pygments
-</span><span class='line'>vim _config.yml
-</span><span class='line'>  pygments: <span class="nb">true</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>シンタックスハイライト用にPygments入れたり</p>
-
-<h2>雑感</h2>
-
-<p> やっぱ普通にエディタで書けるの便利。<br/>
-vimperator使ってるとテキストエリアで外部エディタ使えるけど、
-なんかの拍子に吹っ飛んでっちゃったことがあってそれ以来あんまり使わなくなってたので。</p>
-
-<p>配布されてるテーマ少ないので慣れないCSSとか画像とか触るはめになってつらい。<br/>
-<code>rake install['theme']</code>するとそのたびにファイルが上書きされるみたいで色々試すとなんかグチャグチャになってしまったりとか。</p>
-
-<h2>TODO</h2>
-
-<p>適当に書き足したCSSが悲しい事になってるのどうにかして欲しい。<br/>
-Favicon欲しい。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
+    
+      <a class="prev" href="/page/6/">&larr; Older</a>
     
     <a href="/archives">Blog Archives</a>
     
@@ -551,6 +533,10 @@ Favicon欲しい。</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/04/28/played-games/">今月遊んだゲーム</a>
+      </li>
     
       <li class="post">
         <a href="/2013/04/05/self-signed-certificate/">オレオレ認証局をたててオレオレ証明書を発行する</a>
@@ -588,15 +574,11 @@ Favicon欲しい。</p>
         <a href="/2012/12/22/useful-tips-for-vimperator/">Vimperatorを便利に使うためのtips</a>
       </li>
     
-      <li class="post">
-        <a href="/2012/12/13/vimperator-is-a-powerful-twitter-client/">Vimperatorで快適Twitter</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-  <span id="tag-cloud"><a href='/categories/3ds' style='font-size: 110.0%'>3DS(1)</a> <a href='/categories/adventcalendar' style='font-size: 130.0%'>adventCalendar(3)</a> <a href='/categories/archlinux' style='font-size: 110.0%'>ArchLinux(1)</a> <a href='/categories/bag' style='font-size: 110.0%'>bag(1)</a> <a href='/categories/done' style='font-size: 110.0%'>done(1)</a> <a href='/categories/food' style='font-size: 110.0%'>food(1)</a> <a href='/categories/game' style='font-size: 160.0%'>game(6)</a> <a href='/categories/hardware' style='font-size: 120.0%'>hardware(2)</a> <a href='/categories/hubot' style='font-size: 110.0%'>Hubot(1)</a> <a href='/categories/irc' style='font-size: 120.0%'>IRC(2)</a> <a href='/categories/javascript' style='font-size: 110.0%'>JavaScript(1)</a> <a href='/categories/linux' style='font-size: 130.0%'>linux(3)</a> <a href='/categories/mac' style='font-size: 110.0%'>Mac(1)</a> <a href='/categories/maci' style='font-size: 110.0%'>Maci(1)</a> <a href='/categories/node-js' style='font-size: 120.0%'>Node.js(2)</a> <a href='/categories/octopress' style='font-size: 110.0%'>Octopress(1)</a> <a href='/categories/raspberrypi' style='font-size: 110.0%'>RaspberryPi(1)</a> <a href='/categories/recipe' style='font-size: 110.0%'>recipe(1)</a> <a href='/categories/ruby' style='font-size: 110.0%'>Ruby(1)</a> <a href='/categories/software' style='font-size: 160.0%'>software(6)</a> <a href='/categories/ssl' style='font-size: 110.0%'>ssl(1)</a> <a href='/categories/terraria' style='font-size: 110.0%'>Terraria(1)</a> <a href='/categories/ubuntu' style='font-size: 110.0%'>Ubuntu(1)</a> <a href='/categories/vimperator' style='font-size: 140.0%'>Vimperator(4)</a> <a href='/categories/vps' style='font-size: 110.0%'>VPS(1)</a> <a href='/categories/win' style='font-size: 120.0%'>Win(2)</a> </span>
+  <span id="tag-cloud"><a href='/categories/3ds' style='font-size: 108.57142857142857%'>3DS(1)</a> <a href='/categories/adventcalendar' style='font-size: 125.71428571428572%'>adventCalendar(3)</a> <a href='/categories/archlinux' style='font-size: 108.57142857142857%'>ArchLinux(1)</a> <a href='/categories/bag' style='font-size: 108.57142857142857%'>bag(1)</a> <a href='/categories/done' style='font-size: 108.57142857142857%'>done(1)</a> <a href='/categories/food' style='font-size: 108.57142857142857%'>food(1)</a> <a href='/categories/game' style='font-size: 160.0%'>game(7)</a> <a href='/categories/hardware' style='font-size: 117.14285714285714%'>hardware(2)</a> <a href='/categories/hubot' style='font-size: 108.57142857142857%'>Hubot(1)</a> <a href='/categories/irc' style='font-size: 117.14285714285714%'>IRC(2)</a> <a href='/categories/javascript' style='font-size: 108.57142857142857%'>JavaScript(1)</a> <a href='/categories/linux' style='font-size: 125.71428571428572%'>linux(3)</a> <a href='/categories/mac' style='font-size: 108.57142857142857%'>Mac(1)</a> <a href='/categories/maci' style='font-size: 108.57142857142857%'>Maci(1)</a> <a href='/categories/node-js' style='font-size: 117.14285714285714%'>Node.js(2)</a> <a href='/categories/octopress' style='font-size: 108.57142857142857%'>Octopress(1)</a> <a href='/categories/raspberrypi' style='font-size: 108.57142857142857%'>RaspberryPi(1)</a> <a href='/categories/recipe' style='font-size: 108.57142857142857%'>recipe(1)</a> <a href='/categories/ruby' style='font-size: 108.57142857142857%'>Ruby(1)</a> <a href='/categories/software' style='font-size: 151.42857142857144%'>software(6)</a> <a href='/categories/ssl' style='font-size: 108.57142857142857%'>ssl(1)</a> <a href='/categories/terraria' style='font-size: 108.57142857142857%'>Terraria(1)</a> <a href='/categories/ubuntu' style='font-size: 108.57142857142857%'>Ubuntu(1)</a> <a href='/categories/vimperator' style='font-size: 134.28571428571428%'>Vimperator(4)</a> <a href='/categories/vps' style='font-size: 108.57142857142857%'>VPS(1)</a> <a href='/categories/win' style='font-size: 117.14285714285714%'>Win(2)</a> </span>
 </section>
 
 <section>

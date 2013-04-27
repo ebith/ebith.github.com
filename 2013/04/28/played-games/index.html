@@ -5,14 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>VPSのバックアップをDropboxに取る - おいら屋ファクトリー</title>
+  <title>今月遊んだゲーム - おいら屋ファクトリー</title>
   <meta name="author" content="ebith">
 
   
-  <meta name="description" content="簡易的なバックアップで良いので取っておきたかったので、
-tarで固めてlzoで圧縮してDropboxに送るバックアップスクリプト書いた。
-BASH Dropbox Uploaderが必要。 #!/bin/bash # バックアップ対象ディレクトリ
-target=&quot;/etc /home/ &hellip;">
+  <meta name="description" content="Kingdoms of Amalur: Reckoning ¥310 正統派のアクションRPG。続編があれば更に面白そうだけど出ようが無いのが悲しい。これやってるとSkyrimやりたくなる。
+インベントリとかスキルツリーのシステムがイマイチなのが惜しい。 Age of Empires II: HD &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -22,7 +20,7 @@ target=&quot;/etc /home/ &hellip;">
   <meta name="google-site-verification" content="2weq-haP9jiK3brxIN6DELbPYBYT4Q2eaW_-miG8pII">
 
   
-  <link rel="canonical" href="http://blog.feelmy.net/2012/09/17/server-backup-to-dropbox/">
+  <link rel="canonical" href="http://blog.feelmy.net/2013/04/28/played-games/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -83,7 +81,7 @@ target=&quot;/etc /home/ &hellip;">
   
   <header>
     
-      <h1 class="entry-title">VPSのバックアップをDropboxに取る</h1>
+      <h1 class="entry-title">今月遊んだゲーム</h1>
     
     
       <p class="meta">
@@ -99,40 +97,31 @@ target=&quot;/etc /home/ &hellip;">
   
 
 
-<time datetime="2012-09-17T09:30:00+09:00" pubdate data-updated="true">Sep 17<span>th</span>, 2012</time>
+<time datetime="2013-04-28T00:15:00+09:00" pubdate data-updated="true">Apr 28<span>th</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>簡易的なバックアップで良いので取っておきたかったので、<br/>
-tarで固めてlzoで圧縮してDropboxに送るバックアップスクリプト書いた。<br/>
-<a href="http://www.andreafabrizi.it/?dropbox_uploader" title="BASH Dropbox Uploader">BASH Dropbox Uploader</a>が必要。</p>
+<div class="entry-content"><h2>Kingdoms of Amalur: Reckoning ¥310</h2>
 
-<div><script src='https://gist.github.com/3735146.js'></script>
-<noscript><pre><code>#!/bin/bash
+<p>正統派のアクションRPG。続編があれば更に面白そうだけど出ようが無いのが悲しい。これやってるとSkyrimやりたくなる。<br/>
+インベントリとかスキルツリーのシステムがイマイチなのが惜しい。</p>
 
-# バックアップ対象ディレクトリ
-target=&quot;/etc /home/ebith&quot;
+<h2><a href="http://steamcommunity.com/app/221380">Age of Empires II: HD Edition</a> ¥1469</h2>
 
-# 除外パターン
-exclude=(sites/www/rep2 .cpanm .rbenv)
+<p>まじ名作。Steamからさくっとフレンド誘ってマルチプレイできるの素晴らしい。<br/>
+バグいっぱいのままリリースしてて残念な感じになってる。</p>
 
-# 一時ファイル
-tempfile=&quot;/tmp/backup.tar.lzo&quot;
+<h2><a href="http://steamcommunity.com/app/230410">Warframe</a> F2P</h2>
 
-for v in ${exclude[@]}; do
-  e=&quot;$e --exclude=$v&quot;
-done
+<p>SF NinjaなMOTPS、F2Pのゲームでオープンベータ中。翻訳途中だけど日本語もあるしTPSのCoopゲーとしても悪くないできっぽい。</p>
 
-tar --lzop -cf $tempfile $target $e
+<h2><a href="http://tera.hangame.co.jp/">TERA</a> F2P</h2>
 
-./dropbox_uploader.sh upload $tempfile /backup/`basename $tempfile`</code></pre></noscript></div>
-
-
-<p>DropboxのAPIからのアップロードが1ファイル150MBまでなので<br/>
-ファイル分割とかできるといいかもしれないけど今んとこ必要ないので付いてない。</p>
+<p>DDOより更にTPS寄りで珍しい。ゲーム自体は今となってはごく普通というかありふれた感じする。<br/>
+インストーラーがクソだし、キーバインディング変更ソフトとかを終了させないと遊べないのも酷い。</p>
 </div>
 
 
@@ -155,12 +144,12 @@ tar --lzop -cf $tempfile $target $e
   
 
 
-<time datetime="2012-09-17T09:30:00+09:00" pubdate data-updated="true">Sep 17<span>th</span>, 2012</time>
+<time datetime="2013-04-28T00:15:00+09:00" pubdate data-updated="true">Apr 28<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/categories/vps/'>VPS</a>, <a class='category' href='/categories/linux/'>linux</a>
+    <a class='category' href='/categories/game/'>game</a>
   
 </span>
 
@@ -176,10 +165,8 @@ tar --lzop -cf $tempfile $target $e
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2012/09/12/install-windows-7/" title="Previous Post: 新PCにWindows 7入れた">&laquo; 新PCにWindows 7入れた</a>
+        <a class="basic-alignment left" href="/2013/04/05/self-signed-certificate/" title="Previous Post: オレオレ認証局をたててオレオレ証明書を発行する">&laquo; オレオレ認証局をたててオレオレ証明書を発行する</a>
       
-      
-        <a class="basic-alignment right" href="/2012/09/18/use-7-zip-from-a-filer/" title="Next Post: ファイラから7-zip(7zG.exe)使うようにすると捗る">ファイラから7-zip(7zG.exe)使うようにすると捗る &raquo;</a>
       
     </p>
   </footer>
@@ -282,8 +269,8 @@ tar --lzop -cf $tempfile $target $e
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.feelmy.net/2012/09/17/server-backup-to-dropbox/';
-        var disqus_url = 'http://blog.feelmy.net/2012/09/17/server-backup-to-dropbox/';
+        var disqus_identifier = 'http://blog.feelmy.net/2013/04/28/played-games/';
+        var disqus_url = 'http://blog.feelmy.net/2013/04/28/played-games/';
         var disqus_script = 'embed.js';
       
     (function () {
