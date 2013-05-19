@@ -4,7 +4,7 @@
   <title><![CDATA[おいら屋ファクトリー]]></title>
   <link href="http://blog.feelmy.net/atom.xml" rel="self"/>
   <link href="http://blog.feelmy.net/"/>
-  <updated>2013-04-28T02:00:11+09:00</updated>
+  <updated>2013-05-20T01:31:14+09:00</updated>
   <id>http://blog.feelmy.net/</id>
   <author>
     <name><![CDATA[ebith]]></name>
@@ -12,6 +12,24 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[TwitterのtimelineからURLを抽出してRSSにするの作った]]></title>
+    <link href="http://blog.feelmy.net/2013/05/19/feedline/"/>
+    <updated>2013-05-19T00:22:00+09:00</updated>
+    <id>http://blog.feelmy.net/2013/05/19/feedline</id>
+    <content type="html"><![CDATA[<h2><a href="https://github.com/ebith/feedline" title="ebith/feedline · GitHub">feedline</a></h2>
+
+<p>CrowsnestとかGunosyみたいな便利っぽいのもあるけど、<br/>
+単にタイムラインに流れてきたURLを後からフィードリーダーで見たかったので作った。</p>
+
+<p><a href="http://www.flickr.com/photos/ebith/8753538041/" title="feedline by Ebith, on Flickr"><img src="http://farm9.staticflickr.com/8420/8753538041_f11d9dc68c_n.jpg" width="320" height="293" alt="feedline"></a><br/>
+こんな感じで読める。</p>
+
+<p>config.coffee.sampleを参考にconfig.coffeeを用意して、<code>npm install</code>すればあとは起動するだけ。<br/>
+<code>forever start -c coffee app.coffee</code>とか後が楽なのでオススメ。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[今月遊んだゲーム]]></title>
@@ -1382,39 +1400,6 @@ $k-&gt;clear;</code></pre></noscript></div>
 
 <p>みたいな感じで使う。
 percolのお陰で絞込み検索が素晴らしい感じなので便利。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[ファイラから7-zip(7zG.exe)使うようにすると捗る]]></title>
-    <link href="http://blog.feelmy.net/2012/09/18/use-7-zip-from-a-filer/"/>
-    <updated>2012-09-18T00:10:00+09:00</updated>
-    <id>http://blog.feelmy.net/2012/09/18/use-7-zip-from-a-filer</id>
-    <content type="html"><![CDATA[<p>Windowsではずっと統合アーカイバプロジェクトのDLL群とそれらを使うアーカイバにお世話になってきたけど、<br/>
-<a href="http://sevenzip.sourceforge.jp/" title="7-Zip">7-Zip</a>のほうが速いので7-Zip付属の7zG.exe, 7z.exeとB2E(Bridge To Executables)に移行することにした。<br/>
-B2Eの本家は<a href="http://www.kmonos.net/lib/noah.ja.html" title="Noah - kMonos.NET">Noah</a>だけど、<a href="http://claybird.sakura.ne.jp/garage/lhaforge/" title="泥巣 : 作品庫 - LhaForge">LhaForge</a>の方がコマンドラインオプションが充実していて使いやすいのでそっちを使う。</p>
-
-<div><script src='https://gist.github.com/3737689.js'></script>
-<noscript><pre><code>load:
-  (name 7zG.exe)
-  (type 7z LZMA *LZMA2)
-
-encode:
-  (if (method 1) (cmd a -t7z -m0=LZMA (arc.7z) (list\*)))
-  (if (method 2) (cmd a -t7z -m0=LZMA2 (arc.7z) (list\*)))</code></pre></noscript></div>
-
-
-<p>zip, 7z圧縮用と展開用のスクリプト。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>  C:\usr\app\lfarchive\LhaForge.exe /b2e /e                   #展開
-</span><span class='line'>  C:\usr\app\lfarchive\LhaForge.exe /b2e /c:zip /method:Store #圧縮(Zip Store)
-</span><span class='line'>  C:\usr\app\lfarchive\LhaForge.exe /b2e /c:7z /method:LZMA2  #圧縮(7z LZMA2)</span></code></pre></td></tr></table></div></figure>
-
-
-<p>LhaForgeをファイラから呼ぶ場合こんな感じ。</p>
 ]]></content>
   </entry>
   

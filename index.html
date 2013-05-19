@@ -9,8 +9,8 @@
   <meta name="author" content="ebith">
 
   
-  <meta name="description" content="Kingdoms of Amalur: Reckoning ¥310 正統派のアクションRPG。続編があれば更に面白そうだけど出ようが無いのが悲しい。これやってるとSkyrimやりたくなる。
-インベントリとかスキルツリーのシステムがイマイチなのが惜しい。 Age of Empires II: HD &hellip;">
+  <meta name="description" content="feedline CrowsnestとかGunosyみたいな便利っぽいのもあるけど、
+単にタイムラインに流れてきたURLを後からフィードリーダーで見たかったので作った。 こんな感じで読める。 config.coffee.sampleを参考にconfig.coffeeを用意して、npm &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,51 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/05/19/feedline/">TwitterのtimelineからURLを抽出してRSSにするの作った</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-19T00:22:00+09:00" pubdate data-updated="true">May 19<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2><a href="https://github.com/ebith/feedline" title="ebith/feedline · GitHub">feedline</a></h2>
+
+<p>CrowsnestとかGunosyみたいな便利っぽいのもあるけど、<br/>
+単にタイムラインに流れてきたURLを後からフィードリーダーで見たかったので作った。</p>
+
+<p><a href="http://www.flickr.com/photos/ebith/8753538041/" title="feedline by Ebith, on Flickr"><img src="http://farm9.staticflickr.com/8420/8753538041_f11d9dc68c_n.jpg" width="320" height="293" alt="feedline"></a><br/>
+こんな感じで読める。</p>
+
+<p>config.coffee.sampleを参考にconfig.coffeeを用意して、<code>npm install</code>すればあとは起動するだけ。<br/>
+<code>forever start -c coffee app.coffee</code>とか後が楽なのでオススメ。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -400,71 +445,6 @@ GfWLと似たようなRockstar Games Social Clubがダルい、グラフィッ�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/02/15/tlv-js/">Tiarraのログをブラウザから見たり検索したりできるやつ作った</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-02-15T22:00:00+09:00" pubdate data-updated="true">Feb 15<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2><a href="https://github.com/ebith/TLV.js" title="ebith/TLV.js · GitHub">TLV.js</a></h2>
-
-<p><a href="http://www.flickr.com/photos/ebith/8475029653/" title="tlv01 by Ebith, on Flickr"><img src="http://farm9.staticflickr.com/8111/8475029653_055048fbb4_n.jpg" width="320" height="240" alt="tlv01"></a>
-<a href="http://www.flickr.com/photos/ebith/8475029689/" title="tlv02 by Ebith, on Flickr"><img src="http://farm9.staticflickr.com/8246/8475029689_ba2e947ac5_n.jpg" width="320" height="240" alt="tlv02"></a><br/>
-画像はTwitterのPublic TimelineをIRCのログ代わりにしたやつ。<br/>
-古いログをひたすら継ぎ足して表示したり、検索したり、とある日のログを読んだりできる。</p>
-
-<h2>試してみる</h2>
-
-<p>MongoDBは動いてる前提。インストールするなら<a href="http://docs.mongodb.org/manual/installation/" title="Installing MongoDB — MongoDB Manual">Installing MongoDB</a>が詳しい。<br/>
-Mongo.pmをtiarraPath/module/Log/に配置、confの例は以下に。<br/>
-必要に応じて<code>cpanm MongoDB</code>したのち<code>/load</code>か再起動でMongo.pmを読み込む。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>+ Log::Mongo {
-</span><span class='line'>  charset: utf8
-</span><span class='line'>  channel: *
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Node.jsとcoffee-scriptが入っていれば<code>npm install</code>して<code>coffee app.coffee</code>で動き出す。<br/>
-http://localhost:3000にアクセス！</p>
-
-<h2>その他</h2>
-
-<p>環境変数NODE_ENVを<code>production</code>に設定するとSSL+BASIC認証で起動する。_run.sh参照。<br/>
-あとから見返したいチャンネルが1つだけだったのでチャンネル名を考慮していない。全部混ざって表示されるはず。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/2/">&larr; Older</a>
@@ -478,6 +458,10 @@ http://localhost:3000にアクセス！</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/05/19/feedline/">TwitterのtimelineからURLを抽出してRSSにするの作った</a>
+      </li>
     
       <li class="post">
         <a href="/2013/04/28/played-games/">今月遊んだゲーム</a>
@@ -515,15 +499,11 @@ http://localhost:3000にアクセス！</p>
         <a href="/2013/01/05/terraria-server-with-ubuntu-server-12.04/">さくらのVPS 2G(Ubuntu 12.04)でTerrariaServer(TShock)を動かす</a>
       </li>
     
-      <li class="post">
-        <a href="/2012/12/22/useful-tips-for-vimperator/">Vimperatorを便利に使うためのtips</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-  <span id="tag-cloud"><a href='/categories/3ds' style='font-size: 108.57142857142857%'>3DS(1)</a> <a href='/categories/adventcalendar' style='font-size: 125.71428571428572%'>adventCalendar(3)</a> <a href='/categories/archlinux' style='font-size: 108.57142857142857%'>ArchLinux(1)</a> <a href='/categories/bag' style='font-size: 108.57142857142857%'>bag(1)</a> <a href='/categories/done' style='font-size: 108.57142857142857%'>done(1)</a> <a href='/categories/food' style='font-size: 108.57142857142857%'>food(1)</a> <a href='/categories/game' style='font-size: 160.0%'>game(7)</a> <a href='/categories/hardware' style='font-size: 117.14285714285714%'>hardware(2)</a> <a href='/categories/hubot' style='font-size: 108.57142857142857%'>Hubot(1)</a> <a href='/categories/irc' style='font-size: 117.14285714285714%'>IRC(2)</a> <a href='/categories/javascript' style='font-size: 108.57142857142857%'>JavaScript(1)</a> <a href='/categories/linux' style='font-size: 125.71428571428572%'>linux(3)</a> <a href='/categories/mac' style='font-size: 117.14285714285714%'>Mac(2)</a> <a href='/categories/node-js' style='font-size: 117.14285714285714%'>Node.js(2)</a> <a href='/categories/octopress' style='font-size: 108.57142857142857%'>Octopress(1)</a> <a href='/categories/raspberrypi' style='font-size: 108.57142857142857%'>RaspberryPi(1)</a> <a href='/categories/recipe' style='font-size: 108.57142857142857%'>recipe(1)</a> <a href='/categories/ruby' style='font-size: 108.57142857142857%'>Ruby(1)</a> <a href='/categories/software' style='font-size: 151.42857142857144%'>software(6)</a> <a href='/categories/ssl' style='font-size: 108.57142857142857%'>ssl(1)</a> <a href='/categories/terraria' style='font-size: 108.57142857142857%'>Terraria(1)</a> <a href='/categories/ubuntu' style='font-size: 108.57142857142857%'>Ubuntu(1)</a> <a href='/categories/vimperator' style='font-size: 134.28571428571428%'>Vimperator(4)</a> <a href='/categories/vps' style='font-size: 108.57142857142857%'>VPS(1)</a> <a href='/categories/win' style='font-size: 117.14285714285714%'>Win(2)</a> </span>
+  <span id="tag-cloud"><a href='/categories/3ds' style='font-size: 108.57142857142857%'>3DS(1)</a> <a href='/categories/adventcalendar' style='font-size: 125.71428571428572%'>adventCalendar(3)</a> <a href='/categories/archlinux' style='font-size: 108.57142857142857%'>ArchLinux(1)</a> <a href='/categories/bag' style='font-size: 108.57142857142857%'>bag(1)</a> <a href='/categories/done' style='font-size: 108.57142857142857%'>done(1)</a> <a href='/categories/food' style='font-size: 108.57142857142857%'>food(1)</a> <a href='/categories/game' style='font-size: 160.0%'>game(7)</a> <a href='/categories/gyazo' style='font-size: 108.57142857142857%'>Gyazo(1)</a> <a href='/categories/hardware' style='font-size: 117.14285714285714%'>hardware(2)</a> <a href='/categories/hubot' style='font-size: 108.57142857142857%'>Hubot(1)</a> <a href='/categories/irc' style='font-size: 117.14285714285714%'>IRC(2)</a> <a href='/categories/javascript' style='font-size: 108.57142857142857%'>JavaScript(1)</a> <a href='/categories/linux' style='font-size: 125.71428571428572%'>linux(3)</a> <a href='/categories/mac' style='font-size: 117.14285714285714%'>Mac(2)</a> <a href='/categories/node-js' style='font-size: 125.71428571428572%'>Node.js(3)</a> <a href='/categories/octopress' style='font-size: 108.57142857142857%'>Octopress(1)</a> <a href='/categories/perl' style='font-size: 108.57142857142857%'>Perl(1)</a> <a href='/categories/raspberrypi' style='font-size: 108.57142857142857%'>RaspberryPi(1)</a> <a href='/categories/recipe' style='font-size: 108.57142857142857%'>recipe(1)</a> <a href='/categories/ruby' style='font-size: 117.14285714285714%'>Ruby(2)</a> <a href='/categories/software' style='font-size: 125.71428571428572%'>software(3)</a> <a href='/categories/ssl' style='font-size: 108.57142857142857%'>ssl(1)</a> <a href='/categories/terraria' style='font-size: 108.57142857142857%'>Terraria(1)</a> <a href='/categories/twitter' style='font-size: 108.57142857142857%'>Twitter(1)</a> <a href='/categories/ubuntu' style='font-size: 108.57142857142857%'>Ubuntu(1)</a> <a href='/categories/vimperator' style='font-size: 134.28571428571428%'>Vimperator(4)</a> <a href='/categories/vps' style='font-size: 108.57142857142857%'>VPS(1)</a> <a href='/categories/win' style='font-size: 117.14285714285714%'>Win(2)</a> </span>
 </section>
 
 <section>
