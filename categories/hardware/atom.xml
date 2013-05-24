@@ -4,7 +4,7 @@
   <title><![CDATA[Category: hardware | おいら屋ファクトリー]]></title>
   <link href="http://blog.feelmy.net/categories/hardware/atom.xml" rel="self"/>
   <link href="http://blog.feelmy.net/"/>
-  <updated>2013-05-21T19:47:43+09:00</updated>
+  <updated>2013-05-24T21:43:27+09:00</updated>
   <id>http://blog.feelmy.net/</id>
   <author>
     <name><![CDATA[ebith]]></name>
@@ -40,63 +40,63 @@ shred -v -n 3 -z /dev/hoge  # ランダムデータを3回書き込んだのち�
 <li>ケース
 
 <ul>
-<li><a href="http://www.links.co.jp/items/antec-case/p280.html" title="P280 製品情報 コンピュータ関連製品の代理店事業 ｌ 株式会社リンクスインターナショナル">ANTEC P280</a></li>
+<li><a href="http://www.links.co.jp/items/antec-case/p280.html" title="P280 製品情報 コンピュータ関連製品の代理店事業 ｌ 株式会社リンクスインターナショナル">ANTEC P280</a> \10,544</li>
 </ul>
 </li>
 <li>電源
 
 <ul>
-<li><a href="http://www.owltech.co.jp/products/power/Seasonic/SS-X2/SS850_760_660_560KM.html" title="Seasonic電源 X-Series SS-850KM SS-760KM SS-660KM SS-560KM">Seasonic XSeries SS-760KM</a></li>
+<li><a href="http://www.owltech.co.jp/products/power/Seasonic/SS-X2/SS850_760_660_560KM.html" title="Seasonic電源 X-Series SS-850KM SS-760KM SS-660KM SS-560KM">Seasonic XSeries SS-760KM</a> \18,629</li>
 </ul>
 </li>
 <li>マザーボード
 
 <ul>
-<li><a href="http://www.asus.co.jp/Motherboards/Intel_Socket_1155/P8Z77V_PRO/" title="ASUS - マザーボード- ASUS P8Z77-V PRO">ASUS P8Z77-V PRO</a></li>
+<li><a href="http://www.asus.co.jp/Motherboards/Intel_Socket_1155/P8Z77V_PRO/" title="ASUS - マザーボード- ASUS P8Z77-V PRO">ASUS P8Z77-V PRO</a> \17,470</li>
 </ul>
 </li>
 <li>CPU
 
 <ul>
-<li><a href="http://ark.intel.com/ja/products/65520" title="ARK | Intel® Core™ i5-3570K Processor (6M Cache, up to 3.80 GHz)">Intel Core i5 3570K</a></li>
+<li><a href="http://ark.intel.com/ja/products/65520" title="ARK | Intel® Core™ i5-3570K Processor (6M Cache, up to 3.80 GHz)">Intel Core i5 3570K</a> \18,501</li>
 </ul>
 </li>
 <li>CPUクーラー
 
 <ul>
-<li><a href="http://www.scythe.co.jp/cooler/ninja3-revb.html" title="株式会社サイズ ｜ 商品詳細 ｜忍者参リビジョンB">SCYTHE 忍者参リビジョンB</a></li>
+<li><a href="http://www.scythe.co.jp/cooler/ninja3-revb.html" title="株式会社サイズ ｜ 商品詳細 ｜忍者参リビジョンB">SCYTHE 忍者参リビジョンB</a> \3,291</li>
 </ul>
 </li>
 <li>メモリ
 
 <ul>
-<li><a href="http://www.avexir.com/product/platinumspec.htm" title="AVEXIR">AVEXIR AVD3U16001108G-2MW</a></li>
+<li><a href="http://www.avexir.com/product/platinumspec.htm" title="AVEXIR">AVEXIR AVD3U16001108G-2MW</a> \8,980</li>
 </ul>
 </li>
 <li>GPU
 
 <ul>
-<li><a href="http://www.gigabyte.jp/products/product-page.aspx?pid=4211#ov" title="GIGABYTE - グラフィックスカード - NVIDIA - PCI Express Solution - GeForce 600 Series - GV-N670OC-2GD">GIGABYTE GV-N670OC-2GD</a></li>
+<li><a href="http://www.gigabyte.jp/products/product-page.aspx?pid=4211#ov" title="GIGABYTE - グラフィックスカード - NVIDIA - PCI Express Solution - GeForce 600 Series - GV-N670OC-2GD">GIGABYTE GV-N670OC-2GD</a> \37,634</li>
 </ul>
 </li>
 <li>ストレージ
 
 <ul>
-<li><a href="http://www.links.co.jp/item/px-256m3p/" title="PX-256M3P | コンピュータ関連製品の代理店事業 ｌ 株式会社リンクスインターナショナル">PLEXTOR PX-256M3P</a></li>
-<li><a href="http://www.semicon.toshiba.co.jp/product/storage/selection/built-in/client_hdd35/DT01ACAxxx.html" title="クライアントHDD(3.5型)｜クライアントHDD(3.5型)｜東芝 セミコンダクター＆ストレージ社">TOSHIBA DT01ACA200</a></li>
+<li><a href="http://www.links.co.jp/item/px-256m3p/" title="PX-256M3P | コンピュータ関連製品の代理店事業 ｌ 株式会社リンクスインターナショナル">PLEXTOR PX-256M3P</a> \17,980</li>
+<li><a href="http://www.semicon.toshiba.co.jp/product/storage/selection/built-in/client_hdd35/DT01ACAxxx.html" title="クライアントHDD(3.5型)｜クライアントHDD(3.5型)｜東芝 セミコンダクター＆ストレージ社">TOSHIBA DT01ACA200</a> \9,480</li>
 </ul>
 </li>
 <li>光学ドライブ
 
 <ul>
-<li><a href="http://www.pioneerelectronics.com/PUSA/Computer/Computer+Drives/BDR-207DBK" title="BDR-207DBK - 12x Internal BD/DVD/CD Burner. SATA Interface. | Pioneer Electronics USA">Pioneer BDR-207DBK</a></li>
+<li><a href="http://www.pioneerelectronics.com/PUSA/Computer/Computer+Drives/BDR-207DBK" title="BDR-207DBK - 12x Internal BD/DVD/CD Burner. SATA Interface. | Pioneer Electronics USA">Pioneer BDR-207DBK</a> \6,470</li>
 </ul>
 </li>
 <li>その他
 
 <ul>
-<li><a href="http://www.ainex.jp/products/as-05.htm" title="Ainex | AS-05">Ainex AS-05 シルバーグリス</a></li>
-<li><a href="http://www.ainex.jp/products/bz-01.htm" title="Ainex | BZ-01">Ainex BZ-01 ブザーユニット</a></li>
+<li><a href="http://www.ainex.jp/products/as-05.htm" title="Ainex | AS-05">Ainex AS-05 シルバーグリス</a> \1,300</li>
+<li><a href="http://www.ainex.jp/products/bz-01.htm" title="Ainex | BZ-01">Ainex BZ-01 ブザーユニット</a> \336</li>
 </ul>
 </li>
 <li>流用品
@@ -107,7 +107,7 @@ shred -v -n 3 -z /dev/hoge  # ランダムデータを3回書き込んだのち�
 <li><a href="http://www.scythe.co.jp/cooler/kaze-juni.html" title="株式会社サイズ ｜ 商品詳細 ｜KAZE-JYUNI">SCYTHE KAZE-JYUNI 800rpm SY1225SL12L</a> * 2</li>
 </ul>
 </li>
-<li>合計 ￥151140</li>
+<li>合計 \150,615</li>
 </ul>
 
 
