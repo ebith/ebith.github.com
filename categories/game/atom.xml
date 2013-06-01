@@ -4,7 +4,7 @@
   <title><![CDATA[Category: game | おいら屋ファクトリー]]></title>
   <link href="http://blog.feelmy.net/categories/game/atom.xml" rel="self"/>
   <link href="http://blog.feelmy.net/"/>
-  <updated>2013-05-24T21:48:33+09:00</updated>
+  <updated>2013-06-01T23:45:45+09:00</updated>
   <id>http://blog.feelmy.net/</id>
   <author>
     <name><![CDATA[ebith]]></name>
@@ -12,6 +12,29 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[今月買ったゲーム]]></title>
+    <link href="http://blog.feelmy.net/2013/05/31/bought-games/"/>
+    <updated>2013-05-31T04:28:00+09:00</updated>
+    <id>http://blog.feelmy.net/2013/05/31/bought-games</id>
+    <content type="html"><![CDATA[<h2>Kingdoms of Amalur: Reckoning + 2DLC ¥892</h2>
+
+<p>DLC目的で購入。余った本体は300円で売った。</p>
+
+<h2>Bundle Stars #7 "Indie Jam2" ¥514</h2>
+
+<p>安い時に買いたいと思っていたTwo Worlds IIが入ってたので。</p>
+
+<h2>Skyrim DLCs Heathfire(¥255), Dawnguard(¥1021), Dragonborn(¥1021) ¥2297</h2>
+
+<p>DLCのリリース終了で買い時っぽかった。</p>
+
+<h2>Hitman: Absolution ¥518</h2>
+
+<p>ゲームとしてはHitmanじゃないらしいけどすっげー安いので買っといた。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[今月遊んだゲーム]]></title>
@@ -140,79 +163,6 @@ Coop誘うのSteamじゃなくてGames for Windows Live経由なのがダルい�
 
 <p>石掘ってると無心になれる。サーバ立てればみんなで一緒に遊べるし、協力して掘ったり戦ったり楽しい。<br/>
 次作早くやりたい。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[年末年始にゲーム35本買ったのでその一覧]]></title>
-    <link href="http://blog.feelmy.net/2013/01/10/holiday-sale/"/>
-    <updated>2013-01-10T00:00:00+09:00</updated>
-    <id>http://blog.feelmy.net/2013/01/10/holiday-sale</id>
-    <content type="html"><![CDATA[<h2>DRM: Origin</h2>
-
-<ul>
-<li>Crysis ¥750</li>
-<li>Crysis Warhead ¥750</li>
-<li>Crysis 2 ¥1000</li>
-</ul>
-
-
-<p>¥2500</p>
-
-<h2>DRM: Steam</h2>
-
-<ul>
-<li>Bastion ¥327</li>
-<li>Castle Crashers (4 Pack) ¥1357</li>
-<li>Darksiders Franchise Pack (1+2+DLC) ¥1243</li>
-<li>Hotline Miami ¥222</li>
-<li>Max Payne 3 ¥1310</li>
-<li>Renegade Ops ¥0(もらった)</li>
-<li>Sine Mora ¥155</li>
-<li>SkyDrift (*5) ¥449</li>
-<li>Sleeping Dogs + Dragon Master Pack ¥723</li>
-<li>Spec Ops: The Line ¥425</li>
-<li>Terraria (4 Pack) ¥897</li>
-<li>The Humble Indie Bundle 7 ¥586
-
-<ul>
-<li>Cave Story+</li>
-<li>Closure</li>
-<li>Dungeon Defenders + All DLC</li>
-<li>Legend of Grimrock</li>
-<li>Offspring Fling</li>
-<li>Shank 2</li>
-<li>Snapshot</li>
-<li>The Basement Collection</li>
-<li>The Binding of Isaac + Wrath of the Lamb DLC</li>
-</ul>
-</li>
-<li>Toki Tori ¥44</li>
-<li>Torchlight II ¥872</li>
-</ul>
-
-
-<h2>合計</h2>
-
-<p>35本 ¥11110</p>
-
-<h2>いろいろ</h2>
-
-<p>回線がやっと光になったのと、最近PCでゲームあんまりやってないなと思ったのでセール情報に貼り付いてたくさん買ってみた。<br/>
-効率的にセール情報を得るためにredditの<a href="http://en.reddit.com/r/GameDeals/new/?sort=new" title="newest submissions : GameDeals">newest submissions : GameDeals</a>の新着をポストする<a href="https://twitter.com/gamedealsbot" title="r/GameDeals/new/ (GameDealsBot)さんはTwitterを使っています">Twitter bot</a>作ったけど何故か即凍結されたのでIkachanでIRCに流すことになった。</p>
-
-<p>そういえば動画かなんかを見ただけでやってないな。ってことで買ったCrysisシリーズがちょっと高いというかEA Japanのセールがしょぼい。
-挙句の果てに2は面白くなかった。<br/>
-あとやっぱOriginとかUplayとか微妙すぎると思うので早くSteamに合流しちゃってほしい。</p>
-
-<p>もらったRenegade Opsとか4packを買ったTerraria, Castle CrashersはCoop用。<br/>
-Terrariaのマルチが思っていた以上に楽しくて年末年始はずっとやってた。<br/>
-<a href="https://github.com/TShock/TShock" title="TShock/TShock · GitHub">TShock</a>っていう非公式なdedicated serverがよくできていてMono使うとLinuxでも動くし素晴らしい。<br/>
-サーバのたて方とかは<a href="http://blog.feelmy.net/2013/01/05/terraria-server-with-ubuntu-server-12.04/" title="さくらのVPS 2G(Ubuntu 12.04)でTerrariaServer(TShock)を動かす - おいら屋ファクトリー">さくらのVPS 2G(Ubuntu 12.04)でTerrariaServer(TShock)を動かす</a>にまとめた。</p>
-
-<p>GamersGateで$2.84だったTom Clancy's Ghost Recon: Future Soldierを逃してしまったのを悲しんでいたらその前後のBethesda CollectionとかBorderlands2 4Packとかも合わせて返金騒ぎになってた。</p>
-
-<p>Steamだと日本語字幕入りな代わりにおま値$79.99で買うことはまずないであろうと思っていたSleeping Dogsが、ホリデーセール延長開始時に91%になっていたので飛びついておいた。</p>
 ]]></content>
   </entry>
   

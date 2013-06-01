@@ -9,8 +9,7 @@
   <meta name="author" content="ebith">
 
   
-  <meta name="description" content="feedline CrowsnestとかGunosyみたいな便利っぽいのもあるけど、
-単にタイムラインに流れてきたURLを後からフィードリーダーで見たかったので作った。 こんな感じで読める。 config.coffee.sampleを参考にconfig.coffeeを用意して、npm &hellip;">
+  <meta name="description" content="前にやったオレオレ認証局をたててオレオレ証明書を発行するからもう一歩進む。 証明書の中身で分岐したい $ssl_client_s_dnにSubject(発行対象)、$ssl_client_i_dnにIssuer(発行者)の情報が入っていて、それぞれCN(Common Name), O( &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +78,119 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/06/01/nginx-ssl-client-authentication/">Nginxでちょっと高度なクライアント認証する</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-01T23:30:00+09:00" pubdate data-updated="true">Jun 1<span>st</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>前にやった<a href="http://blog.feelmy.net/2013/04/05/self-signed-certificate/">オレオレ認証局をたててオレオレ証明書を発行する</a>からもう一歩進む。</p>
+
+<h2>証明書の中身で分岐したい</h2>
+
+<p><code>$ssl_client_s_dn</code>にSubject(発行対象)、<code>$ssl_client_i_dn</code>にIssuer(発行者)の情報が入っていて、それぞれCN(Common Name), O(Organization)が含まれているのでこれらを見てよしなにする。</p>
+
+<h3>Common Nameにebithが含まれていない場合403 Forbiddenを返す</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='nginx'><span class='line'><span class="k">ssl</span> <span class="no">on</span><span class="p">;</span>
+</span><span class='line'><span class="k">ssl_certificate</span> <span class="s">server.crt</span><span class="p">;</span>
+</span><span class='line'><span class="k">ssl_certificate_key</span> <span class="s">sever.key</span><span class="p">;</span>
+</span><span class='line'><span class="k">ssl_verify_client</span> <span class="no">on</span><span class="p">;</span>
+</span><span class='line'><span class="k">ssl_client_certificate</span> <span class="s">cacert.pem</span><span class="p">;</span>
+</span><span class='line'><span class="k">if</span> <span class="s">(</span><span class="nv">$ssl_client_s_dn</span> <span class="s">!~</span> <span class="s">&quot;CN=ebith&quot;)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kn">return</span> <span class="mi">403</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ルート証明書のインポートをお願いできる仲間内だと警告無しで正規のSSLと変わらない使い勝手でお手軽に暗号化できるし、今回のようにクライアント認証も使えば更に便利なので素晴らしい。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/05/31/bought-games/">今月買ったゲーム</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-31T04:28:00+09:00" pubdate data-updated="true">May 31<span>st</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Kingdoms of Amalur: Reckoning + 2DLC ¥892</h2>
+
+<p>DLC目的で購入。余った本体は300円で売った。</p>
+
+<h2>Bundle Stars #7 &#8220;Indie Jam2&#8221; ¥514</h2>
+
+<p>安い時に買いたいと思っていたTwo Worlds IIが入ってたので。</p>
+
+<h2>Skyrim DLCs Heathfire(¥255), Dawnguard(¥1021), Dragonborn(¥1021) ¥2297</h2>
+
+<p>DLCのリリース終了で買い時っぽかった。</p>
+
+<h2>Hitman: Absolution ¥518</h2>
+
+<p>ゲームとしてはHitmanじゃないらしいけどすっげー安いので買っといた。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -349,102 +461,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/03/29/played-games/">今月遊んだゲーム</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-29T00:00:00+09:00" pubdate data-updated="true">Mar 29<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2><a href="http://store.steampowered.com/app/23530">Earth Defense Force: Insect Armageddon</a> ¥185</h2>
-
-<p>オンラインCoopがある地球防衛軍。</p>
-
-<h2><a href="http://store.steampowered.com/agecheck/app/202170/">Sleeping Dogs</a> ¥723</h2>
-
-<p>面白くないわけじゃないけどGTAで良いやんという結論。</p>
-
-<h2><a href="http://amazon.jp/dp/B00A8E0L4S?tag=ebith-22">マクロス30 銀河を繋ぐ歌声</a> ¥6722</h2>
-
-<p>でかい画面でバルキリー動かせるの楽しい。機体も豊富。アクションRPGであることを受け入れられるなら楽しめる。<br/>
-50時間で2回フリーズした。低い空、機体ステータスの一部が見られない、インベントリの容量が小さすぎる、ちゃちなダンジョン、荒い機体テクスチャなど残念な仕様や要素も多い。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/02/28/played-games/">今月遊んだゲーム</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-02-28T22:00:00+09:00" pubdate data-updated="true">Feb 28<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2><a href="http://store.steampowered.com/app/204100">Max Payne 3</a> ¥1310</h2>
-
-<p>高めの難易度とバレットタイムのシステムがチグハグに感じた。格好良く飛び出すと死ぬ。<br/>
-GfWLと似たようなRockstar Games Social Clubがダルい、グラフィックが妙に安っぽい。</p>
-
-<h2><a href="http://store.steampowered.com/app/50650">Darksiders II</a> ¥1243</h2>
-
-<p>主人公の見た目や装備が中二心をくすぐる。デスさんまじ良い人。<br/>
-攻撃の種類は数少ないので戦闘は単調になりがち。パズル要素がやや多いのは好みが分かれそう。</p>
-
-<h2><a href="http://amazon.jp/o/ASIN/B0095D6I86?tag=ebith-22">METAL GEAR RISING: REVENGEANCE</a> ¥5699</h2>
-
-<p>雷電まじかっこいい。複雑過ぎないシステムで面白い。雷電このあとどうなんの…<br/>
-ボリューム不足で出てくるキャラ達即退場or空気。口の動き英語なの気になる。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/2/">&larr; Older</a>
@@ -458,6 +474,14 @@ GfWLと似たようなRockstar Games Social Clubがダルい、グラフィッ�
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/06/01/nginx-ssl-client-authentication/">Nginxでちょっと高度なクライアント認証する</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/05/31/bought-games/">今月買ったゲーム</a>
+      </li>
     
       <li class="post">
         <a href="/2013/05/20/feedline/">TwitterのtimelineからURLを抽出してRSSにするの作った</a>
@@ -491,19 +515,11 @@ GfWLと似たようなRockstar Games Social Clubがダルい、グラフィッ�
         <a href="/2013/01/31/played-games/">今月遊んだゲーム</a>
       </li>
     
-      <li class="post">
-        <a href="/2013/01/10/holiday-sale/">年末年始にゲーム35本買ったのでその一覧</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/01/05/terraria-server-with-ubuntu-server-12.04/">さくらのVPS 2G(Ubuntu 12.04)でTerrariaServer(TShock)を動かす</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-  <span id="tag-cloud"><a href='/categories/3ds' style='font-size: 108.57142857142857%'>3DS(1)</a> <a href='/categories/adventcalendar' style='font-size: 125.71428571428572%'>adventCalendar(3)</a> <a href='/categories/archlinux' style='font-size: 108.57142857142857%'>ArchLinux(1)</a> <a href='/categories/bag' style='font-size: 108.57142857142857%'>bag(1)</a> <a href='/categories/done' style='font-size: 108.57142857142857%'>done(1)</a> <a href='/categories/food' style='font-size: 108.57142857142857%'>food(1)</a> <a href='/categories/game' style='font-size: 160.0%'>game(7)</a> <a href='/categories/gyazo' style='font-size: 108.57142857142857%'>Gyazo(1)</a> <a href='/categories/hardware' style='font-size: 117.14285714285714%'>hardware(2)</a> <a href='/categories/hubot' style='font-size: 108.57142857142857%'>Hubot(1)</a> <a href='/categories/irc' style='font-size: 117.14285714285714%'>IRC(2)</a> <a href='/categories/javascript' style='font-size: 108.57142857142857%'>JavaScript(1)</a> <a href='/categories/linux' style='font-size: 125.71428571428572%'>linux(3)</a> <a href='/categories/mac' style='font-size: 117.14285714285714%'>Mac(2)</a> <a href='/categories/node-js' style='font-size: 125.71428571428572%'>Node.js(3)</a> <a href='/categories/octopress' style='font-size: 108.57142857142857%'>Octopress(1)</a> <a href='/categories/perl' style='font-size: 108.57142857142857%'>Perl(1)</a> <a href='/categories/raspberrypi' style='font-size: 108.57142857142857%'>RaspberryPi(1)</a> <a href='/categories/recipe' style='font-size: 108.57142857142857%'>recipe(1)</a> <a href='/categories/ruby' style='font-size: 117.14285714285714%'>Ruby(2)</a> <a href='/categories/software' style='font-size: 125.71428571428572%'>software(3)</a> <a href='/categories/ssl' style='font-size: 108.57142857142857%'>ssl(1)</a> <a href='/categories/terraria' style='font-size: 108.57142857142857%'>Terraria(1)</a> <a href='/categories/twitter' style='font-size: 108.57142857142857%'>Twitter(1)</a> <a href='/categories/ubuntu' style='font-size: 108.57142857142857%'>Ubuntu(1)</a> <a href='/categories/vimperator' style='font-size: 134.28571428571428%'>Vimperator(4)</a> <a href='/categories/vps' style='font-size: 108.57142857142857%'>VPS(1)</a> <a href='/categories/win' style='font-size: 117.14285714285714%'>Win(2)</a> </span>
+  <span id="tag-cloud"><a href='/categories/3ds' style='font-size: 107.5%'>3DS(1)</a> <a href='/categories/adventcalendar' style='font-size: 122.5%'>adventCalendar(3)</a> <a href='/categories/archlinux' style='font-size: 107.5%'>ArchLinux(1)</a> <a href='/categories/bag' style='font-size: 107.5%'>bag(1)</a> <a href='/categories/done' style='font-size: 107.5%'>done(1)</a> <a href='/categories/food' style='font-size: 107.5%'>food(1)</a> <a href='/categories/game' style='font-size: 160.0%'>game(8)</a> <a href='/categories/gyazo' style='font-size: 107.5%'>Gyazo(1)</a> <a href='/categories/hardware' style='font-size: 115.0%'>hardware(2)</a> <a href='/categories/hubot' style='font-size: 107.5%'>Hubot(1)</a> <a href='/categories/irc' style='font-size: 115.0%'>IRC(2)</a> <a href='/categories/javascript' style='font-size: 107.5%'>JavaScript(1)</a> <a href='/categories/linux' style='font-size: 122.5%'>linux(3)</a> <a href='/categories/mac' style='font-size: 115.0%'>Mac(2)</a> <a href='/categories/nginx' style='font-size: 107.5%'>Nginx(1)</a> <a href='/categories/node-js' style='font-size: 122.5%'>Node.js(3)</a> <a href='/categories/octopress' style='font-size: 107.5%'>Octopress(1)</a> <a href='/categories/perl' style='font-size: 107.5%'>Perl(1)</a> <a href='/categories/raspberrypi' style='font-size: 107.5%'>RaspberryPi(1)</a> <a href='/categories/recipe' style='font-size: 107.5%'>recipe(1)</a> <a href='/categories/ruby' style='font-size: 115.0%'>Ruby(2)</a> <a href='/categories/software' style='font-size: 122.5%'>software(3)</a> <a href='/categories/ssl' style='font-size: 115.0%'>SSL(2)</a> <a href='/categories/terraria' style='font-size: 107.5%'>Terraria(1)</a> <a href='/categories/twitter' style='font-size: 107.5%'>Twitter(1)</a> <a href='/categories/ubuntu' style='font-size: 107.5%'>Ubuntu(1)</a> <a href='/categories/vimperator' style='font-size: 130.0%'>Vimperator(4)</a> <a href='/categories/vps' style='font-size: 107.5%'>VPS(1)</a> <a href='/categories/win' style='font-size: 115.0%'>Win(2)</a> </span>
 </section>
 
 <section>

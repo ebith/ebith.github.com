@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Nginx | おいら屋ファクトリー]]></title>
+  <link href="http://blog.feelmy.net/categories/nginx/atom.xml" rel="self"/>
+  <link href="http://blog.feelmy.net/"/>
+  <updated>2013-06-01T23:45:45+09:00</updated>
+  <id>http://blog.feelmy.net/</id>
+  <author>
+    <name><![CDATA[ebith]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Nginxでちょっと高度なクライアント認証する]]></title>
+    <link href="http://blog.feelmy.net/2013/06/01/nginx-ssl-client-authentication/"/>
+    <updated>2013-06-01T23:30:00+09:00</updated>
+    <id>http://blog.feelmy.net/2013/06/01/nginx-ssl-client-authentication</id>
+    <content type="html"><![CDATA[<p>前にやった<a href="http://blog.feelmy.net/2013/04/05/self-signed-certificate/">オレオレ認証局をたててオレオレ証明書を発行する</a>からもう一歩進む。</p>
+
+<h2>証明書の中身で分岐したい</h2>
+
+<p><code>$ssl_client_s_dn</code>にSubject(発行対象)、<code>$ssl_client_i_dn</code>にIssuer(発行者)の情報が入っていて、それぞれCN(Common Name), O(Organization)が含まれているのでこれらを見てよしなにする。</p>
+
+<h3>Common Nameにebithが含まれていない場合403 Forbiddenを返す</h3>
+
+<p><code>nginx
+ssl on;
+ssl_certificate server.crt;
+ssl_certificate_key sever.key;
+ssl_verify_client on;
+ssl_client_certificate cacert.pem;
+if ($ssl_client_s_dn !~ "CN=ebith") {
+  return 403;
+}
+</code></p>
+
+<p>ルート証明書のインポートをお願いできる仲間内だと警告無しで正規のSSLと変わらない使い勝手でお手軽に暗号化できるし、今回のようにクライアント認証も使えば更に便利なので素晴らしい。</p>
+]]></content>
+  </entry>
+  
+</feed>

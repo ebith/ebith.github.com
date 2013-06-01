@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: food - おいら屋ファクトリー</title>
+  <title>Nginxでちょっと高度なクライアント認証する - おいら屋ファクトリー</title>
   <meta name="author" content="ebith">
 
   
-  <meta name="description" content="Category: food">
+  <meta name="description" content="前にやったオレオレ認証局をたててオレオレ証明書を発行するからもう一歩進む。 証明書の中身で分岐したい $ssl_client_s_dnにSubject(発行対象)、$ssl_client_i_dnにIssuer(発行者)の情報が入っていて、それぞれCN(Common Name), O( &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +20,7 @@
   <meta name="pocket-site-verification" content="66428973d8a3558b172e82627c6de8" />
 
   
-  <link rel="canonical" href="http://blog.feelmy.netcategories/food/">
+  <link rel="canonical" href="http://blog.feelmy.net/2013/06/01/nginx-ssl-client-authentication/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -77,36 +77,116 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Food</h1>
+    
+      <h1 class="entry-title">Nginxでちょっと高度なクライアント認証する</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-01T23:30:00+09:00" pubdate data-updated="true">Jun 1<span>st</span>, 2013</time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>前にやった<a href="http://blog.feelmy.net/2013/04/05/self-signed-certificate/">オレオレ認証局をたててオレオレ証明書を発行する</a>からもう一歩進む。</p>
 
-  
-  <h2>2012</h2>
+<h2>証明書の中身で分岐したい</h2>
 
-<article>
-  
-<h1><a href="/2012/09/11/muesli-cookies/">ミューズリーのクッキー</a></h1>
-<time datetime="2012-09-11T11:40:00+09:00" pubdate><span class='month'>Sep</span> <span class='day'>11</span> <span class='year'>2012</span></time>
+<p><code>$ssl_client_s_dn</code>にSubject(発行対象)、<code>$ssl_client_i_dn</code>にIssuer(発行者)の情報が入っていて、それぞれCN(Common Name), O(Organization)が含まれているのでこれらを見てよしなにする。</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/food/'>food</a>, <a class='category' href='/categories/recipe/'>recipe</a></span>
-</footer>
+<h3>Common Nameにebithが含まれていない場合403 Forbiddenを返す</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='nginx'><span class='line'><span class="k">ssl</span> <span class="no">on</span><span class="p">;</span>
+</span><span class='line'><span class="k">ssl_certificate</span> <span class="s">server.crt</span><span class="p">;</span>
+</span><span class='line'><span class="k">ssl_certificate_key</span> <span class="s">sever.key</span><span class="p">;</span>
+</span><span class='line'><span class="k">ssl_verify_client</span> <span class="no">on</span><span class="p">;</span>
+</span><span class='line'><span class="k">ssl_client_certificate</span> <span class="s">cacert.pem</span><span class="p">;</span>
+</span><span class='line'><span class="k">if</span> <span class="s">(</span><span class="nv">$ssl_client_s_dn</span> <span class="s">!~</span> <span class="s">&quot;CN=ebith&quot;)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kn">return</span> <span class="mi">403</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-</article>
-
+<p>ルート証明書のインポートをお願いできる仲間内だと警告無しで正規のSSLと変わらない使い勝手でお手軽に暗号化できるし、今回のようにクライアント認証も使えば更に便利なので素晴らしい。</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">ebith</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-01T23:30:00+09:00" pubdate data-updated="true">Jun 1<span>st</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/categories/nginx/'>Nginx</a>, <a class='category' href='/categories/ssl/'>SSL</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2013/05/31/bought-games/" title="Previous Post: 今月買ったゲーム">&laquo; 今月買ったゲーム</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -198,7 +278,10 @@
       var disqus_shortname = 'ebith';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.feelmy.net/2013/06/01/nginx-ssl-client-authentication/';
+        var disqus_url = 'http://blog.feelmy.net/2013/06/01/nginx-ssl-client-authentication/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
