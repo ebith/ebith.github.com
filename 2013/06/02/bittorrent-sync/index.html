@@ -5,11 +5,20 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: ArchLinux - おいら屋ファクトリー</title>
+  <title>BitTorrent SyncをVPSにセットアップする - おいら屋ファクトリー</title>
   <meta name="author" content="ebith">
 
   
-  <meta name="description" content="Category: ArchLinux">
+  <meta name="description" content="ダウンロードと起動 1
+2
+3
+4
+5
+6
+wget http://btsync.s3-website-us-east-1.amazonaws.com/btsync_x64.tar.gz
+tar xvfz btsync_x64.tar.gz
+mv btsync ~/bin/
+rehash &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +29,7 @@
   <meta name="pocket-site-verification" content="66428973d8a3558b172e82627c6de8" />
 
   
-  <link rel="canonical" href="http://blog.feelmy.netcategories/archlinux/">
+  <link rel="canonical" href="http://blog.feelmy.net/2013/06/02/bittorrent-sync/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -77,36 +86,163 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: ArchLinux</h1>
+    
+      <h1 class="entry-title">BitTorrent SyncをVPSにセットアップする</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-02T08:38:00+09:00" pubdate data-updated="true">Jun 2<span>nd</span>, 2013</time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><h2>ダウンロードと起動</h2>
 
-  
-  <h2>2012</h2>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>wget http://btsync.s3-website-us-east-1.amazonaws.com/btsync_x64.tar.gz
+</span><span class='line'>tar xvfz btsync_x64.tar.gz
+</span><span class='line'>mv btsync ~/bin/
+</span><span class='line'>rehash
+</span><span class='line'>btsync
+</span><span class='line'>sudo ufw allow xxxxxx
+</span></code></pre></td></tr></table></div></figure>
 
-<article>
-  
-<h1><a href="/2012/10/01/i-got-raspberry-pi/">ラズベリーパイを手に入れた！</a></h1>
-<time datetime="2012-10-01T09:02:00+09:00" pubdate><span class='month'>Oct</span> <span class='day'>01</span> <span class='year'>2012</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/archlinux/'>ArchLinux</a>, <a class='category' href='/categories/raspberrypi/'>RaspberryPi</a></span>
-</footer>
+<h2>外からWebUIにアクセスできるようにする</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='nginx'><span class='line'><span class="k">server</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kn">listen</span> <span class="mi">443</span><span class="p">;</span>
+</span><span class='line'>  <span class="kn">server_name</span> <span class="s">hoge.feelmy.net</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kn">ssl</span> <span class="no">on</span><span class="p">;</span>
+</span><span class='line'>  <span class="kn">ssl_certificate</span> <span class="s">server.crt</span><span class="p">;</span>
+</span><span class='line'>  <span class="kn">ssl_certificate_key</span> <span class="s">server.key</span><span class="p">;</span>
+</span><span class='line'>  <span class="kn">ssl_verify_client</span> <span class="no">on</span><span class="p">;</span>
+</span><span class='line'>  <span class="kn">ssl_client_certificate</span> <span class="s">cacert.pem</span><span class="p">;</span>
+</span><span class='line'>  <span class="kn">if</span> <span class="s">(</span><span class="nv">$ssl_client_s_dn</span> <span class="s">!~</span> <span class="s">&quot;CN=ebith&quot;)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kn">return</span> <span class="mi">403</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kn">location</span> <span class="s">/</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kn">proxy_redirect</span> <span class="no">off</span><span class="p">;</span>
+</span><span class='line'>    <span class="kn">proxy_set_header</span> <span class="s">X-Real-IP</span> <span class="nv">$remote_addr</span><span class="p">;</span>
+</span><span class='line'>    <span class="kn">proxy_set_header</span> <span class="s">X-Forwarded-For</span> <span class="nv">$proxy_add_x_forwarded_for</span><span class="p">;</span>
+</span><span class='line'>    <span class="kn">proxy_set_header</span> <span class="s">Host</span> <span class="nv">$http_host</span><span class="p">;</span>
+</span><span class='line'>    <span class="kn">proxy_pass</span> <span class="s">http://127.0.0.1:8888</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-</article>
+<h2>使ってみた感じ</h2>
 
+<ul>
+<li>P2Pなので速度出る</li>
+<li>フォルダ単位の共有で、追加や削除が簡単</li>
+<li>ワンタイム、リードオンリーなどの共有オプション有り</li>
+<li>.Syncignoreで除外ファイル設定可能</li>
+</ul>
+
+
+<p>起動しっぱなしのPCとかリソース余らせてるサーバがある場合は良い選択っぽい。</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">ebith</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-02T08:38:00+09:00" pubdate data-updated="true">Jun 2<span>nd</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/categories/vps/'>VPS</a>, <a class='category' href='/categories/software/'>software</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2013/06/01/nginx-ssl-client-authentication/" title="Previous Post: Nginxでちょっと高度なクライアント認証する">&laquo; Nginxでちょっと高度なクライアント認証する</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -198,7 +334,10 @@
       var disqus_shortname = 'ebith';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.feelmy.net/2013/06/02/bittorrent-sync/';
+        var disqus_url = 'http://blog.feelmy.net/2013/06/02/bittorrent-sync/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

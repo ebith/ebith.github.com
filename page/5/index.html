@@ -9,8 +9,11 @@
   <meta name="author" content="ebith">
 
   
-  <meta name="description" content="6月末にRSに注文したものの、届く気配もなかったのでModMyPiに頼んでみると1週間で到着。
-残念ながらRev1だったけど、Arch Linuxを入れてHeadless運用でしばらく遊ぶことにする。 最初の接続までは約3,300円で買えるLinuxパソコンRaspberry PiをMacで使う &hellip;">
+  <meta name="description" content="1
+2
+sfdisk -l # 消したいディスクを確認する
+shred -v -n 3 -z /dev/hoge # ランダムデータを3回書き込んだのちゼロフィル 大抵のディストリで可能らしいけどSystemRescueCdがシンプルで扱いやすい。
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +82,49 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/10/09/permanently-erase-disk/">HDDのデータを念入りに消去する</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-09T10:38:00+09:00" pubdate data-updated="true">Oct 9<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>sfdisk -l                   <span class="c"># 消したいディスクを確認する</span>
+</span><span class='line'>shred -v -n 3 -z /dev/hoge  <span class="c"># ランダムデータを3回書き込んだのちゼロフィル</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>大抵のディストリで可能らしいけど<a href="http://www.sysresccd.org/SystemRescueCd_Homepage" title="SystemRescueCd">SystemRescueCd</a>がシンプルで扱いやすい。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -479,116 +525,6 @@ tar --lzop -cf $tempfile $target $e
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/09/12/install-windows-7/">新PCにWindows 7入れた</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-09-12T21:43:00+09:00" pubdate data-updated="true">Sep 12<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Windows 7のインストールは3回目ぐらい、XPの頃と比べると本当に楽になった。<br/>
-OSのインストール後の流れをメモっておく。</p>
-
-<h2>ドライバのインストール</h2>
-
-<ul>
-<li>マザーボード系
-
-<ul>
-<li>チップセット</li>
-<li>LAN</li>
-<li>USB3</li>
-</ul>
-</li>
-<li>GPU</li>
-<li>サウンドカード</li>
-</ul>
-
-
-<h2>設定</h2>
-
-<ul>
-<li>サービスの停止
-
-<ul>
-<li>Superfetch</li>
-<li>Windows Search</li>
-</ul>
-</li>
-<li>SNP: 無効(<a href="http://itpro.nikkeibp.co.jp/article/COLUMN/20100824/351391/" title="ITアーキテクトの「やってはいけない」 - ［Windows 7編］ネットワーク設定を標準で使ってはいけない：ITpro">ITアーキテクトの「やってはいけない」 - ［Windows 7編］ネットワーク設定を標準で使ってはいけない：ITpro</a>)</li>
-<li>システムの復元: 無効</li>
-<li>ページングファイル: 最小</li>
-<li>ハイバネーション: オフ</li>
-<li>バックアップ: 週1に設定</li>
-</ul>
-
-
-<h2>ソフトのインストール</h2>
-
-<ul>
-<li><a href="http://www.comodo.com/home/internet-security/free-internet-security.php" title="Free Internet Security, Download Internet Security Software Suite - Comodo">COMODO Internet Security</a>
-
-<ul>
-<li>インストールに関しては2chのテンプレが詳しい(<a href="http://find.2ch.net/?STR=comodo+internet+security" title="2ch検索: [comodo internet security]">2ch検索: [comodo internet security]</a>)</li>
-<li>日本語化(<a href="http://torichuu.blog69.fc2.com/" title="NipsuのBlog">NipsuのBlog</a>)</li>
-</ul>
-</li>
-<li><a href="https://www.dropbox.com/" title="Dropbox - 生活をシンプルに">Dropbox</a></li>
-<li><a href="http://www.fraps.com/" title="FRAPS show fps, record video game movies, screen capture software">FRAPS</a></li>
-<li><a href="http://www.mozilla.jp/firefox/" title="次世代ブラウザ Firefox — 高速・安全・カスタマイズ自在な無料ブラウザ">Firefox</a></li>
-<li><a href="http://www.google.co.jp/ime/" title="Google 日本語入力 - ダウンロード">Google 日本語入力</a></li>
-<li><a href="http://www.growlforwindows.com/gfw/" title="Growl for Windows">Growl for Windows</a></li>
-<li><a href="http://www.apple.com/jp/itunes/download/" title="アップル - iTunes - iTunesを今すぐダウンロード">iTunes</a>
-
-<ul>
-<li><a href="http://www.apple.com/jp/support/iphone/enterprise/" title="Apple - サポート - iPhone - エンタープライズ">iPhone 構成ユーティリティ</a></li>
-<li>C:\Users\ebith\AppData\Roaming\Apple Computer\MobileSyncとC:\Users\ebith\Music\iTunesをデータドライブに移動してシンボリックリンクをはっておく</li>
-</ul>
-</li>
-<li><a href="http://schinagl.priv.at/nt/hardlinkshellext/hardlinkshellext.html" title="Link Shell Extension">Link Shell Extension</a></li>
-<li><a href="http://www.skype.com/intl/ja/home" title="オンラインで無料のSkypeインスタント通話と固定電話への格安通話 - Skype">Skype</a></li>
-<li><a href="http://store.steampowered.com/" title="Steam へようこそ">Steam</a></li>
-<li><a href="http://www.truecrypt.org/" title="TrueCrypt - Free Open-Source On-The-Fly Disk Encryption Software for Windows 7/Vista/XP, Mac OS X and Linux">TrueCrypt</a></li>
-<li><a href="https://www.virtualbox.org/" title="Oracle VM VirtualBox">VirtualBox</a>
-
-<ul>
-<li><a href="http://www.toptensoftware.com/VBoxHeadlessTray/" title="Topten Software">VBoxHeadlessTray</a></li>
-</ul>
-</li>
-<li><a href="http://www.appletkan.com/nodoka.htm" title="汎用キーバインディング変更ソフト「のどか」">のどか</a></li>
-</ul>
-
-
-<p>その他のファイルはバックアップからコピーして戻す。<br/>
-ソフト自体はポータブルなのにインストーラー版しか提供しないソフトが多くてこういう時すごく面倒くさいよね。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/6/">&larr; Older</a>
@@ -604,6 +540,10 @@ OSのインストール後の流れをメモっておく。</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/06/02/bittorrent-sync/">BitTorrent SyncをVPSにセットアップする</a>
+      </li>
     
       <li class="post">
         <a href="/2013/06/01/nginx-ssl-client-authentication/">Nginxでちょっと高度なクライアント認証する</a>
@@ -641,15 +581,11 @@ OSのインストール後の流れをメモっておく。</p>
         <a href="/2013/02/03/hubot-irc/">HubotでIRC Botを作る</a>
       </li>
     
-      <li class="post">
-        <a href="/2013/01/31/played-games/">今月遊んだゲーム</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-  <span id="tag-cloud"><a href='/categories/3ds' style='font-size: 107.5%'>3DS(1)</a> <a href='/categories/adventcalendar' style='font-size: 122.5%'>adventCalendar(3)</a> <a href='/categories/archlinux' style='font-size: 107.5%'>ArchLinux(1)</a> <a href='/categories/bag' style='font-size: 107.5%'>bag(1)</a> <a href='/categories/done' style='font-size: 107.5%'>done(1)</a> <a href='/categories/food' style='font-size: 107.5%'>food(1)</a> <a href='/categories/game' style='font-size: 160.0%'>game(8)</a> <a href='/categories/gyazo' style='font-size: 107.5%'>Gyazo(1)</a> <a href='/categories/hardware' style='font-size: 115.0%'>hardware(2)</a> <a href='/categories/hubot' style='font-size: 107.5%'>Hubot(1)</a> <a href='/categories/irc' style='font-size: 115.0%'>IRC(2)</a> <a href='/categories/javascript' style='font-size: 107.5%'>JavaScript(1)</a> <a href='/categories/linux' style='font-size: 122.5%'>linux(3)</a> <a href='/categories/mac' style='font-size: 115.0%'>Mac(2)</a> <a href='/categories/nginx' style='font-size: 107.5%'>Nginx(1)</a> <a href='/categories/node-js' style='font-size: 122.5%'>Node.js(3)</a> <a href='/categories/octopress' style='font-size: 107.5%'>Octopress(1)</a> <a href='/categories/perl' style='font-size: 107.5%'>Perl(1)</a> <a href='/categories/raspberrypi' style='font-size: 107.5%'>RaspberryPi(1)</a> <a href='/categories/recipe' style='font-size: 107.5%'>recipe(1)</a> <a href='/categories/ruby' style='font-size: 115.0%'>Ruby(2)</a> <a href='/categories/software' style='font-size: 122.5%'>software(3)</a> <a href='/categories/ssl' style='font-size: 115.0%'>SSL(2)</a> <a href='/categories/terraria' style='font-size: 107.5%'>Terraria(1)</a> <a href='/categories/twitter' style='font-size: 107.5%'>Twitter(1)</a> <a href='/categories/ubuntu' style='font-size: 107.5%'>Ubuntu(1)</a> <a href='/categories/vimperator' style='font-size: 130.0%'>Vimperator(4)</a> <a href='/categories/vps' style='font-size: 107.5%'>VPS(1)</a> <a href='/categories/win' style='font-size: 115.0%'>Win(2)</a> </span>
+  <span id="tag-cloud"><a href='/categories/3ds' style='font-size: 107.5%'>3DS(1)</a> <a href='/categories/adventcalendar' style='font-size: 122.5%'>adventCalendar(3)</a> <a href='/categories/archlinux' style='font-size: 107.5%'>ArchLinux(1)</a> <a href='/categories/bag' style='font-size: 107.5%'>bag(1)</a> <a href='/categories/done' style='font-size: 107.5%'>done(1)</a> <a href='/categories/food' style='font-size: 107.5%'>food(1)</a> <a href='/categories/game' style='font-size: 160.0%'>game(8)</a> <a href='/categories/gyazo' style='font-size: 107.5%'>Gyazo(1)</a> <a href='/categories/hardware' style='font-size: 115.0%'>hardware(2)</a> <a href='/categories/hubot' style='font-size: 107.5%'>Hubot(1)</a> <a href='/categories/irc' style='font-size: 115.0%'>IRC(2)</a> <a href='/categories/javascript' style='font-size: 107.5%'>JavaScript(1)</a> <a href='/categories/linux' style='font-size: 122.5%'>linux(3)</a> <a href='/categories/mac' style='font-size: 115.0%'>Mac(2)</a> <a href='/categories/nginx' style='font-size: 107.5%'>Nginx(1)</a> <a href='/categories/node-js' style='font-size: 122.5%'>Node.js(3)</a> <a href='/categories/octopress' style='font-size: 107.5%'>Octopress(1)</a> <a href='/categories/perl' style='font-size: 107.5%'>Perl(1)</a> <a href='/categories/raspberrypi' style='font-size: 107.5%'>RaspberryPi(1)</a> <a href='/categories/recipe' style='font-size: 107.5%'>recipe(1)</a> <a href='/categories/ruby' style='font-size: 115.0%'>Ruby(2)</a> <a href='/categories/software' style='font-size: 130.0%'>software(4)</a> <a href='/categories/ssl' style='font-size: 115.0%'>SSL(2)</a> <a href='/categories/terraria' style='font-size: 107.5%'>Terraria(1)</a> <a href='/categories/twitter' style='font-size: 107.5%'>Twitter(1)</a> <a href='/categories/ubuntu' style='font-size: 107.5%'>Ubuntu(1)</a> <a href='/categories/vimperator' style='font-size: 130.0%'>Vimperator(4)</a> <a href='/categories/vps' style='font-size: 115.0%'>VPS(2)</a> <a href='/categories/win' style='font-size: 115.0%'>Win(2)</a> </span>
 </section>
 
 <section>

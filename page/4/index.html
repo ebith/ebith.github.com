@@ -9,8 +9,9 @@
   <meta name="author" content="ebith">
 
   
-  <meta name="description" content="こういうやつ。
-オリジナルはDays Since | Leancodeで、今回作ったのがDays Since。 Webアプリ的なやつ形にするのって8年ぶりとかな気がするけど便利なフレームワークとかのおかげでググりまくるだけでそれっぽくできたし素晴らしい時代になった。 &hellip;">
+  <meta name="description" content="Vimperator Advent Calendar 2012 4日目のebithです。
+今日はVimperatorプラグインを書いてみたい、もしくは書こうとは思ったけど良くわからなかった人向けの情報などを紹介します。
+だいたいは僕がプラグインを作り始めた時に困ったりハマったりしたことですが、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +80,91 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/12/04/vimperator-plugin-dev-tips/">Vimperatorプラグインを書いてみたい人のためのtips</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-04T00:00:00+09:00" pubdate data-updated="true">Dec 4<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://atnd.org/events/34070" title="Vimperator Advent Calendar 2012 : ATND">Vimperator Advent Calendar 2012</a> 4日目のebithです。<br/>
+今日はVimperatorプラグインを書いてみたい、もしくは書こうとは思ったけど良くわからなかった人向けの情報などを紹介します。<br/>
+だいたいは僕がプラグインを作り始めた時に困ったりハマったりしたことですが、お役に立てれば幸いです。</p>
+
+<h2>そもそもどう書けば良いの</h2>
+
+<p><a href="https://github.com/vimpr/vimperator-plugins/blob/master/function-template.js" title="vimperator-plugins/function-template.js at master · vimpr/vimperator-plugins">サンプル用のプラグイン</a>にプラグインには欠かせないコマンドやマッピングなどの定義例が書いてあります。<br/>
+また、<a href="https://github.com/vimpr/vimperator-plugins" title="vimpr/vimperator-plugins">vimpr/vimperator-plugins</a>には200近いプラグインがあるので参考になるはずです。</p>
+
+<h2>プラグイン作るときに便利なやつ</h2>
+
+<h3>ライブラリ</h3>
+
+<p>Vimperator組込みの<code>util</code>や<a href="https://github.com/vimpr/vimperator-plugins/blob/master/_libly.js" title="vimperator-plugins/_libly.js at master · vimpr/vimperator-plugins">_libly.js</a>があります。</p>
+
+<h3>コマンド</h3>
+
+<p><code>:js</code>や<code>:echo</code>を使えば手軽にJavaScriptを実行できます。例) <code>:echo util</code><br/>
+<code>:source</code>がプラグインの再読み込みに使えます。</p>
+
+<h3>プラグイン</h3>
+
+<p><a href="https://github.com/vimpr/vimperator-plugins/blob/master/auto_source.js" title="vimperator-plugins/auto_source.js at master · vimpr/vimperator-plugins">auto_source.js</a> - 指定ファイルが変更されると自動的に:sourceします。<br/>
+<a href="https://github.com/vimpr/vimperator-plugins/blob/master/echopy.js" title="vimperator-plugins/echopy.js at master · vimpr/vimperator-plugins">echopy.js</a> - echoしつつクリップボードにコピーします。</p>
+
+<!--- [sitesearch](https://github.com/vimpr/vimperator-rc/blob/b6a3ef4de8a7befebbdbad56c1762423bbe1e7f7/anekos/.vimperatorrc.js#L595-L612 "vimperator-rc/anekos/.vimperatorrc.js at b6a3ef4de8a7befebbdbad56c1762423bbe1e7f7 · vimpr/vimperator-rc")
+ Googleのサイト内検索を開く-->
+
+
+<h3>プリントデバッグ</h3>
+
+<p><code>:js!</code>で開くエラーコンソールに、liberator.log()で出力できます。<br/>
+ログに残るタイプのechoであるliberator.echomsg()やliberator.echoerr()も便利です。<code>:messages</code>であとからでも読めます。</p>
+
+<h2>既存の動作を変更するプラグインを書きたい</h2>
+
+<p>_libly.jsの$U.aroundを使います。anekosさんの記事が詳しいです。<br/>
+<a href="http://vimperator.g.hatena.ne.jp/nokturnalmortum/20100120/1263929847" title="Vimperator 本体のメソッドを書き換えるときの指針 - Death to false Web browser! - vimperatorグループ">Vimperator 本体のメソッドを書き換えるときの指針</a>、
+<a href="http://vimperator.g.hatena.ne.jp/nokturnalmortum/20120811/1344688021" title="vimperator で、既存のコマンドにオレオレ動作を差しこむ - Death to false Web browser! - vimperatorグループ">vimperator で、既存のコマンドにオレオレ動作を差しこむ</a></p>
+
+<h2>ググってもググっても情報出てこない</h2>
+
+<p>プラグインに限らずVimperator全体に言えることですが、Googleなどで検索してもまとまった日本語の情報はイマイチ出てきません。<br/>
+<a href="https://github.com/vimpr/vimperator-plugins" title="vimpr/vimperator-plugins">vimpr/vimperator-plugins</a>をgrepしたりしてなんとかしましょう。<br/>
+JavaScript自体に関しては<a href="https://developer.mozilla.org/" title="Mozilla Developer Network">Mozilla Developer Network</a>が心強いです。</p>
+
+<h2>最後に</h2>
+
+<p>やってみると案外なんとかなるもので、単なるソフトウェアオタクでも少しはプラグイン書けるようになりました。<br/>
+多くの人がプラグインを書けばそれだけVimperatorが便利になってみんなが幸せなので是非ともチャレンジしてください。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -363,49 +449,6 @@ $170+$10(ポーチ10ドル値引きされた)+送料$65の$245で2万円。</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/10/09/permanently-erase-disk/">HDDのデータを念入りに消去する</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-10-09T10:38:00+09:00" pubdate data-updated="true">Oct 9<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>sfdisk -l                   <span class="c"># 消したいディスクを確認する</span>
-</span><span class='line'>shred -v -n 3 -z /dev/hoge  <span class="c"># ランダムデータを3回書き込んだのちゼロフィル</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>大抵のディストリで可能らしいけど<a href="http://www.sysresccd.org/SystemRescueCd_Homepage" title="SystemRescueCd">SystemRescueCd</a>がシンプルで扱いやすい。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/5/">&larr; Older</a>
@@ -421,6 +464,10 @@ $170+$10(ポーチ10ドル値引きされた)+送料$65の$245で2万円。</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/06/02/bittorrent-sync/">BitTorrent SyncをVPSにセットアップする</a>
+      </li>
     
       <li class="post">
         <a href="/2013/06/01/nginx-ssl-client-authentication/">Nginxでちょっと高度なクライアント認証する</a>
@@ -458,15 +505,11 @@ $170+$10(ポーチ10ドル値引きされた)+送料$65の$245で2万円。</p>
         <a href="/2013/02/03/hubot-irc/">HubotでIRC Botを作る</a>
       </li>
     
-      <li class="post">
-        <a href="/2013/01/31/played-games/">今月遊んだゲーム</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-  <span id="tag-cloud"><a href='/categories/3ds' style='font-size: 107.5%'>3DS(1)</a> <a href='/categories/adventcalendar' style='font-size: 122.5%'>adventCalendar(3)</a> <a href='/categories/archlinux' style='font-size: 107.5%'>ArchLinux(1)</a> <a href='/categories/bag' style='font-size: 107.5%'>bag(1)</a> <a href='/categories/done' style='font-size: 107.5%'>done(1)</a> <a href='/categories/food' style='font-size: 107.5%'>food(1)</a> <a href='/categories/game' style='font-size: 160.0%'>game(8)</a> <a href='/categories/gyazo' style='font-size: 107.5%'>Gyazo(1)</a> <a href='/categories/hardware' style='font-size: 115.0%'>hardware(2)</a> <a href='/categories/hubot' style='font-size: 107.5%'>Hubot(1)</a> <a href='/categories/irc' style='font-size: 115.0%'>IRC(2)</a> <a href='/categories/javascript' style='font-size: 107.5%'>JavaScript(1)</a> <a href='/categories/linux' style='font-size: 122.5%'>linux(3)</a> <a href='/categories/mac' style='font-size: 115.0%'>Mac(2)</a> <a href='/categories/nginx' style='font-size: 107.5%'>Nginx(1)</a> <a href='/categories/node-js' style='font-size: 122.5%'>Node.js(3)</a> <a href='/categories/octopress' style='font-size: 107.5%'>Octopress(1)</a> <a href='/categories/perl' style='font-size: 107.5%'>Perl(1)</a> <a href='/categories/raspberrypi' style='font-size: 107.5%'>RaspberryPi(1)</a> <a href='/categories/recipe' style='font-size: 107.5%'>recipe(1)</a> <a href='/categories/ruby' style='font-size: 115.0%'>Ruby(2)</a> <a href='/categories/software' style='font-size: 122.5%'>software(3)</a> <a href='/categories/ssl' style='font-size: 115.0%'>SSL(2)</a> <a href='/categories/terraria' style='font-size: 107.5%'>Terraria(1)</a> <a href='/categories/twitter' style='font-size: 107.5%'>Twitter(1)</a> <a href='/categories/ubuntu' style='font-size: 107.5%'>Ubuntu(1)</a> <a href='/categories/vimperator' style='font-size: 130.0%'>Vimperator(4)</a> <a href='/categories/vps' style='font-size: 107.5%'>VPS(1)</a> <a href='/categories/win' style='font-size: 115.0%'>Win(2)</a> </span>
+  <span id="tag-cloud"><a href='/categories/3ds' style='font-size: 107.5%'>3DS(1)</a> <a href='/categories/adventcalendar' style='font-size: 122.5%'>adventCalendar(3)</a> <a href='/categories/archlinux' style='font-size: 107.5%'>ArchLinux(1)</a> <a href='/categories/bag' style='font-size: 107.5%'>bag(1)</a> <a href='/categories/done' style='font-size: 107.5%'>done(1)</a> <a href='/categories/food' style='font-size: 107.5%'>food(1)</a> <a href='/categories/game' style='font-size: 160.0%'>game(8)</a> <a href='/categories/gyazo' style='font-size: 107.5%'>Gyazo(1)</a> <a href='/categories/hardware' style='font-size: 115.0%'>hardware(2)</a> <a href='/categories/hubot' style='font-size: 107.5%'>Hubot(1)</a> <a href='/categories/irc' style='font-size: 115.0%'>IRC(2)</a> <a href='/categories/javascript' style='font-size: 107.5%'>JavaScript(1)</a> <a href='/categories/linux' style='font-size: 122.5%'>linux(3)</a> <a href='/categories/mac' style='font-size: 115.0%'>Mac(2)</a> <a href='/categories/nginx' style='font-size: 107.5%'>Nginx(1)</a> <a href='/categories/node-js' style='font-size: 122.5%'>Node.js(3)</a> <a href='/categories/octopress' style='font-size: 107.5%'>Octopress(1)</a> <a href='/categories/perl' style='font-size: 107.5%'>Perl(1)</a> <a href='/categories/raspberrypi' style='font-size: 107.5%'>RaspberryPi(1)</a> <a href='/categories/recipe' style='font-size: 107.5%'>recipe(1)</a> <a href='/categories/ruby' style='font-size: 115.0%'>Ruby(2)</a> <a href='/categories/software' style='font-size: 130.0%'>software(4)</a> <a href='/categories/ssl' style='font-size: 115.0%'>SSL(2)</a> <a href='/categories/terraria' style='font-size: 107.5%'>Terraria(1)</a> <a href='/categories/twitter' style='font-size: 107.5%'>Twitter(1)</a> <a href='/categories/ubuntu' style='font-size: 107.5%'>Ubuntu(1)</a> <a href='/categories/vimperator' style='font-size: 130.0%'>Vimperator(4)</a> <a href='/categories/vps' style='font-size: 115.0%'>VPS(2)</a> <a href='/categories/win' style='font-size: 115.0%'>Win(2)</a> </span>
 </section>
 
 <section>

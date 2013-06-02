@@ -9,7 +9,16 @@
   <meta name="author" content="ebith">
 
   
-  <meta name="description" content="前にやったオレオレ認証局をたててオレオレ証明書を発行するからもう一歩進む。 証明書の中身で分岐したい $ssl_client_s_dnにSubject(発行対象)、$ssl_client_i_dnにIssuer(発行者)の情報が入っていて、それぞれCN(Common Name), O( &hellip;">
+  <meta name="description" content="ダウンロードと起動 1
+2
+3
+4
+5
+6
+wget http://btsync.s3-website-us-east-1.amazonaws.com/btsync_x64.tar.gz
+tar xvfz btsync_x64.tar.gz
+mv btsync ~/bin/
+rehash &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +87,116 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/06/02/bittorrent-sync/">BitTorrent SyncをVPSにセットアップする</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-02T08:38:00+09:00" pubdate data-updated="true">Jun 2<span>nd</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>ダウンロードと起動</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>wget http://btsync.s3-website-us-east-1.amazonaws.com/btsync_x64.tar.gz
+</span><span class='line'>tar xvfz btsync_x64.tar.gz
+</span><span class='line'>mv btsync ~/bin/
+</span><span class='line'>rehash
+</span><span class='line'>btsync
+</span><span class='line'>sudo ufw allow xxxxxx
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>外からWebUIにアクセスできるようにする</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='nginx'><span class='line'><span class="k">server</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kn">listen</span> <span class="mi">443</span><span class="p">;</span>
+</span><span class='line'>  <span class="kn">server_name</span> <span class="s">hoge.feelmy.net</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kn">ssl</span> <span class="no">on</span><span class="p">;</span>
+</span><span class='line'>  <span class="kn">ssl_certificate</span> <span class="s">server.crt</span><span class="p">;</span>
+</span><span class='line'>  <span class="kn">ssl_certificate_key</span> <span class="s">server.key</span><span class="p">;</span>
+</span><span class='line'>  <span class="kn">ssl_verify_client</span> <span class="no">on</span><span class="p">;</span>
+</span><span class='line'>  <span class="kn">ssl_client_certificate</span> <span class="s">cacert.pem</span><span class="p">;</span>
+</span><span class='line'>  <span class="kn">if</span> <span class="s">(</span><span class="nv">$ssl_client_s_dn</span> <span class="s">!~</span> <span class="s">&quot;CN=ebith&quot;)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kn">return</span> <span class="mi">403</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kn">location</span> <span class="s">/</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kn">proxy_redirect</span> <span class="no">off</span><span class="p">;</span>
+</span><span class='line'>    <span class="kn">proxy_set_header</span> <span class="s">X-Real-IP</span> <span class="nv">$remote_addr</span><span class="p">;</span>
+</span><span class='line'>    <span class="kn">proxy_set_header</span> <span class="s">X-Forwarded-For</span> <span class="nv">$proxy_add_x_forwarded_for</span><span class="p">;</span>
+</span><span class='line'>    <span class="kn">proxy_set_header</span> <span class="s">Host</span> <span class="nv">$http_host</span><span class="p">;</span>
+</span><span class='line'>    <span class="kn">proxy_pass</span> <span class="s">http://127.0.0.1:8888</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>使ってみた感じ</h2>
+
+<ul>
+<li>P2Pなので速度出る</li>
+<li>フォルダ単位の共有で、追加や削除が簡単</li>
+<li>ワンタイム、リードオンリーなどの共有オプション有り</li>
+<li>.Syncignoreで除外ファイル設定可能</li>
+</ul>
+
+
+<p>起動しっぱなしのPCとかリソース余らせてるサーバがある場合は良い選択っぽい。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -290,177 +409,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/04/05/self-signed-certificate/">オレオレ認証局をたててオレオレ証明書を発行する</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-05T06:54:00+09:00" pubdate data-updated="true">Apr 5<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>概要</h2>
-
-<ul>
-<li>CA.(sh|pl)を使わず、openssl.cnfの変更も最小限で済ます</li>
-<li>オレオレ認証局の証明書をブラウザに登録して警告が出ないようにする</li>
-<li>ワイルドカードなサーバー証明書を作る</li>
-<li>クライアント証明書も作る</li>
-</ul>
-
-
-<h2>下準備</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>sudo cp /etc/ssl/openssl.cnf /etc/ssl/openssl.cnf.orig
-</span><span class='line'>vi /etc/ssl/openssl.cnf
-</span><span class='line'>  -dir            <span class="o">=</span> ./demoCA
-</span><span class='line'>  +dir            <span class="o">=</span> .
-</span><span class='line'>
-</span><span class='line'>  +<span class="o">[</span> feelmy_net <span class="o">]</span>
-</span><span class='line'>  +subjectAltName <span class="o">=</span> DNS:feelmy.net,DNS:*.feelmy.net
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>ルート証明書を作る</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>mkdir ca
-</span><span class='line'><span class="nb">cd </span>ca
-</span><span class='line'>touch index.txt
-</span><span class='line'><span class="nb">echo </span>01 &gt; serial
-</span><span class='line'>mkdir newcerts private
-</span><span class='line'>openssl req -new -newkey rsa:2048 -keyout private/cakey.pem -out careq.pem
-</span><span class='line'>  Country Name <span class="o">(</span>2 letter code<span class="o">)</span> <span class="o">[</span>AU<span class="o">]</span>:JP
-</span><span class='line'>  State or Province Name <span class="o">(</span>full name<span class="o">)</span> <span class="o">[</span>Some-State<span class="o">]</span>:Nara
-</span><span class='line'>  Organization Name <span class="o">(</span>eg, company<span class="o">)</span> <span class="o">[</span>Internet Widgits Pty Ltd<span class="o">]</span>:Oiraya Factory
-</span><span class='line'>  Common Name <span class="o">(</span>e.g. server FQDN or YOUR name<span class="o">)</span> <span class="o">[]</span>:CA
-</span><span class='line'>chmod 400 private/cakey.pem
-</span><span class='line'>
-</span><span class='line'>openssl ca -in careq.pem -out cacert.pem -selfsign -days 3650 -extensions v3_ca -batch
-</span><span class='line'>rm careq.pem
-</span><span class='line'>chmod 444 cacert.pem newcerts/01.pem
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>サーバー証明書を作る</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>openssl req -new -newkey rsa:2048 -nodes -keyout cert.key -out cert.csr
-</span><span class='line'>  Country Name <span class="o">(</span>2 letter code<span class="o">)</span> <span class="o">[</span>AU<span class="o">]</span>:JP
-</span><span class='line'>  State or Province Name <span class="o">(</span>full name<span class="o">)</span> <span class="o">[</span>Some-State<span class="o">]</span>:Nara
-</span><span class='line'>  Organization Name <span class="o">(</span>eg, company<span class="o">)</span> <span class="o">[</span>Internet Widgits Pty Ltd<span class="o">]</span>:Oiraya Factory
-</span><span class='line'>  Common Name <span class="o">(</span>e.g. server FQDN or YOUR name<span class="o">)</span> <span class="o">[]</span>:*.feelmy.net
-</span><span class='line'>openssl ca -in cert.csr -out cert.crt -days 3650 -extensions feelmy_net -batch
-</span><span class='line'>rm cert.csr
-</span><span class='line'>chmod 400 cert.key
-</span><span class='line'>chmod 444 cert.crt
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>クライアント証明書を作る</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>openssl req -new -newkey rsa:2048 -nodes -keyout client.key -out client.csr
-</span><span class='line'>  Country Name <span class="o">(</span>2 letter code<span class="o">)</span> <span class="o">[</span>AU<span class="o">]</span>:JP
-</span><span class='line'>  State or Province Name <span class="o">(</span>full name<span class="o">)</span> <span class="o">[</span>Some-State<span class="o">]</span>:Nara
-</span><span class='line'>  Organization Name <span class="o">(</span>eg, company<span class="o">)</span> <span class="o">[</span>Internet Widgits Pty Ltd<span class="o">]</span>:Oiraya Factory
-</span><span class='line'>  Common Name <span class="o">(</span>e.g. server FQDN or YOUR name<span class="o">)</span> <span class="o">[]</span>:ebith
-</span><span class='line'>openssl ca -in client.csr -out client.crt -days 3650 -extensions feelmy_net -batch
-</span><span class='line'>openssl pkcs12 -export -in client.crt -inkey client.key -out client.p12
-</span><span class='line'>rm client.csr client.crt client.key
-</span><span class='line'>chmod 400 client.p12
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>雑感とか</h2>
-
-<p>今思うとディレクトリは名前の変更にとどめたほうがファイルがごちゃっとならなくて良かったっぽい。<br/>
-普通にCommon Nameを*.feelmy.netにして証明書を作るとfeelmy.netで通用しない。<br/>
-それを突破するにはSubject Alternative Nameを使うしかないっぽいけどSANを使うとopenssl.cnfの編集を避けられないようでつらい。</p>
-
-<p>作った証明書類はこんな感じにリネームしといた。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>mv cacert.pem oiraya-ca.pem
-</span><span class='line'>mv cert.key feelmy.net.key
-</span><span class='line'>mv cert.crt feelmy.net.crt
-</span><span class='line'>mv client.p12 feelmy.net.p12
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>参考にしたとこ</h2>
-
-<ul>
-<li><a href="http://www.tietew.jp/2007/01/30/how-to-setup-ca-using-openssl" title="OpenSSLでオレオレ認証局を立ち上げる | www.tietew.jp">OpenSSLでオレオレ認証局を立ち上げる | www.tietew.jp</a></li>
-<li><a href="http://www.daily-labo.com/ygg16_3.html" title="クライアント証明書の発行">クライアント証明書の発行</a></li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/2/">&larr; Older</a>
@@ -474,6 +422,10 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/06/02/bittorrent-sync/">BitTorrent SyncをVPSにセットアップする</a>
+      </li>
     
       <li class="post">
         <a href="/2013/06/01/nginx-ssl-client-authentication/">Nginxでちょっと高度なクライアント認証する</a>
@@ -511,15 +463,11 @@
         <a href="/2013/02/03/hubot-irc/">HubotでIRC Botを作る</a>
       </li>
     
-      <li class="post">
-        <a href="/2013/01/31/played-games/">今月遊んだゲーム</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-  <span id="tag-cloud"><a href='/categories/3ds' style='font-size: 107.5%'>3DS(1)</a> <a href='/categories/adventcalendar' style='font-size: 122.5%'>adventCalendar(3)</a> <a href='/categories/archlinux' style='font-size: 107.5%'>ArchLinux(1)</a> <a href='/categories/bag' style='font-size: 107.5%'>bag(1)</a> <a href='/categories/done' style='font-size: 107.5%'>done(1)</a> <a href='/categories/food' style='font-size: 107.5%'>food(1)</a> <a href='/categories/game' style='font-size: 160.0%'>game(8)</a> <a href='/categories/gyazo' style='font-size: 107.5%'>Gyazo(1)</a> <a href='/categories/hardware' style='font-size: 115.0%'>hardware(2)</a> <a href='/categories/hubot' style='font-size: 107.5%'>Hubot(1)</a> <a href='/categories/irc' style='font-size: 115.0%'>IRC(2)</a> <a href='/categories/javascript' style='font-size: 107.5%'>JavaScript(1)</a> <a href='/categories/linux' style='font-size: 122.5%'>linux(3)</a> <a href='/categories/mac' style='font-size: 115.0%'>Mac(2)</a> <a href='/categories/nginx' style='font-size: 107.5%'>Nginx(1)</a> <a href='/categories/node-js' style='font-size: 122.5%'>Node.js(3)</a> <a href='/categories/octopress' style='font-size: 107.5%'>Octopress(1)</a> <a href='/categories/perl' style='font-size: 107.5%'>Perl(1)</a> <a href='/categories/raspberrypi' style='font-size: 107.5%'>RaspberryPi(1)</a> <a href='/categories/recipe' style='font-size: 107.5%'>recipe(1)</a> <a href='/categories/ruby' style='font-size: 115.0%'>Ruby(2)</a> <a href='/categories/software' style='font-size: 122.5%'>software(3)</a> <a href='/categories/ssl' style='font-size: 115.0%'>SSL(2)</a> <a href='/categories/terraria' style='font-size: 107.5%'>Terraria(1)</a> <a href='/categories/twitter' style='font-size: 107.5%'>Twitter(1)</a> <a href='/categories/ubuntu' style='font-size: 107.5%'>Ubuntu(1)</a> <a href='/categories/vimperator' style='font-size: 130.0%'>Vimperator(4)</a> <a href='/categories/vps' style='font-size: 107.5%'>VPS(1)</a> <a href='/categories/win' style='font-size: 115.0%'>Win(2)</a> </span>
+  <span id="tag-cloud"><a href='/categories/3ds' style='font-size: 107.5%'>3DS(1)</a> <a href='/categories/adventcalendar' style='font-size: 122.5%'>adventCalendar(3)</a> <a href='/categories/archlinux' style='font-size: 107.5%'>ArchLinux(1)</a> <a href='/categories/bag' style='font-size: 107.5%'>bag(1)</a> <a href='/categories/done' style='font-size: 107.5%'>done(1)</a> <a href='/categories/food' style='font-size: 107.5%'>food(1)</a> <a href='/categories/game' style='font-size: 160.0%'>game(8)</a> <a href='/categories/gyazo' style='font-size: 107.5%'>Gyazo(1)</a> <a href='/categories/hardware' style='font-size: 115.0%'>hardware(2)</a> <a href='/categories/hubot' style='font-size: 107.5%'>Hubot(1)</a> <a href='/categories/irc' style='font-size: 115.0%'>IRC(2)</a> <a href='/categories/javascript' style='font-size: 107.5%'>JavaScript(1)</a> <a href='/categories/linux' style='font-size: 122.5%'>linux(3)</a> <a href='/categories/mac' style='font-size: 115.0%'>Mac(2)</a> <a href='/categories/nginx' style='font-size: 107.5%'>Nginx(1)</a> <a href='/categories/node-js' style='font-size: 122.5%'>Node.js(3)</a> <a href='/categories/octopress' style='font-size: 107.5%'>Octopress(1)</a> <a href='/categories/perl' style='font-size: 107.5%'>Perl(1)</a> <a href='/categories/raspberrypi' style='font-size: 107.5%'>RaspberryPi(1)</a> <a href='/categories/recipe' style='font-size: 107.5%'>recipe(1)</a> <a href='/categories/ruby' style='font-size: 115.0%'>Ruby(2)</a> <a href='/categories/software' style='font-size: 130.0%'>software(4)</a> <a href='/categories/ssl' style='font-size: 115.0%'>SSL(2)</a> <a href='/categories/terraria' style='font-size: 107.5%'>Terraria(1)</a> <a href='/categories/twitter' style='font-size: 107.5%'>Twitter(1)</a> <a href='/categories/ubuntu' style='font-size: 107.5%'>Ubuntu(1)</a> <a href='/categories/vimperator' style='font-size: 130.0%'>Vimperator(4)</a> <a href='/categories/vps' style='font-size: 115.0%'>VPS(2)</a> <a href='/categories/win' style='font-size: 115.0%'>Win(2)</a> </span>
 </section>
 
 <section>

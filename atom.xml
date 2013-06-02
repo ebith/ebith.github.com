@@ -4,7 +4,7 @@
   <title><![CDATA[おいら屋ファクトリー]]></title>
   <link href="http://blog.feelmy.net/atom.xml" rel="self"/>
   <link href="http://blog.feelmy.net/"/>
-  <updated>2013-06-01T23:46:30+09:00</updated>
+  <updated>2013-06-02T09:27:10+09:00</updated>
   <id>http://blog.feelmy.net/</id>
   <author>
     <name><![CDATA[ebith]]></name>
@@ -12,6 +12,89 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[BitTorrent SyncをVPSにセットアップする]]></title>
+    <link href="http://blog.feelmy.net/2013/06/02/bittorrent-sync/"/>
+    <updated>2013-06-02T08:38:00+09:00</updated>
+    <id>http://blog.feelmy.net/2013/06/02/bittorrent-sync</id>
+    <content type="html"><![CDATA[<h2>ダウンロードと起動</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>wget http://btsync.s3-website-us-east-1.amazonaws.com/btsync_x64.tar.gz
+</span><span class='line'>tar xvfz btsync_x64.tar.gz
+</span><span class='line'>mv btsync ~/bin/
+</span><span class='line'>rehash
+</span><span class='line'>btsync
+</span><span class='line'>sudo ufw allow xxxxxx
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>外からWebUIにアクセスできるようにする</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='nginx'><span class='line'><span class="k">server</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kn">listen</span> <span class="mi">443</span><span class="p">;</span>
+</span><span class='line'>  <span class="kn">server_name</span> <span class="s">hoge.feelmy.net</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kn">ssl</span> <span class="no">on</span><span class="p">;</span>
+</span><span class='line'>  <span class="kn">ssl_certificate</span> <span class="s">server.crt</span><span class="p">;</span>
+</span><span class='line'>  <span class="kn">ssl_certificate_key</span> <span class="s">server.key</span><span class="p">;</span>
+</span><span class='line'>  <span class="kn">ssl_verify_client</span> <span class="no">on</span><span class="p">;</span>
+</span><span class='line'>  <span class="kn">ssl_client_certificate</span> <span class="s">cacert.pem</span><span class="p">;</span>
+</span><span class='line'>  <span class="kn">if</span> <span class="s">(</span><span class="nv">$ssl_client_s_dn</span> <span class="s">!~</span> <span class="s">&quot;CN=ebith&quot;)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kn">return</span> <span class="mi">403</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kn">location</span> <span class="s">/</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kn">proxy_redirect</span> <span class="no">off</span><span class="p">;</span>
+</span><span class='line'>    <span class="kn">proxy_set_header</span> <span class="s">X-Real-IP</span> <span class="nv">$remote_addr</span><span class="p">;</span>
+</span><span class='line'>    <span class="kn">proxy_set_header</span> <span class="s">X-Forwarded-For</span> <span class="nv">$proxy_add_x_forwarded_for</span><span class="p">;</span>
+</span><span class='line'>    <span class="kn">proxy_set_header</span> <span class="s">Host</span> <span class="nv">$http_host</span><span class="p">;</span>
+</span><span class='line'>    <span class="kn">proxy_pass</span> <span class="s">http://127.0.0.1:8888</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>使ってみた感じ</h2>
+
+<ul>
+<li>P2Pなので速度出る</li>
+<li>フォルダ単位の共有で、追加や削除が簡単</li>
+<li>ワンタイム、リードオンリーなどの共有オプション有り</li>
+<li>.Syncignoreで除外ファイル設定可能</li>
+</ul>
+
+
+<p>起動しっぱなしのPCとかリソース余らせてるサーバがある場合は良い選択っぽい。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Nginxでちょっと高度なクライアント認証する]]></title>
@@ -1220,22 +1303,6 @@ $170+$10(ポーチ10ドル値引きされた)+送料$65の$245で2万円。</p>
 <h3>TODO?</h3>
 
 <p>JSのエラーコンソールにやたらとセキュリティエラーが出ちゃうんだけどよくわからないのでそのままになってる。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[HDDのデータを念入りに消去する]]></title>
-    <link href="http://blog.feelmy.net/2012/10/09/permanently-erase-disk/"/>
-    <updated>2012-10-09T10:38:00+09:00</updated>
-    <id>http://blog.feelmy.net/2012/10/09/permanently-erase-disk</id>
-    <content type="html"><![CDATA[<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>sfdisk -l                   <span class="c"># 消したいディスクを確認する</span>
-</span><span class='line'>shred -v -n 3 -z /dev/hoge  <span class="c"># ランダムデータを3回書き込んだのちゼロフィル</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>大抵のディストリで可能らしいけど<a href="http://www.sysresccd.org/SystemRescueCd_Homepage" title="SystemRescueCd">SystemRescueCd</a>がシンプルで扱いやすい。</p>
 ]]></content>
   </entry>
   
