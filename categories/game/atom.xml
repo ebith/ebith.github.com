@@ -4,7 +4,7 @@
   <title><![CDATA[Category: game | おいら屋ファクトリー]]></title>
   <link href="http://blog.feelmy.net/categories/game/atom.xml" rel="self"/>
   <link href="http://blog.feelmy.net/"/>
-  <updated>2013-06-02T09:27:10+09:00</updated>
+  <updated>2013-06-27T22:37:24+09:00</updated>
   <id>http://blog.feelmy.net/</id>
   <author>
     <name><![CDATA[ebith]]></name>
@@ -12,6 +12,38 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[今月買ったゲーム]]></title>
+    <link href="http://blog.feelmy.net/2013/06/30/bought-games/"/>
+    <updated>2013-06-30T03:35:00+09:00</updated>
+    <id>http://blog.feelmy.net/2013/06/30/bought-games</id>
+    <content type="html"><![CDATA[<h2><a href="https://www.humblebundle.com/">The Humble Indie Bundle 8 (pay what you want and help charity)</a> ¥583</h2>
+
+<p>見覚えがあるけど持ってないタイトルが並んでたので買っといた。Hotline Miamiがキー余り。</p>
+
+<h2><a href="http://ssq.atlusnet.jp/#/top/">新・世界樹の迷宮 ミレニアムの少女</a> ¥5,136</h2>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ゲームのセール情報を監視すべくsubredditをtwitterにポストするbot作った]]></title>
+    <link href="http://blog.feelmy.net/2013/06/27/reddit-to-twitter-bot/"/>
+    <updated>2013-06-27T22:03:00+09:00</updated>
+    <id>http://blog.feelmy.net/2013/06/27/reddit-to-twitter-bot</id>
+    <content type="html"><![CDATA[<p><a href="http://www.flickr.com/photos/ebith/9152186036/" title="@rGameDeals by Ebith, on Flickr"><img src="http://farm3.staticflickr.com/2808/9152186036_0521713773.jpg" width="482" height="500" alt="@rGameDeals"></a></p>
+
+<h2><a href="https://github.com/ebith/redot">ebith/redot</a></h2>
+
+<p>指定したSubredditを定期的にチェックして、不要なポストは除外しつつツイート。<br/>
+さらに、登録しておいたタイトルにヒットするとreply飛ばして通知する機能がついてる。</p>
+
+<p>実際に動いてるのは<a href="https://twitter.com/rGameDeals">@rGameDeals</a>で、<br/>
+<code>@rGameDeals add hoge</code>とか<code>@rGameDeals ls</code>とか<code>@rGameDeals del 0</code>とかできる。</p>
+
+<p>これでサマーセールへ向けての準備も完璧！</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[今月買ったゲーム]]></title>
@@ -79,90 +111,6 @@
 
 <p>でかい画面でバルキリー動かせるの楽しい。機体も豊富。アクションRPGであることを受け入れられるなら楽しめる。<br/>
 50時間で2回フリーズした。低い空、機体ステータスの一部が見られない、インベントリの容量が小さすぎる、ちゃちなダンジョン、荒い機体テクスチャなど残念な仕様や要素も多い。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[今月遊んだゲーム]]></title>
-    <link href="http://blog.feelmy.net/2013/02/28/played-games/"/>
-    <updated>2013-02-28T22:00:00+09:00</updated>
-    <id>http://blog.feelmy.net/2013/02/28/played-games</id>
-    <content type="html"><![CDATA[<h2><a href="http://store.steampowered.com/app/204100">Max Payne 3</a> ¥1310</h2>
-
-<p>高めの難易度とバレットタイムのシステムがチグハグに感じた。格好良く飛び出すと死ぬ。<br/>
-GfWLと似たようなRockstar Games Social Clubがダルい、グラフィックが妙に安っぽい。</p>
-
-<h2><a href="http://store.steampowered.com/app/50650">Darksiders II</a> ¥1243</h2>
-
-<p>主人公の見た目や装備が中二心をくすぐる。デスさんまじ良い人。<br/>
-攻撃の種類は数少ないので戦闘は単調になりがち。パズル要素がやや多いのは好みが分かれそう。</p>
-
-<h2><a href="http://amazon.jp/o/ASIN/B0095D6I86?tag=ebith-22">METAL GEAR RISING: REVENGEANCE</a> ¥5699</h2>
-
-<p>雷電まじかっこいい。複雑過ぎないシステムで面白い。雷電このあとどうなんの…<br/>
-ボリューム不足で出てくるキャラ達即退場or空気。口の動き英語なの気になる。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[今月遊んだゲーム]]></title>
-    <link href="http://blog.feelmy.net/2013/01/31/played-games/"/>
-    <updated>2013-01-31T22:00:00+09:00</updated>
-    <id>http://blog.feelmy.net/2013/01/31/played-games</id>
-    <content type="html"><![CDATA[<h2><a href="http://store.steampowered.com/app/107100/">Bastion</a> ¥327</h2>
-
-<p>楽しいアクションゲームだった。見た目も綺麗。<br/>
-ストーリーはイミフ。</p>
-
-<h2><a href="http://store.steampowered.com/app/204360/">Castle Crashers</a> ¥339</h2>
-
-<p>Coopすべく買ったが難しいのでやらなくなってしまった。<br/>
-糞ゲー(汚い意味で)</p>
-
-<h2><a href="http://store.steampowered.com/app/219150/">Hotline Miami</a> ¥222</h2>
-
-<p>ゲームとしては凄くシンプルだけどちゃんと面白い。<br/>
-2chのスレにあったストーリーまとめみたいなのを読んだら更に面白くなった。</p>
-
-<h2><a href="http://steamcommunity.com/app/115120">Iron Brigade</a> ¥97</h2>
-
-<p>メカモノ好きだしタワーディフェンスのCoopは楽しい。機体に個性出るのも良い。<br/>
-Coop誘うのSteamじゃなくてGames for Windows Live経由なのがダルいしたまにバグる。</p>
-
-<h2><a href="http://steamcommunity.com/app/57740">Jagged Alliance - Back in Action</a> ¥0</h2>
-
-<p>バランス調整Mod入れたら普通に遊べてるし珍しいジャンルなのでそこそこ楽しいけど全体的に作りこみが浅い。<br/>
-リメイク元の1999年発売のやつの方が良く出来てるとか聞いた。</p>
-
-<h2><a href="http://store.steampowered.com/app/211360/">Offspring Fling!</a> ¥65</h2>
-
-<p>普通のパズルゲーっぽい。
-見た目は可愛い。</p>
-
-<h2><a href="http://steamcommunity.com/app/99300">Renegade Ops</a> ¥0</h2>
-
-<p>敵なぎ倒す系のCoopは単純かつ楽しくていい。<br/>
-左手パッド右手マウスでやりたいけどできない。マップ表示がクソい。</p>
-
-<h2><a href="http://steamcommunity.com/app/207040">Sine Mora</a> ¥155</h2>
-
-<p>シューティングゲームだけど一発終了なタイプじゃないから普通に遊べてる。<br/>
-でもやっぱ目が疲れるのでアレ。</p>
-
-<h2><a href="http://store.steampowered.com/app/91100/">SkyDrift</a> ¥90</h2>
-
-<p>仲間内でレースすると最高に盛り上がる。もちろんSkype有りで。<br/>
-空飛ぶマリカーっぽいけどコース数少ない、バランス悪いとかあるのでPC版マリカー早く！</p>
-
-<h2><a href="http://steamcommunity.com/app/50300">Spec Ops: The Line</a> ¥425</h2>
-
-<p>久しぶりのストーリー重視のTPSで楽しめた。後味の良いストーリーではないけどわりと満足。MultiplayとCoopは未プレイ。<br/>
-実績47/50まで8時間足らずというボリュームの少なさはやや寂しいけど物語長引いても面白く無いからこんなもんかも。</p>
-
-<h2><a href="http://store.steampowered.com/app/105600/">Terraria</a> ¥224</h2>
-
-<p>石掘ってると無心になれる。サーバ立てればみんなで一緒に遊べるし、協力して掘ったり戦ったり楽しい。<br/>
-次作早くやりたい。</p>
 ]]></content>
   </entry>
   

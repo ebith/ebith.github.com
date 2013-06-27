@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: Mac - おいら屋ファクトリー</title>
+  <title>おいら屋ファクトリー</title>
   <meta name="author" content="ebith">
 
   
-  <meta name="description" content="Category: Mac">
+  <meta name="description" content="気づいたらAPI v1の提供が終了したとかでアップロードできなくなっていたのでv2版書きました。 使い方 scriptをGyazoのものと差し替えれば動きますが、tumblifeのgemが必要だったりOAuthの例に漏れず各種トークンが必要だったりするのでよしなにしてください。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +20,7 @@
   <meta name="pocket-site-verification" content="66428973d8a3558b172e82627c6de8" />
 
   
-  <link rel="canonical" href="http://blog.feelmy.netcategories/mac/">
+  <link rel="canonical" href="http://blog.feelmy.net/page/7/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -76,54 +76,165 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div>
-<article role="article">
+      <div class="blog-index">
   
+  
+  
+    <article>
+      
   <header>
-    <h1 class="entry-title">Category: Mac</h1>
+    
+      <h1 class="entry-title"><a href="/2012/09/07/gyamblr-for-osx%28tumblr-api-v2%29/">Gyazoのアップロード先をTumblrにするやつ(Gyamblr) API V2版 for OS X</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-07T01:22:00+09:00" pubdate data-updated="true">Sep 7<span>th</span>, 2012</time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+  <div class="entry-content"><p>気づいたらAPI v1の提供が終了したとかでアップロードできなくなっていたのでv2版書きました。</p>
 
-  
-  <h2>2012</h2>
+<h2>使い方</h2>
 
-<article>
-  
-<h1><a href="/2012/09/23/keepass2-for-osx/">KeePass2のkdbxをMacでも快適に読めるようにした</a></h1>
-<time datetime="2012-09-23T04:21:00+09:00" pubdate><span class='month'>Sep</span> <span class='day'>23</span> <span class='year'>2012</span></time>
+<p>scriptをGyazoのものと差し替えれば動きますが、tumblifeのgemが必要だったりOAuthの例に漏れず各種トークンが必要だったりするのでよしなにしてください。<br/>
+トークン類は<a href="http://www.tumblr.com/oauth/apps" title="Tumblr">Tumblr</a>でアプリを登録して、oauth.rbを使うと良いと思います。</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/mac/'>Mac</a>, <a class='category' href='/categories/perl/'>Perl</a>, <a class='category' href='/categories/software/'>software</a></span>
-</footer>
+<div><script src='https://gist.github.com/3657917.js'></script>
+<noscript><pre><code>#!/usr/bin/env ruby
+require 'oauth'
+
+consumer = OAuth::Consumer.new(
+  'consumer_key',
+  'consumer_secret',
+  {
+    site: 'http://api.tumblr.com',
+    request_token_url: &quot;http://www.tumblr.com/oauth/request_token&quot;,
+    authorize_url: &quot;http://www.tumblr.com/oauth/authorize&quot;,
+    access_token_url: &quot;http://www.tumblr.com/oauth/access_token&quot;
+  }
+)
+request_token = consumer.get_request_token
+system('open ' + request_token.authorize_url)
+
+p 'enter oauth_verifier'
+oauth_verifier = gets.chomp!
+access_token = request_token.get_access_token(:oauth_verifier =&gt; oauth_verifier)
+
+p 'oauth_token : ' + access_token.token
+p 'oauth_token_secret : ' + access_token.secret</code></pre></noscript></div>
 
 
-</article>
-
-
-
-<article>
-  
-<h1><a href="/2012/09/07/gyamblr-for-osx%28tumblr-api-v2%29/">Gyazoのアップロード先をTumblrにするやつ(Gyamblr) API v2版 for OS X</a></h1>
-<time datetime="2012-09-07T01:22:00+09:00" pubdate><span class='month'>Sep</span> <span class='day'>07</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/gyazo/'>Gyazo</a>, <a class='category' href='/categories/mac/'>Mac</a>, <a class='category' href='/categories/ruby/'>Ruby</a></span>
-</footer>
-
-
-</article>
 
 </div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/08/25/try-octopress/">Octopressを試す</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
 
   
-</article>
 
+
+<time datetime="2012-08-25T05:53:00+09:00" pubdate data-updated="true">Aug 25<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>はてなダイアリーも広告が入るようになってしまったので、これを機会にGithub+Octopressも試してみる。<br/>
+TumblrとかLokkaとか、WordPressに出戻りも考慮したけどどれもしっくりこないので期待。</p>
+
+<h2>参考にしたページとか</h2>
+
+<p><a href="http://mattn.kaoriya.net/software/lang/ruby/20111017205717.htm" title="Big Sky :: githubとjekyllとoctopressで作る簡単でモダンなブログ">Big Sky :: githubとjekyllとoctopressで作る簡単でモダンなブログ</a><br/>
+<a href="http://blog.glidenote.com/blog/2011/11/07/install-octopress-on-github/" title="GithubとOctopressでモダンな技術系ブログを作ってみる - Glide Note - グライドノート">GithubとOctopressでモダンな技術系ブログを作ってみる - Glide Note - グライドノート</a><br/>
+<a href="http://nowelium.github.com/blog/2012/03/26/octopress-diff.html" title="octopress でブログを書いてみる - ハタさんのブログ(出張版)">octopress でブログを書いてみる - ハタさんのブログ(出張版)</a><br/>
+<a href="http://tokkonopapa.github.com/blog/2012/01/04/octopress-plugin-for-categories-cloud/" title="Octopress用Tag Cloudプラグインをリリースします - T.I.D.">Octopress用Tag Cloudプラグインをリリースします - T.I.D.</a></p>
+
+<h2>それ以外にやったこと</h2>
+
+<p><a href="http://blog.glidenote.com/blog/2012/04/02/octoeditor.vim/" title="Octopressの記事管理用プラグイン、Octoeditor.vimを作った - Glide Note - グライドノート">Octopressの記事管理用プラグイン、Octoeditor.vimを作った - Glide Note - グライドノート</a>を導入したり</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='vim'><span class='line'><span class="nb">nnoremap</span> <span class="p">&lt;</span>Leader<span class="p">&gt;</span>of :Unite file_rec:<span class="p">&lt;</span>C<span class="p">-</span><span class="k">r</span><span class="p">&gt;=</span>expand<span class="p">(</span><span class="k">g</span>:octopress_path.<span class="s2">&quot;/source/_posts/&quot;</span><span class="p">)&lt;</span>CR<span class="p">&gt;&lt;</span>CR<span class="p">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Unite.vimで記事一覧開くのマッピングしたり</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>pip install pygments
+</span><span class='line'>vim _config.yml
+</span><span class='line'>  pygments: <span class="nb">true</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>シンタックスハイライト用にPygments入れたり</p>
+
+<h2>雑感</h2>
+
+<p> やっぱ普通にエディタで書けるの便利。<br/>
+vimperator使ってるとテキストエリアで外部エディタ使えるけど、
+なんかの拍子に吹っ飛んでっちゃったことがあってそれ以来あんまり使わなくなってたので。</p>
+
+<p>配布されてるテーマ少ないので慣れないCSSとか画像とか触るはめになってつらい。<br/>
+<code>rake install['theme']</code>するとそのたびにファイルが上書きされるみたいで色々試すとなんかグチャグチャになってしまったりとか。</p>
+
+<h2>TODO</h2>
+
+<p>適当に書き足したCSSが悲しい事になってるのどうにかして欲しい。<br/>
+Favicon欲しい。</p>
 </div>
+  
+  
 
+
+    </article>
+  
+  <div class="pagination">
+    
+    <a href="/archives">Blog Archives</a>
+    
+    <a class="next" href="/page/6/">Newer &rarr;</a>
+    
+  </div>
+</div>
 <aside class="sidebar">
   
     <section>
@@ -180,7 +291,7 @@
 <section>
   <h1>Latest Tweets</h1>
   <ul id="tweets">
-    <li class="loading">Status updating...</li>
+    <li class="loading">Status updating&#8230;</li>
   </ul>
   <script type="text/javascript">
     $.domReady(function(){
@@ -196,7 +307,6 @@
 
   
 </aside>
-
 
     </div>
   </div>
