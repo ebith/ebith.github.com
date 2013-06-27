@@ -9,8 +9,12 @@
   <meta name="author" content="ebith">
 
   
-  <meta name="description" content="TLV.js 画像はTwitterのPublic TimelineをIRCのログ代わりにしたやつ。
-古いログをひたすら継ぎ足して表示したり、検索したり、とある日のログを読んだりできる。 試してみる MongoDBは動いてる前提。インストールするならInstalling MongoDBが詳しい。 &hellip;">
+  <meta name="description" content="Node.jsのインストールと下準備 Node.jsの管理にはNodebrewを使う。
+Readmeに従ってインストールして、Nodebrew経由でNodeのバイナリを入れる。
+更にcoffee-script必要らしいのとforeverあると便利らしいので入れとく。 1
+2
+3
+4 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,71 +83,6 @@
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/02/15/tlv-js/">Tiarraのログをブラウザから見たり検索したりできるやつ作った</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-02-15T22:00:00+09:00" pubdate data-updated="true">Feb 15<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2><a href="https://github.com/ebith/TLV.js" title="ebith/TLV.js · GitHub">TLV.js</a></h2>
-
-<p><a href="http://www.flickr.com/photos/ebith/8475029653/" title="tlv01 by Ebith, on Flickr"><img src="http://farm9.staticflickr.com/8111/8475029653_055048fbb4_n.jpg" width="320" height="240" alt="tlv01"></a>
-<a href="http://www.flickr.com/photos/ebith/8475029689/" title="tlv02 by Ebith, on Flickr"><img src="http://farm9.staticflickr.com/8246/8475029689_ba2e947ac5_n.jpg" width="320" height="240" alt="tlv02"></a><br/>
-画像はTwitterのPublic TimelineをIRCのログ代わりにしたやつ。<br/>
-古いログをひたすら継ぎ足して表示したり、検索したり、とある日のログを読んだりできる。</p>
-
-<h2>試してみる</h2>
-
-<p>MongoDBは動いてる前提。インストールするなら<a href="http://docs.mongodb.org/manual/installation/" title="Installing MongoDB — MongoDB Manual">Installing MongoDB</a>が詳しい。<br/>
-Mongo.pmをtiarraPath/module/Log/に配置、confの例は以下に。<br/>
-必要に応じて<code>cpanm MongoDB</code>したのち<code>/load</code>か再起動でMongo.pmを読み込む。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>+ Log::Mongo {
-</span><span class='line'>  charset: utf8
-</span><span class='line'>  channel: *
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Node.jsとcoffee-scriptが入っていれば<code>npm install</code>して<code>coffee app.coffee</code>で動き出す。<br/>
-http://localhost:3000にアクセス！</p>
-
-<h2>その他</h2>
-
-<p>環境変数NODE_ENVを<code>production</code>に設定するとSSL+BASIC認証で起動する。_run.sh参照。<br/>
-あとから見返したいチャンネルが1つだけだったのでチャンネル名を考慮していない。全部混ざって表示されるはず。</p>
-</div>
-  
-  
-
-
-    </article>
   
   
     <article>
@@ -617,6 +556,201 @@ Terrariaのマルチが思っていた以上に楽しくて年末年始はずっ
 
     </article>
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/12/22/useful-tips-for-vimperator/">Vimperatorを便利に使うためのtips</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-22T00:00:00+09:00" pubdate data-updated="true">Dec 22<span>nd</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://atnd.org/events/34070" title="Vimperator Advent Calendar 2012 : ATND">Vimperator Advent Calendar 2012</a> 22日目担当のebithです。<br/>
+今日はgistで公開されているプラグインや各ユーザのrcにある便利な設定など、<a href="http://vimpr.github.com/" title="Welcome to vimpr!">vimpr</a>のプラグインリポジトリ外のものを紹介します。</p>
+
+<h2>QB.js (<a href="https://gist.github.com/1766649" title="QB.js 2012/02/08 現在使っているバージョン">https://gist.github.com/1766649</a>)</h2>
+
+<p>コマンドラインへメッセージを表示するechoをGrowlへの通知に変更するプラグインです。<br/>
+<a href="https://addons.mozilla.org/ja/firefox/addon/growlgntp/" title="Growl/GNTP :: Add-ons for Firefox">Growl/GNTP</a>のアドオンが必要になりますがWindows/Linux/Macなど各種OSで使用できます。<br/>
+webサービスを利用するためのプラグインはコマンドの正否にechoが使われることが多いので、そういったプラグインを入れている人にはオススメです。</p>
+
+<h2>コマンドラインを <Esc> でもあなたのこと、忘れない!! (<a href="https://gist.github.com/2944628" title="コマンドラインを &lt;Esc&gt; でもあなたのこと、忘れない!!">https://gist.github.com/2944628</a>)</h2>
+
+<p>途中でESCを押して消してしまった入力を履歴に残します。<br/>
+入力途中にググりたくなっても安心です。</p>
+
+<h2>lazy command</h2>
+
+<p>コマンドを遅延実行します。<br/>
+プラグインが読み込まれないと実行できないコマンドを.vimperatorrcに書けるようになります。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># lazyコマンドを定義
+</span><span class='line'>command! -nargs=+ lazy autocmd VimperatorEnter .* &lt;args&gt;
+</span><span class='line'>
+</span><span class='line'># URL補完の設定。はてなブックマーク拡張のHとadd-url-completer.twのTに遅延実行が必要
+</span><span class='line'>lazy set complete=slHT
+</span><span class='line'>
+</span><span class='line'># loginManager.js用。各種Webサービスに自動的にログインする
+</span><span class='line'>lazy :login hatena
+</span><span class='line'>lazy :login livedoor
+</span><span class='line'>lazy :login nicovideo</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>autocmd 駆動時のエコーをやめる (<a href="https://gist.github.com/1028562" title="autocmd 駆動時のエコーをやめる">https://gist.github.com/1028562</a>)</h2>
+
+<p>autocmdが静かになります。<br/>
+autocmdは自動処理のためのもので<code>:help :autocmd</code>に詳しく書かれています。</p>
+
+<figure class='code'><figcaption><span>便利なautocmd一例</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='vim'><span class='line'><span class="c">&quot; Gmail/LDR/はてブでは新規タブをバックグラウンドで開く</span>
+</span><span class='line'>autocmd LocationChange <span class="s1">&#39;^(?!https?://(mail\.google\.com/(mail|a)/|reader\.livedoor\.com/reader/|b\.hatena\.ne\.jp/(?!(entry|articles|guide))))&#39;</span> :<span class="k">set</span><span class="p">!</span> browser.<span class="k">tabs</span>.loadDivertedInBackground<span class="p">=</span>false
+</span><span class='line'>autocmd LocationChange <span class="s1">&#39;^https?://(mail\.google\.com/(mail|a)/|reader\.livedoor\.com/reader/|b\.hatena\.ne\.jp/(?!(entry|articles|guide)))&#39;</span> :<span class="k">set</span><span class="p">!</span> browser.<span class="k">tabs</span>.loadDivertedInBackground<span class="p">=</span>true
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>サイト内検索</h2>
+
+<p>Googleを使ってサイト内検索するコマンドです。<br/>
+オリジナルより少し変更を加えていて、ディレクトリ名が必要な@wikiやはてなダイアリーに対応しています。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">nnoremap</span> <span class="p">,</span><span class="err">/ :sitesearch&lt;Space&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">javascript</span> <span class="o">&lt;&lt;</span><span class="nx">EOM</span>
+</span><span class='line'><span class="nx">commands</span><span class="p">.</span><span class="nx">addUserCommand</span><span class="p">(</span>
+</span><span class='line'>  <span class="p">[</span><span class="s1">&#39;sitesearch&#39;</span><span class="p">],</span>
+</span><span class='line'>  <span class="s1">&#39;Search in this site&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="kd">function</span> <span class="p">(</span><span class="nx">args</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kd">let</span> <span class="nx">url</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">content</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">hostname</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">[</span>
+</span><span class='line'>      <span class="sr">/d\.hatena\.ne\.jp/</span><span class="p">,</span>
+</span><span class='line'>      <span class="sr">/www\d+\.atwiki\.jp/</span><span class="p">,</span>
+</span><span class='line'>    <span class="p">].</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">r</span><span class="p">){</span>
+</span><span class='line'>      <span class="nx">url</span> <span class="o">+=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span> <span class="o">?</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="nb">window</span><span class="p">.</span><span class="nx">content</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">pathname</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'>    <span class="nx">liberator</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span>
+</span><span class='line'>      <span class="s1">&#39;http://www.google.com/search?q=&#39;</span> <span class="o">+</span>
+</span><span class='line'>        <span class="nb">encodeURIComponent</span><span class="p">(</span><span class="nx">args</span><span class="p">.</span><span class="nx">literalArg</span><span class="p">)</span> <span class="o">+</span>
+</span><span class='line'>        <span class="s1">&#39;+site%3A&#39;</span> <span class="o">+</span>
+</span><span class='line'>        <span class="nx">url</span><span class="p">,</span>
+</span><span class='line'>      <span class="nx">liberator</span><span class="p">.</span><span class="nx">NEW_TAB</span>
+</span><span class='line'>    <span class="p">);</span>
+</span><span class='line'>  <span class="p">},</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="nx">completer</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">context</span><span class="p">)</span> <span class="nx">completion</span><span class="p">.</span><span class="nx">url</span><span class="p">(</span><span class="nx">context</span><span class="p">,</span> <span class="s1">&#39;S&#39;</span><span class="p">),</span>
+</span><span class='line'>    <span class="nx">literal</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+</span><span class='line'>  <span class="p">},</span>
+</span><span class='line'>  <span class="kc">true</span>
+</span><span class='line'><span class="p">);</span>
+</span><span class='line'><span class="nx">EOM</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>vimpMonkey <a href="http://d.hatena.ne.jp/wlt/20110105/1294204461" title="VimperatorでGreasemonkeyみたいな事をする - wltの日記">http://d.hatena.ne.jp/wlt/20110105/1294204461</a></h2>
+
+<p>VimperatorでGreasemonkeyみたいな事をするためのユーティリティ関数です。<br/>
+例では@wikiのページタイトルの前後を入れ替えています。ツリー型タブユーザにオススメです。</p>
+
+<figure class='code'><figcaption><span>vimpMonkey一例</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">javascript</span> <span class="o">&lt;&lt;</span><span class="nx">EOM</span>
+</span><span class='line'><span class="c1">// @wikiのページタイトル - を区切りに前後入れ替え</span>
+</span><span class='line'><span class="nx">vimpMonkey</span><span class="p">(</span><span class="s1">&#39;http://www\\d+\\.atwiki\\.jp&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+</span><span class='line'>  <span class="nx">content</span><span class="p">.</span><span class="nb">document</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="nx">content</span><span class="p">.</span><span class="nb">document</span><span class="p">.</span><span class="nx">title</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/(.*) - (.*)/</span><span class="p">,</span> <span class="s1">&#39;$2 - $1&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// VimperatorでGreasemonkeyみたいな事をする - wltの日記 - http://d.hatena.ne.jp/wlt/20110105/1294204461</span>
+</span><span class='line'><span class="kd">function</span> <span class="nx">vimpMonkey</span><span class="p">(</span><span class="nx">urlRegexPattern</span><span class="p">,</span> <span class="nx">func</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">cmd</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="s1">&#39;(function(args) {&#39;</span> <span class="o">+</span>
+</span><span class='line'>    <span class="s1">&#39;var content = tabs.getTab(args.tab - 1).linkedBrowser.contentWindow;&#39;</span> <span class="o">+</span>
+</span><span class='line'>    <span class="s1">&#39;var unsafeContent = content.wrappedJSObject;&#39;</span> <span class="o">+</span>
+</span><span class='line'>    <span class="nx">func</span><span class="p">.</span><span class="nx">toSource</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;();&#39;</span> <span class="o">+</span>
+</span><span class='line'>  <span class="s1">&#39;})&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">autocommands</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;PageLoad&#39;</span><span class="p">,</span> <span class="nx">urlRegexPattern</span><span class="p">,</span> <span class="nx">cmd</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nx">EOM</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
   <div class="pagination">
     
       <a class="prev" href="/page/4/">&larr; Older</a>
@@ -632,10 +766,6 @@ Terrariaのマルチが思っていた以上に楽しくて年末年始はずっ
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/2013/06/30/bought-games/">今月買ったゲーム</a>
-      </li>
     
       <li class="post">
         <a href="/2013/06/27/reddit-to-twitter-bot/">ゲームのセール情報を監視すべくsubredditをtwitterにポストするbot作った</a>
@@ -673,11 +803,15 @@ Terrariaのマルチが思っていた以上に楽しくて年末年始はずっ
         <a href="/2013/02/28/played-games/">今月遊んだゲーム</a>
       </li>
     
+      <li class="post">
+        <a href="/2013/02/15/tlv-js/">Tiarraのログをブラウザから見たり検索したりできるやつ作った</a>
+      </li>
+    
   </ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-  <span id="tag-cloud"><a href='/categories/3ds' style='font-size: 106.0%'>3DS(1)</a> <a href='/categories/adventcalendar' style='font-size: 118.0%'>adventCalendar(3)</a> <a href='/categories/archlinux' style='font-size: 106.0%'>ArchLinux(1)</a> <a href='/categories/bag' style='font-size: 106.0%'>bag(1)</a> <a href='/categories/done' style='font-size: 106.0%'>done(1)</a> <a href='/categories/food' style='font-size: 106.0%'>food(1)</a> <a href='/categories/game' style='font-size: 160.0%'>game(10)</a> <a href='/categories/gyazo' style='font-size: 106.0%'>Gyazo(1)</a> <a href='/categories/hardware' style='font-size: 112.0%'>hardware(2)</a> <a href='/categories/hubot' style='font-size: 106.0%'>Hubot(1)</a> <a href='/categories/irc' style='font-size: 112.0%'>IRC(2)</a> <a href='/categories/javascript' style='font-size: 106.0%'>JavaScript(1)</a> <a href='/categories/linux' style='font-size: 118.0%'>linux(3)</a> <a href='/categories/mac' style='font-size: 112.0%'>Mac(2)</a> <a href='/categories/nginx' style='font-size: 106.0%'>Nginx(1)</a> <a href='/categories/node-js' style='font-size: 124.0%'>Node.js(4)</a> <a href='/categories/octopress' style='font-size: 106.0%'>Octopress(1)</a> <a href='/categories/perl' style='font-size: 106.0%'>Perl(1)</a> <a href='/categories/raspberrypi' style='font-size: 106.0%'>RaspberryPi(1)</a> <a href='/categories/recipe' style='font-size: 106.0%'>recipe(1)</a> <a href='/categories/ruby' style='font-size: 112.0%'>Ruby(2)</a> <a href='/categories/software' style='font-size: 124.0%'>software(4)</a> <a href='/categories/ssl' style='font-size: 112.0%'>SSL(2)</a> <a href='/categories/terraria' style='font-size: 106.0%'>Terraria(1)</a> <a href='/categories/twitter' style='font-size: 106.0%'>Twitter(1)</a> <a href='/categories/ubuntu' style='font-size: 106.0%'>Ubuntu(1)</a> <a href='/categories/vimperator' style='font-size: 124.0%'>Vimperator(4)</a> <a href='/categories/vps' style='font-size: 112.0%'>VPS(2)</a> <a href='/categories/win' style='font-size: 112.0%'>Win(2)</a> </span>
+  <span id="tag-cloud"><a href='/categories/3ds' style='font-size: 106.66666666666667%'>3DS(1)</a> <a href='/categories/adventcalendar' style='font-size: 120.0%'>adventCalendar(3)</a> <a href='/categories/archlinux' style='font-size: 106.66666666666667%'>ArchLinux(1)</a> <a href='/categories/bag' style='font-size: 106.66666666666667%'>bag(1)</a> <a href='/categories/done' style='font-size: 106.66666666666667%'>done(1)</a> <a href='/categories/food' style='font-size: 106.66666666666667%'>food(1)</a> <a href='/categories/game' style='font-size: 160.0%'>game(9)</a> <a href='/categories/gyazo' style='font-size: 106.66666666666667%'>Gyazo(1)</a> <a href='/categories/hardware' style='font-size: 113.33333333333333%'>hardware(2)</a> <a href='/categories/hubot' style='font-size: 106.66666666666667%'>Hubot(1)</a> <a href='/categories/irc' style='font-size: 113.33333333333333%'>IRC(2)</a> <a href='/categories/javascript' style='font-size: 106.66666666666667%'>JavaScript(1)</a> <a href='/categories/linux' style='font-size: 120.0%'>linux(3)</a> <a href='/categories/mac' style='font-size: 113.33333333333333%'>Mac(2)</a> <a href='/categories/nginx' style='font-size: 106.66666666666667%'>Nginx(1)</a> <a href='/categories/node-js' style='font-size: 126.66666666666667%'>Node.js(4)</a> <a href='/categories/octopress' style='font-size: 106.66666666666667%'>Octopress(1)</a> <a href='/categories/perl' style='font-size: 106.66666666666667%'>Perl(1)</a> <a href='/categories/raspberrypi' style='font-size: 106.66666666666667%'>RaspberryPi(1)</a> <a href='/categories/recipe' style='font-size: 106.66666666666667%'>recipe(1)</a> <a href='/categories/ruby' style='font-size: 113.33333333333333%'>Ruby(2)</a> <a href='/categories/software' style='font-size: 126.66666666666667%'>software(4)</a> <a href='/categories/ssl' style='font-size: 113.33333333333333%'>SSL(2)</a> <a href='/categories/terraria' style='font-size: 106.66666666666667%'>Terraria(1)</a> <a href='/categories/twitter' style='font-size: 106.66666666666667%'>Twitter(1)</a> <a href='/categories/ubuntu' style='font-size: 106.66666666666667%'>Ubuntu(1)</a> <a href='/categories/vimperator' style='font-size: 126.66666666666667%'>Vimperator(4)</a> <a href='/categories/vps' style='font-size: 113.33333333333333%'>VPS(2)</a> <a href='/categories/win' style='font-size: 113.33333333333333%'>Win(2)</a> </span>
 </section>
 
 <section>
