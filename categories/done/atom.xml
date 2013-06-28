@@ -4,7 +4,7 @@
   <title><![CDATA[Category: done | おいら屋ファクトリー]]></title>
   <link href="http://blog.feelmy.net/categories/done/atom.xml" rel="self"/>
   <link href="http://blog.feelmy.net/"/>
-  <updated>2013-06-27T22:38:01+09:00</updated>
+  <updated>2013-06-28T23:50:44+09:00</updated>
   <id>http://blog.feelmy.net/</id>
   <author>
     <name><![CDATA[ebith]]></name>
@@ -18,20 +18,7 @@
     <link href="http://blog.feelmy.net/2012/11/04/bravely-default-flying-fairy/"/>
     <updated>2012-11-04T05:23:00+09:00</updated>
     <id>http://blog.feelmy.net/2012/11/04/bravely-default-flying-fairy</id>
-    <content type="html"><![CDATA[<p><div class="hatena-asin-detail">
-  <a href="http://www.amazon.co.jp/%E3%82%B9%E3%82%AF%E3%82%A6%E3%82%A7%E3%82%A2%E3%83%BB%E3%82%A8%E3%83%8B%E3%83%83%E3%82%AF%E3%82%B9-%E3%83%96%E3%83%AC%E3%82%A4%E3%83%96%E3%83%AA%E3%83%BC%E3%83%87%E3%83%95%E3%82%A9%E3%83%AB%E3%83%88/dp/B008F29CRM%3FSubscriptionId%3DAKIAJVATSFYOD4ND3TIA%26tag%3Debith-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB008F29CRM"><img src="http://ecx.images-amazon.com/images/I/51BdKmAou-L._SL160_.jpg" class="hatena-asin-detail-image" alt="ブレイブリーデフォルト" title="ブレイブリーデフォルト"></a>
-  <div class="hatena-asin-detail-info">
-    <p class="hatena-asin-detail-title"><a href="http://www.amazon.co.jp/%E3%82%B9%E3%82%AF%E3%82%A6%E3%82%A7%E3%82%A2%E3%83%BB%E3%82%A8%E3%83%8B%E3%83%83%E3%82%AF%E3%82%B9-%E3%83%96%E3%83%AC%E3%82%A4%E3%83%96%E3%83%AA%E3%83%BC%E3%83%87%E3%83%95%E3%82%A9%E3%83%AB%E3%83%88/dp/B008F29CRM%3FSubscriptionId%3DAKIAJVATSFYOD4ND3TIA%26tag%3Debith-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB008F29CRM">ブレイブリーデフォルト</a></p>
-    <ul>
-
-      <li><span class="hatena-asin-detail-label">出版社/メーカー:</span> スクウェア・エニックス</li>
-      <li><span class="hatena-asin-detail-label">発売日:</span> 2012-10-11</li>
-      <li><span class="hatena-asin-detail-label">メディア:</span> Video Game</li>
-      <li><a href="http://www.amazon.co.jp/review/product/B008F29CRM%3FSubscriptionId%3DAKIAJVATSFYOD4ND3TIA%26tag%3Debith-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D5143%26creativeASIN%3DB008F29CRM">Amazon のレビューを見る</a></li>
-    </ul>
-  </div>
-  <div class="hatena-asin-detail-foot"></div>
-</div></p>
+    <content type="html"><![CDATA[<p>{% amazon jp:B008F29CRM:detail %}</p>
 
 <p>よくできたJPRGって感じでそこそこ楽しんだ。<br/>
 誰にでもオススメできるわけじゃないけどFFっぽいRPGやりたいならアリなんじゃないかな。<br/>

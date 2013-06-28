@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Vimperator | おいら屋ファクトリー]]></title>
   <link href="http://blog.feelmy.net/categories/vimperator/atom.xml" rel="self"/>
   <link href="http://blog.feelmy.net/"/>
-  <updated>2013-06-27T22:38:01+09:00</updated>
+  <updated>2013-06-28T23:50:44+09:00</updated>
   <id>http://blog.feelmy.net/</id>
   <author>
     <name><![CDATA[ebith]]></name>
@@ -287,67 +287,7 @@ JavaScript自体に関しては<a href="https://developer.mozilla.org/" title="M
     <link href="http://blog.feelmy.net/2012/10/19/ldr-subaccount-switcher-for-vimperator/"/>
     <updated>2012-10-19T02:30:00+09:00</updated>
     <id>http://blog.feelmy.net/2012/10/19/ldr-subaccount-switcher-for-vimperator</id>
-    <content type="html"><![CDATA[<p><div><script src='https://gist.github.com/3913442.js'></script>
-<noscript><pre><code>(function(){
-
- let libly = plugins.libly;
- let apiKey;
-
- commands.addUserCommand(
-   ['ldrSwitch'],
-   'Livedoor Readerのサブアカウントを切り替える',
-   function (args) {
-    if (!args.length) {
-      getAcc(function (accList) {
-        switchAcc(apiKey, accList[0][0]);
-      });
-    } else {
-      switchAcc(apiKey, args.literalArg);
-    }
-   },
-   {
-      literal: 0,
-      completer: function (context) {
-        context.incomplete = true;
-        context.title = ['account'];
-        context.compare = void 0;
-
-        getAcc (function (accList) {
-          context.completions = accList;
-          context.incomplete = false;
-        });
-
-      }
-    },
-    true
-  );
-
-  function switchAcc (apiKey, acc) {
-    let url = 'http://reader.livedoor.com/account/switch';
-    let req = new libly.Request(url, null, {postBody: 'ApiKey=' + apiKey + '&amp;switch_to=' + acc});
-    req.addEventListener('onSuccess', function (res) {
-      liberator.echo('account switched: ' + acc);
-    });
-    req.post();
-  }
-
-  function getAcc (callback) {
-    let url = 'http://reader.livedoor.com/subaccount';
-    let req = new libly.Request(url);
-    let accList = [];
-    req.addEventListener('onSuccess', function (res) {
-      apiKey = res.getHTMLDocument('//input[@name=&quot;ApiKey&quot;]')[0].value;
-      res.getHTMLDocument('//input[@name=&quot;switch_to&quot;]').forEach(function (acc) {
-        accList.push([acc.value, acc.value]);
-      });
-      callback(accList);
-    });
-    req.get();
-  }
-
-})();
-</code></pre></noscript></div>
-</p>
+    <content type="html"><![CDATA[<p>{%gist https://gist.github.com/3913442 %}</p>
 
 <p><code>ldrSwitch</code>コマンドが追加されるのでよしなにしてください。</p>
 
