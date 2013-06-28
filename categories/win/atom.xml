@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Win | おいら屋ファクトリー]]></title>
   <link href="http://blog.feelmy.net/categories/win/atom.xml" rel="self"/>
   <link href="http://blog.feelmy.net/"/>
-  <updated>2013-06-28T23:50:44+09:00</updated>
+  <updated>2013-06-28T23:51:18+09:00</updated>
   <id>http://blog.feelmy.net/</id>
   <author>
     <name><![CDATA[ebith]]></name>
@@ -22,7 +22,15 @@
 <a href="http://sevenzip.sourceforge.jp/" title="7-Zip">7-Zip</a>のほうが速いので7-Zip付属の7zG.exe, 7z.exeとB2E(Bridge To Executables)に移行することにした。<br/>
 B2Eの本家は<a href="http://www.kmonos.net/lib/noah.ja.html" title="Noah - kMonos.NET">Noah</a>だけど、<a href="http://claybird.sakura.ne.jp/garage/lhaforge/" title="泥巣 : 作品庫 - LhaForge">LhaForge</a>の方がコマンドラインオプションが充実していて使いやすいのでそっちを使う。</p>
 
-<p>{% gist 3737689 %}
+<p><div><script src='https://gist.github.com/3737689.js'></script>
+<noscript><pre><code>load:
+  (name 7zG.exe)
+  (type 7z LZMA *LZMA2)
+
+encode:
+  (if (method 1) (cmd a -t7z -m0=LZMA (arc.7z) (list\*)))
+  (if (method 2) (cmd a -t7z -m0=LZMA2 (arc.7z) (list\*)))</code></pre></noscript></div>
+
 zip, 7z圧縮用と展開用のスクリプト。</p>
 
 <p><code>

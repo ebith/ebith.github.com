@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | おいら屋ファクトリー]]></title>
   <link href="http://blog.feelmy.net/categories/linux/atom.xml" rel="self"/>
   <link href="http://blog.feelmy.net/"/>
-  <updated>2013-06-28T23:50:44+09:00</updated>
+  <updated>2013-06-28T23:51:18+09:00</updated>
   <id>http://blog.feelmy.net/</id>
   <author>
     <name><![CDATA[ebith]]></name>
@@ -134,7 +134,26 @@ shred -v -n 3 -z /dev/hoge  # ランダムデータを3回書き込んだのち�
 tarで固めてlzoで圧縮してDropboxに送るバックアップスクリプト書いた。<br/>
 <a href="http://www.andreafabrizi.it/?dropbox_uploader" title="BASH Dropbox Uploader">BASH Dropbox Uploader</a>が必要。</p>
 
-<p>{% gist 3735146 %}</p>
+<p><div><script src='https://gist.github.com/3735146.js'></script>
+<noscript><pre><code>#!/bin/bash
+
+# バックアップ対象ディレクトリ
+target=&quot;/etc /home/ebith&quot;
+
+# 除外パターン
+exclude=(sites/www/rep2 .cpanm .rbenv)
+
+# 一時ファイル
+tempfile=&quot;/tmp/backup.tar.lzo&quot;
+
+for v in ${exclude[@]}; do
+  e=&quot;$e --exclude=$v&quot;
+done
+
+tar --lzop -cf $tempfile $target $e
+
+./dropbox_uploader.sh upload $tempfile /backup/`basename $tempfile`</code></pre></noscript></div>
+</p>
 
 <p>DropboxのAPIからのアップロードが1ファイル150MBまでなので<br/>
 ファイル分割とかできるといいかもしれないけど今んとこ必要ないので付いてない。</p>

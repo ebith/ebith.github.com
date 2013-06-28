@@ -4,7 +4,7 @@
   <title><![CDATA[Category: game | おいら屋ファクトリー]]></title>
   <link href="http://blog.feelmy.net/categories/game/atom.xml" rel="self"/>
   <link href="http://blog.feelmy.net/"/>
-  <updated>2013-06-28T23:50:44+09:00</updated>
+  <updated>2013-06-28T23:51:18+09:00</updated>
   <id>http://blog.feelmy.net/</id>
   <author>
     <name><![CDATA[ebith]]></name>
@@ -12,6 +12,21 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[今月買ったゲーム]]></title>
+    <link href="http://blog.feelmy.net/2013/06/28/bought-games/"/>
+    <updated>2013-06-28T23:00:00+09:00</updated>
+    <id>http://blog.feelmy.net/2013/06/28/bought-games</id>
+    <content type="html"><![CDATA[<h2><a href="https://www.humblebundle.com/">The Humble Indie Bundle 8 (pay what you want and help charity)</a> ¥583</h2>
+
+<p>見覚えがあるけど持ってないタイトルが並んでたので買っといた。Hotline Miamiがキー余り。</p>
+
+<h2><a href="http://ssq.atlusnet.jp/">新・世界樹の迷宮 ミレニアムの少女</a> ¥5,136</h2>
+
+<p>毎作セーブデータ1つしかないのは何の嫌がらせなの</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[ゲームのセール情報を監視すべくsubredditをtwitterにポストするbot作った]]></title>
@@ -98,28 +113,6 @@
 
 <p>でかい画面でバルキリー動かせるの楽しい。機体も豊富。アクションRPGであることを受け入れられるなら楽しめる。<br/>
 50時間で2回フリーズした。低い空、機体ステータスの一部が見られない、インベントリの容量が小さすぎる、ちゃちなダンジョン、荒い機体テクスチャなど残念な仕様や要素も多い。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[今月遊んだゲーム]]></title>
-    <link href="http://blog.feelmy.net/2013/02/28/played-games/"/>
-    <updated>2013-02-28T22:00:00+09:00</updated>
-    <id>http://blog.feelmy.net/2013/02/28/played-games</id>
-    <content type="html"><![CDATA[<h2><a href="http://store.steampowered.com/app/204100">Max Payne 3</a> ¥1310</h2>
-
-<p>高めの難易度とバレットタイムのシステムがチグハグに感じた。格好良く飛び出すと死ぬ。<br/>
-GfWLと似たようなRockstar Games Social Clubがダルい、グラフィックが妙に安っぽい。</p>
-
-<h2><a href="http://store.steampowered.com/app/50650">Darksiders II</a> ¥1243</h2>
-
-<p>主人公の見た目や装備が中二心をくすぐる。デスさんまじ良い人。<br/>
-攻撃の種類は数少ないので戦闘は単調になりがち。パズル要素がやや多いのは好みが分かれそう。</p>
-
-<h2><a href="http://amazon.jp/o/ASIN/B0095D6I86?tag=ebith-22">METAL GEAR RISING: REVENGEANCE</a> ¥5699</h2>
-
-<p>雷電まじかっこいい。複雑過ぎないシステムで面白い。雷電このあとどうなんの…<br/>
-ボリューム不足で出てくるキャラ達即退場or空気。口の動き英語なの気になる。</p>
 ]]></content>
   </entry>
   

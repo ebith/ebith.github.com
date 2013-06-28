@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Perl | おいら屋ファクトリー]]></title>
   <link href="http://blog.feelmy.net/categories/perl/atom.xml" rel="self"/>
   <link href="http://blog.feelmy.net/"/>
-  <updated>2013-06-28T23:50:44+09:00</updated>
+  <updated>2013-06-28T23:51:18+09:00</updated>
   <id>http://blog.feelmy.net/</id>
   <author>
     <name><![CDATA[ebith]]></name>
@@ -23,7 +23,36 @@
 
 <p>PerlのFile::KeePassとIO::Prompter、<a href="https://github.com/mooz/percol" title="mooz/percol">mooz/percol</a>が必要。</p>
 
-<p>{% gist 3767494 %}</p>
+<p><div><script src='https://gist.github.com/3767494.js'></script>
+<noscript><pre><code>#!/usr/bin/env perl
+use strict;
+use warnings;
+use utf8;
+
+use File::KeePass;
+use IO::Prompter;
+use Encode;
+
+my $file = shift @ARGV;
+my $pass = prompt('Password: ', -e =&gt; '');
+
+my $k = File::KeePass-&gt;new;
+
+$k-&gt;load_db($file, $pass);
+
+$k-&gt;unlock;
+
+my @entries = $k-&gt;find_entries({});
+
+open(OUT, '| percol | awk \'BEGIN { FS = &quot; :: &quot;} { printf $2 }\' | pbcopy ');
+foreach my $entry (@entries) {
+  next unless ($entry-&gt;{title} &amp;&amp; $entry-&gt;{password});
+  print OUT encode_utf8(&quot;$entry-&gt;{title} :: $entry-&gt;{password}\n&quot;);
+}
+close(OUT);
+
+$k-&gt;clear;</code></pre></noscript></div>
+</p>
 
 <p><code>sh
 ./keepass.pl ~/ebith.kdbx

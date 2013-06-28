@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Node.js | おいら屋ファクトリー]]></title>
   <link href="http://blog.feelmy.net/categories/node-js/atom.xml" rel="self"/>
   <link href="http://blog.feelmy.net/"/>
-  <updated>2013-06-28T23:50:44+09:00</updated>
+  <updated>2013-06-28T23:51:18+09:00</updated>
   <id>http://blog.feelmy.net/</id>
   <author>
     <name><![CDATA[ebith]]></name>
@@ -177,7 +177,35 @@ export HUBOT_IRC_ROOMS="#ebithubot"</p>
 
 <p><a href="http://blog.fumiz.me/2012/08/05/hubot-irc-bot-script/#notice" title="hubotスクリプトの書き方とサンプル集 | mitc">hubotスクリプトの書き方とサンプル集 | mitc</a>によると互換性のために削除されたらしい。<br/>
 hubot-ircにパッチを当てて復活させる。v0.1.4向け。
-{% gist 4505583 %}</p>
+<div><script src='https://gist.github.com/4505583.js'></script>
+<noscript><pre><code>diff --git a/src/irc.coffee b/src/irc.coffee
+index 1cd6be3..dbfb495 100644
+--- a/src/irc.coffee
++++ b/src/irc.coffee
+@@ -5,6 +5,12 @@
+ Irc = require 'irc'
+ 
+ class IrcBot extends Adapter
++  constructor: (@robot) -&gt;
++    super @robot
++    @robot.notice = (user, strings...) -&gt;
++      @adapter.notice user, strings...
++    @robot.Response = IrcResponse
++
+   send: (user, strings...) -&gt;
+     for str in strings
+       if not str?
+@@ -176,5 +182,9 @@ class IrcBot extends Adapter
+ 
+     self.emit &quot;connected&quot;
+ 
++class IrcResponse extends Response
++  notice: (strings...) -&gt;
++    @robot.adapter.notice @message.user, strings...
++
+ exports.use = (robot) -&gt;
+   new IrcBot robot</code></pre></noscript></div>
+</p>
 
 <h3>データの永続化</h3>
 
