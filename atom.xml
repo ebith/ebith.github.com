@@ -4,7 +4,7 @@
   <title><![CDATA[おいら屋ファクトリー]]></title>
   <link href="http://blog.feelmy.net/atom.xml" rel="self"/>
   <link href="http://blog.feelmy.net/"/>
-  <updated>2013-06-28T23:51:18+09:00</updated>
+  <updated>2013-07-31T07:16:30+09:00</updated>
   <id>http://blog.feelmy.net/</id>
   <author>
     <name><![CDATA[ebith]]></name>
@@ -12,6 +12,38 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[今月買ったゲーム]]></title>
+    <link href="http://blog.feelmy.net/2013/07/31/bought-games/"/>
+    <updated>2013-07-31T07:00:00+09:00</updated>
+    <id>http://blog.feelmy.net/2013/07/31/bought-games</id>
+    <content type="html"><![CDATA[<h2>ファイナルファンタジーXIV: 新生エオルゼア ¥2483</h2>
+
+<p>まともにMMORPGすんのEverQuest2以来なので楽しみ</p>
+
+<h2>Bioshock 1, 2 ¥435</h2>
+
+<p>この1と2をクリアしたらInfinite買いたい</p>
+
+<h2><a href="http://store.steampowered.com/app/234160/">Strike Suit Infinity</a> ¥178</h2>
+
+<p>安くなるの待ってた</p>
+
+<h2><a href="http://www.humblebundle.com/">Humble Deep Silver Bundle (pay what you want and help charity)</a> ¥484</h2>
+
+<p>Dead Island GOTYとSaints Row:The Third Full Package入ってるしと思って買ったけどあんまりやる気ないしちょっともったいなかった</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ディスクを読み込まなくなったXbox360を修理した]]></title>
+    <link href="http://blog.feelmy.net/2013/07/08/repaired-xbox360/"/>
+    <updated>2013-07-08T00:31:00+09:00</updated>
+    <id>http://blog.feelmy.net/2013/07/08/repaired-xbox360</id>
+    <content type="html"><![CDATA[<p>Falcon</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[今月買ったゲーム]]></title>
@@ -25,6 +57,10 @@
 <h2><a href="http://ssq.atlusnet.jp/">新・世界樹の迷宮 ミレニアムの少女</a> ¥5,136</h2>
 
 <p>毎作セーブデータ1つしかないのは何の嫌がらせなの</p>
+
+<h2><a href="http://www.ftlgame.com/">FTL: Faster Than Light</a> ¥251</h2>
+
+<p>やりごたえのある難易度で良い</p>
 ]]></content>
   </entry>
   
@@ -1162,65 +1198,6 @@ JavaScript自体に関しては<a href="https://developer.mozilla.org/" title="M
 
 <p>やってみると案外なんとかなるもので、単なるソフトウェアオタクでも少しはプラグイン書けるようになりました。<br/>
 多くの人がプラグインを書けばそれだけVimperatorが便利になってみんなが幸せなので是非ともチャレンジしてください。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[iGoogleのDays Since(あれやってから何日経ったっけを管理するやつ)クローン作った]]></title>
-    <link href="http://blog.feelmy.net/2012/11/24/days-since-app/"/>
-    <updated>2012-11-24T22:43:00+09:00</updated>
-    <id>http://blog.feelmy.net/2012/11/24/days-since-app</id>
-    <content type="html"><![CDATA[<p><img src="https://raw.github.com/ebith/DaysSince/master/public/images/sample.png" alt="" /><br/>
-こういうやつ。<br/>
-オリジナルは<a href="http://leancode.com/dayssince/" title="Days Since | Leancode">Days Since | Leancode</a>で、今回作ったのが<a href="http://dayssince.feelmy.net/" title="Days Since">Days Since</a>。</p>
-
-<p>Webアプリ的なやつ形にするのって8年ぶりとかな気がするけど便利なフレームワークとかのおかげでググりまくるだけでそれっぽくできたし素晴らしい時代になった。<br/>
-今回お世話になったのはPadrino, ActiveRecord, SQLite, Slim, jQuery, Twitter Bootstrapその他いっぱい。</p>
-
-<p>リポジトリは<a href="https://github.com/ebith/DaysSince" title="ebith/DaysSince · GitHub">こっち</a>。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[ブレイブリーデフォルトクリアした]]></title>
-    <link href="http://blog.feelmy.net/2012/11/04/bravely-default-flying-fairy/"/>
-    <updated>2012-11-04T05:23:00+09:00</updated>
-    <id>http://blog.feelmy.net/2012/11/04/bravely-default-flying-fairy</id>
-    <content type="html"><![CDATA[<div class="hatena-asin-detail">
-  <a href="http://www.amazon.co.jp/%E3%82%B9%E3%82%AF%E3%82%A6%E3%82%A7%E3%82%A2%E3%83%BB%E3%82%A8%E3%83%8B%E3%83%83%E3%82%AF%E3%82%B9-%E3%83%96%E3%83%AC%E3%82%A4%E3%83%96%E3%83%AA%E3%83%BC%E3%83%87%E3%83%95%E3%82%A9%E3%83%AB%E3%83%88/dp/B008F29CRM%3FSubscriptionId%3DAKIAJVATSFYOD4ND3TIA%26tag%3Debith-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB008F29CRM"><img src="http://ecx.images-amazon.com/images/I/51BdKmAou-L._SL160_.jpg" class="hatena-asin-detail-image" alt="ブレイブリーデフォルト" title="ブレイブリーデフォルト"></a>
-  <div class="hatena-asin-detail-info">
-    <p class="hatena-asin-detail-title"><a href="http://www.amazon.co.jp/%E3%82%B9%E3%82%AF%E3%82%A6%E3%82%A7%E3%82%A2%E3%83%BB%E3%82%A8%E3%83%8B%E3%83%83%E3%82%AF%E3%82%B9-%E3%83%96%E3%83%AC%E3%82%A4%E3%83%96%E3%83%AA%E3%83%BC%E3%83%87%E3%83%95%E3%82%A9%E3%83%AB%E3%83%88/dp/B008F29CRM%3FSubscriptionId%3DAKIAJVATSFYOD4ND3TIA%26tag%3Debith-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB008F29CRM">ブレイブリーデフォルト</a></p>
-    <ul>
-
-      <li><span class="hatena-asin-detail-label">出版社/メーカー:</span> スクウェア・エニックス</li>
-      <li><span class="hatena-asin-detail-label">発売日:</span> 2012-10-11</li>
-      <li><span class="hatena-asin-detail-label">メディア:</span> Video Game</li>
-      <li><a href="http://www.amazon.co.jp/review/product/B008F29CRM%3FSubscriptionId%3DAKIAJVATSFYOD4ND3TIA%26tag%3Debith-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D5143%26creativeASIN%3DB008F29CRM">Amazon のレビューを見る</a></li>
-    </ul>
-  </div>
-  <div class="hatena-asin-detail-foot"></div>
-</div>
-
-
-<p>よくできたJPRGって感じでそこそこ楽しんだ。<br/>
-誰にでもオススメできるわけじゃないけどFFっぽいRPGやりたいならアリなんじゃないかな。<br/>
-9999*2(刀流)*5(回行動)*2(人)を毎ターンできるのとか楽しい。</p>
-
-<h3>良かったとこ</h3>
-
-<ul>
-<li>安定のジョブシステム</li>
-<li>ブレイブシステムでテンポ良い戦闘</li>
-</ul>
-
-
-<h3>悪かったとこ</h3>
-
-<ul>
-<li>主人公たちの性格とか会話がイマイチに感じた。ストーリー外の話とかだと違和感無かったんでなんか勿体ない感じ。</li>
-<li>中盤以降ストーリーの盛り上がりに欠ける上に徒歩移動が増えて、エンカウント率の高さも相まってストレス。</li>
-</ul>
-
 ]]></content>
   </entry>
   
