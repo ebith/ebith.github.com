@@ -9,8 +9,8 @@
   <meta name="author" content="ebith">
 
   
-  <meta name="description" content="6月末にRSに注文したものの、届く気配もなかったのでModMyPiに頼んでみると1週間で到着。
-残念ながらRev1だったけど、Arch Linuxを入れてHeadless運用でしばらく遊ぶことにする。 最初の接続までは約3,300円で買えるLinuxパソコンRaspberry PiをMacで使う &hellip;">
+  <meta name="description" content="Macbook触ってる時間が長くなってくるとKeePass2がまともに動かないのが凄く気になってきたし、
+かと言って1Passwordは凄く高いのでどうにかしたくて右往左往してたらkdbxを読めるPerlモジュールを見つけたので頑張った。 PerlのFile::KeePassとIO:: &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,203 +79,6 @@
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/10/01/i-got-raspberry-pi/">ラズベリーパイを手に入れた！</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-10-01T09:02:00+09:00" pubdate data-updated="true">Oct 1<span>st</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://www.flickr.com/photos/ebith/8038651368/" title="Raspberry Pi 1/2 by Ebith, on Flickr"><img src="http://farm9.staticflickr.com/8462/8038651368_d716208375_n.jpg" width="320" height="239" alt="Raspberry Pi 1/2"></a><a href="http://www.flickr.com/photos/ebith/8038648103/" title="Raspberry Pi 2/2 by Ebith, on Flickr"><img src="http://farm9.staticflickr.com/8316/8038648103_f163c4d92a_n.jpg" width="320" height="239" alt="Raspberry Pi 2/2"></a><br/>
-6月末にRSに注文したものの、届く気配もなかったのでModMyPiに頼んでみると1週間で到着。<br/>
-残念ながらRev1だったけど、Arch Linuxを入れてHeadless運用でしばらく遊ぶことにする。</p>
-
-<p>最初の接続までは<a href="http://hitoriblog.com/?p=9733" title="約3,300円で買えるLinuxパソコンRaspberry PiをMacで使う | ひとりぶろぐ">約3,300円で買えるLinuxパソコンRaspberry PiをMacで使う | ひとりぶろぐ</a>を参考にした。<br/>
-<a href="https://github.com/exaviorn/RasPiWrite" title="exaviorn/RasPiWrite">RasPiWrite</a>はエラーを吐くので適当なfork版を使う。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>nmap -sP 192.168.0.0/24
-</span><span class='line'>ssh root@x.x.x.x
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>alarmpiのホスト名だと繋げなかったのでIP探してsshで接続。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-<span class='line-number'>62</span>
-<span class='line-number'>63</span>
-<span class='line-number'>64</span>
-<span class='line-number'>65</span>
-<span class='line-number'>66</span>
-<span class='line-number'>67</span>
-<span class='line-number'>68</span>
-<span class='line-number'>69</span>
-<span class='line-number'>70</span>
-<span class='line-number'>71</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>pacman -Syu     <span class="c"># Arch Linuxのアップデート</span>
-</span><span class='line'>passwd          <span class="c"># rootのパスワード変更</span>
-</span><span class='line'>adduser         <span class="c"># 普段使い用のユーザー追加(sudo用にwheelグループにも所属させておく)</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># sudo導入</span>
-</span><span class='line'>pacman -S sudo
-</span><span class='line'>visudo
-</span><span class='line'>  %wheel <span class="nv">ALL</span><span class="o">=(</span>ALL<span class="o">)</span> ALL
-</span><span class='line'>  Defaults <span class="nv">timestamp_timeout</span><span class="o">=</span>30
-</span><span class='line'>
-</span><span class='line'><span class="c"># 固定IPにする(systemd/Services - ArchWiki - https://wiki.archlinux.org/index.php/Systemd/Services#Static_Ethernet_network)</span>
-</span><span class='line'>vi /etc/conf.d/network
-</span><span class='line'>  <span class="nv">interface</span><span class="o">=</span>eth0
-</span><span class='line'>  <span class="nv">address</span><span class="o">=</span>192.168.0.32
-</span><span class='line'>  <span class="nv">netmask</span><span class="o">=</span>24
-</span><span class='line'>  <span class="nv">broadcast</span><span class="o">=</span>192.168.0.255
-</span><span class='line'>  <span class="nv">gateway</span><span class="o">=</span>192.168.0.1
-</span><span class='line'>vi /etc/systemd/system/network.service
-</span><span class='line'>  <span class="o">[</span>Unit<span class="o">]</span>
-</span><span class='line'>  <span class="nv">Description</span><span class="o">=</span>Network Connectivity
-</span><span class='line'>  <span class="nv">Wants</span><span class="o">=</span>network.target
-</span><span class='line'>  <span class="nv">Before</span><span class="o">=</span>network.target
-</span><span class='line'>  <span class="o">[</span>Service<span class="o">]</span>
-</span><span class='line'>  <span class="nv">Type</span><span class="o">=</span>oneshot
-</span><span class='line'>  <span class="nv">RemainAfterExit</span><span class="o">=</span>yes
-</span><span class='line'>  <span class="nv">EnvironmentFile</span><span class="o">=</span>/etc/conf.d/network
-</span><span class='line'>  <span class="nv">ExecStart</span><span class="o">=</span>/sbin/ip link <span class="nb">set </span>dev <span class="k">${</span><span class="nv">interface</span><span class="k">}</span> up
-</span><span class='line'>  <span class="nv">ExecStart</span><span class="o">=</span>/sbin/ip addr add <span class="k">${</span><span class="nv">address</span><span class="k">}</span>/<span class="k">${</span><span class="nv">netmask</span><span class="k">}</span> broadcast <span class="k">${</span><span class="nv">broadcast</span><span class="k">}</span> dev <span class="k">${</span><span class="nv">interface</span><span class="k">}</span>
-</span><span class='line'>  <span class="nv">ExecStart</span><span class="o">=</span>/sbin/ip route add default via <span class="k">${</span><span class="nv">gateway</span><span class="k">}</span>
-</span><span class='line'>  <span class="nv">ExecStop</span><span class="o">=</span>/sbin/ip addr flush dev <span class="k">${</span><span class="nv">interface</span><span class="k">}</span>
-</span><span class='line'>  <span class="nv">ExecStop</span><span class="o">=</span>/sbin/ip link <span class="nb">set </span>dev <span class="k">${</span><span class="nv">interface</span><span class="k">}</span> down
-</span><span class='line'>  <span class="o">[</span>Install<span class="o">]</span>
-</span><span class='line'>  <span class="nv">WantedBy</span><span class="o">=</span>multi-user.target
-</span><span class='line'>vi /etc/resolve.conf
-</span><span class='line'>  nameserver 143.90.130.165
-</span><span class='line'>  nameserver 143.90.130.39
-</span><span class='line'>systemctl disable dhcpcd@eth0.service
-</span><span class='line'>systemctl <span class="nb">enable </span>network.service
-</span><span class='line'>
-</span><span class='line'><span class="c"># ssh, sshd周り</span>
-</span><span class='line'>vi /etc/ssh/sshd_config
-</span><span class='line'>  PermitRootLogin no
-</span><span class='line'>  PubkeyAuthentication yes
-</span><span class='line'>  PasswordAuthentication no
-</span><span class='line'>  Port xxxxx
-</span><span class='line'>systemctl restart sshd.service
-</span><span class='line'>su ebith
-</span><span class='line'>ssh-keygen  <span class="c"># ローカルにコピーしたり~/.ssh/config設定したりしとく</span>
-</span><span class='line'>cat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys
-</span><span class='line'>
-</span><span class='line'><span class="c"># DDNS</span>
-</span><span class='line'>vi ~/.crontab
-</span><span class='line'>  curl <span class="s1">&#39;http://dynamic.name-services.com/interface.asp?Command=SetDNSHost&amp;HostName=home&amp;Zone=feelmy.net&amp;DomainPassword=xxxxx&#39;</span>
-</span><span class='line'>crontab ~/.crontab
-</span><span class='line'>
-</span><span class='line'><span class="c"># ロケール</span>
-</span><span class='line'>sudo vi /etc/locale.gen
-</span><span class='line'>  ja_JP.UTF-8 UTF-8
-</span><span class='line'>sudo locale-gen
-</span><span class='line'>sudo vi /etc/locale.conf
-</span><span class='line'>  <span class="nv">LANG</span><span class="o">=</span>ja_JP.UTF-8
-</span><span class='line'>
-</span><span class='line'><span class="c"># 環境設定</span>
-</span><span class='line'>sudo pacman -S git rsync vim zsh
-</span><span class='line'>git clone git@github.com:ebith/dotfiles.git
-</span><span class='line'><span class="nb">cd </span>dotfiles
-</span><span class='line'>git sm init
-</span><span class='line'>git sm update
-</span><span class='line'><span class="nb">cd</span>
-</span><span class='line'>./dotfiles/create_link.sh
-</span><span class='line'>chsh -s /bin/zsh
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><a href="http://d.hatena.ne.jp/mickey24/20120911/air_conditioner_with_arduino" title="うちのbotがエアコンの操作方法を覚えた - ぬいぐるみライフ(仮)">うちのbotがエアコンの操作方法を覚えた - ぬいぐるみライフ(仮)</a>とかすごく楽しそうなのでUSBの赤外線リモコン繋いだら簡単に似たようなことできるのかなとか思ったけど、調度良さそうなのが見つからないしそう簡単な話ではなかった。</p>
-</div>
-  
-  
-
-
-    </article>
   
   
     <article>
@@ -589,6 +392,79 @@ OSのインストール後の流れをメモっておく。</p>
 
     </article>
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/09/11/muesli-cookies/">ミューズリーのクッキー</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-11T11:40:00+09:00" pubdate data-updated="true">Sep 11<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://www.flickr.com/photos/ebith/7975028474/" title="ミューズリーのクッキー by Ebith, on Flickr"><img src="http://farm9.staticflickr.com/8302/7975028474_740036360a_n.jpg" width="320" height="239" alt="ミューズリーのクッキー"></a><br/>
+<a href="http://hnycamera.exblog.jp/13661996" title="ミューズリーのクッキー : ハチミツカメラ">ミューズリーのクッキー : ハチミツカメラ</a>より。<br/>
+はちみつじゃなくてメープルシロップだったり、水分やや大目だったりする程度のアレンジ。<br/>
+バキバキと硬くて食べごたえのあるクッキーができるのでお気に入り。</p>
+
+<h2>材料</h2>
+
+<ul>
+<li>A
+
+<ul>
+<li>ミューズリー 140g</li>
+<li>薄力粉 60g</li>
+<li>きび砂糖 20g</li>
+</ul>
+</li>
+<li>B
+
+<ul>
+<li>メープルシロップ 大さじ2</li>
+<li>サラダ油 大さじ4</li>
+<li>水 大さじ3</li>
+</ul>
+</li>
+</ul>
+
+
+<h2>手順</h2>
+
+<ol>
+<li>Aをフードプロセッサーに入れて軽く回す</li>
+<li>Bも入れて回す</li>
+<li>天板に適当なサイズで落として指で押し広げる</li>
+<li>160度のオーブンで30分焼く</li>
+</ol>
+
+
+<p><a href="https://gist.github.com/3706093" title="ミューズリーのクッキー — Gist">最新のレシピ</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
   <div class="pagination">
     
       <a class="prev" href="/page/7/">&larr; Older</a>
@@ -607,10 +483,6 @@ OSのインストール後の流れをメモっておく。</p>
     
       <li class="post">
         <a href="/2013/07/31/bought-games/">今月買ったゲーム</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/07/08/repaired-xbox360/">ディスクを読み込まなくなったXbox360を修理した</a>
       </li>
     
       <li class="post">
@@ -645,11 +517,15 @@ OSのインストール後の流れをメモっておく。</p>
         <a href="/2013/04/05/self-signed-certificate/">オレオレ認証局をたててオレオレ証明書を発行する</a>
       </li>
     
+      <li class="post">
+        <a href="/2013/03/29/played-games/">今月遊んだゲーム</a>
+      </li>
+    
   </ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-  <span id="tag-cloud"><a href='/categories/3ds' style='font-size: 105.0%'>3DS(1)</a> <a href='/categories/adventcalendar' style='font-size: 115.0%'>adventCalendar(3)</a> <a href='/categories/archlinux' style='font-size: 105.0%'>ArchLinux(1)</a> <a href='/categories/bag' style='font-size: 105.0%'>bag(1)</a> <a href='/categories/done' style='font-size: 105.0%'>done(1)</a> <a href='/categories/food' style='font-size: 105.0%'>food(1)</a> <a href='/categories/game' style='font-size: 160.0%'>game(12)</a> <a href='/categories/gyazo' style='font-size: 105.0%'>Gyazo(1)</a> <a href='/categories/hardware' style='font-size: 115.0%'>hardware(3)</a> <a href='/categories/hubot' style='font-size: 105.0%'>Hubot(1)</a> <a href='/categories/irc' style='font-size: 110.0%'>IRC(2)</a> <a href='/categories/javascript' style='font-size: 105.0%'>JavaScript(1)</a> <a href='/categories/linux' style='font-size: 115.0%'>linux(3)</a> <a href='/categories/mac' style='font-size: 110.0%'>Mac(2)</a> <a href='/categories/nginx' style='font-size: 105.0%'>Nginx(1)</a> <a href='/categories/node-js' style='font-size: 120.0%'>Node.js(4)</a> <a href='/categories/octopress' style='font-size: 105.0%'>Octopress(1)</a> <a href='/categories/perl' style='font-size: 105.0%'>Perl(1)</a> <a href='/categories/raspberrypi' style='font-size: 105.0%'>RaspberryPi(1)</a> <a href='/categories/recipe' style='font-size: 105.0%'>recipe(1)</a> <a href='/categories/ruby' style='font-size: 110.0%'>Ruby(2)</a> <a href='/categories/software' style='font-size: 120.0%'>software(4)</a> <a href='/categories/ssl' style='font-size: 110.0%'>SSL(2)</a> <a href='/categories/terraria' style='font-size: 105.0%'>Terraria(1)</a> <a href='/categories/twitter' style='font-size: 105.0%'>Twitter(1)</a> <a href='/categories/ubuntu' style='font-size: 105.0%'>Ubuntu(1)</a> <a href='/categories/vimperator' style='font-size: 120.0%'>Vimperator(4)</a> <a href='/categories/vps' style='font-size: 110.0%'>VPS(2)</a> <a href='/categories/win' style='font-size: 110.0%'>Win(2)</a> </span>
+  <span id="tag-cloud"><a href='/categories/3ds' style='font-size: 105.45454545454545%'>3DS(1)</a> <a href='/categories/adventcalendar' style='font-size: 116.36363636363636%'>adventCalendar(3)</a> <a href='/categories/archlinux' style='font-size: 105.45454545454545%'>ArchLinux(1)</a> <a href='/categories/bag' style='font-size: 105.45454545454545%'>bag(1)</a> <a href='/categories/done' style='font-size: 105.45454545454545%'>done(1)</a> <a href='/categories/food' style='font-size: 105.45454545454545%'>food(1)</a> <a href='/categories/game' style='font-size: 160.0%'>game(11)</a> <a href='/categories/gyazo' style='font-size: 105.45454545454545%'>Gyazo(1)</a> <a href='/categories/hardware' style='font-size: 110.9090909090909%'>hardware(2)</a> <a href='/categories/hubot' style='font-size: 105.45454545454545%'>Hubot(1)</a> <a href='/categories/irc' style='font-size: 110.9090909090909%'>IRC(2)</a> <a href='/categories/javascript' style='font-size: 105.45454545454545%'>JavaScript(1)</a> <a href='/categories/linux' style='font-size: 116.36363636363636%'>linux(3)</a> <a href='/categories/mac' style='font-size: 110.9090909090909%'>Mac(2)</a> <a href='/categories/nginx' style='font-size: 105.45454545454545%'>Nginx(1)</a> <a href='/categories/node-js' style='font-size: 121.81818181818181%'>Node.js(4)</a> <a href='/categories/octopress' style='font-size: 105.45454545454545%'>Octopress(1)</a> <a href='/categories/perl' style='font-size: 105.45454545454545%'>Perl(1)</a> <a href='/categories/raspberrypi' style='font-size: 105.45454545454545%'>RaspberryPi(1)</a> <a href='/categories/recipe' style='font-size: 105.45454545454545%'>recipe(1)</a> <a href='/categories/ruby' style='font-size: 110.9090909090909%'>Ruby(2)</a> <a href='/categories/software' style='font-size: 121.81818181818181%'>software(4)</a> <a href='/categories/ssl' style='font-size: 110.9090909090909%'>SSL(2)</a> <a href='/categories/terraria' style='font-size: 105.45454545454545%'>Terraria(1)</a> <a href='/categories/twitter' style='font-size: 105.45454545454545%'>Twitter(1)</a> <a href='/categories/ubuntu' style='font-size: 105.45454545454545%'>Ubuntu(1)</a> <a href='/categories/vimperator' style='font-size: 121.81818181818181%'>Vimperator(4)</a> <a href='/categories/vps' style='font-size: 110.9090909090909%'>VPS(2)</a> <a href='/categories/win' style='font-size: 110.9090909090909%'>Win(2)</a> </span>
 </section>
 
 <section>

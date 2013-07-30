@@ -134,42 +134,6 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2013/07/08/repaired-xbox360/">ディスクを読み込まなくなったXbox360を修理した</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-08T00:31:00+09:00" pubdate data-updated="true">Jul 8<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Falcon</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
       <h1 class="entry-title"><a href="/2013/06/28/bought-games/">今月買ったゲーム</a></h1>
     
     
@@ -367,6 +331,69 @@
 
     </article>
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/06/01/nginx-ssl-client-authentication/">Nginxでちょっと高度なクライアント認証する</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-01T23:30:00+09:00" pubdate data-updated="true">Jun 1<span>st</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>前にやった<a href="http://blog.feelmy.net/2013/04/05/self-signed-certificate/">オレオレ認証局をたててオレオレ証明書を発行する</a>からもう一歩進む。</p>
+
+<h2>証明書の中身で分岐したい</h2>
+
+<p><code>$ssl_client_s_dn</code>にSubject(発行対象)、<code>$ssl_client_i_dn</code>にIssuer(発行者)の情報が入っていて、それぞれCN(Common Name), O(Organization)が含まれているのでこれらを見てよしなにする。</p>
+
+<h3>Common Nameにebithが含まれていない場合403 Forbiddenを返す</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='nginx'><span class='line'><span class="k">ssl</span> <span class="no">on</span><span class="p">;</span>
+</span><span class='line'><span class="k">ssl_certificate</span> <span class="s">server.crt</span><span class="p">;</span>
+</span><span class='line'><span class="k">ssl_certificate_key</span> <span class="s">sever.key</span><span class="p">;</span>
+</span><span class='line'><span class="k">ssl_verify_client</span> <span class="no">on</span><span class="p">;</span>
+</span><span class='line'><span class="k">ssl_client_certificate</span> <span class="s">cacert.pem</span><span class="p">;</span>
+</span><span class='line'><span class="k">if</span> <span class="s">(</span><span class="nv">$ssl_client_s_dn</span> <span class="s">!~</span> <span class="s">&quot;CN=ebith&quot;)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kn">return</span> <span class="mi">403</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ルート証明書のインポートをお願いできる仲間内だと警告無しで正規のSSLと変わらない使い勝手でお手軽に暗号化できるし、今回のようにクライアント認証も使えば更に便利なので素晴らしい。</p>
+</div>
+  
+  
+
+
+    </article>
+  
   <div class="pagination">
     
       <a class="prev" href="/page/2/">&larr; Older</a>
@@ -383,10 +410,6 @@
     
       <li class="post">
         <a href="/2013/07/31/bought-games/">今月買ったゲーム</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/07/08/repaired-xbox360/">ディスクを読み込まなくなったXbox360を修理した</a>
       </li>
     
       <li class="post">
@@ -421,11 +444,15 @@
         <a href="/2013/04/05/self-signed-certificate/">オレオレ認証局をたててオレオレ証明書を発行する</a>
       </li>
     
+      <li class="post">
+        <a href="/2013/03/29/played-games/">今月遊んだゲーム</a>
+      </li>
+    
   </ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-  <span id="tag-cloud"><a href='/categories/3ds' style='font-size: 105.0%'>3DS(1)</a> <a href='/categories/adventcalendar' style='font-size: 115.0%'>adventCalendar(3)</a> <a href='/categories/archlinux' style='font-size: 105.0%'>ArchLinux(1)</a> <a href='/categories/bag' style='font-size: 105.0%'>bag(1)</a> <a href='/categories/done' style='font-size: 105.0%'>done(1)</a> <a href='/categories/food' style='font-size: 105.0%'>food(1)</a> <a href='/categories/game' style='font-size: 160.0%'>game(12)</a> <a href='/categories/gyazo' style='font-size: 105.0%'>Gyazo(1)</a> <a href='/categories/hardware' style='font-size: 115.0%'>hardware(3)</a> <a href='/categories/hubot' style='font-size: 105.0%'>Hubot(1)</a> <a href='/categories/irc' style='font-size: 110.0%'>IRC(2)</a> <a href='/categories/javascript' style='font-size: 105.0%'>JavaScript(1)</a> <a href='/categories/linux' style='font-size: 115.0%'>linux(3)</a> <a href='/categories/mac' style='font-size: 110.0%'>Mac(2)</a> <a href='/categories/nginx' style='font-size: 105.0%'>Nginx(1)</a> <a href='/categories/node-js' style='font-size: 120.0%'>Node.js(4)</a> <a href='/categories/octopress' style='font-size: 105.0%'>Octopress(1)</a> <a href='/categories/perl' style='font-size: 105.0%'>Perl(1)</a> <a href='/categories/raspberrypi' style='font-size: 105.0%'>RaspberryPi(1)</a> <a href='/categories/recipe' style='font-size: 105.0%'>recipe(1)</a> <a href='/categories/ruby' style='font-size: 110.0%'>Ruby(2)</a> <a href='/categories/software' style='font-size: 120.0%'>software(4)</a> <a href='/categories/ssl' style='font-size: 110.0%'>SSL(2)</a> <a href='/categories/terraria' style='font-size: 105.0%'>Terraria(1)</a> <a href='/categories/twitter' style='font-size: 105.0%'>Twitter(1)</a> <a href='/categories/ubuntu' style='font-size: 105.0%'>Ubuntu(1)</a> <a href='/categories/vimperator' style='font-size: 120.0%'>Vimperator(4)</a> <a href='/categories/vps' style='font-size: 110.0%'>VPS(2)</a> <a href='/categories/win' style='font-size: 110.0%'>Win(2)</a> </span>
+  <span id="tag-cloud"><a href='/categories/3ds' style='font-size: 105.45454545454545%'>3DS(1)</a> <a href='/categories/adventcalendar' style='font-size: 116.36363636363636%'>adventCalendar(3)</a> <a href='/categories/archlinux' style='font-size: 105.45454545454545%'>ArchLinux(1)</a> <a href='/categories/bag' style='font-size: 105.45454545454545%'>bag(1)</a> <a href='/categories/done' style='font-size: 105.45454545454545%'>done(1)</a> <a href='/categories/food' style='font-size: 105.45454545454545%'>food(1)</a> <a href='/categories/game' style='font-size: 160.0%'>game(11)</a> <a href='/categories/gyazo' style='font-size: 105.45454545454545%'>Gyazo(1)</a> <a href='/categories/hardware' style='font-size: 110.9090909090909%'>hardware(2)</a> <a href='/categories/hubot' style='font-size: 105.45454545454545%'>Hubot(1)</a> <a href='/categories/irc' style='font-size: 110.9090909090909%'>IRC(2)</a> <a href='/categories/javascript' style='font-size: 105.45454545454545%'>JavaScript(1)</a> <a href='/categories/linux' style='font-size: 116.36363636363636%'>linux(3)</a> <a href='/categories/mac' style='font-size: 110.9090909090909%'>Mac(2)</a> <a href='/categories/nginx' style='font-size: 105.45454545454545%'>Nginx(1)</a> <a href='/categories/node-js' style='font-size: 121.81818181818181%'>Node.js(4)</a> <a href='/categories/octopress' style='font-size: 105.45454545454545%'>Octopress(1)</a> <a href='/categories/perl' style='font-size: 105.45454545454545%'>Perl(1)</a> <a href='/categories/raspberrypi' style='font-size: 105.45454545454545%'>RaspberryPi(1)</a> <a href='/categories/recipe' style='font-size: 105.45454545454545%'>recipe(1)</a> <a href='/categories/ruby' style='font-size: 110.9090909090909%'>Ruby(2)</a> <a href='/categories/software' style='font-size: 121.81818181818181%'>software(4)</a> <a href='/categories/ssl' style='font-size: 110.9090909090909%'>SSL(2)</a> <a href='/categories/terraria' style='font-size: 105.45454545454545%'>Terraria(1)</a> <a href='/categories/twitter' style='font-size: 105.45454545454545%'>Twitter(1)</a> <a href='/categories/ubuntu' style='font-size: 105.45454545454545%'>Ubuntu(1)</a> <a href='/categories/vimperator' style='font-size: 121.81818181818181%'>Vimperator(4)</a> <a href='/categories/vps' style='font-size: 110.9090909090909%'>VPS(2)</a> <a href='/categories/win' style='font-size: 110.9090909090909%'>Win(2)</a> </span>
 </section>
 
 <section>
