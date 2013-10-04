@@ -9,8 +9,17 @@
   <meta name="author" content="ebith">
 
   
-  <meta name="description" content="Max Payne 3 ¥1310 高めの難易度とバレットタイムのシステムがチグハグに感じた。格好良く飛び出すと死ぬ。
-GfWLと似たようなRockstar Games Social Clubがダルい、グラフィックが妙に安っぽい。 Darksiders II ¥1243 &hellip;">
+  <meta name="description" content="概要 CA.(sh|pl)を使わず、openssl.cnfの変更も最小限で済ます
+オレオレ認証局の証明書をブラウザに登録して警告が出ないようにする
+ワイルドカードなサーバー証明書を作る
+クライアント証明書も作る 下準備 1
+2
+3
+4
+5
+6
+7
+sudo cp /etc/ssl/openssl. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +88,224 @@ GfWLと似たようなRockstar Games Social Clubがダルい、グラフィッ�
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/04/05/self-signed-certificate/">オレオレ認証局をたててオレオレ証明書を発行する</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-05T06:54:00+09:00" pubdate data-updated="true">Apr 5<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>概要</h2>
+
+<ul>
+<li>CA.(sh|pl)を使わず、openssl.cnfの変更も最小限で済ます</li>
+<li>オレオレ認証局の証明書をブラウザに登録して警告が出ないようにする</li>
+<li>ワイルドカードなサーバー証明書を作る</li>
+<li>クライアント証明書も作る</li>
+</ul>
+
+
+<h2>下準備</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>sudo cp /etc/ssl/openssl.cnf /etc/ssl/openssl.cnf.orig
+</span><span class='line'>vi /etc/ssl/openssl.cnf
+</span><span class='line'>  -dir            <span class="o">=</span> ./demoCA
+</span><span class='line'>  +dir            <span class="o">=</span> .
+</span><span class='line'>
+</span><span class='line'>  +<span class="o">[</span> feelmy_net <span class="o">]</span>
+</span><span class='line'>  +subjectAltName <span class="o">=</span> DNS:feelmy.net,DNS:*.feelmy.net
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>ルート証明書を作る</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>mkdir ca
+</span><span class='line'><span class="nb">cd </span>ca
+</span><span class='line'>touch index.txt
+</span><span class='line'><span class="nb">echo </span>01 &gt; serial
+</span><span class='line'>mkdir newcerts private
+</span><span class='line'>openssl req -new -newkey rsa:2048 -keyout private/cakey.pem -out careq.pem
+</span><span class='line'>  Country Name <span class="o">(</span>2 letter code<span class="o">)</span> <span class="o">[</span>AU<span class="o">]</span>:JP
+</span><span class='line'>  State or Province Name <span class="o">(</span>full name<span class="o">)</span> <span class="o">[</span>Some-State<span class="o">]</span>:Nara
+</span><span class='line'>  Organization Name <span class="o">(</span>eg, company<span class="o">)</span> <span class="o">[</span>Internet Widgits Pty Ltd<span class="o">]</span>:Oiraya Factory
+</span><span class='line'>  Common Name <span class="o">(</span>e.g. server FQDN or YOUR name<span class="o">)</span> <span class="o">[]</span>:CA
+</span><span class='line'>chmod 400 private/cakey.pem
+</span><span class='line'>
+</span><span class='line'>openssl ca -in careq.pem -out cacert.pem -selfsign -days 3650 -extensions v3_ca -batch
+</span><span class='line'>rm careq.pem
+</span><span class='line'>chmod 444 cacert.pem newcerts/01.pem
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>サーバー証明書を作る</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>openssl req -new -newkey rsa:2048 -nodes -keyout cert.key -out cert.csr
+</span><span class='line'>  Country Name <span class="o">(</span>2 letter code<span class="o">)</span> <span class="o">[</span>AU<span class="o">]</span>:JP
+</span><span class='line'>  State or Province Name <span class="o">(</span>full name<span class="o">)</span> <span class="o">[</span>Some-State<span class="o">]</span>:Nara
+</span><span class='line'>  Organization Name <span class="o">(</span>eg, company<span class="o">)</span> <span class="o">[</span>Internet Widgits Pty Ltd<span class="o">]</span>:Oiraya Factory
+</span><span class='line'>  Common Name <span class="o">(</span>e.g. server FQDN or YOUR name<span class="o">)</span> <span class="o">[]</span>:*.feelmy.net
+</span><span class='line'>openssl ca -in cert.csr -out cert.crt -days 3650 -extensions feelmy_net -batch
+</span><span class='line'>rm cert.csr
+</span><span class='line'>chmod 400 cert.key
+</span><span class='line'>chmod 444 cert.crt
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>クライアント証明書を作る</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>openssl req -new -newkey rsa:2048 -nodes -keyout client.key -out client.csr
+</span><span class='line'>  Country Name <span class="o">(</span>2 letter code<span class="o">)</span> <span class="o">[</span>AU<span class="o">]</span>:JP
+</span><span class='line'>  State or Province Name <span class="o">(</span>full name<span class="o">)</span> <span class="o">[</span>Some-State<span class="o">]</span>:Nara
+</span><span class='line'>  Organization Name <span class="o">(</span>eg, company<span class="o">)</span> <span class="o">[</span>Internet Widgits Pty Ltd<span class="o">]</span>:Oiraya Factory
+</span><span class='line'>  Common Name <span class="o">(</span>e.g. server FQDN or YOUR name<span class="o">)</span> <span class="o">[]</span>:ebith
+</span><span class='line'>openssl ca -in client.csr -out client.crt -days 3650 -extensions feelmy_net -batch
+</span><span class='line'>openssl pkcs12 -export -in client.crt -inkey client.key -out client.p12
+</span><span class='line'>rm client.csr client.crt client.key
+</span><span class='line'>chmod 400 client.p12
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>雑感とか</h2>
+
+<p>今思うとディレクトリは名前の変更にとどめたほうがファイルがごちゃっとならなくて良かったっぽい。<br/>
+普通にCommon Nameを*.feelmy.netにして証明書を作るとfeelmy.netで通用しない。<br/>
+それを突破するにはSubject Alternative Nameを使うしかないっぽいけどSANを使うとopenssl.cnfの編集を避けられないようでつらい。</p>
+
+<p>作った証明書類はこんな感じにリネームしといた。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>mv cacert.pem oiraya-ca.pem
+</span><span class='line'>mv cert.key feelmy.net.key
+</span><span class='line'>mv cert.crt feelmy.net.crt
+</span><span class='line'>mv client.p12 feelmy.net.p12
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>参考にしたとこ</h2>
+
+<ul>
+<li><a href="http://www.tietew.jp/2007/01/30/how-to-setup-ca-using-openssl" title="OpenSSLでオレオレ認証局を立ち上げる | www.tietew.jp">OpenSSLでオレオレ認証局を立ち上げる | www.tietew.jp</a></li>
+<li><a href="http://www.daily-labo.com/ygg16_3.html" title="クライアント証明書の発行">クライアント証明書の発行</a></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/03/29/played-games/">今月遊んだゲーム</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-29T00:00:00+09:00" pubdate data-updated="true">Mar 29<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2><a href="http://store.steampowered.com/app/23530">Earth Defense Force: Insect Armageddon</a> ¥185</h2>
+
+<p>オンラインCoopがある地球防衛軍。</p>
+
+<h2><a href="http://store.steampowered.com/agecheck/app/202170/">Sleeping Dogs</a> ¥723</h2>
+
+<p>面白くないわけじゃないけどGTAで良いやんという結論。</p>
+
+<h2><a href="http://amazon.jp/dp/B00A8E0L4S?tag=ebith-22">マクロス30 銀河を繋ぐ歌声</a> ¥6722</h2>
+
+<p>でかい画面でバルキリー動かせるの楽しい。機体も豊富。アクションRPGであることを受け入れられるなら楽しめる。<br/>
+50時間で2回フリーズした。低い空、機体ステータスの一部が見られない、インベントリの容量が小さすぎる、ちゃちなダンジョン、荒い機体テクスチャなど残念な仕様や要素も多い。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -406,195 +633,6 @@ index 1cd6be3..dbfb495 100644
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/01/31/played-games/">今月遊んだゲーム</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-01-31T22:00:00+09:00" pubdate data-updated="true">Jan 31<span>st</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2><a href="http://store.steampowered.com/app/107100/">Bastion</a> ¥327</h2>
-
-<p>楽しいアクションゲームだった。見た目も綺麗。<br/>
-ストーリーはイミフ。</p>
-
-<h2><a href="http://store.steampowered.com/app/204360/">Castle Crashers</a> ¥339</h2>
-
-<p>Coopすべく買ったが難しいのでやらなくなってしまった。<br/>
-糞ゲー(汚い意味で)</p>
-
-<h2><a href="http://store.steampowered.com/app/219150/">Hotline Miami</a> ¥222</h2>
-
-<p>ゲームとしては凄くシンプルだけどちゃんと面白い。<br/>
-2chのスレにあったストーリーまとめみたいなのを読んだら更に面白くなった。</p>
-
-<h2><a href="http://steamcommunity.com/app/115120">Iron Brigade</a> ¥97</h2>
-
-<p>メカモノ好きだしタワーディフェンスのCoopは楽しい。機体に個性出るのも良い。<br/>
-Coop誘うのSteamじゃなくてGames for Windows Live経由なのがダルいしたまにバグる。</p>
-
-<h2><a href="http://steamcommunity.com/app/57740">Jagged Alliance - Back in Action</a> ¥0</h2>
-
-<p>バランス調整Mod入れたら普通に遊べてるし珍しいジャンルなのでそこそこ楽しいけど全体的に作りこみが浅い。<br/>
-リメイク元の1999年発売のやつの方が良く出来てるとか聞いた。</p>
-
-<h2><a href="http://store.steampowered.com/app/211360/">Offspring Fling!</a> ¥65</h2>
-
-<p>普通のパズルゲーっぽい。
-見た目は可愛い。</p>
-
-<h2><a href="http://steamcommunity.com/app/99300">Renegade Ops</a> ¥0</h2>
-
-<p>敵なぎ倒す系のCoopは単純かつ楽しくていい。<br/>
-左手パッド右手マウスでやりたいけどできない。マップ表示がクソい。</p>
-
-<h2><a href="http://steamcommunity.com/app/207040">Sine Mora</a> ¥155</h2>
-
-<p>シューティングゲームだけど一発終了なタイプじゃないから普通に遊べてる。<br/>
-でもやっぱ目が疲れるのでアレ。</p>
-
-<h2><a href="http://store.steampowered.com/app/91100/">SkyDrift</a> ¥90</h2>
-
-<p>仲間内でレースすると最高に盛り上がる。もちろんSkype有りで。<br/>
-空飛ぶマリカーっぽいけどコース数少ない、バランス悪いとかあるのでPC版マリカー早く！</p>
-
-<h2><a href="http://steamcommunity.com/app/50300">Spec Ops: The Line</a> ¥425</h2>
-
-<p>久しぶりのストーリー重視のTPSで楽しめた。後味の良いストーリーではないけどわりと満足。MultiplayとCoopは未プレイ。<br/>
-実績47/50まで8時間足らずというボリュームの少なさはやや寂しいけど物語長引いても面白く無いからこんなもんかも。</p>
-
-<h2><a href="http://store.steampowered.com/app/105600/">Terraria</a> ¥224</h2>
-
-<p>石掘ってると無心になれる。サーバ立てればみんなで一緒に遊べるし、協力して掘ったり戦ったり楽しい。<br/>
-次作早くやりたい。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/01/10/holiday-sale/">年末年始にゲーム35本買ったのでその一覧</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-01-10T00:00:00+09:00" pubdate data-updated="true">Jan 10<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>DRM: Origin</h2>
-
-<ul>
-<li>Crysis ¥750</li>
-<li>Crysis Warhead ¥750</li>
-<li>Crysis 2 ¥1000</li>
-</ul>
-
-
-<p>¥2500</p>
-
-<h2>DRM: Steam</h2>
-
-<ul>
-<li>Bastion ¥327</li>
-<li>Castle Crashers (4 Pack) ¥1357</li>
-<li>Darksiders Franchise Pack (1+2+DLC) ¥1243</li>
-<li>Hotline Miami ¥222</li>
-<li>Max Payne 3 ¥1310</li>
-<li>Renegade Ops ¥0(もらった)</li>
-<li>Sine Mora ¥155</li>
-<li>SkyDrift (*5) ¥449</li>
-<li>Sleeping Dogs + Dragon Master Pack ¥723</li>
-<li>Spec Ops: The Line ¥425</li>
-<li>Terraria (4 Pack) ¥897</li>
-<li>The Humble Indie Bundle 7 ¥586
-
-<ul>
-<li>Cave Story+</li>
-<li>Closure</li>
-<li>Dungeon Defenders + All DLC</li>
-<li>Legend of Grimrock</li>
-<li>Offspring Fling</li>
-<li>Shank 2</li>
-<li>Snapshot</li>
-<li>The Basement Collection</li>
-<li>The Binding of Isaac + Wrath of the Lamb DLC</li>
-</ul>
-</li>
-<li>Toki Tori ¥44</li>
-<li>Torchlight II ¥872</li>
-</ul>
-
-
-<h2>合計</h2>
-
-<p>35本 ¥11110</p>
-
-<h2>いろいろ</h2>
-
-<p>回線がやっと光になったのと、最近PCでゲームあんまりやってないなと思ったのでセール情報に貼り付いてたくさん買ってみた。<br/>
-効率的にセール情報を得るためにredditの<a href="http://en.reddit.com/r/GameDeals/new/?sort=new" title="newest submissions : GameDeals">newest submissions : GameDeals</a>の新着をポストする<a href="https://twitter.com/gamedealsbot" title="r/GameDeals/new/ (GameDealsBot)さんはTwitterを使っています">Twitter bot</a>作ったけど何故か即凍結されたのでIkachanでIRCに流すことになった。</p>
-
-<p>そういえば動画かなんかを見ただけでやってないな。ってことで買ったCrysisシリーズがちょっと高いというかEA Japanのセールがしょぼい。
-挙句の果てに2は面白くなかった。<br/>
-あとやっぱOriginとかUplayとか微妙すぎると思うので早くSteamに合流しちゃってほしい。</p>
-
-<p>もらったRenegade Opsとか4packを買ったTerraria, Castle CrashersはCoop用。<br/>
-Terrariaのマルチが思っていた以上に楽しくて年末年始はずっとやってた。<br/>
-<a href="https://github.com/TShock/TShock" title="TShock/TShock · GitHub">TShock</a>っていう非公式なdedicated serverがよくできていてMono使うとLinuxでも動くし素晴らしい。<br/>
-サーバのたて方とかは<a href="http://blog.feelmy.net/2013/01/05/terraria-server-with-ubuntu-server-12.04/" title="さくらのVPS 2G(Ubuntu 12.04)でTerrariaServer(TShock)を動かす - おいら屋ファクトリー">さくらのVPS 2G(Ubuntu 12.04)でTerrariaServer(TShock)を動かす</a>にまとめた。</p>
-
-<p>GamersGateで$2.84だったTom Clancy&#8217;s Ghost Recon: Future Soldierを逃してしまったのを悲しんでいたらその前後のBethesda CollectionとかBorderlands2 4Packとかも合わせて返金騒ぎになってた。</p>
-
-<p>Steamだと日本語字幕入りな代わりにおま値$79.99で買うことはまずないであろうと思っていたSleeping Dogsが、ホリデーセール延長開始時に91%になっていたので飛びついておいた。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/4/">&larr; Older</a>
@@ -610,6 +648,14 @@ Terrariaのマルチが思っていた以上に楽しくて年末年始はずっ
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/10/03/ff14-a-realm-reborn-review/">新生FF14を一ヶ月やってみた感想</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/08/30/bought-games/">今月買ったゲーム</a>
+      </li>
     
       <li class="post">
         <a href="/2013/07/31/bought-games/">今月買ったゲーム</a>
@@ -643,19 +689,11 @@ Terrariaのマルチが思っていた以上に楽しくて年末年始はずっ
         <a href="/2013/04/28/played-games/">今月遊んだゲーム</a>
       </li>
     
-      <li class="post">
-        <a href="/2013/04/05/self-signed-certificate/">オレオレ認証局をたててオレオレ証明書を発行する</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/03/29/played-games/">今月遊んだゲーム</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-  <span id="tag-cloud"><a href='/categories/3ds' style='font-size: 105.45454545454545%'>3DS(1)</a> <a href='/categories/adventcalendar' style='font-size: 116.36363636363636%'>adventCalendar(3)</a> <a href='/categories/archlinux' style='font-size: 105.45454545454545%'>ArchLinux(1)</a> <a href='/categories/bag' style='font-size: 105.45454545454545%'>bag(1)</a> <a href='/categories/done' style='font-size: 105.45454545454545%'>done(1)</a> <a href='/categories/food' style='font-size: 105.45454545454545%'>food(1)</a> <a href='/categories/game' style='font-size: 160.0%'>game(11)</a> <a href='/categories/gyazo' style='font-size: 105.45454545454545%'>Gyazo(1)</a> <a href='/categories/hardware' style='font-size: 110.9090909090909%'>hardware(2)</a> <a href='/categories/hubot' style='font-size: 105.45454545454545%'>Hubot(1)</a> <a href='/categories/irc' style='font-size: 110.9090909090909%'>IRC(2)</a> <a href='/categories/javascript' style='font-size: 105.45454545454545%'>JavaScript(1)</a> <a href='/categories/linux' style='font-size: 116.36363636363636%'>linux(3)</a> <a href='/categories/mac' style='font-size: 110.9090909090909%'>Mac(2)</a> <a href='/categories/nginx' style='font-size: 105.45454545454545%'>Nginx(1)</a> <a href='/categories/node-js' style='font-size: 121.81818181818181%'>Node.js(4)</a> <a href='/categories/octopress' style='font-size: 105.45454545454545%'>Octopress(1)</a> <a href='/categories/perl' style='font-size: 105.45454545454545%'>Perl(1)</a> <a href='/categories/raspberrypi' style='font-size: 105.45454545454545%'>RaspberryPi(1)</a> <a href='/categories/recipe' style='font-size: 105.45454545454545%'>recipe(1)</a> <a href='/categories/ruby' style='font-size: 110.9090909090909%'>Ruby(2)</a> <a href='/categories/software' style='font-size: 121.81818181818181%'>software(4)</a> <a href='/categories/ssl' style='font-size: 110.9090909090909%'>SSL(2)</a> <a href='/categories/terraria' style='font-size: 105.45454545454545%'>Terraria(1)</a> <a href='/categories/twitter' style='font-size: 105.45454545454545%'>Twitter(1)</a> <a href='/categories/ubuntu' style='font-size: 105.45454545454545%'>Ubuntu(1)</a> <a href='/categories/vimperator' style='font-size: 121.81818181818181%'>Vimperator(4)</a> <a href='/categories/vps' style='font-size: 110.9090909090909%'>VPS(2)</a> <a href='/categories/win' style='font-size: 110.9090909090909%'>Win(2)</a> </span>
+  <span id="tag-cloud"><a href='/categories/3ds' style='font-size: 104.61538461538461%'>3DS(1)</a> <a href='/categories/adventcalendar' style='font-size: 113.84615384615384%'>adventCalendar(3)</a> <a href='/categories/archlinux' style='font-size: 104.61538461538461%'>ArchLinux(1)</a> <a href='/categories/bag' style='font-size: 104.61538461538461%'>bag(1)</a> <a href='/categories/done' style='font-size: 104.61538461538461%'>done(1)</a> <a href='/categories/food' style='font-size: 104.61538461538461%'>food(1)</a> <a href='/categories/game' style='font-size: 160.0%'>game(13)</a> <a href='/categories/gyazo' style='font-size: 104.61538461538461%'>Gyazo(1)</a> <a href='/categories/hardware' style='font-size: 109.23076923076923%'>hardware(2)</a> <a href='/categories/hubot' style='font-size: 104.61538461538461%'>Hubot(1)</a> <a href='/categories/irc' style='font-size: 109.23076923076923%'>IRC(2)</a> <a href='/categories/javascript' style='font-size: 104.61538461538461%'>JavaScript(1)</a> <a href='/categories/linux' style='font-size: 113.84615384615384%'>linux(3)</a> <a href='/categories/mac' style='font-size: 109.23076923076923%'>Mac(2)</a> <a href='/categories/nginx' style='font-size: 104.61538461538461%'>Nginx(1)</a> <a href='/categories/node-js' style='font-size: 118.46153846153845%'>Node.js(4)</a> <a href='/categories/octopress' style='font-size: 104.61538461538461%'>Octopress(1)</a> <a href='/categories/perl' style='font-size: 104.61538461538461%'>Perl(1)</a> <a href='/categories/raspberrypi' style='font-size: 104.61538461538461%'>RaspberryPi(1)</a> <a href='/categories/recipe' style='font-size: 104.61538461538461%'>recipe(1)</a> <a href='/categories/ruby' style='font-size: 109.23076923076923%'>Ruby(2)</a> <a href='/categories/software' style='font-size: 118.46153846153845%'>software(4)</a> <a href='/categories/ssl' style='font-size: 109.23076923076923%'>SSL(2)</a> <a href='/categories/terraria' style='font-size: 104.61538461538461%'>Terraria(1)</a> <a href='/categories/twitter' style='font-size: 104.61538461538461%'>Twitter(1)</a> <a href='/categories/ubuntu' style='font-size: 104.61538461538461%'>Ubuntu(1)</a> <a href='/categories/vimperator' style='font-size: 118.46153846153845%'>Vimperator(4)</a> <a href='/categories/vps' style='font-size: 109.23076923076923%'>VPS(2)</a> <a href='/categories/win' style='font-size: 109.23076923076923%'>Win(2)</a> </span>
 </section>
 
 <section>
