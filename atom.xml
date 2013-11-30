@@ -4,7 +4,7 @@
   <title><![CDATA[おいら屋ファクトリー]]></title>
   <link href="http://blog.feelmy.net/atom.xml" rel="self"/>
   <link href="http://blog.feelmy.net/"/>
-  <updated>2013-10-04T21:53:21+09:00</updated>
+  <updated>2013-11-30T21:49:09+09:00</updated>
   <id>http://blog.feelmy.net/</id>
   <author>
     <name><![CDATA[ebith]]></name>
@@ -12,6 +12,29 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[今月買ったゲーム]]></title>
+    <link href="http://blog.feelmy.net/2013/11/30/bought-games/"/>
+    <updated>2013-11-30T22:00:00+09:00</updated>
+    <id>http://blog.feelmy.net/2013/11/30/bought-games</id>
+    <content type="html"><![CDATA[<h2><a href="https://www.humblebundle.com/">Humble WB Games Bundle (pay what you want and help charity)</a> ¥459</h2>
+
+<p>Batman2作面白いらしいし他のもそこそこ興味あった</p>
+
+<h2><a href="http://metalmax.info/">メタルマックス4 月光のディーヴァ</a> ¥4980</h2>
+
+<p>見た目が酷すぎて様子見してたけど2ch覗いたら面白いらしかったので</p>
+
+<h2><a href="http://store.steampowered.com/app/220240">Far Cry 3</a> ¥789</h2>
+
+<p>安くなるの待ってた！</p>
+
+<h2><a href="http://store.steampowered.com/app/205100/">Dishonored</a> ¥526</h2>
+
+<p>安くなるの待ってたその2</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[新生FF14を一ヶ月やってみた感想]]></title>
@@ -1091,124 +1114,6 @@ autocmdは自動処理のためのもので<code>:help :autocmd</code>に詳し�
 </span><span class='line'><span class="nx">EOM</span>
 </span></code></pre></td></tr></table></div></figure>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Vimperatorで快適Twitter]]></title>
-    <link href="http://blog.feelmy.net/2012/12/13/vimperator-is-a-powerful-twitter-client/"/>
-    <updated>2012-12-13T00:00:00+09:00</updated>
-    <id>http://blog.feelmy.net/2012/12/13/vimperator-is-a-powerful-twitter-client</id>
-    <content type="html"><![CDATA[<p><a href="http://atnd.org/events/34070" title="Vimperator Advent Calendar 2012 : ATND">Vimperator Advent Calendar 2012</a> 13日目、二週目に突入のebithです。<br/>
-今日はVimperatorプラグインの中でお気に入りの一つであるTwittperatorとそのプラグイン群の紹介をしたいと思います。</p>
-
-<h2>Twittperatorとは</h2>
-
-<p>Streamimg APIにいち早く対応したTwitterクライアントであり、Vimperatorのプラグインでもあります。<br/>
-ツイートすることやタイムラインの表示の他にRTやFavはもちろん、会話(in_reply_to)を辿ったり、Twitterを検索したり、特定のツイート(status)のページや誰かのホームを開いたりと言ったことがコマンドラインから可能です。<br/>
-また、プラグインを作ることによって自由度の高い拡張が可能で既に幾つものプラグインが存在しています。</p>
-
-<h2>使ってみる</h2>
-
-<p><a href="https://raw.github.com/vimpr/vimperator-plugins/master/twittperator.js">twittperator.js</a>を読み込み、<code>:tw -getPIN</code>で得たPINコードを<code>:tw -setPIN</code>でセットすることで使えるようになります。<br/>
-基本的な使い方は<code>:tw</code>コマンドからの補完や<code>:help twittperator</code>を参考にしてください。<br/>
-また、一例として少しだけ設定を書いておくので必要に応じて.vimperatorrcに書き足すと良いと思います。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-</pre></td><td class='code'><pre><code class='vim'><span class='line'><span class="c">&quot; Twitterへの接続がSSLのみになったので、Twittperator側でもSSLを使うように</span>
-</span><span class='line'><span class="k">let</span> <span class="k">g</span>:twittperator_use_ssl_connection_for_api_ep <span class="p">=</span> <span class="m">1</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">&quot; Streaming APIを使う</span>
-</span><span class='line'><span class="k">let</span> <span class="k">g</span>:twittperator_use_chirp <span class="p">=</span> <span class="m">1</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">&quot; 特定の単語を含むツイートを追いかける</span>
-</span><span class='line'><span class="k">let</span> <span class="k">g</span>:twittperator_track_words <span class="p">=</span> <span class="s2">&quot;vimp,vimperator,twittperator,ついっぺ,ツイッペ&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">&quot; Twitter IDの設定。いくつかのプラグインで必要</span>
-</span><span class='line'><span class="k">let</span> <span class="k">g</span>:twittperator_screen_name <span class="p">=</span> <span class="s2">&quot;ebith&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">&quot; タイムラインの表示</span>
-</span><span class='line'><span class="nb">nnoremap</span> <span class="p">,</span>wl :<span class="nb">tw</span><span class="p">&lt;</span>CR<span class="p">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">&quot; ツイートする</span>
-</span><span class='line'><span class="nb">nnoremap</span> <span class="p">,</span><span class="nb">ww</span> :<span class="nb">tw</span><span class="p">&lt;</span>Space<span class="p">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">&quot; 返信する</span>
-</span><span class='line'><span class="nb">nnoremap</span> <span class="p">,</span>wr :<span class="nb">tw</span><span class="p">&lt;</span>Space<span class="p">&gt;</span>@
-</span><span class='line'>
-</span><span class='line'><span class="c">&quot; ツイートに含まれるURLを開く</span>
-</span><span class='line'><span class="nb">nnoremap</span> <span class="p">,</span><span class="k">w</span><span class="sr">/ :tw!/</span><span class="p">&lt;</span>Tab<span class="p">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">&quot; 会話を辿る</span>
-</span><span class='line'><span class="nb">nnoremap</span> <span class="p">,</span>wt :<span class="nb">tw</span><span class="p">!</span>thread<span class="p">&lt;</span>Space<span class="p">&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>個性あふれるプラグイン群</h2>
-
-<p>Twittperatorには数々の便利なプラグインが提供されています。<br/>
-ここでそれらの一部を紹介します。<br/>
-<a href="https://github.com/vimpr/vimperator-plugins/tree/master/twittperator" title="vimperator-plugins/twittperator at master · vimpr/vimperator-plugins · GitHub">https://github.com/vimpr/vimperator-plugins/tree/master/twittperator</a>からダウンロード可能です。</p>
-
-<h3>add-url-completer</h3>
-
-<p><a href="http://vimperator.g.hatena.ne.jp/nokturnalmortum/20110704/1309706089" title="Twittperator の履歴から URL を取り出して、:tabopen などで補完できるようにする - Death to false Web browser! - vimperatorグループ">Twittperator の履歴から URL を取り出して、:tabopen などで補完できるようにする</a></p>
-
-<h3>colorful-log-writer</h3>
-
-<p><a href="http://www.flickr.com/photos/ebith/5674571479/" title="colorful-log-writer | Flickr - Photo Sharing!">tail -fするとカラフルなTLが流れてくるファイルを書き出すTwittperatorプラグイン</a></p>
-
-<h3>eject-alert</h3>
-
-<p><a href="http://vimperator.g.hatena.ne.jp/nokturnalmortum/20120317/1331979169" title="音を鳴らしたりできない環境で、reply に気づけるようにする便利な Twittperator プラグイン - Death to false Web browser! - vimperatorグループ">音を鳴らしたりできない環境で、reply に気づけるようにする便利な Twittperator プラグイン</a></p>
-
-<h3>pong</h3>
-
-<p><a href="http://vimperator.g.hatena.ne.jp/nokturnalmortum/20110330/1301495775" title="Twitter で超反応するための Twittperator 用プラグイン - Death to false Web browser! - vimperatorグループ">Twitter で超反応するための Twittperator 用プラグイン</a></p>
-
-<h3>twsidebar</h3>
-
-<p><a href="http://vimperator.g.hatena.ne.jp/nokturnalmortum/20111102/1320245517" title="サイドバーにTL表示をするプラグイン - Death to false Web browser! - vimperatorグループ">サイドバーにTL表示をするプラグイン</a></p>
-
-<h3>twsidebar-expand-url</h3>
-
-<p><a href="http://d.hatena.ne.jp/ebith/20120808/1344429639" title="短縮URLを展開するTwittperatorプラグイン(twsidebar向け) - おいら屋ファクトリー">短縮URLを展開するTwittperatorプラグイン(twsidebar向け)</a><br/>
-画像のサムネイルを表示したり、ツイートを展開表示する機能も付いています</p>
-
-<h3>urusai-namakubi</h3>
-
-<p><a href="http://chi.usamimi.info/Program/Application/BouyomiChan/" title="棒読みちゃん ～ 音声合成で日本語文章を読み上げるツール">棒読みちゃん</a>にタイムラインを読み上げさせるプラグイン。namakubi.js(Vimperatorプラグイン)も必要になります</p>
-
-<h2>最後に</h2>
-
-<p>普段はtwsidebar+twsidebar-expand-urlでタイムラインを流しながらブラウジングして、目に付くツイートがあればコマンドラインからURLを開いたり会話を辿ったりしています。<br/>
-僕の.vimperatorrcのTwittperator関連部分を抜き出したものも用意しておきましたので良ければ参考にしてください。<br/>
-<a href="https://gist.github.com/4264015">https://gist.github.com/4264015</a></p>
 ]]></content>
   </entry>
   
