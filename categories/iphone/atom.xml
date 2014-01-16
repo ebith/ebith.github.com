@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: iPhone | おいら屋ファクトリー]]></title>
+  <link href="http://blog.feelmy.net/categories/iphone/atom.xml" rel="self"/>
+  <link href="http://blog.feelmy.net/"/>
+  <updated>2014-01-17T06:49:11+09:00</updated>
+  <id>http://blog.feelmy.net/</id>
+  <author>
+    <name><![CDATA[ebith]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[iPhone 5s jailbreak memo]]></title>
+    <link href="http://blog.feelmy.net/2014/01/02/iphone-5s-jailbreak-memo/"/>
+    <updated>2014-01-02T02:38:00+09:00</updated>
+    <id>http://blog.feelmy.net/2014/01/02/iphone-5s-jailbreak-memo</id>
+    <content type="html"><![CDATA[<h2>参考にしたページ</h2>
+
+<ul>
+<li><a href="http://tools4hack.santalab.me/how-to-ios7-untethered-jailbreak-evasi0n7.html">[iOS] 『iOS 7.0～7.0.4』を完全脱獄する方法！『evasi0n 7』 iPhone 5sやiPad Airにも対応 | Tools 4 Hack</a></li>
+<li><a href="http://tools4hack.santalab.me/ios7-a7-jbapp-tweak-arm64-compatibility-list.html">[iOS 7 脱獄] iPhone 5s（A7デバイス）で使用出来る 脱獄アプリ まとめ [随時更新] | Tools 4 Hack</a></li>
+</ul>
+
+
+<h2>なんかやったこと</h2>
+
+<ul>
+<li>サーバ落ち過ぎでうざいのでCydiaからUltrasn0wのリポジトリ消した</li>
+<li>mobileとrootのパスワード変更した</li>
+<li>/etc/hosts 差し替えて広告消した</li>
+<li>CCTogglesで追加されるSpringboardの隠し設定からParallax Effect消した</li>
+<li>/etc/ssh/sshd_config を編集して公開鍵認証のみにした</li>
+<li>/etc/sudoers を編集してmobileでsudoできるようにした</li>
+</ul>
+
+
+<h2>インストールしたパッケージとか</h2>
+
+<p><div><script src='https://gist.github.com/8369853.js'></script>
+<noscript><pre><code>&lt;html&gt;&lt;body&gt;You are being &lt;a href=&quot;https://github.com/gist/8369853&quot;&gt;redirected&lt;/a&gt;.&lt;/body&gt;&lt;/html&gt;</code></pre></noscript></div>
+</p>
+]]></content>
+  </entry>
+  
+</feed>

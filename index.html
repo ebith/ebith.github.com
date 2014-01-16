@@ -9,7 +9,8 @@
   <meta name="author" content="ebith">
 
   
-  <meta name="description" content="Humble WB Games Bundle (pay what you want and help charity) ¥459 Batman2作面白いらしいし他のもそこそこ興味あった メタルマックス4 月光のディーヴァ ¥4980 &hellip;">
+  <meta name="description" content="ゴール 連絡先の住所をタッチするとGoogle Mapsで開くTweakを作る 参考にしたところ ひとりぶろぐ » iOS 7の中身に興味津々！Jailbreakなしでファイルシステムを覗いてみたりしよう
+dotfiles/install_theos.sh at master · r-plus/ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +79,194 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2014/01/16/i-want-to-build-a-tweak/">iOSのTweak作りたい</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-16T21:54:00+09:00" pubdate data-updated="true">Jan 16<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>ゴール</h2>
+
+<p>連絡先の住所をタッチするとGoogle Mapsで開くTweakを作る</p>
+
+<h2>参考にしたところ</h2>
+
+<p><a href="http://hitoriblog.com/?p=19242">ひとりぶろぐ » iOS 7の中身に興味津々！Jailbreakなしでファイルシステムを覗いてみたりしよう</a><br/>
+<a href="https://github.com/r-plus/dotfiles/blob/master/install_theos.sh">dotfiles/install_theos.sh at master · r-plus/dotfiles</a><br/>
+<a href="http://seekpoint.blogspot.jp/search/label/theos">seekpoint: theos</a></p>
+
+<h2>つまずいたところ</h2>
+
+<figure class='code'><figcaption><span>deb.mk</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='diff'><span class='line'># homebrewで入れたcoreutilsを優先してるとエラー
+</span><span class='line'><span class="gd">-    $(ECHO_NOTHING)echo &quot;Installed-Size: $(shell du $(_THEOS_PLATFORM_DU_EXCLUDE) DEBIAN -ks &quot;$(THEOS_STAGING_DIR)&quot; | cut -f 1)&quot; &gt;&gt; &quot;$@&quot;$(ECHO_END)</span>
+</span><span class='line'><span class="gi">+    $(ECHO_NOTHING)echo &quot;Installed-Size: $(shell /usr/bin/du $(_THEOS_PLATFORM_DU_EXCLUDE) DEBIAN -ks &quot;$(THEOS_STAGING_DIR)&quot; | cut -f 1)&quot; &gt;&gt; &quot;$@&quot;$(ECHO_END)</span>
+</span><span class='line'>
+</span><span class='line'># homebrewで入れたdpkgを使ってるとエラー
+</span><span class='line'><span class="gd">-    $(ECHO_NOTHING)COPYFILE_DISABLE=1 $(FAKEROOT) -r dpkg-deb -b &quot;$(THEOS_STAGING_DIR)&quot; &quot;$(_THEOS_DEB_PACKAGE_FILENAME)&quot; $(STDERR_NULL_REDIRECT)$(ECHO_END)</span>
+</span><span class='line'><span class="gi">+    $(ECHO_NOTHING)COPYFILE_DISABLE=1 $(FAKEROOT) -r dpkg-deb -Zgzip -b &quot;$(THEOS_STAGING_DIR)&quot; &quot;$(_THEOS_DEB_PACKAGE_FILENAME)&quot; $(STDERR_NULL_REDIRECT)$(ECHO_END)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption><span>Makefile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='diff'><span class='line'># デフォルトのMakefileだとiPhone 5sに未対応のバイナリができる
+</span><span class='line'><span class="gi">+ ARCHS = armv7 arm64</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>だいたいの流れ</h2>
+
+<ol>
+<li>iFunBoxでMobilePhone.appをコピーしてきて<code>class-dump -H MobilePhone.app -o headers</code>した</li>
+<li><code>ag -i 'open' headers</code>した結果PhoneApplication.hにopenURLがあったのでこれにUIAlertViewを差し込んでみる</li>
+<li>urlとか住所とか別アプリに飛ぶようなのをタッチした時にアラート出るのでURLのスキームがmapsのやつだけGoogle Mapsに投げれば良いんじゃないの</li>
+<li>Browser Changerをいじくりまわして設定しなおしてみた結果、地図だけデフォルト変更できちゃったので解決</li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2014/01/02/iphone-5s-jailbreak-memo/">iPhone 5s Jailbreak Memo</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-02T02:38:00+09:00" pubdate data-updated="true">Jan 2<span>nd</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>参考にしたページ</h2>
+
+<ul>
+<li><a href="http://tools4hack.santalab.me/how-to-ios7-untethered-jailbreak-evasi0n7.html">[iOS] 『iOS 7.0～7.0.4』を完全脱獄する方法！『evasi0n 7』 iPhone 5sやiPad Airにも対応 | Tools 4 Hack</a></li>
+<li><a href="http://tools4hack.santalab.me/ios7-a7-jbapp-tweak-arm64-compatibility-list.html">[iOS 7 脱獄] iPhone 5s（A7デバイス）で使用出来る 脱獄アプリ まとめ [随時更新] | Tools 4 Hack</a></li>
+</ul>
+
+
+<h2>なんかやったこと</h2>
+
+<ul>
+<li>サーバ落ち過ぎでうざいのでCydiaからUltrasn0wのリポジトリ消した</li>
+<li>mobileとrootのパスワード変更した</li>
+<li>/etc/hosts 差し替えて広告消した</li>
+<li>CCTogglesで追加されるSpringboardの隠し設定からParallax Effect消した</li>
+<li>/etc/ssh/sshd_config を編集して公開鍵認証のみにした</li>
+<li>/etc/sudoers を編集してmobileでsudoできるようにした</li>
+</ul>
+
+
+<h2>インストールしたパッケージとか</h2>
+
+<div><script src='https://gist.github.com/8369853.js'></script>
+<noscript><pre><code>&lt;html&gt;&lt;body&gt;You are being &lt;a href=&quot;https://github.com/gist/8369853&quot;&gt;redirected&lt;/a&gt;.&lt;/body&gt;&lt;/html&gt;</code></pre></noscript></div>
+
+
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/12/31/bought-games/">今月買ったゲーム</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-31T22:00:00+09:00" pubdate data-updated="true">Dec 31<span>st</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2><a href="http://store.steampowered.com/app/113020/">Monaco: What&#8217;s Yours Is Mine</a> ¥0</h2>
+
+<p>Starbound上げたお返しとして買ってもらった。一人でやってよしみんなでやってよしの強盗アクション</p>
+
+<h2><a href="http://www.nintendo.co.jp/3ds/bzlj/">ゼルダの伝説 神々のトライフォース２</a> ¥3894</h2>
+
+<p>待ってました！</p>
+
+<h2><a href="http://store.steampowered.com/app/235600/">Tom Clancy’s Splinter Cell Blacklist</a> ¥3528</h2>
+
+<p>初代からずっと好きなシリーズ。せっかくなのでDeluxe Edition買った。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -223,140 +412,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/08/30/bought-games/">今月買ったゲーム</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-08-30T00:27:00+09:00" pubdate data-updated="true">Aug 30<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2><a href="https://www.humblebundle.com/">Humble Origin Bundle (pay what you want and help charity)</a> ¥102</h2>
-
-<p>Battlefield 3とSims 3は要らなかったので$1だけ投入。DS2無いのが残念。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/07/31/bought-games/">今月買ったゲーム</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-31T07:00:00+09:00" pubdate data-updated="true">Jul 31<span>st</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>ファイナルファンタジーXIV: 新生エオルゼア ¥2483</h2>
-
-<p>まともにMMORPGすんのEverQuest2以来なので楽しみ</p>
-
-<h2>Bioshock 1, 2 ¥435</h2>
-
-<p>この1と2をクリアしたらInfinite買いたい</p>
-
-<h2><a href="http://store.steampowered.com/app/234160/">Strike Suit Infinity</a> ¥178</h2>
-
-<p>安くなるの待ってた</p>
-
-<h2><a href="http://www.humblebundle.com/">Humble Deep Silver Bundle (pay what you want and help charity)</a> ¥484</h2>
-
-<p>Dead Island GOTYとSaints Row:The Third Full Package入ってるしと思って買ったけどあんまりやる気ないしちょっともったいなかった</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/06/28/bought-games/">今月買ったゲーム</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-28T23:00:00+09:00" pubdate data-updated="true">Jun 28<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2><a href="https://www.humblebundle.com/">The Humble Indie Bundle 8 (pay what you want and help charity)</a> ¥583</h2>
-
-<p>見覚えがあるけど持ってないタイトルが並んでたので買っといた。Hotline Miamiがキー余り。</p>
-
-<h2><a href="http://ssq.atlusnet.jp/">新・世界樹の迷宮 ミレニアムの少女</a> ¥5,136</h2>
-
-<p>毎作セーブデータ1つしかないのは何の嫌がらせなの</p>
-
-<h2><a href="http://www.ftlgame.com/">FTL: Faster Than Light</a> ¥251</h2>
-
-<p>やりごたえのある難易度で良い</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/2/">&larr; Older</a>
@@ -370,6 +425,18 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/01/16/i-want-to-build-a-tweak/">iOSのTweak作りたい</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/01/02/iphone-5s-jailbreak-memo/">iPhone 5s jailbreak memo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/12/31/bought-games/">今月買ったゲーム</a>
+      </li>
     
       <li class="post">
         <a href="/2013/11/30/bought-games/">今月買ったゲーム</a>
@@ -399,23 +466,11 @@
         <a href="/2013/06/02/bittorrent-sync/">BitTorrent SyncをVPSにセットアップする</a>
       </li>
     
-      <li class="post">
-        <a href="/2013/06/01/nginx-ssl-client-authentication/">Nginxでちょっと高度なクライアント認証する</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/05/31/bought-games/">今月買ったゲーム</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/05/20/feedline/">TwitterのtimelineからURLを抽出してRSSにするの作った</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-  <span id="tag-cloud"><a href='/categories/3ds' style='font-size: 104.28571428571429%'>3DS(1)</a> <a href='/categories/adventcalendar' style='font-size: 112.85714285714286%'>adventCalendar(3)</a> <a href='/categories/archlinux' style='font-size: 104.28571428571429%'>ArchLinux(1)</a> <a href='/categories/bag' style='font-size: 104.28571428571429%'>bag(1)</a> <a href='/categories/done' style='font-size: 104.28571428571429%'>done(1)</a> <a href='/categories/food' style='font-size: 104.28571428571429%'>food(1)</a> <a href='/categories/game' style='font-size: 160.0%'>game(14)</a> <a href='/categories/gyazo' style='font-size: 104.28571428571429%'>Gyazo(1)</a> <a href='/categories/hardware' style='font-size: 108.57142857142857%'>hardware(2)</a> <a href='/categories/hubot' style='font-size: 104.28571428571429%'>Hubot(1)</a> <a href='/categories/irc' style='font-size: 108.57142857142857%'>IRC(2)</a> <a href='/categories/javascript' style='font-size: 104.28571428571429%'>JavaScript(1)</a> <a href='/categories/linux' style='font-size: 112.85714285714286%'>linux(3)</a> <a href='/categories/mac' style='font-size: 108.57142857142857%'>Mac(2)</a> <a href='/categories/nginx' style='font-size: 104.28571428571429%'>Nginx(1)</a> <a href='/categories/node-js' style='font-size: 117.14285714285714%'>Node.js(4)</a> <a href='/categories/octopress' style='font-size: 104.28571428571429%'>Octopress(1)</a> <a href='/categories/perl' style='font-size: 104.28571428571429%'>Perl(1)</a> <a href='/categories/raspberrypi' style='font-size: 104.28571428571429%'>RaspberryPi(1)</a> <a href='/categories/recipe' style='font-size: 104.28571428571429%'>recipe(1)</a> <a href='/categories/ruby' style='font-size: 108.57142857142857%'>Ruby(2)</a> <a href='/categories/software' style='font-size: 117.14285714285714%'>software(4)</a> <a href='/categories/ssl' style='font-size: 108.57142857142857%'>SSL(2)</a> <a href='/categories/terraria' style='font-size: 104.28571428571429%'>Terraria(1)</a> <a href='/categories/twitter' style='font-size: 104.28571428571429%'>Twitter(1)</a> <a href='/categories/ubuntu' style='font-size: 104.28571428571429%'>Ubuntu(1)</a> <a href='/categories/vimperator' style='font-size: 117.14285714285714%'>Vimperator(4)</a> <a href='/categories/vps' style='font-size: 108.57142857142857%'>VPS(2)</a> <a href='/categories/win' style='font-size: 108.57142857142857%'>Win(2)</a> </span>
+  <span id="tag-cloud"><a href='/categories/3ds' style='font-size: 104.0%'>3DS(1)</a> <a href='/categories/adventcalendar' style='font-size: 112.0%'>adventCalendar(3)</a> <a href='/categories/archlinux' style='font-size: 104.0%'>ArchLinux(1)</a> <a href='/categories/bag' style='font-size: 104.0%'>bag(1)</a> <a href='/categories/done' style='font-size: 104.0%'>done(1)</a> <a href='/categories/food' style='font-size: 104.0%'>food(1)</a> <a href='/categories/game' style='font-size: 160.0%'>game(15)</a> <a href='/categories/gyazo' style='font-size: 104.0%'>Gyazo(1)</a> <a href='/categories/hardware' style='font-size: 108.0%'>hardware(2)</a> <a href='/categories/hubot' style='font-size: 104.0%'>Hubot(1)</a> <a href='/categories/ios' style='font-size: 104.0%'>iOS(1)</a> <a href='/categories/iphone' style='font-size: 104.0%'>iPhone(1)</a> <a href='/categories/irc' style='font-size: 108.0%'>IRC(2)</a> <a href='/categories/jailbreak' style='font-size: 108.0%'>JailBreak(2)</a> <a href='/categories/javascript' style='font-size: 104.0%'>JavaScript(1)</a> <a href='/categories/linux' style='font-size: 112.0%'>linux(3)</a> <a href='/categories/mac' style='font-size: 108.0%'>Mac(2)</a> <a href='/categories/nginx' style='font-size: 104.0%'>Nginx(1)</a> <a href='/categories/node-js' style='font-size: 116.0%'>Node.js(4)</a> <a href='/categories/octopress' style='font-size: 104.0%'>Octopress(1)</a> <a href='/categories/perl' style='font-size: 104.0%'>Perl(1)</a> <a href='/categories/raspberrypi' style='font-size: 104.0%'>RaspberryPi(1)</a> <a href='/categories/recipe' style='font-size: 104.0%'>recipe(1)</a> <a href='/categories/ruby' style='font-size: 108.0%'>Ruby(2)</a> <a href='/categories/software' style='font-size: 116.0%'>software(4)</a> <a href='/categories/ssl' style='font-size: 108.0%'>SSL(2)</a> <a href='/categories/terraria' style='font-size: 104.0%'>Terraria(1)</a> <a href='/categories/twitter' style='font-size: 104.0%'>Twitter(1)</a> <a href='/categories/ubuntu' style='font-size: 104.0%'>Ubuntu(1)</a> <a href='/categories/vimperator' style='font-size: 116.0%'>Vimperator(4)</a> <a href='/categories/vps' style='font-size: 108.0%'>VPS(2)</a> <a href='/categories/win' style='font-size: 108.0%'>Win(2)</a> </span>
 </section>
 
 <section>
@@ -441,7 +496,7 @@
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - ebith -
+  Copyright &copy; 2014 - ebith -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

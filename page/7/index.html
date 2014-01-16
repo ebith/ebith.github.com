@@ -9,10 +9,8 @@
   <meta name="author" content="ebith">
 
   
-  <meta name="description" content="簡易的なバックアップで良いので取っておきたかったので、
-tarで固めてlzoで圧縮してDropboxに送るバックアップスクリプト書いた。
-BASH Dropbox Uploaderが必要。 #!/bin/bash # バックアップ対象ディレクトリ
-target=&quot;/etc /home/ &hellip;">
+  <meta name="description" content="6月末にRSに注文したものの、届く気配もなかったのでModMyPiに頼んでみると1週間で到着。
+残念ながらRev1だったけど、Arch Linuxを入れてHeadless運用でしばらく遊ぶことにする。 最初の接続までは約3,300円で買えるLinuxパソコンRaspberry PiをMacで使う &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +79,343 @@ target=&quot;/etc /home/ &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/10/01/i-got-raspberry-pi/">ラズベリーパイを手に入れた！</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-01T09:02:00+09:00" pubdate data-updated="true">Oct 1<span>st</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://www.flickr.com/photos/ebith/8038651368/" title="Raspberry Pi 1/2 by Ebith, on Flickr"><img src="http://farm9.staticflickr.com/8462/8038651368_d716208375_n.jpg" width="320" height="239" alt="Raspberry Pi 1/2"></a><a href="http://www.flickr.com/photos/ebith/8038648103/" title="Raspberry Pi 2/2 by Ebith, on Flickr"><img src="http://farm9.staticflickr.com/8316/8038648103_f163c4d92a_n.jpg" width="320" height="239" alt="Raspberry Pi 2/2"></a><br/>
+6月末にRSに注文したものの、届く気配もなかったのでModMyPiに頼んでみると1週間で到着。<br/>
+残念ながらRev1だったけど、Arch Linuxを入れてHeadless運用でしばらく遊ぶことにする。</p>
+
+<p>最初の接続までは<a href="http://hitoriblog.com/?p=9733" title="約3,300円で買えるLinuxパソコンRaspberry PiをMacで使う | ひとりぶろぐ">約3,300円で買えるLinuxパソコンRaspberry PiをMacで使う | ひとりぶろぐ</a>を参考にした。<br/>
+<a href="https://github.com/exaviorn/RasPiWrite" title="exaviorn/RasPiWrite">RasPiWrite</a>はエラーを吐くので適当なfork版を使う。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>nmap -sP 192.168.0.0/24
+</span><span class='line'>ssh root@x.x.x.x
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>alarmpiのホスト名だと繋げなかったのでIP探してsshで接続。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>pacman -Syu     <span class="c"># Arch Linuxのアップデート</span>
+</span><span class='line'>passwd          <span class="c"># rootのパスワード変更</span>
+</span><span class='line'>adduser         <span class="c"># 普段使い用のユーザー追加(sudo用にwheelグループにも所属させておく)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># sudo導入</span>
+</span><span class='line'>pacman -S sudo
+</span><span class='line'>visudo
+</span><span class='line'>  %wheel <span class="nv">ALL</span><span class="o">=(</span>ALL<span class="o">)</span> ALL
+</span><span class='line'>  Defaults <span class="nv">timestamp_timeout</span><span class="o">=</span>30
+</span><span class='line'>
+</span><span class='line'><span class="c"># 固定IPにする(systemd/Services - ArchWiki - https://wiki.archlinux.org/index.php/Systemd/Services#Static_Ethernet_network)</span>
+</span><span class='line'>vi /etc/conf.d/network
+</span><span class='line'>  <span class="nv">interface</span><span class="o">=</span>eth0
+</span><span class='line'>  <span class="nv">address</span><span class="o">=</span>192.168.0.32
+</span><span class='line'>  <span class="nv">netmask</span><span class="o">=</span>24
+</span><span class='line'>  <span class="nv">broadcast</span><span class="o">=</span>192.168.0.255
+</span><span class='line'>  <span class="nv">gateway</span><span class="o">=</span>192.168.0.1
+</span><span class='line'>vi /etc/systemd/system/network.service
+</span><span class='line'>  <span class="o">[</span>Unit<span class="o">]</span>
+</span><span class='line'>  <span class="nv">Description</span><span class="o">=</span>Network Connectivity
+</span><span class='line'>  <span class="nv">Wants</span><span class="o">=</span>network.target
+</span><span class='line'>  <span class="nv">Before</span><span class="o">=</span>network.target
+</span><span class='line'>  <span class="o">[</span>Service<span class="o">]</span>
+</span><span class='line'>  <span class="nv">Type</span><span class="o">=</span>oneshot
+</span><span class='line'>  <span class="nv">RemainAfterExit</span><span class="o">=</span>yes
+</span><span class='line'>  <span class="nv">EnvironmentFile</span><span class="o">=</span>/etc/conf.d/network
+</span><span class='line'>  <span class="nv">ExecStart</span><span class="o">=</span>/sbin/ip link <span class="nb">set </span>dev <span class="k">${</span><span class="nv">interface</span><span class="k">}</span> up
+</span><span class='line'>  <span class="nv">ExecStart</span><span class="o">=</span>/sbin/ip addr add <span class="k">${</span><span class="nv">address</span><span class="k">}</span>/<span class="k">${</span><span class="nv">netmask</span><span class="k">}</span> broadcast <span class="k">${</span><span class="nv">broadcast</span><span class="k">}</span> dev <span class="k">${</span><span class="nv">interface</span><span class="k">}</span>
+</span><span class='line'>  <span class="nv">ExecStart</span><span class="o">=</span>/sbin/ip route add default via <span class="k">${</span><span class="nv">gateway</span><span class="k">}</span>
+</span><span class='line'>  <span class="nv">ExecStop</span><span class="o">=</span>/sbin/ip addr flush dev <span class="k">${</span><span class="nv">interface</span><span class="k">}</span>
+</span><span class='line'>  <span class="nv">ExecStop</span><span class="o">=</span>/sbin/ip link <span class="nb">set </span>dev <span class="k">${</span><span class="nv">interface</span><span class="k">}</span> down
+</span><span class='line'>  <span class="o">[</span>Install<span class="o">]</span>
+</span><span class='line'>  <span class="nv">WantedBy</span><span class="o">=</span>multi-user.target
+</span><span class='line'>vi /etc/resolve.conf
+</span><span class='line'>  nameserver 143.90.130.165
+</span><span class='line'>  nameserver 143.90.130.39
+</span><span class='line'>systemctl disable dhcpcd@eth0.service
+</span><span class='line'>systemctl <span class="nb">enable </span>network.service
+</span><span class='line'>
+</span><span class='line'><span class="c"># ssh, sshd周り</span>
+</span><span class='line'>vi /etc/ssh/sshd_config
+</span><span class='line'>  PermitRootLogin no
+</span><span class='line'>  PubkeyAuthentication yes
+</span><span class='line'>  PasswordAuthentication no
+</span><span class='line'>  Port xxxxx
+</span><span class='line'>systemctl restart sshd.service
+</span><span class='line'>su ebith
+</span><span class='line'>ssh-keygen  <span class="c"># ローカルにコピーしたり~/.ssh/config設定したりしとく</span>
+</span><span class='line'>cat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys
+</span><span class='line'>
+</span><span class='line'><span class="c"># DDNS</span>
+</span><span class='line'>vi ~/.crontab
+</span><span class='line'>  curl <span class="s1">&#39;http://dynamic.name-services.com/interface.asp?Command=SetDNSHost&amp;HostName=home&amp;Zone=feelmy.net&amp;DomainPassword=xxxxx&#39;</span>
+</span><span class='line'>crontab ~/.crontab
+</span><span class='line'>
+</span><span class='line'><span class="c"># ロケール</span>
+</span><span class='line'>sudo vi /etc/locale.gen
+</span><span class='line'>  ja_JP.UTF-8 UTF-8
+</span><span class='line'>sudo locale-gen
+</span><span class='line'>sudo vi /etc/locale.conf
+</span><span class='line'>  <span class="nv">LANG</span><span class="o">=</span>ja_JP.UTF-8
+</span><span class='line'>
+</span><span class='line'><span class="c"># 環境設定</span>
+</span><span class='line'>sudo pacman -S git rsync vim zsh
+</span><span class='line'>git clone git@github.com:ebith/dotfiles.git
+</span><span class='line'><span class="nb">cd </span>dotfiles
+</span><span class='line'>git sm init
+</span><span class='line'>git sm update
+</span><span class='line'><span class="nb">cd</span>
+</span><span class='line'>./dotfiles/create_link.sh
+</span><span class='line'>chsh -s /bin/zsh
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="http://d.hatena.ne.jp/mickey24/20120911/air_conditioner_with_arduino" title="うちのbotがエアコンの操作方法を覚えた - ぬいぐるみライフ(仮)">うちのbotがエアコンの操作方法を覚えた - ぬいぐるみライフ(仮)</a>とかすごく楽しそうなのでUSBの赤外線リモコン繋いだら簡単に似たようなことできるのかなとか思ったけど、調度良さそうなのが見つからないしそう簡単な話ではなかった。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/09/23/keepass2-for-osx/">KeePass2のkdbxをMacでも快適に読めるようにした</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-23T04:21:00+09:00" pubdate data-updated="true">Sep 23<span>rd</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Macbook触ってる時間が長くなってくるとKeePass2がまともに動かないのが凄く気になってきたし、<br/>
+かと言って1Passwordは凄く高いのでどうにかしたくて右往左往してたらkdbxを読めるPerlモジュールを見つけたので頑張った。</p>
+
+<p>PerlのFile::KeePassとIO::Prompter、<a href="https://github.com/mooz/percol" title="mooz/percol">mooz/percol</a>が必要。</p>
+
+<div><script src='https://gist.github.com/3767494.js'></script>
+<noscript><pre><code>#!/usr/bin/env perl
+use strict;
+use warnings;
+use utf8;
+
+use File::KeePass;
+use IO::Prompter;
+use Encode;
+
+my $file = shift @ARGV;
+my $pass = prompt('Password: ', -e =&gt; '');
+
+my $k = File::KeePass-&gt;new;
+
+$k-&gt;load_db($file, $pass);
+
+$k-&gt;unlock;
+
+my @entries = $k-&gt;find_entries({});
+
+open(OUT, '| percol | awk \'BEGIN { FS = &quot; :: &quot;} { printf $2 }\' | pbcopy ');
+foreach my $entry (@entries) {
+  next unless ($entry-&gt;{title} &amp;&amp; $entry-&gt;{password});
+  print OUT encode_utf8(&quot;$entry-&gt;{title} :: $entry-&gt;{password}\n&quot;);
+}
+close(OUT);
+
+$k-&gt;clear;</code></pre></noscript></div>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>./keepass.pl ~/ebith.kdbx
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>みたいな感じで使う。
+percolのお陰で絞込み検索が素晴らしい感じなので便利。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/09/18/use-7-zip-from-a-filer/">ファイラから7-zip(7zG.exe)使うようにすると捗る</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-18T00:10:00+09:00" pubdate data-updated="true">Sep 18<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Windowsではずっと統合アーカイバプロジェクトのDLL群とそれらを使うアーカイバにお世話になってきたけど、<br/>
+<a href="http://sevenzip.sourceforge.jp/" title="7-Zip">7-Zip</a>のほうが速いので7-Zip付属の7zG.exe, 7z.exeとB2E(Bridge To Executables)に移行することにした。<br/>
+B2Eの本家は<a href="http://www.kmonos.net/lib/noah.ja.html" title="Noah - kMonos.NET">Noah</a>だけど、<a href="http://claybird.sakura.ne.jp/garage/lhaforge/" title="泥巣 : 作品庫 - LhaForge">LhaForge</a>の方がコマンドラインオプションが充実していて使いやすいのでそっちを使う。</p>
+
+<div><script src='https://gist.github.com/3737689.js'></script>
+<noscript><pre><code>load:
+  (name 7zG.exe)
+  (type 7z LZMA *LZMA2)
+
+encode:
+  (if (method 1) (cmd a -t7z -m0=LZMA (arc.7z) (list\*)))
+  (if (method 2) (cmd a -t7z -m0=LZMA2 (arc.7z) (list\*)))</code></pre></noscript></div>
+
+
+<p>zip, 7z圧縮用と展開用のスクリプト。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  C:\usr\app\lfarchive\LhaForge.exe /b2e /e                   #展開
+</span><span class='line'>  C:\usr\app\lfarchive\LhaForge.exe /b2e /c:zip /method:Store #圧縮(Zip Store)
+</span><span class='line'>  C:\usr\app\lfarchive\LhaForge.exe /b2e /c:7z /method:LZMA2  #圧縮(7z LZMA2)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>LhaForgeをファイラから呼ぶ場合こんな感じ。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -254,271 +589,6 @@ OSのインストール後の流れをメモっておく。</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/09/11/muesli-cookies/">ミューズリーのクッキー</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-09-11T11:40:00+09:00" pubdate data-updated="true">Sep 11<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://www.flickr.com/photos/ebith/7975028474/" title="ミューズリーのクッキー by Ebith, on Flickr"><img src="http://farm9.staticflickr.com/8302/7975028474_740036360a_n.jpg" width="320" height="239" alt="ミューズリーのクッキー"></a><br/>
-<a href="http://hnycamera.exblog.jp/13661996" title="ミューズリーのクッキー : ハチミツカメラ">ミューズリーのクッキー : ハチミツカメラ</a>より。<br/>
-はちみつじゃなくてメープルシロップだったり、水分やや大目だったりする程度のアレンジ。<br/>
-バキバキと硬くて食べごたえのあるクッキーができるのでお気に入り。</p>
-
-<h2>材料</h2>
-
-<ul>
-<li>A
-
-<ul>
-<li>ミューズリー 140g</li>
-<li>薄力粉 60g</li>
-<li>きび砂糖 20g</li>
-</ul>
-</li>
-<li>B
-
-<ul>
-<li>メープルシロップ 大さじ2</li>
-<li>サラダ油 大さじ4</li>
-<li>水 大さじ3</li>
-</ul>
-</li>
-</ul>
-
-
-<h2>手順</h2>
-
-<ol>
-<li>Aをフードプロセッサーに入れて軽く回す</li>
-<li>Bも入れて回す</li>
-<li>天板に適当なサイズで落として指で押し広げる</li>
-<li>160度のオーブンで30分焼く</li>
-</ol>
-
-
-<p><a href="https://gist.github.com/3706093" title="ミューズリーのクッキー — Gist">最新のレシピ</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/09/07/new-gaming-pc/">ゲーム用の新PC組んだ</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-09-07T21:00:00+09:00" pubdate data-updated="true">Sep 7<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://flic.kr/p/d7tBTJ" title="New gaming pc 1/2 by Ebith, on Flickr"><img src="http://farm9.staticflickr.com/8037/7949568956_1d55933fa2_n.jpg" alt="New gaming pc 1/2" /></a>
-<a href="http://flic.kr/p/d7tMUJ" title="New gaming pc 2/2 by Ebith, on Flickr"><img src="http://farm9.staticflickr.com/8035/7949602654_782f691be0_n.jpg" alt="New gaming pc 2/2" /></a></p>
-
-<h2>構成</h2>
-
-<ul>
-<li>ケース
-
-<ul>
-<li><a href="http://www.links.co.jp/items/antec-case/p280.html" title="P280 製品情報 コンピュータ関連製品の代理店事業 ｌ 株式会社リンクスインターナショナル">ANTEC P280</a> \10,544</li>
-</ul>
-</li>
-<li>電源
-
-<ul>
-<li><a href="http://www.owltech.co.jp/products/power/Seasonic/SS-X2/SS850_760_660_560KM.html" title="Seasonic電源 X-Series SS-850KM SS-760KM SS-660KM SS-560KM">Seasonic XSeries SS-760KM</a> \18,629</li>
-</ul>
-</li>
-<li>マザーボード
-
-<ul>
-<li><a href="http://www.asus.co.jp/Motherboards/Intel_Socket_1155/P8Z77V_PRO/" title="ASUS - マザーボード- ASUS P8Z77-V PRO">ASUS P8Z77-V PRO</a> \17,470</li>
-</ul>
-</li>
-<li>CPU
-
-<ul>
-<li><a href="http://ark.intel.com/ja/products/65520" title="ARK | Intel® Core™ i5-3570K Processor (6M Cache, up to 3.80 GHz)">Intel Core i5 3570K</a> \18,501</li>
-</ul>
-</li>
-<li>CPUクーラー
-
-<ul>
-<li><a href="http://www.scythe.co.jp/cooler/ninja3-revb.html" title="株式会社サイズ ｜ 商品詳細 ｜忍者参リビジョンB">SCYTHE 忍者参リビジョンB</a> \3,291</li>
-</ul>
-</li>
-<li>メモリ
-
-<ul>
-<li><a href="http://www.avexir.com/product/platinumspec.htm" title="AVEXIR">AVEXIR AVD3U16001108G-2MW</a> \8,980</li>
-</ul>
-</li>
-<li>GPU
-
-<ul>
-<li><a href="http://www.gigabyte.jp/products/product-page.aspx?pid=4211#ov" title="GIGABYTE - グラフィックスカード - NVIDIA - PCI Express Solution - GeForce 600 Series - GV-N670OC-2GD">GIGABYTE GV-N670OC-2GD</a> \37,634</li>
-</ul>
-</li>
-<li>ストレージ
-
-<ul>
-<li><a href="http://www.links.co.jp/item/px-256m3p/" title="PX-256M3P | コンピュータ関連製品の代理店事業 ｌ 株式会社リンクスインターナショナル">PLEXTOR PX-256M3P</a> \17,980</li>
-<li><a href="http://www.semicon.toshiba.co.jp/product/storage/selection/built-in/client_hdd35/DT01ACAxxx.html" title="クライアントHDD(3.5型)｜クライアントHDD(3.5型)｜東芝 セミコンダクター＆ストレージ社">TOSHIBA DT01ACA200</a> \9,480</li>
-</ul>
-</li>
-<li>光学ドライブ
-
-<ul>
-<li><a href="http://www.pioneerelectronics.com/PUSA/Computer/Computer+Drives/BDR-207DBK" title="BDR-207DBK - 12x Internal BD/DVD/CD Burner. SATA Interface. | Pioneer Electronics USA">Pioneer BDR-207DBK</a> \6,470</li>
-</ul>
-</li>
-<li>その他
-
-<ul>
-<li><a href="http://www.ainex.jp/products/as-05.htm" title="Ainex | AS-05">Ainex AS-05 シルバーグリス</a> \1,300</li>
-<li><a href="http://www.ainex.jp/products/bz-01.htm" title="Ainex | BZ-01">Ainex BZ-01 ブザーユニット</a> \336</li>
-</ul>
-</li>
-<li>流用品
-
-<ul>
-<li><a href="http://jp.creative.com/products/product.asp?category=209&amp;subcategory=669&amp;product=15853" title="Sound Blaster X-Fi XtremeGamer">CREATIVE Sound Blaster X-Fi XtremeGamer</a></li>
-<li><a href="http://www.jp.onkyo.com/pcaudio/pcidigitalaudioboard/se90pci/index.htm" title="ONKYO PCオーディオ製品情報：SE-90PCI - PCIe/PCIデジタルオーディオボード | オンキヨー株式会社">ONKYO SE-90PCI</a></li>
-<li><a href="http://www.scythe.co.jp/cooler/kaze-juni.html" title="株式会社サイズ ｜ 商品詳細 ｜KAZE-JYUNI">SCYTHE KAZE-JYUNI 800rpm SY1225SL12L</a> * 2</li>
-</ul>
-</li>
-<li>合計 \150,615</li>
-</ul>
-
-
-<h2>感想</h2>
-
-<p>ちょっと電源にお金割きすぎた感じあるのでCorsairの750AXみたいなもうちょい安いのでも良かったかもしれない。<br/>
-光学ドライブ無し予定だったけどブルーレイドライブ6500円だったので使い道無いのに付けてしまった。<br/>
-<a href="www.antecindia.co.in/pdf/manuals/P280_Manual_JP.pdf">P280のマニュアル</a>にネジの説明がカラー写真付きで載っていて素晴らしい。<br/>
-高級グリス塗るの初めてやったけど<a href="http://www.ainex.jp/data/as-05_mnl_web.pdf">AS-05のマニュアル</a>が詳しくて良かった。<br/>
-SSDはずっとX25-Mを使っていて速いなーと思っていたけどM3PはWindows 7の起動が15秒足らずとかでそれどころじゃなかった。<br/>
-BIOSまじグラフィカルやし、パッと見わかりやすくなっててBIOSとにらめっこする時間減ったし、USBメモリ挿すだけでアップデートできるとかすごい。<br/>
-Dark Souls: Prepare to Die Editionとっても楽しい。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/09/07/gyamblr-for-osx%28tumblr-api-v2%29/">Gyazoのアップロード先をTumblrにするやつ(Gyamblr) API V2版 for OS X</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-09-07T01:22:00+09:00" pubdate data-updated="true">Sep 7<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>気づいたらAPI v1の提供が終了したとかでアップロードできなくなっていたのでv2版書きました。</p>
-
-<h2>使い方</h2>
-
-<p>scriptをGyazoのものと差し替えれば動きますが、tumblifeのgemが必要だったりOAuthの例に漏れず各種トークンが必要だったりするのでよしなにしてください。<br/>
-トークン類は<a href="http://www.tumblr.com/oauth/apps" title="Tumblr">Tumblr</a>でアプリを登録して、oauth.rbを使うと良いと思います。</p>
-
-<div><script src='https://gist.github.com/3657917.js'></script>
-<noscript><pre><code>#!/usr/bin/env ruby
-require 'oauth'
-
-consumer = OAuth::Consumer.new(
-  'consumer_key',
-  'consumer_secret',
-  {
-    site: 'http://api.tumblr.com',
-    request_token_url: &quot;http://www.tumblr.com/oauth/request_token&quot;,
-    authorize_url: &quot;http://www.tumblr.com/oauth/authorize&quot;,
-    access_token_url: &quot;http://www.tumblr.com/oauth/access_token&quot;
-  }
-)
-request_token = consumer.get_request_token
-system('open ' + request_token.authorize_url)
-
-p 'enter oauth_verifier'
-oauth_verifier = gets.chomp!
-access_token = request_token.get_access_token(:oauth_verifier =&gt; oauth_verifier)
-
-p 'oauth_token : ' + access_token.token
-p 'oauth_token_secret : ' + access_token.secret</code></pre></noscript></div>
-
-
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/8/">&larr; Older</a>
@@ -534,6 +604,18 @@ p 'oauth_token_secret : ' + access_token.secret</code></pre></noscript></div>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/01/16/i-want-to-build-a-tweak/">iOSのTweak作りたい</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/01/02/iphone-5s-jailbreak-memo/">iPhone 5s jailbreak memo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/12/31/bought-games/">今月買ったゲーム</a>
+      </li>
     
       <li class="post">
         <a href="/2013/11/30/bought-games/">今月買ったゲーム</a>
@@ -563,23 +645,11 @@ p 'oauth_token_secret : ' + access_token.secret</code></pre></noscript></div>
         <a href="/2013/06/02/bittorrent-sync/">BitTorrent SyncをVPSにセットアップする</a>
       </li>
     
-      <li class="post">
-        <a href="/2013/06/01/nginx-ssl-client-authentication/">Nginxでちょっと高度なクライアント認証する</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/05/31/bought-games/">今月買ったゲーム</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/05/20/feedline/">TwitterのtimelineからURLを抽出してRSSにするの作った</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-  <span id="tag-cloud"><a href='/categories/3ds' style='font-size: 104.28571428571429%'>3DS(1)</a> <a href='/categories/adventcalendar' style='font-size: 112.85714285714286%'>adventCalendar(3)</a> <a href='/categories/archlinux' style='font-size: 104.28571428571429%'>ArchLinux(1)</a> <a href='/categories/bag' style='font-size: 104.28571428571429%'>bag(1)</a> <a href='/categories/done' style='font-size: 104.28571428571429%'>done(1)</a> <a href='/categories/food' style='font-size: 104.28571428571429%'>food(1)</a> <a href='/categories/game' style='font-size: 160.0%'>game(14)</a> <a href='/categories/gyazo' style='font-size: 104.28571428571429%'>Gyazo(1)</a> <a href='/categories/hardware' style='font-size: 108.57142857142857%'>hardware(2)</a> <a href='/categories/hubot' style='font-size: 104.28571428571429%'>Hubot(1)</a> <a href='/categories/irc' style='font-size: 108.57142857142857%'>IRC(2)</a> <a href='/categories/javascript' style='font-size: 104.28571428571429%'>JavaScript(1)</a> <a href='/categories/linux' style='font-size: 112.85714285714286%'>linux(3)</a> <a href='/categories/mac' style='font-size: 108.57142857142857%'>Mac(2)</a> <a href='/categories/nginx' style='font-size: 104.28571428571429%'>Nginx(1)</a> <a href='/categories/node-js' style='font-size: 117.14285714285714%'>Node.js(4)</a> <a href='/categories/octopress' style='font-size: 104.28571428571429%'>Octopress(1)</a> <a href='/categories/perl' style='font-size: 104.28571428571429%'>Perl(1)</a> <a href='/categories/raspberrypi' style='font-size: 104.28571428571429%'>RaspberryPi(1)</a> <a href='/categories/recipe' style='font-size: 104.28571428571429%'>recipe(1)</a> <a href='/categories/ruby' style='font-size: 108.57142857142857%'>Ruby(2)</a> <a href='/categories/software' style='font-size: 117.14285714285714%'>software(4)</a> <a href='/categories/ssl' style='font-size: 108.57142857142857%'>SSL(2)</a> <a href='/categories/terraria' style='font-size: 104.28571428571429%'>Terraria(1)</a> <a href='/categories/twitter' style='font-size: 104.28571428571429%'>Twitter(1)</a> <a href='/categories/ubuntu' style='font-size: 104.28571428571429%'>Ubuntu(1)</a> <a href='/categories/vimperator' style='font-size: 117.14285714285714%'>Vimperator(4)</a> <a href='/categories/vps' style='font-size: 108.57142857142857%'>VPS(2)</a> <a href='/categories/win' style='font-size: 108.57142857142857%'>Win(2)</a> </span>
+  <span id="tag-cloud"><a href='/categories/3ds' style='font-size: 104.0%'>3DS(1)</a> <a href='/categories/adventcalendar' style='font-size: 112.0%'>adventCalendar(3)</a> <a href='/categories/archlinux' style='font-size: 104.0%'>ArchLinux(1)</a> <a href='/categories/bag' style='font-size: 104.0%'>bag(1)</a> <a href='/categories/done' style='font-size: 104.0%'>done(1)</a> <a href='/categories/food' style='font-size: 104.0%'>food(1)</a> <a href='/categories/game' style='font-size: 160.0%'>game(15)</a> <a href='/categories/gyazo' style='font-size: 104.0%'>Gyazo(1)</a> <a href='/categories/hardware' style='font-size: 108.0%'>hardware(2)</a> <a href='/categories/hubot' style='font-size: 104.0%'>Hubot(1)</a> <a href='/categories/ios' style='font-size: 104.0%'>iOS(1)</a> <a href='/categories/iphone' style='font-size: 104.0%'>iPhone(1)</a> <a href='/categories/irc' style='font-size: 108.0%'>IRC(2)</a> <a href='/categories/jailbreak' style='font-size: 108.0%'>JailBreak(2)</a> <a href='/categories/javascript' style='font-size: 104.0%'>JavaScript(1)</a> <a href='/categories/linux' style='font-size: 112.0%'>linux(3)</a> <a href='/categories/mac' style='font-size: 108.0%'>Mac(2)</a> <a href='/categories/nginx' style='font-size: 104.0%'>Nginx(1)</a> <a href='/categories/node-js' style='font-size: 116.0%'>Node.js(4)</a> <a href='/categories/octopress' style='font-size: 104.0%'>Octopress(1)</a> <a href='/categories/perl' style='font-size: 104.0%'>Perl(1)</a> <a href='/categories/raspberrypi' style='font-size: 104.0%'>RaspberryPi(1)</a> <a href='/categories/recipe' style='font-size: 104.0%'>recipe(1)</a> <a href='/categories/ruby' style='font-size: 108.0%'>Ruby(2)</a> <a href='/categories/software' style='font-size: 116.0%'>software(4)</a> <a href='/categories/ssl' style='font-size: 108.0%'>SSL(2)</a> <a href='/categories/terraria' style='font-size: 104.0%'>Terraria(1)</a> <a href='/categories/twitter' style='font-size: 104.0%'>Twitter(1)</a> <a href='/categories/ubuntu' style='font-size: 104.0%'>Ubuntu(1)</a> <a href='/categories/vimperator' style='font-size: 116.0%'>Vimperator(4)</a> <a href='/categories/vps' style='font-size: 108.0%'>VPS(2)</a> <a href='/categories/win' style='font-size: 108.0%'>Win(2)</a> </span>
 </section>
 
 <section>
@@ -605,7 +675,7 @@ p 'oauth_token_secret : ' + access_token.secret</code></pre></noscript></div>
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - ebith -
+  Copyright &copy; 2014 - ebith -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

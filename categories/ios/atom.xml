@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: iOS | おいら屋ファクトリー]]></title>
+  <link href="http://blog.feelmy.net/categories/ios/atom.xml" rel="self"/>
+  <link href="http://blog.feelmy.net/"/>
+  <updated>2014-01-17T06:49:11+09:00</updated>
+  <id>http://blog.feelmy.net/</id>
+  <author>
+    <name><![CDATA[ebith]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[iOSのTweak作りたい]]></title>
+    <link href="http://blog.feelmy.net/2014/01/16/i-want-to-build-a-tweak/"/>
+    <updated>2014-01-16T21:54:00+09:00</updated>
+    <id>http://blog.feelmy.net/2014/01/16/i-want-to-build-a-tweak</id>
+    <content type="html"><![CDATA[<h2>ゴール</h2>
+
+<p>連絡先の住所をタッチするとGoogle Mapsで開くTweakを作る</p>
+
+<h2>参考にしたところ</h2>
+
+<p><a href="http://hitoriblog.com/?p=19242">ひとりぶろぐ » iOS 7の中身に興味津々！Jailbreakなしでファイルシステムを覗いてみたりしよう</a><br/>
+<a href="https://github.com/r-plus/dotfiles/blob/master/install_theos.sh">dotfiles/install_theos.sh at master · r-plus/dotfiles</a><br/>
+<a href="http://seekpoint.blogspot.jp/search/label/theos">seekpoint: theos</a></p>
+
+<h2>つまずいたところ</h2>
+
+<p>``` diff deb.mk</p>
+
+<h1>homebrewで入れたcoreutilsを優先してるとエラー</h1>
+
+<ul>
+<li>$(ECHO_NOTHING)echo "Installed-Size: $(shell du $(_THEOS_PLATFORM_DU_EXCLUDE) DEBIAN -ks "$(THEOS_STAGING_DIR)" | cut -f 1)" >> "$@"$(ECHO_END)</li>
+<li>$(ECHO_NOTHING)echo "Installed-Size: $(shell /usr/bin/du $(_THEOS_PLATFORM_DU_EXCLUDE) DEBIAN -ks "$(THEOS_STAGING_DIR)" | cut -f 1)" >> "$@"$(ECHO_END)</li>
+</ul>
+
+
+<h1>homebrewで入れたdpkgを使ってるとエラー</h1>
+
+<ul>
+<li>$(ECHO_NOTHING)COPYFILE_DISABLE=1 $(FAKEROOT) -r dpkg-deb -b "$(THEOS_STAGING_DIR)" "$(_THEOS_DEB_PACKAGE_FILENAME)" $(STDERR_NULL_REDIRECT)$(ECHO_END)</li>
+<li>$(ECHO_NOTHING)COPYFILE_DISABLE=1 $(FAKEROOT) -r dpkg-deb -Zgzip -b "$(THEOS_STAGING_DIR)" "$(_THEOS_DEB_PACKAGE_FILENAME)" $(STDERR_NULL_REDIRECT)$(ECHO_END)
+<code>
+</code> diff Makefile
+
+<h1>デフォルトのMakefileだとiPhone 5sに未対応のバイナリができる</h1></li>
+<li>ARCHS = armv7 arm64
+```</li>
+</ul>
+
+
+<h2>だいたいの流れ</h2>
+
+<ol>
+<li>iFunBoxでMobilePhone.appをコピーしてきて<code>class-dump -H MobilePhone.app -o headers</code>した</li>
+<li><code>ag -i 'open' headers</code>した結果PhoneApplication.hにopenURLがあったのでこれにUIAlertViewを差し込んでみる</li>
+<li>urlとか住所とか別アプリに飛ぶようなのをタッチした時にアラート出るのでURLのスキームがmapsのやつだけGoogle Mapsに投げれば良いんじゃないの</li>
+<li>Browser Changerをいじくりまわして設定しなおしてみた結果、地図だけデフォルト変更できちゃったので解決</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+</feed>

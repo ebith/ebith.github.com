@@ -4,7 +4,7 @@
   <title><![CDATA[おいら屋ファクトリー]]></title>
   <link href="http://blog.feelmy.net/atom.xml" rel="self"/>
   <link href="http://blog.feelmy.net/"/>
-  <updated>2013-11-30T21:51:52+09:00</updated>
+  <updated>2014-01-17T06:49:11+09:00</updated>
   <id>http://blog.feelmy.net/</id>
   <author>
     <name><![CDATA[ebith]]></name>
@@ -12,6 +12,113 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[iOSのTweak作りたい]]></title>
+    <link href="http://blog.feelmy.net/2014/01/16/i-want-to-build-a-tweak/"/>
+    <updated>2014-01-16T21:54:00+09:00</updated>
+    <id>http://blog.feelmy.net/2014/01/16/i-want-to-build-a-tweak</id>
+    <content type="html"><![CDATA[<h2>ゴール</h2>
+
+<p>連絡先の住所をタッチするとGoogle Mapsで開くTweakを作る</p>
+
+<h2>参考にしたところ</h2>
+
+<p><a href="http://hitoriblog.com/?p=19242">ひとりぶろぐ » iOS 7の中身に興味津々！Jailbreakなしでファイルシステムを覗いてみたりしよう</a><br/>
+<a href="https://github.com/r-plus/dotfiles/blob/master/install_theos.sh">dotfiles/install_theos.sh at master · r-plus/dotfiles</a><br/>
+<a href="http://seekpoint.blogspot.jp/search/label/theos">seekpoint: theos</a></p>
+
+<h2>つまずいたところ</h2>
+
+<figure class='code'><figcaption><span>deb.mk</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='diff'><span class='line'># homebrewで入れたcoreutilsを優先してるとエラー
+</span><span class='line'><span class="gd">-    $(ECHO_NOTHING)echo &quot;Installed-Size: $(shell du $(_THEOS_PLATFORM_DU_EXCLUDE) DEBIAN -ks &quot;$(THEOS_STAGING_DIR)&quot; | cut -f 1)&quot; &gt;&gt; &quot;$@&quot;$(ECHO_END)</span>
+</span><span class='line'><span class="gi">+    $(ECHO_NOTHING)echo &quot;Installed-Size: $(shell /usr/bin/du $(_THEOS_PLATFORM_DU_EXCLUDE) DEBIAN -ks &quot;$(THEOS_STAGING_DIR)&quot; | cut -f 1)&quot; &gt;&gt; &quot;$@&quot;$(ECHO_END)</span>
+</span><span class='line'>
+</span><span class='line'># homebrewで入れたdpkgを使ってるとエラー
+</span><span class='line'><span class="gd">-    $(ECHO_NOTHING)COPYFILE_DISABLE=1 $(FAKEROOT) -r dpkg-deb -b &quot;$(THEOS_STAGING_DIR)&quot; &quot;$(_THEOS_DEB_PACKAGE_FILENAME)&quot; $(STDERR_NULL_REDIRECT)$(ECHO_END)</span>
+</span><span class='line'><span class="gi">+    $(ECHO_NOTHING)COPYFILE_DISABLE=1 $(FAKEROOT) -r dpkg-deb -Zgzip -b &quot;$(THEOS_STAGING_DIR)&quot; &quot;$(_THEOS_DEB_PACKAGE_FILENAME)&quot; $(STDERR_NULL_REDIRECT)$(ECHO_END)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption><span>Makefile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='diff'><span class='line'># デフォルトのMakefileだとiPhone 5sに未対応のバイナリができる
+</span><span class='line'><span class="gi">+ ARCHS = armv7 arm64</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>だいたいの流れ</h2>
+
+<ol>
+<li>iFunBoxでMobilePhone.appをコピーしてきて<code>class-dump -H MobilePhone.app -o headers</code>した</li>
+<li><code>ag -i 'open' headers</code>した結果PhoneApplication.hにopenURLがあったのでこれにUIAlertViewを差し込んでみる</li>
+<li>urlとか住所とか別アプリに飛ぶようなのをタッチした時にアラート出るのでURLのスキームがmapsのやつだけGoogle Mapsに投げれば良いんじゃないの</li>
+<li>Browser Changerをいじくりまわして設定しなおしてみた結果、地図だけデフォルト変更できちゃったので解決</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[iPhone 5s jailbreak memo]]></title>
+    <link href="http://blog.feelmy.net/2014/01/02/iphone-5s-jailbreak-memo/"/>
+    <updated>2014-01-02T02:38:00+09:00</updated>
+    <id>http://blog.feelmy.net/2014/01/02/iphone-5s-jailbreak-memo</id>
+    <content type="html"><![CDATA[<h2>参考にしたページ</h2>
+
+<ul>
+<li><a href="http://tools4hack.santalab.me/how-to-ios7-untethered-jailbreak-evasi0n7.html">[iOS] 『iOS 7.0～7.0.4』を完全脱獄する方法！『evasi0n 7』 iPhone 5sやiPad Airにも対応 | Tools 4 Hack</a></li>
+<li><a href="http://tools4hack.santalab.me/ios7-a7-jbapp-tweak-arm64-compatibility-list.html">[iOS 7 脱獄] iPhone 5s（A7デバイス）で使用出来る 脱獄アプリ まとめ [随時更新] | Tools 4 Hack</a></li>
+</ul>
+
+
+<h2>なんかやったこと</h2>
+
+<ul>
+<li>サーバ落ち過ぎでうざいのでCydiaからUltrasn0wのリポジトリ消した</li>
+<li>mobileとrootのパスワード変更した</li>
+<li>/etc/hosts 差し替えて広告消した</li>
+<li>CCTogglesで追加されるSpringboardの隠し設定からParallax Effect消した</li>
+<li>/etc/ssh/sshd_config を編集して公開鍵認証のみにした</li>
+<li>/etc/sudoers を編集してmobileでsudoできるようにした</li>
+</ul>
+
+
+<h2>インストールしたパッケージとか</h2>
+
+<div><script src='https://gist.github.com/8369853.js'></script>
+<noscript><pre><code>&lt;html&gt;&lt;body&gt;You are being &lt;a href=&quot;https://github.com/gist/8369853&quot;&gt;redirected&lt;/a&gt;.&lt;/body&gt;&lt;/html&gt;</code></pre></noscript></div>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[今月買ったゲーム]]></title>
+    <link href="http://blog.feelmy.net/2013/12/31/bought-games/"/>
+    <updated>2013-12-31T22:00:00+09:00</updated>
+    <id>http://blog.feelmy.net/2013/12/31/bought-games</id>
+    <content type="html"><![CDATA[<h2><a href="http://store.steampowered.com/app/113020/">Monaco: What&#8217;s Yours Is Mine</a> ¥0</h2>
+
+<p>Starbound上げたお返しとして買ってもらった。一人でやってよしみんなでやってよしの強盗アクション</p>
+
+<h2><a href="http://www.nintendo.co.jp/3ds/bzlj/">ゼルダの伝説 神々のトライフォース２</a> ¥3894</h2>
+
+<p>待ってました！</p>
+
+<h2><a href="http://store.steampowered.com/app/235600/">Tom Clancy’s Splinter Cell Blacklist</a> ¥3528</h2>
+
+<p>初代からずっと好きなシリーズ。せっかくなのでDeluxe Edition買った。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[今月買ったゲーム]]></title>
@@ -829,291 +936,6 @@ Coop誘うのSteamじゃなくてGames for Windows Live経由なのがダルい�
 
 <p>石掘ってると無心になれる。サーバ立てればみんなで一緒に遊べるし、協力して掘ったり戦ったり楽しい。<br/>
 次作早くやりたい。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[年末年始にゲーム35本買ったのでその一覧]]></title>
-    <link href="http://blog.feelmy.net/2013/01/10/holiday-sale/"/>
-    <updated>2013-01-10T00:00:00+09:00</updated>
-    <id>http://blog.feelmy.net/2013/01/10/holiday-sale</id>
-    <content type="html"><![CDATA[<h2>DRM: Origin</h2>
-
-<ul>
-<li>Crysis ¥750</li>
-<li>Crysis Warhead ¥750</li>
-<li>Crysis 2 ¥1000</li>
-</ul>
-
-
-<p>¥2500</p>
-
-<h2>DRM: Steam</h2>
-
-<ul>
-<li>Bastion ¥327</li>
-<li>Castle Crashers (4 Pack) ¥1357</li>
-<li>Darksiders Franchise Pack (1+2+DLC) ¥1243</li>
-<li>Hotline Miami ¥222</li>
-<li>Max Payne 3 ¥1310</li>
-<li>Renegade Ops ¥0(もらった)</li>
-<li>Sine Mora ¥155</li>
-<li>SkyDrift (*5) ¥449</li>
-<li>Sleeping Dogs + Dragon Master Pack ¥723</li>
-<li>Spec Ops: The Line ¥425</li>
-<li>Terraria (4 Pack) ¥897</li>
-<li>The Humble Indie Bundle 7 ¥586
-
-<ul>
-<li>Cave Story+</li>
-<li>Closure</li>
-<li>Dungeon Defenders + All DLC</li>
-<li>Legend of Grimrock</li>
-<li>Offspring Fling</li>
-<li>Shank 2</li>
-<li>Snapshot</li>
-<li>The Basement Collection</li>
-<li>The Binding of Isaac + Wrath of the Lamb DLC</li>
-</ul>
-</li>
-<li>Toki Tori ¥44</li>
-<li>Torchlight II ¥872</li>
-</ul>
-
-
-<h2>合計</h2>
-
-<p>35本 ¥11110</p>
-
-<h2>いろいろ</h2>
-
-<p>回線がやっと光になったのと、最近PCでゲームあんまりやってないなと思ったのでセール情報に貼り付いてたくさん買ってみた。<br/>
-効率的にセール情報を得るためにredditの<a href="http://en.reddit.com/r/GameDeals/new/?sort=new" title="newest submissions : GameDeals">newest submissions : GameDeals</a>の新着をポストする<a href="https://twitter.com/gamedealsbot" title="r/GameDeals/new/ (GameDealsBot)さんはTwitterを使っています">Twitter bot</a>作ったけど何故か即凍結されたのでIkachanでIRCに流すことになった。</p>
-
-<p>そういえば動画かなんかを見ただけでやってないな。ってことで買ったCrysisシリーズがちょっと高いというかEA Japanのセールがしょぼい。
-挙句の果てに2は面白くなかった。<br/>
-あとやっぱOriginとかUplayとか微妙すぎると思うので早くSteamに合流しちゃってほしい。</p>
-
-<p>もらったRenegade Opsとか4packを買ったTerraria, Castle CrashersはCoop用。<br/>
-Terrariaのマルチが思っていた以上に楽しくて年末年始はずっとやってた。<br/>
-<a href="https://github.com/TShock/TShock" title="TShock/TShock · GitHub">TShock</a>っていう非公式なdedicated serverがよくできていてMono使うとLinuxでも動くし素晴らしい。<br/>
-サーバのたて方とかは<a href="http://blog.feelmy.net/2013/01/05/terraria-server-with-ubuntu-server-12.04/" title="さくらのVPS 2G(Ubuntu 12.04)でTerrariaServer(TShock)を動かす - おいら屋ファクトリー">さくらのVPS 2G(Ubuntu 12.04)でTerrariaServer(TShock)を動かす</a>にまとめた。</p>
-
-<p>GamersGateで$2.84だったTom Clancy&#8217;s Ghost Recon: Future Soldierを逃してしまったのを悲しんでいたらその前後のBethesda CollectionとかBorderlands2 4Packとかも合わせて返金騒ぎになってた。</p>
-
-<p>Steamだと日本語字幕入りな代わりにおま値$79.99で買うことはまずないであろうと思っていたSleeping Dogsが、ホリデーセール延長開始時に91%になっていたので飛びついておいた。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[さくらのVPS 2G(Ubuntu 12.04)でTerrariaServer(TShock)を動かす]]></title>
-    <link href="http://blog.feelmy.net/2013/01/05/terraria-server-with-ubuntu-server-12.04/"/>
-    <updated>2013-01-05T20:33:00+09:00</updated>
-    <id>http://blog.feelmy.net/2013/01/05/terraria-server-with-ubuntu-server-12.04</id>
-    <content type="html"><![CDATA[<h2>サーバーのセットアップ</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install mono-complete
-</span><span class='line'>wget https://github.com/downloads/TShock/TShock/TShock-4.0.zip
-</span><span class='line'>unzip TShock-4.0.zip
-</span><span class='line'>mv serverplugins ServerPlugins
-</span><span class='line'>mono TerrariaServer.exe
-</span><span class='line'>  # 初期設定ではボス召喚アイテムが使えないので許可する
-</span><span class='line'>  modgroup add guest summonboss</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>クライアントから管理者登録</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>/auth *******
-</span><span class='line'>/user add ebith:******** superadmin
-</span><span class='line'>/login ebith ********
-</span><span class='line'>/auth-verify</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>運用において</h2>
-
-<p><code>tmux new -s terraria</code>とかしておくとでサーバーコンソールがどこからでも使えて便利。<br/>
-サーバーの基本的な設定は<code>tshock/config.json</code>を直接書き換える。<a href="https://tshock.atlassian.net/wiki/display/TSHOCKPLUGINS/Configuration+File+Docs" title="Configuration File Docs - TShock Documentation - Confluence">Configuration File Docs</a>を参照。<br/>
-<code>group perm guest</code>でguestユーザが使えるコマンド一覧が表示される。<code>modgroup (add|del) guest hoge</code>で権限操作。<a href="https://tshock.atlassian.net/wiki/pages/viewpage.action?pageId=3047433" title="Commands/Permissions list - TShock Documentation - Confluence">Commands/Permissions list</a>がコマンド一覧。<br/>
-サーバーに接続しただけの未登録ユーザはguestに所属する。身内向けならサーバーパスワード有りにして管理者以外は全員guestが楽そう。権限管理的な意味で。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Vimperatorを便利に使うためのtips]]></title>
-    <link href="http://blog.feelmy.net/2012/12/22/useful-tips-for-vimperator/"/>
-    <updated>2012-12-22T00:00:00+09:00</updated>
-    <id>http://blog.feelmy.net/2012/12/22/useful-tips-for-vimperator</id>
-    <content type="html"><![CDATA[<p><a href="http://atnd.org/events/34070" title="Vimperator Advent Calendar 2012 : ATND">Vimperator Advent Calendar 2012</a> 22日目担当のebithです。<br/>
-今日はgistで公開されているプラグインや各ユーザのrcにある便利な設定など、<a href="http://vimpr.github.com/" title="Welcome to vimpr!">vimpr</a>のプラグインリポジトリ外のものを紹介します。</p>
-
-<h2>QB.js (<a href="https://gist.github.com/1766649" title="QB.js 2012/02/08 現在使っているバージョン">https://gist.github.com/1766649</a>)</h2>
-
-<p>コマンドラインへメッセージを表示するechoをGrowlへの通知に変更するプラグインです。<br/>
-<a href="https://addons.mozilla.org/ja/firefox/addon/growlgntp/" title="Growl/GNTP :: Add-ons for Firefox">Growl/GNTP</a>のアドオンが必要になりますがWindows/Linux/Macなど各種OSで使用できます。<br/>
-webサービスを利用するためのプラグインはコマンドの正否にechoが使われることが多いので、そういったプラグインを入れている人にはオススメです。</p>
-
-<h2>コマンドラインを <Esc> でもあなたのこと、忘れない!! (<a href="https://gist.github.com/2944628" title="コマンドラインを &lt;Esc&gt; でもあなたのこと、忘れない!!">https://gist.github.com/2944628</a>)</h2>
-
-<p>途中でESCを押して消してしまった入力を履歴に残します。<br/>
-入力途中にググりたくなっても安心です。</p>
-
-<h2>lazy command</h2>
-
-<p>コマンドを遅延実行します。<br/>
-プラグインが読み込まれないと実行できないコマンドを.vimperatorrcに書けるようになります。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># lazyコマンドを定義
-</span><span class='line'>command! -nargs=+ lazy autocmd VimperatorEnter .* &lt;args&gt;
-</span><span class='line'>
-</span><span class='line'># URL補完の設定。はてなブックマーク拡張のHとadd-url-completer.twのTに遅延実行が必要
-</span><span class='line'>lazy set complete=slHT
-</span><span class='line'>
-</span><span class='line'># loginManager.js用。各種Webサービスに自動的にログインする
-</span><span class='line'>lazy :login hatena
-</span><span class='line'>lazy :login livedoor
-</span><span class='line'>lazy :login nicovideo</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>autocmd 駆動時のエコーをやめる (<a href="https://gist.github.com/1028562" title="autocmd 駆動時のエコーをやめる">https://gist.github.com/1028562</a>)</h2>
-
-<p>autocmdが静かになります。<br/>
-autocmdは自動処理のためのもので<code>:help :autocmd</code>に詳しく書かれています。</p>
-
-<figure class='code'><figcaption><span>便利なautocmd一例</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='vim'><span class='line'><span class="c">&quot; Gmail/LDR/はてブでは新規タブをバックグラウンドで開く</span>
-</span><span class='line'>autocmd LocationChange <span class="s1">&#39;^(?!https?://(mail\.google\.com/(mail|a)/|reader\.livedoor\.com/reader/|b\.hatena\.ne\.jp/(?!(entry|articles|guide))))&#39;</span> :<span class="k">set</span><span class="p">!</span> browser.<span class="k">tabs</span>.loadDivertedInBackground<span class="p">=</span>false
-</span><span class='line'>autocmd LocationChange <span class="s1">&#39;^https?://(mail\.google\.com/(mail|a)/|reader\.livedoor\.com/reader/|b\.hatena\.ne\.jp/(?!(entry|articles|guide)))&#39;</span> :<span class="k">set</span><span class="p">!</span> browser.<span class="k">tabs</span>.loadDivertedInBackground<span class="p">=</span>true
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>サイト内検索</h2>
-
-<p>Googleを使ってサイト内検索するコマンドです。<br/>
-オリジナルより少し変更を加えていて、ディレクトリ名が必要な@wikiやはてなダイアリーに対応しています。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">nnoremap</span> <span class="p">,</span><span class="err">/ :sitesearch&lt;Space&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">javascript</span> <span class="o">&lt;&lt;</span><span class="nx">EOM</span>
-</span><span class='line'><span class="nx">commands</span><span class="p">.</span><span class="nx">addUserCommand</span><span class="p">(</span>
-</span><span class='line'>  <span class="p">[</span><span class="s1">&#39;sitesearch&#39;</span><span class="p">],</span>
-</span><span class='line'>  <span class="s1">&#39;Search in this site&#39;</span><span class="p">,</span>
-</span><span class='line'>  <span class="kd">function</span> <span class="p">(</span><span class="nx">args</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="kd">let</span> <span class="nx">url</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">content</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">hostname</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">[</span>
-</span><span class='line'>      <span class="sr">/d\.hatena\.ne\.jp/</span><span class="p">,</span>
-</span><span class='line'>      <span class="sr">/www\d+\.atwiki\.jp/</span><span class="p">,</span>
-</span><span class='line'>    <span class="p">].</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">r</span><span class="p">){</span>
-</span><span class='line'>      <span class="nx">url</span> <span class="o">+=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span> <span class="o">?</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="nb">window</span><span class="p">.</span><span class="nx">content</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">pathname</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">});</span>
-</span><span class='line'>    <span class="nx">liberator</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span>
-</span><span class='line'>      <span class="s1">&#39;http://www.google.com/search?q=&#39;</span> <span class="o">+</span>
-</span><span class='line'>        <span class="nb">encodeURIComponent</span><span class="p">(</span><span class="nx">args</span><span class="p">.</span><span class="nx">literalArg</span><span class="p">)</span> <span class="o">+</span>
-</span><span class='line'>        <span class="s1">&#39;+site%3A&#39;</span> <span class="o">+</span>
-</span><span class='line'>        <span class="nx">url</span><span class="p">,</span>
-</span><span class='line'>      <span class="nx">liberator</span><span class="p">.</span><span class="nx">NEW_TAB</span>
-</span><span class='line'>    <span class="p">);</span>
-</span><span class='line'>  <span class="p">},</span>
-</span><span class='line'>  <span class="p">{</span>
-</span><span class='line'>    <span class="nx">completer</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">context</span><span class="p">)</span> <span class="nx">completion</span><span class="p">.</span><span class="nx">url</span><span class="p">(</span><span class="nx">context</span><span class="p">,</span> <span class="s1">&#39;S&#39;</span><span class="p">),</span>
-</span><span class='line'>    <span class="nx">literal</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-</span><span class='line'>  <span class="p">},</span>
-</span><span class='line'>  <span class="kc">true</span>
-</span><span class='line'><span class="p">);</span>
-</span><span class='line'><span class="nx">EOM</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>vimpMonkey <a href="http://d.hatena.ne.jp/wlt/20110105/1294204461" title="VimperatorでGreasemonkeyみたいな事をする - wltの日記">http://d.hatena.ne.jp/wlt/20110105/1294204461</a></h2>
-
-<p>VimperatorでGreasemonkeyみたいな事をするためのユーティリティ関数です。<br/>
-例では@wikiのページタイトルの前後を入れ替えています。ツリー型タブユーザにオススメです。</p>
-
-<figure class='code'><figcaption><span>vimpMonkey一例</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">javascript</span> <span class="o">&lt;&lt;</span><span class="nx">EOM</span>
-</span><span class='line'><span class="c1">// @wikiのページタイトル - を区切りに前後入れ替え</span>
-</span><span class='line'><span class="nx">vimpMonkey</span><span class="p">(</span><span class="s1">&#39;http://www\\d+\\.atwiki\\.jp&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
-</span><span class='line'>  <span class="nx">content</span><span class="p">.</span><span class="nb">document</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="nx">content</span><span class="p">.</span><span class="nb">document</span><span class="p">.</span><span class="nx">title</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/(.*) - (.*)/</span><span class="p">,</span> <span class="s1">&#39;$2 - $1&#39;</span><span class="p">);</span>
-</span><span class='line'><span class="p">});</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">// VimperatorでGreasemonkeyみたいな事をする - wltの日記 - http://d.hatena.ne.jp/wlt/20110105/1294204461</span>
-</span><span class='line'><span class="kd">function</span> <span class="nx">vimpMonkey</span><span class="p">(</span><span class="nx">urlRegexPattern</span><span class="p">,</span> <span class="nx">func</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="kd">var</span> <span class="nx">cmd</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="s1">&#39;(function(args) {&#39;</span> <span class="o">+</span>
-</span><span class='line'>    <span class="s1">&#39;var content = tabs.getTab(args.tab - 1).linkedBrowser.contentWindow;&#39;</span> <span class="o">+</span>
-</span><span class='line'>    <span class="s1">&#39;var unsafeContent = content.wrappedJSObject;&#39;</span> <span class="o">+</span>
-</span><span class='line'>    <span class="nx">func</span><span class="p">.</span><span class="nx">toSource</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;();&#39;</span> <span class="o">+</span>
-</span><span class='line'>  <span class="s1">&#39;})&#39;</span><span class="p">);</span>
-</span><span class='line'>  <span class="nx">autocommands</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;PageLoad&#39;</span><span class="p">,</span> <span class="nx">urlRegexPattern</span><span class="p">,</span> <span class="nx">cmd</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nx">EOM</span>
-</span></code></pre></td></tr></table></div></figure>
-
 ]]></content>
   </entry>
   
