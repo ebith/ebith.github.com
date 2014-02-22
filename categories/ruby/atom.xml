@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby | おいら屋ファクトリー]]></title>
   <link href="http://blog.feelmy.net/categories/ruby/atom.xml" rel="self"/>
   <link href="http://blog.feelmy.net/"/>
-  <updated>2014-01-17T06:49:11+09:00</updated>
+  <updated>2014-02-23T00:50:17+09:00</updated>
   <id>http://blog.feelmy.net/</id>
   <author>
     <name><![CDATA[ebith]]></name>
@@ -43,27 +43,27 @@
 
 <p><div><script src='https://gist.github.com/3657917.js'></script>
 <noscript><pre><code>#!/usr/bin/env ruby
-require 'oauth'
+require &#39;oauth&#39;
 
 consumer = OAuth::Consumer.new(
-  'consumer_key',
-  'consumer_secret',
+  &#39;consumer_key&#39;,
+  &#39;consumer_secret&#39;,
   {
-    site: 'http://api.tumblr.com',
+    site: &#39;http://api.tumblr.com&#39;,
     request_token_url: &quot;http://www.tumblr.com/oauth/request_token&quot;,
     authorize_url: &quot;http://www.tumblr.com/oauth/authorize&quot;,
     access_token_url: &quot;http://www.tumblr.com/oauth/access_token&quot;
   }
 )
 request_token = consumer.get_request_token
-system('open ' + request_token.authorize_url)
+system(&#39;open &#39; + request_token.authorize_url)
 
-p 'enter oauth_verifier'
+p &#39;enter oauth_verifier&#39;
 oauth_verifier = gets.chomp!
 access_token = request_token.get_access_token(:oauth_verifier =&gt; oauth_verifier)
 
-p 'oauth_token : ' + access_token.token
-p 'oauth_token_secret : ' + access_token.secret</code></pre></noscript></div>
+p &#39;oauth_token : &#39; + access_token.token
+p &#39;oauth_token_secret : &#39; + access_token.secret</code></pre></noscript></div>
 </p>
 ]]></content>
   </entry>

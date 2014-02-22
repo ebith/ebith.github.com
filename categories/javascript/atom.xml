@@ -4,7 +4,7 @@
   <title><![CDATA[Category: JavaScript | おいら屋ファクトリー]]></title>
   <link href="http://blog.feelmy.net/categories/javascript/atom.xml" rel="self"/>
   <link href="http://blog.feelmy.net/"/>
-  <updated>2014-01-17T06:49:11+09:00</updated>
+  <updated>2014-02-23T00:50:17+09:00</updated>
   <id>http://blog.feelmy.net/</id>
   <author>
     <name><![CDATA[ebith]]></name>
@@ -25,8 +25,8 @@
  let apiKey;
 
  commands.addUserCommand(
-   ['ldrSwitch'],
-   'Livedoor Readerのサブアカウントを切り替える',
+   [&#39;ldrSwitch&#39;],
+   &#39;Livedoor Readerのサブアカウントを切り替える&#39;,
    function (args) {
     if (!args.length) {
       getAcc(function (accList) {
@@ -40,7 +40,7 @@
       literal: 0,
       completer: function (context) {
         context.incomplete = true;
-        context.title = ['account'];
+        context.title = [&#39;account&#39;];
         context.compare = void 0;
 
         getAcc (function (accList) {
@@ -54,21 +54,21 @@
   );
 
   function switchAcc (apiKey, acc) {
-    let url = 'http://reader.livedoor.com/account/switch';
-    let req = new libly.Request(url, null, {postBody: 'ApiKey=' + apiKey + '&amp;switch_to=' + acc});
-    req.addEventListener('onSuccess', function (res) {
-      liberator.echo('account switched: ' + acc);
+    let url = &#39;http://reader.livedoor.com/account/switch&#39;;
+    let req = new libly.Request(url, null, {postBody: &#39;ApiKey=&#39; + apiKey + &#39;&amp;switch_to=&#39; + acc});
+    req.addEventListener(&#39;onSuccess&#39;, function (res) {
+      liberator.echo(&#39;account switched: &#39; + acc);
     });
     req.post();
   }
 
   function getAcc (callback) {
-    let url = 'http://reader.livedoor.com/subaccount';
+    let url = &#39;http://reader.livedoor.com/subaccount&#39;;
     let req = new libly.Request(url);
     let accList = [];
-    req.addEventListener('onSuccess', function (res) {
-      apiKey = res.getHTMLDocument('//input[@name=&quot;ApiKey&quot;]')[0].value;
-      res.getHTMLDocument('//input[@name=&quot;switch_to&quot;]').forEach(function (acc) {
+    req.addEventListener(&#39;onSuccess&#39;, function (res) {
+      apiKey = res.getHTMLDocument(&#39;//input[@name=&quot;ApiKey&quot;]&#39;)[0].value;
+      res.getHTMLDocument(&#39;//input[@name=&quot;switch_to&quot;]&#39;).forEach(function (acc) {
         accList.push([acc.value, acc.value]);
       });
       callback(accList);

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS | おいら屋ファクトリー]]></title>
   <link href="http://blog.feelmy.net/categories/ios/atom.xml" rel="self"/>
   <link href="http://blog.feelmy.net/"/>
-  <updated>2014-01-17T06:49:11+09:00</updated>
+  <updated>2014-02-23T00:50:17+09:00</updated>
   <id>http://blog.feelmy.net/</id>
   <author>
     <name><![CDATA[ebith]]></name>
@@ -35,16 +35,16 @@
 <h1>homebrewで入れたcoreutilsを優先してるとエラー</h1>
 
 <ul>
-<li>$(ECHO_NOTHING)echo "Installed-Size: $(shell du $(_THEOS_PLATFORM_DU_EXCLUDE) DEBIAN -ks "$(THEOS_STAGING_DIR)" | cut -f 1)" >> "$@"$(ECHO_END)</li>
-<li>$(ECHO_NOTHING)echo "Installed-Size: $(shell /usr/bin/du $(_THEOS_PLATFORM_DU_EXCLUDE) DEBIAN -ks "$(THEOS_STAGING_DIR)" | cut -f 1)" >> "$@"$(ECHO_END)</li>
+<li>$(ECHO_NOTHING)echo &ldquo;Installed-Size: $(shell du $(_THEOS_PLATFORM_DU_EXCLUDE) DEBIAN -ks &rdquo;$(THEOS_STAGING_DIR)&ldquo; | cut -f 1)&rdquo; >> &ldquo;$@&rdquo;$(ECHO_END)</li>
+<li>$(ECHO_NOTHING)echo &ldquo;Installed-Size: $(shell /usr/bin/du $(_THEOS_PLATFORM_DU_EXCLUDE) DEBIAN -ks &rdquo;$(THEOS_STAGING_DIR)&ldquo; | cut -f 1)&rdquo; >> &ldquo;$@&rdquo;$(ECHO_END)</li>
 </ul>
 
 
 <h1>homebrewで入れたdpkgを使ってるとエラー</h1>
 
 <ul>
-<li>$(ECHO_NOTHING)COPYFILE_DISABLE=1 $(FAKEROOT) -r dpkg-deb -b "$(THEOS_STAGING_DIR)" "$(_THEOS_DEB_PACKAGE_FILENAME)" $(STDERR_NULL_REDIRECT)$(ECHO_END)</li>
-<li>$(ECHO_NOTHING)COPYFILE_DISABLE=1 $(FAKEROOT) -r dpkg-deb -Zgzip -b "$(THEOS_STAGING_DIR)" "$(_THEOS_DEB_PACKAGE_FILENAME)" $(STDERR_NULL_REDIRECT)$(ECHO_END)
+<li>$(ECHO_NOTHING)COPYFILE_DISABLE=1 $(FAKEROOT) -r dpkg-deb -b &ldquo;$(THEOS_STAGING_DIR)&rdquo; &ldquo;$(_THEOS_DEB_PACKAGE_FILENAME)&rdquo; $(STDERR_NULL_REDIRECT)$(ECHO_END)</li>
+<li>$(ECHO_NOTHING)COPYFILE_DISABLE=1 $(FAKEROOT) -r dpkg-deb -Zgzip -b &ldquo;$(THEOS_STAGING_DIR)&rdquo; &ldquo;$(_THEOS_DEB_PACKAGE_FILENAME)&rdquo; $(STDERR_NULL_REDIRECT)$(ECHO_END)
 <code>
 </code> diff Makefile
 

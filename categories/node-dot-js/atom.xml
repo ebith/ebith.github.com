@@ -2,9 +2,9 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Node.js | おいら屋ファクトリー]]></title>
-  <link href="http://blog.feelmy.net/categories/node-js/atom.xml" rel="self"/>
+  <link href="http://blog.feelmy.net/categories/node-dot-js/atom.xml" rel="self"/>
   <link href="http://blog.feelmy.net/"/>
-  <updated>2014-01-17T06:49:11+09:00</updated>
+  <updated>2014-02-23T00:50:17+09:00</updated>
   <id>http://blog.feelmy.net/</id>
   <author>
     <name><![CDATA[ebith]]></name>
@@ -12,6 +12,50 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[node-ircでIRC Botを作る]]></title>
+    <link href="http://blog.feelmy.net/2014/02/22/build-irc-bot/"/>
+    <updated>2014-02-22T23:20:00+09:00</updated>
+    <id>http://blog.feelmy.net/2014/02/22/build-irc-bot</id>
+    <content type="html"><![CDATA[<p>ここしばらくHubot+IRC adapterを使ってたけどこまかいところで不満があるというか<br/>
+IRC専用のbotシステムじゃない故の不満があったのをどうにかしたかったので色々調べていたら<br/>
+HubotのIRC adapterにも使われているnode-ircが素晴らしくてこれを使うとお手軽にIRC Botが作れて幸せだったというお話。</p>
+
+<p><div><script src='https://gist.github.com/9155493.js'></script>
+<noscript><pre><code>config =
+  scriptsDir: &#39;./scripts&#39;
+  # API — node-irc 2.1 documentation - https://node-irc.readthedocs.org/en/latest/API.html#client
+  irc:
+    server: &#39;localhost&#39;
+    nick: &#39;bot&#39;
+    options:
+      port: 6669
+      channels: [&#39;#hogehoge&#39;, &#39;#piyopiyo&#39;]
+
+irc = require &#39;irc&#39;
+fs = require &#39;fs&#39;
+
+bot = new irc.Client config.irc.server, config.irc.nick, config.irc.options
+bot.addListener &#39;registered&#39;, (msg) -&gt;
+  do loadScripts
+bot.addListener &#39;message#&#39;, (nick, channel, msg) -&gt;
+  if msg.match /^:reload/
+    do loadScripts
+
+loadScripts = -&gt;
+  fs.readdir config.scriptsDir, (err, files) -&gt;
+    for file in files
+      scriptPath = &quot;#{config.scriptsDir}/#{file}&quot;
+      delete require.cache[require.resolve scriptPath]
+      try
+        require(scriptPath) bot
+      catch err
+        console.log &quot;Unable to load #{scriptPath}: #{err.stack}&quot;
+        process.exit 1</code></pre></noscript></div>
+</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[ゲームのセール情報を監視すべくsubredditをtwitterにポストするbot作った]]></title>
@@ -74,7 +118,7 @@ Mongo.pmをtiarraPath/module/Log/に配置、confの例は以下に。<br/>
 }
 </code>
 Node.jsとcoffee-scriptが入っていれば<code>npm install</code>して<code>coffee app.coffee</code>で動き出す。<br/>
-http://localhost:3000にアクセス！</p>
+<a href="http://localhost:3000%E3%81%AB%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%EF%BC%81">http://localhost:3000%E3%81%AB%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%EF%BC%81</a></p>
 
 <h2>その他</h2>
 
@@ -122,9 +166,9 @@ bot/
 <p>こんな感じにpackage.json書いてnpm installするとややこしいことなくインストール完了。
 ```json
 {
-  "name": "ebithubot",
-  "version": "0.0.1",
-  "dependencies": {</p>
+  &ldquo;name&rdquo;: &ldquo;ebithubot&rdquo;,
+  &ldquo;version&rdquo;: &ldquo;0.0.1&rdquo;,
+  &ldquo;dependencies&rdquo;: {</p>
 
 <pre><code>"hubot": "2.3.5",
 "hubot-irc": "0.1.4",
@@ -164,11 +208,11 @@ bot/
 
 <h1>hubot-irc</h1>
 
-<p>export HUBOT_IRC_UNFLOOD="true"
-export HUBOT_IRC_NICK="ebithubot"
-export HUBOT_IRC_PORT="6669"
-export HUBOT_IRC_SERVER="localhost"
-export HUBOT_IRC_ROOMS="#ebithubot"</p>
+<p>export HUBOT_IRC_UNFLOOD=&ldquo;true&rdquo;
+export HUBOT_IRC_NICK=&ldquo;ebithubot&rdquo;
+export HUBOT_IRC_PORT=&ldquo;6669&rdquo;
+export HUBOT_IRC_SERVER=&ldquo;localhost&rdquo;
+export HUBOT_IRC_ROOMS=&ldquo;#ebithubot&rdquo;</p>
 
 <p>forever start -c coffee node_modules/hubot/bin/hubot -a irc
 ```</p>
@@ -183,7 +227,7 @@ index 1cd6be3..dbfb495 100644
 --- a/src/irc.coffee
 +++ b/src/irc.coffee
 @@ -5,6 +5,12 @@
- Irc = require 'irc'
+ Irc = require &#39;irc&#39;
  
  class IrcBot extends Adapter
 +  constructor: (@robot) -&gt;

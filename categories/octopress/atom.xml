@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | おいら屋ファクトリー]]></title>
   <link href="http://blog.feelmy.net/categories/octopress/atom.xml" rel="self"/>
   <link href="http://blog.feelmy.net/"/>
-  <updated>2014-01-17T06:49:11+09:00</updated>
+  <updated>2014-02-23T00:50:17+09:00</updated>
   <id>http://blog.feelmy.net/</id>
   <author>
     <name><![CDATA[ebith]]></name>
@@ -24,13 +24,13 @@ TumblrとかLokkaとか、WordPressに出戻りも考慮したけどどれもし
 <h2>参考にしたページとか</h2>
 
 <p><a href="http://mattn.kaoriya.net/software/lang/ruby/20111017205717.htm" title="Big Sky :: githubとjekyllとoctopressで作る簡単でモダンなブログ">Big Sky :: githubとjekyllとoctopressで作る簡単でモダンなブログ</a><br/>
-<a href="http://blog.glidenote.com/blog/2011/11/07/install-octopress-on-github/" title="GithubとOctopressでモダンな技術系ブログを作ってみる - Glide Note - グライドノート">GithubとOctopressでモダンな技術系ブログを作ってみる - Glide Note - グライドノート</a><br/>
-<a href="http://nowelium.github.com/blog/2012/03/26/octopress-diff.html" title="octopress でブログを書いてみる - ハタさんのブログ(出張版)">octopress でブログを書いてみる - ハタさんのブログ(出張版)</a><br/>
-<a href="http://tokkonopapa.github.com/blog/2012/01/04/octopress-plugin-for-categories-cloud/" title="Octopress用Tag Cloudプラグインをリリースします - T.I.D.">Octopress用Tag Cloudプラグインをリリースします - T.I.D.</a></p>
+<a href="http://blog.glidenote.com/blog/2011/11/07/install-octopress-on-github/" title="GithubとOctopressでモダンな技術系ブログを作ってみる - Glide Note - グライドノート">GithubとOctopressでモダンな技術系ブログを作ってみる &ndash; Glide Note &ndash; グライドノート</a><br/>
+<a href="http://nowelium.github.com/blog/2012/03/26/octopress-diff.html" title="octopress でブログを書いてみる - ハタさんのブログ(出張版)">octopress でブログを書いてみる &ndash; ハタさんのブログ(出張版)</a><br/>
+<a href="http://tokkonopapa.github.com/blog/2012/01/04/octopress-plugin-for-categories-cloud/" title="Octopress用Tag Cloudプラグインをリリースします - T.I.D.">Octopress用Tag Cloudプラグインをリリースします &ndash; T.I.D.</a></p>
 
 <h2>それ以外にやったこと</h2>
 
-<p><a href="http://blog.glidenote.com/blog/2012/04/02/octoeditor.vim/" title="Octopressの記事管理用プラグイン、Octoeditor.vimを作った - Glide Note - グライドノート">Octopressの記事管理用プラグイン、Octoeditor.vimを作った - Glide Note - グライドノート</a>を導入したり
+<p><a href="http://blog.glidenote.com/blog/2012/04/02/octoeditor.vim/" title="Octopressの記事管理用プラグイン、Octoeditor.vimを作った - Glide Note - グライドノート">Octopressの記事管理用プラグイン、Octoeditor.vimを作った &ndash; Glide Note &ndash; グライドノート</a>を導入したり
 <code>vim
 nnoremap &lt;Leader&gt;of :Unite file_rec:&lt;C-r&gt;=expand(g:octopress_path."/source/_posts/")&lt;CR&gt;&lt;CR&gt;
 </code>

@@ -9,24 +9,24 @@
   <meta name="author" content="ebith">
 
   
-  <meta name="description" content="Earth Defense Force: Insect Armageddon ¥185 オンラインCoopがある地球防衛軍。 Sleeping Dogs ¥723 面白くないわけじゃないけどGTAで良いやんという結論。 マクロス30 銀河を繋ぐ歌声 ¥6722 &hellip;">
+  <meta name="description" content="Kingdoms of Amalur: Reckoning ¥310 正統派のアクションRPG。続編があれば更に面白そうだけど出ようが無いのが悲しい。これやってるとSkyrimやりたくなる。
+インベントリとかスキルツリーのシステムがイマイチなのが惜しい。 Age of Empires II: HD &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="google-site-verification" content="2weq-haP9jiK3brxIN6DELbPYBYT4Q2eaW_-miG8pII">
-  <meta name="pocket-site-verification" content="66428973d8a3558b172e82627c6de8" />
 
   
-  <link rel="canonical" href="http://blog.feelmy.net/page/4/">
+  <link rel="canonical" href="http://blog.feelmy.net/page/4">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <link href="/atom.xml" rel="alternate" title="おいら屋ファクトリー" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
@@ -78,6 +78,230 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/04/28/played-games/">今月遊んだゲーム</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-28T00:15:00+09:00" pubdate data-updated="true">Apr 28<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Kingdoms of Amalur: Reckoning ¥310</h2>
+
+<p>正統派のアクションRPG。続編があれば更に面白そうだけど出ようが無いのが悲しい。これやってるとSkyrimやりたくなる。<br/>
+インベントリとかスキルツリーのシステムがイマイチなのが惜しい。</p>
+
+<h2><a href="http://steamcommunity.com/app/221380">Age of Empires II: HD Edition</a> ¥1469</h2>
+
+<p>まじ名作。Steamからさくっとフレンド誘ってマルチプレイできるの素晴らしい。<br/>
+バグいっぱいのままリリースしてて残念な感じになってる。</p>
+
+<h2><a href="http://steamcommunity.com/app/230410">Warframe</a> F2P</h2>
+
+<p>SF NinjaなMOTPS、F2Pのゲームでオープンベータ中。翻訳途中だけど日本語もあるしTPSのCoopゲーとしても悪くないできっぽい。</p>
+
+<h2><a href="http://tera.hangame.co.jp/">TERA</a> F2P</h2>
+
+<p>DDOより更にTPS寄りで珍しい。ゲーム自体は今となってはごく普通というかありふれた感じする。<br/>
+インストーラーがクソだし、キーバインディング変更ソフトとかを終了させないと遊べないのも酷い。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/04/05/self-signed-certificate/">オレオレ認証局をたててオレオレ証明書を発行する</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-05T06:54:00+09:00" pubdate data-updated="true">Apr 5<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>概要</h2>
+
+<ul>
+<li>CA.(sh|pl)を使わず、openssl.cnfの変更も最小限で済ます</li>
+<li>オレオレ認証局の証明書をブラウザに登録して警告が出ないようにする</li>
+<li>ワイルドカードなサーバー証明書を作る</li>
+<li>クライアント証明書も作る</li>
+</ul>
+
+
+<h2>下準備</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>sudo cp /etc/ssl/openssl.cnf /etc/ssl/openssl.cnf.orig
+</span><span class='line'>vi /etc/ssl/openssl.cnf
+</span><span class='line'>  -dir            <span class="o">=</span> ./demoCA
+</span><span class='line'>  +dir            <span class="o">=</span> .
+</span><span class='line'>
+</span><span class='line'>  +<span class="o">[</span> feelmy_net <span class="o">]</span>
+</span><span class='line'>  +subjectAltName <span class="o">=</span> DNS:feelmy.net,DNS:*.feelmy.net
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>ルート証明書を作る</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>mkdir ca
+</span><span class='line'><span class="nb">cd </span>ca
+</span><span class='line'>touch index.txt
+</span><span class='line'><span class="nb">echo </span>01 &gt; serial
+</span><span class='line'>mkdir newcerts private
+</span><span class='line'>openssl req -new -newkey rsa:2048 -keyout private/cakey.pem -out careq.pem
+</span><span class='line'>  Country Name <span class="o">(</span>2 letter code<span class="o">)</span> <span class="o">[</span>AU<span class="o">]</span>:JP
+</span><span class='line'>  State or Province Name <span class="o">(</span>full name<span class="o">)</span> <span class="o">[</span>Some-State<span class="o">]</span>:Nara
+</span><span class='line'>  Organization Name <span class="o">(</span>eg, company<span class="o">)</span> <span class="o">[</span>Internet Widgits Pty Ltd<span class="o">]</span>:Oiraya Factory
+</span><span class='line'>  Common Name <span class="o">(</span>e.g. server FQDN or YOUR name<span class="o">)</span> <span class="o">[]</span>:CA
+</span><span class='line'>chmod 400 private/cakey.pem
+</span><span class='line'>
+</span><span class='line'>openssl ca -in careq.pem -out cacert.pem -selfsign -days 3650 -extensions v3_ca -batch
+</span><span class='line'>rm careq.pem
+</span><span class='line'>chmod 444 cacert.pem newcerts/01.pem
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>サーバー証明書を作る</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>openssl req -new -newkey rsa:2048 -nodes -keyout cert.key -out cert.csr
+</span><span class='line'>  Country Name <span class="o">(</span>2 letter code<span class="o">)</span> <span class="o">[</span>AU<span class="o">]</span>:JP
+</span><span class='line'>  State or Province Name <span class="o">(</span>full name<span class="o">)</span> <span class="o">[</span>Some-State<span class="o">]</span>:Nara
+</span><span class='line'>  Organization Name <span class="o">(</span>eg, company<span class="o">)</span> <span class="o">[</span>Internet Widgits Pty Ltd<span class="o">]</span>:Oiraya Factory
+</span><span class='line'>  Common Name <span class="o">(</span>e.g. server FQDN or YOUR name<span class="o">)</span> <span class="o">[]</span>:*.feelmy.net
+</span><span class='line'>openssl ca -in cert.csr -out cert.crt -days 3650 -extensions feelmy_net -batch
+</span><span class='line'>rm cert.csr
+</span><span class='line'>chmod 400 cert.key
+</span><span class='line'>chmod 444 cert.crt
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>クライアント証明書を作る</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>openssl req -new -newkey rsa:2048 -nodes -keyout client.key -out client.csr
+</span><span class='line'>  Country Name <span class="o">(</span>2 letter code<span class="o">)</span> <span class="o">[</span>AU<span class="o">]</span>:JP
+</span><span class='line'>  State or Province Name <span class="o">(</span>full name<span class="o">)</span> <span class="o">[</span>Some-State<span class="o">]</span>:Nara
+</span><span class='line'>  Organization Name <span class="o">(</span>eg, company<span class="o">)</span> <span class="o">[</span>Internet Widgits Pty Ltd<span class="o">]</span>:Oiraya Factory
+</span><span class='line'>  Common Name <span class="o">(</span>e.g. server FQDN or YOUR name<span class="o">)</span> <span class="o">[]</span>:ebith
+</span><span class='line'>openssl ca -in client.csr -out client.crt -days 3650 -extensions feelmy_net -batch
+</span><span class='line'>openssl pkcs12 -export -in client.crt -inkey client.key -out client.p12
+</span><span class='line'>rm client.csr client.crt client.key
+</span><span class='line'>chmod 400 client.p12
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>雑感とか</h2>
+
+<p>今思うとディレクトリは名前の変更にとどめたほうがファイルがごちゃっとならなくて良かったっぽい。<br/>
+普通にCommon Nameを*.feelmy.netにして証明書を作るとfeelmy.netで通用しない。<br/>
+それを突破するにはSubject Alternative Nameを使うしかないっぽいけどSANを使うとopenssl.cnfの編集を避けられないようでつらい。</p>
+
+<p>作った証明書類はこんな感じにリネームしといた。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>mv cacert.pem oiraya-ca.pem
+</span><span class='line'>mv cert.key feelmy.net.key
+</span><span class='line'>mv cert.crt feelmy.net.crt
+</span><span class='line'>mv client.p12 feelmy.net.p12
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>参考にしたとこ</h2>
+
+<ul>
+<li><a href="http://www.tietew.jp/2007/01/30/how-to-setup-ca-using-openssl" title="OpenSSLでオレオレ認証局を立ち上げる | www.tietew.jp">OpenSSLでオレオレ認証局を立ち上げる | www.tietew.jp</a></li>
+<li><a href="http://www.daily-labo.com/ygg16_3.html" title="クライアント証明書の発行">クライアント証明書の発行</a></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -227,7 +451,7 @@ Mongo.pmをtiarraPath/module/Log/に配置、confの例は以下に。<br/>
 
 
 <p>Node.jsとcoffee-scriptが入っていれば<code>npm install</code>して<code>coffee app.coffee</code>で動き出す。<br/>
-http://localhost:3000にアクセス！</p>
+<a href="http://localhost:3000%E3%81%AB%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%EF%BC%81">http://localhost:3000%E3%81%AB%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%EF%BC%81</a></p>
 
 <h2>その他</h2>
 
@@ -240,312 +464,11 @@ http://localhost:3000にアクセス！</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/02/03/hubot-irc/">HubotでIRC Botを作る</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-02-03T01:09:00+09:00" pubdate data-updated="true">Feb 3<span>rd</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>Node.jsのインストールと下準備</h2>
-
-<p>Node.jsの管理には<a href="https://github.com/hokaccha/nodebrew" title="hokaccha/nodebrew · GitHub">Nodebrew</a>を使う。<br/>
-Readmeに従ってインストールして、Nodebrew経由でNodeのバイナリを入れる。<br/>
-更にcoffee-script必要らしいのとforeverあると便利らしいので入れとく。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>nodebrew install-binary stable
-</span><span class='line'>nodebrew use v0.8.17
-</span><span class='line'>npm install -g forever
-</span><span class='line'>npm install -g coffee-script
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Bot作る</h2>
-
-<p>フォルダ構成はこんなの。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>bot/
-</span><span class='line'>├── node_modules
-</span><span class='line'>├── scripts
-</span><span class='line'>│   ├── colorful-ping.coffee
-</span><span class='line'>│   ├── config.coffee
-</span><span class='line'>│   ├── fetch-title.coffee
-</span><span class='line'>│   ├── rating.coffee
-</span><span class='line'>│   ├── reddit-gamedeals.coffee
-</span><span class='line'>│   ├── upgrade.coffee
-</span><span class='line'>│   └── vpn-manager.coffee
-</span><span class='line'>├── hubot-scripts.json
-</span><span class='line'>├── package.json
-</span><span class='line'>└── run.sh
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>こんな感じにpackage.json書いてnpm installするとややこしいことなくインストール完了。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;ebithubot&quot;</span><span class="p">,</span>
-</span><span class='line'>  <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;0.0.1&quot;</span><span class="p">,</span>
-</span><span class='line'>  <span class="nt">&quot;dependencies&quot;</span><span class="p">:</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nt">&quot;hubot&quot;</span><span class="p">:</span> <span class="s2">&quot;2.3.5&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;hubot-irc&quot;</span><span class="p">:</span> <span class="s2">&quot;0.1.4&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;hubot-scripts&quot;</span><span class="p">:</span> <span class="s2">&quot;2.2.2&quot;</span><span class="p">,</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nt">&quot;cron&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;request&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;iconv-jp&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;request&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;cheerio&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;aws-sdk&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;ntwitter&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>あとは好きなだけスクリプトを書いてBotの機能強化に励む。<br/>
-<a href="https://github.com/github/hubot/tree/master/src/scripts" title="hubot/src/scripts at master · github/hubot · GitHub">Hubot付属のscript</a>が良い例。</p>
-
-<h2>運用において</h2>
-
-<p>スクリプトのリロード機能が無くて、毎回再起動するしかないのでIRC Proxy無しでの運用は厳しい。<br/>
-かといって普段使いのProxyに繋ぐと入ってるチャンネル全部のメッセージを処理対象にしてしまうのでイマイチ。</p>
-
-<h3>起動スクリプト</h3>
-
-<p>設定類は環境変数で行うのが基本らしいのでシェルスクリプトに<code>export</code>を並び立てる。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c">#!/usr/bin/env bash</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># hubot</span>
-</span><span class='line'><span class="nb">export </span><span class="nv">PORT</span><span class="o">=</span>8889
-</span><span class='line'>
-</span><span class='line'><span class="c"># hubot-irc</span>
-</span><span class='line'><span class="nb">export </span><span class="nv">HUBOT_IRC_UNFLOOD</span><span class="o">=</span><span class="s2">&quot;true&quot;</span>
-</span><span class='line'><span class="nb">export </span><span class="nv">HUBOT_IRC_NICK</span><span class="o">=</span><span class="s2">&quot;ebithubot&quot;</span>
-</span><span class='line'><span class="nb">export </span><span class="nv">HUBOT_IRC_PORT</span><span class="o">=</span><span class="s2">&quot;6669&quot;</span>
-</span><span class='line'><span class="nb">export </span><span class="nv">HUBOT_IRC_SERVER</span><span class="o">=</span><span class="s2">&quot;localhost&quot;</span>
-</span><span class='line'><span class="nb">export </span><span class="nv">HUBOT_IRC_ROOMS</span><span class="o">=</span><span class="s2">&quot;#ebithubot&quot;</span>
-</span><span class='line'>
-</span><span class='line'>forever start -c coffee node_modules/hubot/bin/hubot -a irc
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Notice使いたい</h3>
-
-<p><a href="http://blog.fumiz.me/2012/08/05/hubot-irc-bot-script/#notice" title="hubotスクリプトの書き方とサンプル集 | mitc">hubotスクリプトの書き方とサンプル集 | mitc</a>によると互換性のために削除されたらしい。<br/>
-hubot-ircにパッチを当てて復活させる。v0.1.4向け。</p>
-
-<div><script src='https://gist.github.com/4505583.js'></script>
-<noscript><pre><code>diff --git a/src/irc.coffee b/src/irc.coffee
-index 1cd6be3..dbfb495 100644
---- a/src/irc.coffee
-+++ b/src/irc.coffee
-@@ -5,6 +5,12 @@
- Irc = require 'irc'
- 
- class IrcBot extends Adapter
-+  constructor: (@robot) -&gt;
-+    super @robot
-+    @robot.notice = (user, strings...) -&gt;
-+      @adapter.notice user, strings...
-+    @robot.Response = IrcResponse
-+
-   send: (user, strings...) -&gt;
-     for str in strings
-       if not str?
-@@ -176,5 +182,9 @@ class IrcBot extends Adapter
- 
-     self.emit &quot;connected&quot;
- 
-+class IrcResponse extends Response
-+  notice: (strings...) -&gt;
-+    @robot.adapter.notice @message.user, strings...
-+
- exports.use = (robot) -&gt;
-   new IrcBot robot</code></pre></noscript></div>
-
-
-<h3>データの永続化</h3>
-
-<p>データの永続化はオプションになっていて、Redis以外にもMongoDBやAmazon S3とかファイルも選べるようになってる。<br/>
-どれもhubot-scriptsのリポジトリに入っているので<code>hubot-scripts.json</code>に<code>["redis-brain.coffee"]</code>とか書く。<br/>
-永続化のための*-brain.coffeeが読み込まれるとrobot.brain.dataが5秒おきに自動保存されるようになる。</p>
-
-<p>ただし02/01/2013現在npm上で最新のhubot-scripts 2.4.1に入ってるredis-brain.coffeeは壊れてるので一つ前の2.2.2とか使うべき。</p>
-
-<h3>forever</h3>
-
-<p>簡単なdaemontoolsみたいなので便利なんだけど、logrotateの仕組みが無いのでログをいっぱい吐いてるとディスクを圧迫する。<br/>
-かといってログをrmとかしちゃうとそこで書き込みが止まってしまうのでアレ。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/01/31/played-games/">今月遊んだゲーム</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-01-31T22:00:00+09:00" pubdate data-updated="true">Jan 31<span>st</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2><a href="http://store.steampowered.com/app/107100/">Bastion</a> ¥327</h2>
-
-<p>楽しいアクションゲームだった。見た目も綺麗。<br/>
-ストーリーはイミフ。</p>
-
-<h2><a href="http://store.steampowered.com/app/204360/">Castle Crashers</a> ¥339</h2>
-
-<p>Coopすべく買ったが難しいのでやらなくなってしまった。<br/>
-糞ゲー(汚い意味で)</p>
-
-<h2><a href="http://store.steampowered.com/app/219150/">Hotline Miami</a> ¥222</h2>
-
-<p>ゲームとしては凄くシンプルだけどちゃんと面白い。<br/>
-2chのスレにあったストーリーまとめみたいなのを読んだら更に面白くなった。</p>
-
-<h2><a href="http://steamcommunity.com/app/115120">Iron Brigade</a> ¥97</h2>
-
-<p>メカモノ好きだしタワーディフェンスのCoopは楽しい。機体に個性出るのも良い。<br/>
-Coop誘うのSteamじゃなくてGames for Windows Live経由なのがダルいしたまにバグる。</p>
-
-<h2><a href="http://steamcommunity.com/app/57740">Jagged Alliance - Back in Action</a> ¥0</h2>
-
-<p>バランス調整Mod入れたら普通に遊べてるし珍しいジャンルなのでそこそこ楽しいけど全体的に作りこみが浅い。<br/>
-リメイク元の1999年発売のやつの方が良く出来てるとか聞いた。</p>
-
-<h2><a href="http://store.steampowered.com/app/211360/">Offspring Fling!</a> ¥65</h2>
-
-<p>普通のパズルゲーっぽい。
-見た目は可愛い。</p>
-
-<h2><a href="http://steamcommunity.com/app/99300">Renegade Ops</a> ¥0</h2>
-
-<p>敵なぎ倒す系のCoopは単純かつ楽しくていい。<br/>
-左手パッド右手マウスでやりたいけどできない。マップ表示がクソい。</p>
-
-<h2><a href="http://steamcommunity.com/app/207040">Sine Mora</a> ¥155</h2>
-
-<p>シューティングゲームだけど一発終了なタイプじゃないから普通に遊べてる。<br/>
-でもやっぱ目が疲れるのでアレ。</p>
-
-<h2><a href="http://store.steampowered.com/app/91100/">SkyDrift</a> ¥90</h2>
-
-<p>仲間内でレースすると最高に盛り上がる。もちろんSkype有りで。<br/>
-空飛ぶマリカーっぽいけどコース数少ない、バランス悪いとかあるのでPC版マリカー早く！</p>
-
-<h2><a href="http://steamcommunity.com/app/50300">Spec Ops: The Line</a> ¥425</h2>
-
-<p>久しぶりのストーリー重視のTPSで楽しめた。後味の良いストーリーではないけどわりと満足。MultiplayとCoopは未プレイ。<br/>
-実績47/50まで8時間足らずというボリュームの少なさはやや寂しいけど物語長引いても面白く無いからこんなもんかも。</p>
-
-<h2><a href="http://store.steampowered.com/app/105600/">Terraria</a> ¥224</h2>
-
-<p>石掘ってると無心になれる。サーバ立てればみんなで一緒に遊べるし、協力して掘ったり戦ったり楽しい。<br/>
-次作早くやりたい。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/5/">&larr; Older</a>
     
-    <a href="/archives">Blog Archives</a>
+    <a href="/blog/archives">Blog Archives</a>
     
     <a class="next" href="/page/3/">Newer &rarr;</a>
     
@@ -558,11 +481,19 @@ Coop誘うのSteamじゃなくてGames for Windows Live経由なのがダルい�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/02/22/build-irc-bot/">node-ircでIRC Botを作る</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/01/31/bought-games/">今月買ったゲーム</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/01/16/i-want-to-build-a-tweak/">iOSのTweak作りたい</a>
       </li>
     
       <li class="post">
-        <a href="/2014/01/02/iphone-5s-jailbreak-memo/">iPhone 5s jailbreak memo</a>
+        <a href="/2014/01/02/iphone-5s-jailbreak-memo/">iPhone 5s Jailbreak Memo</a>
       </li>
     
       <li class="post">
@@ -589,35 +520,11 @@ Coop誘うのSteamじゃなくてGames for Windows Live経由なのがダルい�
         <a href="/2013/06/28/bought-games/">今月買ったゲーム</a>
       </li>
     
-      <li class="post">
-        <a href="/2013/06/27/reddit-to-twitter-bot/">ゲームのセール情報を監視すべくsubredditをtwitterにポストするbot作った</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/06/02/bittorrent-sync/">BitTorrent SyncをVPSにセットアップする</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-  <span id="tag-cloud"><a href='/categories/3ds' style='font-size: 104.0%'>3DS(1)</a> <a href='/categories/adventcalendar' style='font-size: 112.0%'>adventCalendar(3)</a> <a href='/categories/archlinux' style='font-size: 104.0%'>ArchLinux(1)</a> <a href='/categories/bag' style='font-size: 104.0%'>bag(1)</a> <a href='/categories/done' style='font-size: 104.0%'>done(1)</a> <a href='/categories/food' style='font-size: 104.0%'>food(1)</a> <a href='/categories/game' style='font-size: 160.0%'>game(15)</a> <a href='/categories/gyazo' style='font-size: 104.0%'>Gyazo(1)</a> <a href='/categories/hardware' style='font-size: 108.0%'>hardware(2)</a> <a href='/categories/hubot' style='font-size: 104.0%'>Hubot(1)</a> <a href='/categories/ios' style='font-size: 104.0%'>iOS(1)</a> <a href='/categories/iphone' style='font-size: 104.0%'>iPhone(1)</a> <a href='/categories/irc' style='font-size: 108.0%'>IRC(2)</a> <a href='/categories/jailbreak' style='font-size: 108.0%'>JailBreak(2)</a> <a href='/categories/javascript' style='font-size: 104.0%'>JavaScript(1)</a> <a href='/categories/linux' style='font-size: 112.0%'>linux(3)</a> <a href='/categories/mac' style='font-size: 108.0%'>Mac(2)</a> <a href='/categories/nginx' style='font-size: 104.0%'>Nginx(1)</a> <a href='/categories/node-js' style='font-size: 116.0%'>Node.js(4)</a> <a href='/categories/octopress' style='font-size: 104.0%'>Octopress(1)</a> <a href='/categories/perl' style='font-size: 104.0%'>Perl(1)</a> <a href='/categories/raspberrypi' style='font-size: 104.0%'>RaspberryPi(1)</a> <a href='/categories/recipe' style='font-size: 104.0%'>recipe(1)</a> <a href='/categories/ruby' style='font-size: 108.0%'>Ruby(2)</a> <a href='/categories/software' style='font-size: 116.0%'>software(4)</a> <a href='/categories/ssl' style='font-size: 108.0%'>SSL(2)</a> <a href='/categories/terraria' style='font-size: 104.0%'>Terraria(1)</a> <a href='/categories/twitter' style='font-size: 104.0%'>Twitter(1)</a> <a href='/categories/ubuntu' style='font-size: 104.0%'>Ubuntu(1)</a> <a href='/categories/vimperator' style='font-size: 116.0%'>Vimperator(4)</a> <a href='/categories/vps' style='font-size: 108.0%'>VPS(2)</a> <a href='/categories/win' style='font-size: 108.0%'>Win(2)</a> </span>
-</section>
-
-<section>
-  <h1>Latest Tweets</h1>
-  <ul id="tweets">
-    <li class="loading">Status updating&#8230;</li>
-  </ul>
-  <script type="text/javascript">
-    $.domReady(function(){
-      getTwitterFeed("ebith", 8, false);
-    });
-  </script>
-  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
-  
-    <p>Follow <a href="http://twitter.com/ebith">@ebith</a></p>
-  
+  <span id="tag-cloud"><a href='/categories/3ds' style='font-size: 103.75%'>3DS(1)</a> <a href='/categories/adventcalendar' style='font-size: 111.25%'>adventCalendar(3)</a> <a href='/categories/archlinux' style='font-size: 103.75%'>ArchLinux(1)</a> <a href='/categories/bag' style='font-size: 103.75%'>bag(1)</a> <a href='/categories/done' style='font-size: 103.75%'>done(1)</a> <a href='/categories/food' style='font-size: 103.75%'>food(1)</a> <a href='/categories/game' style='font-size: 160.0%'>game(16)</a> <a href='/categories/gyazo' style='font-size: 103.75%'>Gyazo(1)</a> <a href='/categories/hardware' style='font-size: 107.5%'>hardware(2)</a> <a href='/categories/hubot' style='font-size: 103.75%'>Hubot(1)</a> <a href='/categories/ios' style='font-size: 103.75%'>iOS(1)</a> <a href='/categories/iphone' style='font-size: 103.75%'>iPhone(1)</a> <a href='/categories/irc' style='font-size: 107.5%'>IRC(2)</a> <a href='/categories/jailbreak' style='font-size: 107.5%'>JailBreak(2)</a> <a href='/categories/javascript' style='font-size: 103.75%'>JavaScript(1)</a> <a href='/categories/linux' style='font-size: 111.25%'>linux(3)</a> <a href='/categories/mac' style='font-size: 107.5%'>Mac(2)</a> <a href='/categories/nginx' style='font-size: 103.75%'>Nginx(1)</a> <a href='/categories/node-js' style='font-size: 118.75%'>Node.js(5)</a> <a href='/categories/octopress' style='font-size: 103.75%'>Octopress(1)</a> <a href='/categories/perl' style='font-size: 103.75%'>Perl(1)</a> <a href='/categories/raspberrypi' style='font-size: 103.75%'>RaspberryPi(1)</a> <a href='/categories/recipe' style='font-size: 103.75%'>recipe(1)</a> <a href='/categories/ruby' style='font-size: 107.5%'>Ruby(2)</a> <a href='/categories/software' style='font-size: 115.0%'>software(4)</a> <a href='/categories/ssl' style='font-size: 107.5%'>SSL(2)</a> <a href='/categories/terraria' style='font-size: 103.75%'>Terraria(1)</a> <a href='/categories/twitter' style='font-size: 103.75%'>Twitter(1)</a> <a href='/categories/ubuntu' style='font-size: 103.75%'>Ubuntu(1)</a> <a href='/categories/vimperator' style='font-size: 115.0%'>Vimperator(4)</a> <a href='/categories/vps' style='font-size: 107.5%'>VPS(2)</a> <a href='/categories/win' style='font-size: 107.5%'>Win(2)</a> </span>
 </section>
 
 
@@ -642,7 +549,7 @@ Coop誘うのSteamじゃなくてGames for Windows Live経由なのがダルい�
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     }());
 </script>
@@ -652,6 +559,16 @@ Coop誘うのSteamじゃなくてGames for Windows Live経由なのがダルい�
 
 
 
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
 
 
 

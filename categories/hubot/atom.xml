@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Hubot | おいら屋ファクトリー]]></title>
   <link href="http://blog.feelmy.net/categories/hubot/atom.xml" rel="self"/>
   <link href="http://blog.feelmy.net/"/>
-  <updated>2014-01-17T06:49:11+09:00</updated>
+  <updated>2014-02-23T00:50:17+09:00</updated>
   <id>http://blog.feelmy.net/</id>
   <author>
     <name><![CDATA[ebith]]></name>
@@ -52,9 +52,9 @@ bot/
 <p>こんな感じにpackage.json書いてnpm installするとややこしいことなくインストール完了。
 ```json
 {
-  "name": "ebithubot",
-  "version": "0.0.1",
-  "dependencies": {</p>
+  &ldquo;name&rdquo;: &ldquo;ebithubot&rdquo;,
+  &ldquo;version&rdquo;: &ldquo;0.0.1&rdquo;,
+  &ldquo;dependencies&rdquo;: {</p>
 
 <pre><code>"hubot": "2.3.5",
 "hubot-irc": "0.1.4",
@@ -94,11 +94,11 @@ bot/
 
 <h1>hubot-irc</h1>
 
-<p>export HUBOT_IRC_UNFLOOD="true"
-export HUBOT_IRC_NICK="ebithubot"
-export HUBOT_IRC_PORT="6669"
-export HUBOT_IRC_SERVER="localhost"
-export HUBOT_IRC_ROOMS="#ebithubot"</p>
+<p>export HUBOT_IRC_UNFLOOD=&ldquo;true&rdquo;
+export HUBOT_IRC_NICK=&ldquo;ebithubot&rdquo;
+export HUBOT_IRC_PORT=&ldquo;6669&rdquo;
+export HUBOT_IRC_SERVER=&ldquo;localhost&rdquo;
+export HUBOT_IRC_ROOMS=&ldquo;#ebithubot&rdquo;</p>
 
 <p>forever start -c coffee node_modules/hubot/bin/hubot -a irc
 ```</p>
@@ -113,7 +113,7 @@ index 1cd6be3..dbfb495 100644
 --- a/src/irc.coffee
 +++ b/src/irc.coffee
 @@ -5,6 +5,12 @@
- Irc = require 'irc'
+ Irc = require &#39;irc&#39;
  
  class IrcBot extends Adapter
 +  constructor: (@robot) -&gt;

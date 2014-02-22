@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Perl | おいら屋ファクトリー]]></title>
   <link href="http://blog.feelmy.net/categories/perl/atom.xml" rel="self"/>
   <link href="http://blog.feelmy.net/"/>
-  <updated>2014-01-17T06:49:11+09:00</updated>
+  <updated>2014-02-23T00:50:17+09:00</updated>
   <id>http://blog.feelmy.net/</id>
   <author>
     <name><![CDATA[ebith]]></name>
@@ -34,7 +34,7 @@ use IO::Prompter;
 use Encode;
 
 my $file = shift @ARGV;
-my $pass = prompt('Password: ', -e =&gt; '');
+my $pass = prompt(&#39;Password: &#39;, -e =&gt; &#39;&#39;);
 
 my $k = File::KeePass-&gt;new;
 
@@ -44,7 +44,7 @@ $k-&gt;unlock;
 
 my @entries = $k-&gt;find_entries({});
 
-open(OUT, '| percol | awk \'BEGIN { FS = &quot; :: &quot;} { printf $2 }\' | pbcopy ');
+open(OUT, &#39;| percol | awk \&#39;BEGIN { FS = &quot; :: &quot;} { printf $2 }\&#39; | pbcopy &#39;);
 foreach my $entry (@entries) {
   next unless ($entry-&gt;{title} &amp;&amp; $entry-&gt;{password});
   print OUT encode_utf8(&quot;$entry-&gt;{title} :: $entry-&gt;{password}\n&quot;);

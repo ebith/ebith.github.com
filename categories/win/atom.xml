@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Win | おいら屋ファクトリー]]></title>
   <link href="http://blog.feelmy.net/categories/win/atom.xml" rel="self"/>
   <link href="http://blog.feelmy.net/"/>
-  <updated>2014-01-17T06:49:11+09:00</updated>
+  <updated>2014-02-23T00:50:17+09:00</updated>
   <id>http://blog.feelmy.net/</id>
   <author>
     <name><![CDATA[ebith]]></name>
@@ -76,7 +76,7 @@ OSのインストール後の流れをメモっておく。</p>
 <li>Windows Search</li>
 </ul>
 </li>
-<li>SNP: 無効(<a href="http://itpro.nikkeibp.co.jp/article/COLUMN/20100824/351391/" title="ITアーキテクトの「やってはいけない」 - ［Windows 7編］ネットワーク設定を標準で使ってはいけない：ITpro">ITアーキテクトの「やってはいけない」 - ［Windows 7編］ネットワーク設定を標準で使ってはいけない：ITpro</a>)</li>
+<li>SNP: 無効(<a href="http://itpro.nikkeibp.co.jp/article/COLUMN/20100824/351391/" title="ITアーキテクトの「やってはいけない」 - ［Windows 7編］ネットワーク設定を標準で使ってはいけない：ITpro">ITアーキテクトの「やってはいけない」 &ndash; ［Windows 7編］ネットワーク設定を標準で使ってはいけない：ITpro</a>)</li>
 <li>システムの復元: 無効</li>
 <li>ページングファイル: 最小</li>
 <li>ハイバネーション: オフ</li>

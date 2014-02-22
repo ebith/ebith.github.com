@@ -4,7 +4,7 @@
   <title><![CDATA[おいら屋ファクトリー]]></title>
   <link href="http://blog.feelmy.net/atom.xml" rel="self"/>
   <link href="http://blog.feelmy.net/"/>
-  <updated>2014-01-17T06:49:11+09:00</updated>
+  <updated>2014-02-23T00:50:17+09:00</updated>
   <id>http://blog.feelmy.net/</id>
   <author>
     <name><![CDATA[ebith]]></name>
@@ -12,6 +12,71 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[node-ircでIRC Botを作る]]></title>
+    <link href="http://blog.feelmy.net/2014/02/22/build-irc-bot/"/>
+    <updated>2014-02-22T23:20:00+09:00</updated>
+    <id>http://blog.feelmy.net/2014/02/22/build-irc-bot</id>
+    <content type="html"><![CDATA[<p>ここしばらくHubot+IRC adapterを使ってたけどこまかいところで不満があるというか<br/>
+IRC専用のbotシステムじゃない故の不満があったのをどうにかしたかったので色々調べていたら<br/>
+HubotのIRC adapterにも使われているnode-ircが素晴らしくてこれを使うとお手軽にIRC Botが作れて幸せだったというお話。</p>
+
+<div><script src='https://gist.github.com/9155493.js'></script>
+<noscript><pre><code>config =
+  scriptsDir: &#39;./scripts&#39;
+  # API — node-irc 2.1 documentation - https://node-irc.readthedocs.org/en/latest/API.html#client
+  irc:
+    server: &#39;localhost&#39;
+    nick: &#39;bot&#39;
+    options:
+      port: 6669
+      channels: [&#39;#hogehoge&#39;, &#39;#piyopiyo&#39;]
+
+irc = require &#39;irc&#39;
+fs = require &#39;fs&#39;
+
+bot = new irc.Client config.irc.server, config.irc.nick, config.irc.options
+bot.addListener &#39;registered&#39;, (msg) -&gt;
+  do loadScripts
+bot.addListener &#39;message#&#39;, (nick, channel, msg) -&gt;
+  if msg.match /^:reload/
+    do loadScripts
+
+loadScripts = -&gt;
+  fs.readdir config.scriptsDir, (err, files) -&gt;
+    for file in files
+      scriptPath = &quot;#{config.scriptsDir}/#{file}&quot;
+      delete require.cache[require.resolve scriptPath]
+      try
+        require(scriptPath) bot
+      catch err
+        console.log &quot;Unable to load #{scriptPath}: #{err.stack}&quot;
+        process.exit 1</code></pre></noscript></div>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[今月買ったゲーム]]></title>
+    <link href="http://blog.feelmy.net/2014/01/31/bought-games/"/>
+    <updated>2014-01-31T22:00:00+09:00</updated>
+    <id>http://blog.feelmy.net/2014/01/31/bought-games</id>
+    <content type="html"><![CDATA[<h2><a href="http://store.steampowered.com/app/225080/">Brothers &ndash; A Tale of Two Sons</a> ¥269</h2>
+
+<p>安くてメタスコア良かったので釣られて買ってみた</p>
+
+<h2><a href="http://www.nintendo.co.jp/3ds/balj/">星のカービィ　トリプルデラックス</a> ¥3891</h2>
+
+<p>ミニゲームのやりこみとかあんま好きじゃないのでちょっと早まったかもと思ってる</p>
+
+<h2><a href="http://store.steampowered.com/app/242050/">Assassin&rsquo;s Creed IV Black Flag</a> ¥2697</h2>
+
+<p>安くなるの待ってた</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[iOSのTweak作りたい]]></title>
@@ -67,7 +132,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[iPhone 5s jailbreak memo]]></title>
+    <title type="html"><![CDATA[iPhone 5s Jailbreak Memo]]></title>
     <link href="http://blog.feelmy.net/2014/01/02/iphone-5s-jailbreak-memo/"/>
     <updated>2014-01-02T02:38:00+09:00</updated>
     <id>http://blog.feelmy.net/2014/01/02/iphone-5s-jailbreak-memo</id>
@@ -106,7 +171,7 @@
     <link href="http://blog.feelmy.net/2013/12/31/bought-games/"/>
     <updated>2013-12-31T22:00:00+09:00</updated>
     <id>http://blog.feelmy.net/2013/12/31/bought-games</id>
-    <content type="html"><![CDATA[<h2><a href="http://store.steampowered.com/app/113020/">Monaco: What&#8217;s Yours Is Mine</a> ¥0</h2>
+    <content type="html"><![CDATA[<h2><a href="http://store.steampowered.com/app/113020/">Monaco: What&rsquo;s Yours Is Mine</a> ¥0</h2>
 
 <p>Starbound上げたお返しとして買ってもらった。一人でやってよしみんなでやってよしの強盗アクション</p>
 
@@ -410,7 +475,7 @@
 
 <p>DLC目的で購入。余った本体は300円で売った。</p>
 
-<h2>Bundle Stars #7 &#8220;Indie Jam2&#8221; ¥514</h2>
+<h2>Bundle Stars #7 &ldquo;Indie Jam2&rdquo; ¥514</h2>
 
 <p>安い時に買いたいと思っていたTwo Worlds IIが入ってたので。</p>
 
@@ -683,259 +748,12 @@ Mongo.pmをtiarraPath/module/Log/に配置、confの例は以下に。<br/>
 
 
 <p>Node.jsとcoffee-scriptが入っていれば<code>npm install</code>して<code>coffee app.coffee</code>で動き出す。<br/>
-http://localhost:3000にアクセス！</p>
+<a href="http://localhost:3000%E3%81%AB%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%EF%BC%81">http://localhost:3000%E3%81%AB%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%EF%BC%81</a></p>
 
 <h2>その他</h2>
 
 <p>環境変数NODE_ENVを<code>production</code>に設定するとSSL+BASIC認証で起動する。_run.sh参照。<br/>
 あとから見返したいチャンネルが1つだけだったのでチャンネル名を考慮していない。全部混ざって表示されるはず。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[HubotでIRC Botを作る]]></title>
-    <link href="http://blog.feelmy.net/2013/02/03/hubot-irc/"/>
-    <updated>2013-02-03T01:09:00+09:00</updated>
-    <id>http://blog.feelmy.net/2013/02/03/hubot-irc</id>
-    <content type="html"><![CDATA[<h2>Node.jsのインストールと下準備</h2>
-
-<p>Node.jsの管理には<a href="https://github.com/hokaccha/nodebrew" title="hokaccha/nodebrew · GitHub">Nodebrew</a>を使う。<br/>
-Readmeに従ってインストールして、Nodebrew経由でNodeのバイナリを入れる。<br/>
-更にcoffee-script必要らしいのとforeverあると便利らしいので入れとく。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>nodebrew install-binary stable
-</span><span class='line'>nodebrew use v0.8.17
-</span><span class='line'>npm install -g forever
-</span><span class='line'>npm install -g coffee-script
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Bot作る</h2>
-
-<p>フォルダ構成はこんなの。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>bot/
-</span><span class='line'>├── node_modules
-</span><span class='line'>├── scripts
-</span><span class='line'>│   ├── colorful-ping.coffee
-</span><span class='line'>│   ├── config.coffee
-</span><span class='line'>│   ├── fetch-title.coffee
-</span><span class='line'>│   ├── rating.coffee
-</span><span class='line'>│   ├── reddit-gamedeals.coffee
-</span><span class='line'>│   ├── upgrade.coffee
-</span><span class='line'>│   └── vpn-manager.coffee
-</span><span class='line'>├── hubot-scripts.json
-</span><span class='line'>├── package.json
-</span><span class='line'>└── run.sh
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>こんな感じにpackage.json書いてnpm installするとややこしいことなくインストール完了。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;ebithubot&quot;</span><span class="p">,</span>
-</span><span class='line'>  <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;0.0.1&quot;</span><span class="p">,</span>
-</span><span class='line'>  <span class="nt">&quot;dependencies&quot;</span><span class="p">:</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nt">&quot;hubot&quot;</span><span class="p">:</span> <span class="s2">&quot;2.3.5&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;hubot-irc&quot;</span><span class="p">:</span> <span class="s2">&quot;0.1.4&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;hubot-scripts&quot;</span><span class="p">:</span> <span class="s2">&quot;2.2.2&quot;</span><span class="p">,</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nt">&quot;cron&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;request&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;iconv-jp&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;request&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;cheerio&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;aws-sdk&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;ntwitter&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>あとは好きなだけスクリプトを書いてBotの機能強化に励む。<br/>
-<a href="https://github.com/github/hubot/tree/master/src/scripts" title="hubot/src/scripts at master · github/hubot · GitHub">Hubot付属のscript</a>が良い例。</p>
-
-<h2>運用において</h2>
-
-<p>スクリプトのリロード機能が無くて、毎回再起動するしかないのでIRC Proxy無しでの運用は厳しい。<br/>
-かといって普段使いのProxyに繋ぐと入ってるチャンネル全部のメッセージを処理対象にしてしまうのでイマイチ。</p>
-
-<h3>起動スクリプト</h3>
-
-<p>設定類は環境変数で行うのが基本らしいのでシェルスクリプトに<code>export</code>を並び立てる。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c">#!/usr/bin/env bash</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># hubot</span>
-</span><span class='line'><span class="nb">export </span><span class="nv">PORT</span><span class="o">=</span>8889
-</span><span class='line'>
-</span><span class='line'><span class="c"># hubot-irc</span>
-</span><span class='line'><span class="nb">export </span><span class="nv">HUBOT_IRC_UNFLOOD</span><span class="o">=</span><span class="s2">&quot;true&quot;</span>
-</span><span class='line'><span class="nb">export </span><span class="nv">HUBOT_IRC_NICK</span><span class="o">=</span><span class="s2">&quot;ebithubot&quot;</span>
-</span><span class='line'><span class="nb">export </span><span class="nv">HUBOT_IRC_PORT</span><span class="o">=</span><span class="s2">&quot;6669&quot;</span>
-</span><span class='line'><span class="nb">export </span><span class="nv">HUBOT_IRC_SERVER</span><span class="o">=</span><span class="s2">&quot;localhost&quot;</span>
-</span><span class='line'><span class="nb">export </span><span class="nv">HUBOT_IRC_ROOMS</span><span class="o">=</span><span class="s2">&quot;#ebithubot&quot;</span>
-</span><span class='line'>
-</span><span class='line'>forever start -c coffee node_modules/hubot/bin/hubot -a irc
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Notice使いたい</h3>
-
-<p><a href="http://blog.fumiz.me/2012/08/05/hubot-irc-bot-script/#notice" title="hubotスクリプトの書き方とサンプル集 | mitc">hubotスクリプトの書き方とサンプル集 | mitc</a>によると互換性のために削除されたらしい。<br/>
-hubot-ircにパッチを当てて復活させる。v0.1.4向け。</p>
-
-<div><script src='https://gist.github.com/4505583.js'></script>
-<noscript><pre><code>diff --git a/src/irc.coffee b/src/irc.coffee
-index 1cd6be3..dbfb495 100644
---- a/src/irc.coffee
-+++ b/src/irc.coffee
-@@ -5,6 +5,12 @@
- Irc = require 'irc'
- 
- class IrcBot extends Adapter
-+  constructor: (@robot) -&gt;
-+    super @robot
-+    @robot.notice = (user, strings...) -&gt;
-+      @adapter.notice user, strings...
-+    @robot.Response = IrcResponse
-+
-   send: (user, strings...) -&gt;
-     for str in strings
-       if not str?
-@@ -176,5 +182,9 @@ class IrcBot extends Adapter
- 
-     self.emit &quot;connected&quot;
- 
-+class IrcResponse extends Response
-+  notice: (strings...) -&gt;
-+    @robot.adapter.notice @message.user, strings...
-+
- exports.use = (robot) -&gt;
-   new IrcBot robot</code></pre></noscript></div>
-
-
-<h3>データの永続化</h3>
-
-<p>データの永続化はオプションになっていて、Redis以外にもMongoDBやAmazon S3とかファイルも選べるようになってる。<br/>
-どれもhubot-scriptsのリポジトリに入っているので<code>hubot-scripts.json</code>に<code>["redis-brain.coffee"]</code>とか書く。<br/>
-永続化のための*-brain.coffeeが読み込まれるとrobot.brain.dataが5秒おきに自動保存されるようになる。</p>
-
-<p>ただし02/01/2013現在npm上で最新のhubot-scripts 2.4.1に入ってるredis-brain.coffeeは壊れてるので一つ前の2.2.2とか使うべき。</p>
-
-<h3>forever</h3>
-
-<p>簡単なdaemontoolsみたいなので便利なんだけど、logrotateの仕組みが無いのでログをいっぱい吐いてるとディスクを圧迫する。<br/>
-かといってログをrmとかしちゃうとそこで書き込みが止まってしまうのでアレ。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[今月遊んだゲーム]]></title>
-    <link href="http://blog.feelmy.net/2013/01/31/played-games/"/>
-    <updated>2013-01-31T22:00:00+09:00</updated>
-    <id>http://blog.feelmy.net/2013/01/31/played-games</id>
-    <content type="html"><![CDATA[<h2><a href="http://store.steampowered.com/app/107100/">Bastion</a> ¥327</h2>
-
-<p>楽しいアクションゲームだった。見た目も綺麗。<br/>
-ストーリーはイミフ。</p>
-
-<h2><a href="http://store.steampowered.com/app/204360/">Castle Crashers</a> ¥339</h2>
-
-<p>Coopすべく買ったが難しいのでやらなくなってしまった。<br/>
-糞ゲー(汚い意味で)</p>
-
-<h2><a href="http://store.steampowered.com/app/219150/">Hotline Miami</a> ¥222</h2>
-
-<p>ゲームとしては凄くシンプルだけどちゃんと面白い。<br/>
-2chのスレにあったストーリーまとめみたいなのを読んだら更に面白くなった。</p>
-
-<h2><a href="http://steamcommunity.com/app/115120">Iron Brigade</a> ¥97</h2>
-
-<p>メカモノ好きだしタワーディフェンスのCoopは楽しい。機体に個性出るのも良い。<br/>
-Coop誘うのSteamじゃなくてGames for Windows Live経由なのがダルいしたまにバグる。</p>
-
-<h2><a href="http://steamcommunity.com/app/57740">Jagged Alliance - Back in Action</a> ¥0</h2>
-
-<p>バランス調整Mod入れたら普通に遊べてるし珍しいジャンルなのでそこそこ楽しいけど全体的に作りこみが浅い。<br/>
-リメイク元の1999年発売のやつの方が良く出来てるとか聞いた。</p>
-
-<h2><a href="http://store.steampowered.com/app/211360/">Offspring Fling!</a> ¥65</h2>
-
-<p>普通のパズルゲーっぽい。
-見た目は可愛い。</p>
-
-<h2><a href="http://steamcommunity.com/app/99300">Renegade Ops</a> ¥0</h2>
-
-<p>敵なぎ倒す系のCoopは単純かつ楽しくていい。<br/>
-左手パッド右手マウスでやりたいけどできない。マップ表示がクソい。</p>
-
-<h2><a href="http://steamcommunity.com/app/207040">Sine Mora</a> ¥155</h2>
-
-<p>シューティングゲームだけど一発終了なタイプじゃないから普通に遊べてる。<br/>
-でもやっぱ目が疲れるのでアレ。</p>
-
-<h2><a href="http://store.steampowered.com/app/91100/">SkyDrift</a> ¥90</h2>
-
-<p>仲間内でレースすると最高に盛り上がる。もちろんSkype有りで。<br/>
-空飛ぶマリカーっぽいけどコース数少ない、バランス悪いとかあるのでPC版マリカー早く！</p>
-
-<h2><a href="http://steamcommunity.com/app/50300">Spec Ops: The Line</a> ¥425</h2>
-
-<p>久しぶりのストーリー重視のTPSで楽しめた。後味の良いストーリーではないけどわりと満足。MultiplayとCoopは未プレイ。<br/>
-実績47/50まで8時間足らずというボリュームの少なさはやや寂しいけど物語長引いても面白く無いからこんなもんかも。</p>
-
-<h2><a href="http://store.steampowered.com/app/105600/">Terraria</a> ¥224</h2>
-
-<p>石掘ってると無心になれる。サーバ立てればみんなで一緒に遊べるし、協力して掘ったり戦ったり楽しい。<br/>
-次作早くやりたい。</p>
 ]]></content>
   </entry>
   
