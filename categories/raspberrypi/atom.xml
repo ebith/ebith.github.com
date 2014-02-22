@@ -4,7 +4,7 @@
   <title><![CDATA[Category: RaspberryPi | おいら屋ファクトリー]]></title>
   <link href="http://blog.feelmy.net/categories/raspberrypi/atom.xml" rel="self"/>
   <link href="http://blog.feelmy.net/"/>
-  <updated>2014-02-23T00:50:17+09:00</updated>
+  <updated>2014-02-23T00:51:31+09:00</updated>
   <id>http://blog.feelmy.net/</id>
   <author>
     <name><![CDATA[ebith]]></name>
@@ -70,7 +70,7 @@ vi /etc/systemd/system/network.service
 vi /etc/resolve.conf
   nameserver 143.90.130.165
   nameserver 143.90.130.39
-systemctl disable <a href="&#x6d;&#x61;&#105;&#x6c;&#116;&#111;&#x3a;&#x64;&#x68;&#99;&#x70;&#99;&#100;&#64;&#x65;&#x74;&#x68;&#x30;&#x2e;&#115;&#101;&#114;&#118;&#x69;&#99;&#101;">&#x64;&#x68;&#x63;&#x70;&#x63;&#100;&#x40;&#x65;&#116;&#x68;&#x30;&#x2e;&#115;&#x65;&#x72;&#118;&#x69;&#99;&#101;</a>
+systemctl disable <a href="&#x6d;&#x61;&#105;&#x6c;&#x74;&#111;&#58;&#x64;&#104;&#99;&#x70;&#x63;&#100;&#x40;&#x65;&#116;&#104;&#48;&#x2e;&#x73;&#101;&#114;&#x76;&#x69;&#99;&#101;">&#x64;&#104;&#x63;&#x70;&#99;&#x64;&#64;&#x65;&#116;&#x68;&#x30;&#46;&#115;&#x65;&#x72;&#x76;&#105;&#x63;&#x65;</a>
 systemctl enable network.service</p>
 
 <h1>ssh, sshd周り</h1>

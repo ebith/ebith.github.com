@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Node.js | おいら屋ファクトリー]]></title>
   <link href="http://blog.feelmy.net/categories/node-dot-js/atom.xml" rel="self"/>
   <link href="http://blog.feelmy.net/"/>
-  <updated>2014-02-23T00:50:17+09:00</updated>
+  <updated>2014-02-23T00:51:31+09:00</updated>
   <id>http://blog.feelmy.net/</id>
   <author>
     <name><![CDATA[ebith]]></name>
@@ -12,50 +12,6 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
-  
-  <entry>
-    <title type="html"><![CDATA[node-ircでIRC Botを作る]]></title>
-    <link href="http://blog.feelmy.net/2014/02/22/build-irc-bot/"/>
-    <updated>2014-02-22T23:20:00+09:00</updated>
-    <id>http://blog.feelmy.net/2014/02/22/build-irc-bot</id>
-    <content type="html"><![CDATA[<p>ここしばらくHubot+IRC adapterを使ってたけどこまかいところで不満があるというか<br/>
-IRC専用のbotシステムじゃない故の不満があったのをどうにかしたかったので色々調べていたら<br/>
-HubotのIRC adapterにも使われているnode-ircが素晴らしくてこれを使うとお手軽にIRC Botが作れて幸せだったというお話。</p>
-
-<p><div><script src='https://gist.github.com/9155493.js'></script>
-<noscript><pre><code>config =
-  scriptsDir: &#39;./scripts&#39;
-  # API — node-irc 2.1 documentation - https://node-irc.readthedocs.org/en/latest/API.html#client
-  irc:
-    server: &#39;localhost&#39;
-    nick: &#39;bot&#39;
-    options:
-      port: 6669
-      channels: [&#39;#hogehoge&#39;, &#39;#piyopiyo&#39;]
-
-irc = require &#39;irc&#39;
-fs = require &#39;fs&#39;
-
-bot = new irc.Client config.irc.server, config.irc.nick, config.irc.options
-bot.addListener &#39;registered&#39;, (msg) -&gt;
-  do loadScripts
-bot.addListener &#39;message#&#39;, (nick, channel, msg) -&gt;
-  if msg.match /^:reload/
-    do loadScripts
-
-loadScripts = -&gt;
-  fs.readdir config.scriptsDir, (err, files) -&gt;
-    for file in files
-      scriptPath = &quot;#{config.scriptsDir}/#{file}&quot;
-      delete require.cache[require.resolve scriptPath]
-      try
-        require(scriptPath) bot
-      catch err
-        console.log &quot;Unable to load #{scriptPath}: #{err.stack}&quot;
-        process.exit 1</code></pre></noscript></div>
-</p>
-]]></content>
-  </entry>
   
   <entry>
     <title type="html"><![CDATA[ゲームのセール情報を監視すべくsubredditをtwitterにポストするbot作った]]></title>
