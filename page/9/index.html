@@ -5,11 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>今月買ったゲーム - おいら屋ファクトリー</title>
+  <title>おいら屋ファクトリー</title>
   <meta name="author" content="ebith">
 
   
-  <meta name="description" content="Brothers &ndash; A Tale of Two Sons ¥269 安くてメタスコア良かったので釣られて買ってみた 星のカービィ　トリプルデラックス ¥3891 ミニゲームのやりこみとかあんま好きじゃないのでちょっと早まったかもと思ってる Assassin&rsquo;s Creed &hellip;">
+  <meta name="description" content="はてなダイアリーも広告が入るようになってしまったので、これを機会にGithub+Octopressも試してみる。
+TumblrとかLokkaとか、WordPressに出戻りも考慮したけどどれもしっくりこないので期待。 参考にしたページとか Big Sky :: &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.feelmy.net/2014/01/31/bought-games">
+  <link rel="canonical" href="http://blog.feelmy.net/page/9">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="おいら屋ファクトリー" type="application/atom+xml">
@@ -75,12 +76,15 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div>
-<article class="hentry" role="article">
+      <div class="blog-index">
   
+  
+  
+    <article>
+      
   <header>
     
-      <h1 class="entry-title">今月買ったゲーム</h1>
+      <h1 class="entry-title"><a href="/2012/08/25/try-octopress/">Octopressを試す</a></h1>
     
     
       <p class="meta">
@@ -96,86 +100,73 @@
   
 
 
-<time datetime="2014-01-31T22:00:00+09:00" pubdate data-updated="true">Jan 31<span>st</span>, 2014</time>
+<time datetime="2012-08-25T05:53:00+09:00" pubdate data-updated="true">Aug 25<span>th</span>, 2012</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h2><a href="http://store.steampowered.com/app/225080/">Brothers &ndash; A Tale of Two Sons</a> ¥269</h2>
+  <div class="entry-content"><p>はてなダイアリーも広告が入るようになってしまったので、これを機会にGithub+Octopressも試してみる。<br/>
+TumblrとかLokkaとか、WordPressに出戻りも考慮したけどどれもしっくりこないので期待。</p>
 
-<p>安くてメタスコア良かったので釣られて買ってみた</p>
+<h2>参考にしたページとか</h2>
 
-<h2><a href="http://www.nintendo.co.jp/3ds/balj/">星のカービィ　トリプルデラックス</a> ¥3891</h2>
+<p><a href="http://mattn.kaoriya.net/software/lang/ruby/20111017205717.htm" title="Big Sky :: githubとjekyllとoctopressで作る簡単でモダンなブログ">Big Sky :: githubとjekyllとoctopressで作る簡単でモダンなブログ</a><br/>
+<a href="http://blog.glidenote.com/blog/2011/11/07/install-octopress-on-github/" title="GithubとOctopressでモダンな技術系ブログを作ってみる - Glide Note - グライドノート">GithubとOctopressでモダンな技術系ブログを作ってみる &ndash; Glide Note &ndash; グライドノート</a><br/>
+<a href="http://nowelium.github.com/blog/2012/03/26/octopress-diff.html" title="octopress でブログを書いてみる - ハタさんのブログ(出張版)">octopress でブログを書いてみる &ndash; ハタさんのブログ(出張版)</a><br/>
+<a href="http://tokkonopapa.github.com/blog/2012/01/04/octopress-plugin-for-categories-cloud/" title="Octopress用Tag Cloudプラグインをリリースします - T.I.D.">Octopress用Tag Cloudプラグインをリリースします &ndash; T.I.D.</a></p>
 
-<p>ミニゲームのやりこみとかあんま好きじゃないのでちょっと早まったかもと思ってる</p>
+<h2>それ以外にやったこと</h2>
 
-<h2><a href="http://store.steampowered.com/app/242050/">Assassin&rsquo;s Creed IV Black Flag</a> ¥2697</h2>
+<p><a href="http://blog.glidenote.com/blog/2012/04/02/octoeditor.vim/" title="Octopressの記事管理用プラグイン、Octoeditor.vimを作った - Glide Note - グライドノート">Octopressの記事管理用プラグイン、Octoeditor.vimを作った &ndash; Glide Note &ndash; グライドノート</a>を導入したり</p>
 
-<p>安くなるの待ってた</p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='vim'><span class='line'><span class="nb">nnoremap</span> <span class="p">&lt;</span>Leader<span class="p">&gt;</span>of :Unite file_rec:<span class="p">&lt;</span>C<span class="p">-</span><span class="k">r</span><span class="p">&gt;=</span>expand<span class="p">(</span><span class="k">g</span>:octopress_path.<span class="s2">&quot;/source/_posts/&quot;</span><span class="p">)&lt;</span>CR<span class="p">&gt;&lt;</span>CR<span class="p">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Unite.vimで記事一覧開くのマッピングしたり</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>pip install pygments
+</span><span class='line'>vim _config.yml
+</span><span class='line'>  pygments: <span class="nb">true</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>シンタックスハイライト用にPygments入れたり</p>
+
+<h2>雑感</h2>
+
+<p> やっぱ普通にエディタで書けるの便利。<br/>
+vimperator使ってるとテキストエリアで外部エディタ使えるけど、
+なんかの拍子に吹っ飛んでっちゃったことがあってそれ以来あんまり使わなくなってたので。</p>
+
+<p>配布されてるテーマ少ないので慣れないCSSとか画像とか触るはめになってつらい。<br/>
+<code>rake install['theme']</code>するとそのたびにファイルが上書きされるみたいで色々試すとなんかグチャグチャになってしまったりとか。</p>
+
+<h2>TODO</h2>
+
+<p>適当に書き足したCSSが悲しい事になってるのどうにかして欲しい。<br/>
+Favicon欲しい。</p>
 </div>
-
-
-  <footer>
-    <p class="meta">
-      
   
-
-<span class="byline author vcard">Posted by <span class="fn">ebith</span></span>
-
-      
-
-
-
-
-
-
-
-
   
 
 
-<time datetime="2014-01-31T22:00:00+09:00" pubdate data-updated="true">Jan 31<span>st</span>, 2014</time>
-      
-
-<span class="categories">
+    </article>
   
-    <a class='category' href='/categories/game/'>game</a>
-  
-</span>
-
-
-    </p>
+  <div class="pagination">
     
-      <div class="sharing">
-  
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.feelmy.net/2014/01/31/bought-games/" data-via="" data-counturl="http://blog.feelmy.net/2014/01/31/bought-games/" >Tweet</a>
-  
-  
-  
-</div>
-
+    <a href="/blog/archives">Blog Archives</a>
     
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/2014/01/16/i-want-to-build-a-tweak/" title="Previous Post: iOSのTweak作りたい">&laquo; iOSのTweak作りたい</a>
-      
-      
-        <a class="basic-alignment right" href="/2014/04/30/bought-games/" title="Next Post: 今月買ったゲーム">今月買ったゲーム &raquo;</a>
-      
-    </p>
-  </footer>
-</article>
-
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a class="next" href="/page/8/">Newer &rarr;</a>
+    
+  </div>
 </div>
-  </section>
-
-</div>
-
 <aside class="sidebar">
   
     <section>
@@ -233,7 +224,6 @@
   
 </aside>
 
-
     </div>
   </div>
   <footer role="contentinfo"><p>
@@ -248,10 +238,7 @@
       var disqus_shortname = 'ebith';
       
         
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.feelmy.net/2014/01/31/bought-games/';
-        var disqus_url = 'http://blog.feelmy.net/2014/01/31/bought-games/';
-        var disqus_script = 'embed.js';
+        var disqus_script = 'count.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

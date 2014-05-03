@@ -4,7 +4,7 @@
   <title><![CDATA[おいら屋ファクトリー]]></title>
   <link href="http://blog.feelmy.net/atom.xml" rel="self"/>
   <link href="http://blog.feelmy.net/"/>
-  <updated>2014-02-23T00:51:31+09:00</updated>
+  <updated>2014-05-04T00:12:25+09:00</updated>
   <id>http://blog.feelmy.net/</id>
   <author>
     <name><![CDATA[ebith]]></name>
@@ -12,6 +12,21 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[今月買ったゲーム]]></title>
+    <link href="http://blog.feelmy.net/2014/04/30/bought-games/"/>
+    <updated>2014-04-30T23:01:00+09:00</updated>
+    <id>http://blog.feelmy.net/2014/04/30/bought-games</id>
+    <content type="html"><![CDATA[<h2><a href="http://store.steampowered.com/app/248820">Risk of Rain</a> ¥0</h2>
+
+<p>demoやってから安くなったら買いたいと思ってたので66%ありがとうございます</p>
+
+<h2><a href="http://store.steampowered.com/app/236430/">Steam：Dark Souls™ II</a> ¥6302</h2>
+
+<p>待ってました</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[今月買ったゲーム]]></title>
@@ -708,191 +723,6 @@ Mongo.pmをtiarraPath/module/Log/に配置、confの例は以下に。<br/>
 
 <p>環境変数NODE_ENVを<code>production</code>に設定するとSSL+BASIC認証で起動する。_run.sh参照。<br/>
 あとから見返したいチャンネルが1つだけだったのでチャンネル名を考慮していない。全部混ざって表示されるはず。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[HubotでIRC Botを作る]]></title>
-    <link href="http://blog.feelmy.net/2013/02/03/hubot-irc/"/>
-    <updated>2013-02-03T01:09:00+09:00</updated>
-    <id>http://blog.feelmy.net/2013/02/03/hubot-irc</id>
-    <content type="html"><![CDATA[<h2>Node.jsのインストールと下準備</h2>
-
-<p>Node.jsの管理には<a href="https://github.com/hokaccha/nodebrew" title="hokaccha/nodebrew · GitHub">Nodebrew</a>を使う。<br/>
-Readmeに従ってインストールして、Nodebrew経由でNodeのバイナリを入れる。<br/>
-更にcoffee-script必要らしいのとforeverあると便利らしいので入れとく。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>nodebrew install-binary stable
-</span><span class='line'>nodebrew use v0.8.17
-</span><span class='line'>npm install -g forever
-</span><span class='line'>npm install -g coffee-script
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Bot作る</h2>
-
-<p>フォルダ構成はこんなの。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>bot/
-</span><span class='line'>├── node_modules
-</span><span class='line'>├── scripts
-</span><span class='line'>│   ├── colorful-ping.coffee
-</span><span class='line'>│   ├── config.coffee
-</span><span class='line'>│   ├── fetch-title.coffee
-</span><span class='line'>│   ├── rating.coffee
-</span><span class='line'>│   ├── reddit-gamedeals.coffee
-</span><span class='line'>│   ├── upgrade.coffee
-</span><span class='line'>│   └── vpn-manager.coffee
-</span><span class='line'>├── hubot-scripts.json
-</span><span class='line'>├── package.json
-</span><span class='line'>└── run.sh
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>こんな感じにpackage.json書いてnpm installするとややこしいことなくインストール完了。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;ebithubot&quot;</span><span class="p">,</span>
-</span><span class='line'>  <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;0.0.1&quot;</span><span class="p">,</span>
-</span><span class='line'>  <span class="nt">&quot;dependencies&quot;</span><span class="p">:</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nt">&quot;hubot&quot;</span><span class="p">:</span> <span class="s2">&quot;2.3.5&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;hubot-irc&quot;</span><span class="p">:</span> <span class="s2">&quot;0.1.4&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;hubot-scripts&quot;</span><span class="p">:</span> <span class="s2">&quot;2.2.2&quot;</span><span class="p">,</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nt">&quot;cron&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;request&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;iconv-jp&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;request&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;cheerio&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;aws-sdk&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;ntwitter&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>あとは好きなだけスクリプトを書いてBotの機能強化に励む。<br/>
-<a href="https://github.com/github/hubot/tree/master/src/scripts" title="hubot/src/scripts at master · github/hubot · GitHub">Hubot付属のscript</a>が良い例。</p>
-
-<h2>運用において</h2>
-
-<p>スクリプトのリロード機能が無くて、毎回再起動するしかないのでIRC Proxy無しでの運用は厳しい。<br/>
-かといって普段使いのProxyに繋ぐと入ってるチャンネル全部のメッセージを処理対象にしてしまうのでイマイチ。</p>
-
-<h3>起動スクリプト</h3>
-
-<p>設定類は環境変数で行うのが基本らしいのでシェルスクリプトに<code>export</code>を並び立てる。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c">#!/usr/bin/env bash</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># hubot</span>
-</span><span class='line'><span class="nb">export </span><span class="nv">PORT</span><span class="o">=</span>8889
-</span><span class='line'>
-</span><span class='line'><span class="c"># hubot-irc</span>
-</span><span class='line'><span class="nb">export </span><span class="nv">HUBOT_IRC_UNFLOOD</span><span class="o">=</span><span class="s2">&quot;true&quot;</span>
-</span><span class='line'><span class="nb">export </span><span class="nv">HUBOT_IRC_NICK</span><span class="o">=</span><span class="s2">&quot;ebithubot&quot;</span>
-</span><span class='line'><span class="nb">export </span><span class="nv">HUBOT_IRC_PORT</span><span class="o">=</span><span class="s2">&quot;6669&quot;</span>
-</span><span class='line'><span class="nb">export </span><span class="nv">HUBOT_IRC_SERVER</span><span class="o">=</span><span class="s2">&quot;localhost&quot;</span>
-</span><span class='line'><span class="nb">export </span><span class="nv">HUBOT_IRC_ROOMS</span><span class="o">=</span><span class="s2">&quot;#ebithubot&quot;</span>
-</span><span class='line'>
-</span><span class='line'>forever start -c coffee node_modules/hubot/bin/hubot -a irc
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Notice使いたい</h3>
-
-<p><a href="http://blog.fumiz.me/2012/08/05/hubot-irc-bot-script/#notice" title="hubotスクリプトの書き方とサンプル集 | mitc">hubotスクリプトの書き方とサンプル集 | mitc</a>によると互換性のために削除されたらしい。<br/>
-hubot-ircにパッチを当てて復活させる。v0.1.4向け。</p>
-
-<div><script src='https://gist.github.com/4505583.js'></script>
-<noscript><pre><code>diff --git a/src/irc.coffee b/src/irc.coffee
-index 1cd6be3..dbfb495 100644
---- a/src/irc.coffee
-+++ b/src/irc.coffee
-@@ -5,6 +5,12 @@
- Irc = require &#39;irc&#39;
- 
- class IrcBot extends Adapter
-+  constructor: (@robot) -&gt;
-+    super @robot
-+    @robot.notice = (user, strings...) -&gt;
-+      @adapter.notice user, strings...
-+    @robot.Response = IrcResponse
-+
-   send: (user, strings...) -&gt;
-     for str in strings
-       if not str?
-@@ -176,5 +182,9 @@ class IrcBot extends Adapter
- 
-     self.emit &quot;connected&quot;
- 
-+class IrcResponse extends Response
-+  notice: (strings...) -&gt;
-+    @robot.adapter.notice @message.user, strings...
-+
- exports.use = (robot) -&gt;
-   new IrcBot robot</code></pre></noscript></div>
-
-
-<h3>データの永続化</h3>
-
-<p>データの永続化はオプションになっていて、Redis以外にもMongoDBやAmazon S3とかファイルも選べるようになってる。<br/>
-どれもhubot-scriptsのリポジトリに入っているので<code>hubot-scripts.json</code>に<code>["redis-brain.coffee"]</code>とか書く。<br/>
-永続化のための*-brain.coffeeが読み込まれるとrobot.brain.dataが5秒おきに自動保存されるようになる。</p>
-
-<p>ただし02/01/2013現在npm上で最新のhubot-scripts 2.4.1に入ってるredis-brain.coffeeは壊れてるので一つ前の2.2.2とか使うべき。</p>
-
-<h3>forever</h3>
-
-<p>簡単なdaemontoolsみたいなので便利なんだけど、logrotateの仕組みが無いのでログをいっぱい吐いてるとディスクを圧迫する。<br/>
-かといってログをrmとかしちゃうとそこで書き込みが止まってしまうのでアレ。</p>
 ]]></content>
   </entry>
   
