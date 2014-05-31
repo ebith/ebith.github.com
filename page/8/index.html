@@ -9,10 +9,8 @@
   <meta name="author" content="ebith">
 
   
-  <meta name="description" content="簡易的なバックアップで良いので取っておきたかったので、
-tarで固めてlzoで圧縮してDropboxに送るバックアップスクリプト書いた。
-BASH Dropbox Uploaderが必要。 #!/bin/bash # バックアップ対象ディレクトリ
-target=&quot;/etc /home/ &hellip;">
+  <meta name="description" content="Macbook触ってる時間が長くなってくるとKeePass2がまともに動かないのが凄く気になってきたし、
+かと言って1Passwordは凄く高いのでどうにかしたくて右往左往してたらkdbxを読めるPerlモジュールを見つけたので頑張った。 PerlのFile::KeePassとIO:: &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +78,146 @@ target=&quot;/etc /home/ &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/09/23/keepass2-for-osx/">KeePass2のkdbxをMacでも快適に読めるようにした</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-23T04:21:00+09:00" pubdate data-updated="true">Sep 23<span>rd</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Macbook触ってる時間が長くなってくるとKeePass2がまともに動かないのが凄く気になってきたし、<br/>
+かと言って1Passwordは凄く高いのでどうにかしたくて右往左往してたらkdbxを読めるPerlモジュールを見つけたので頑張った。</p>
+
+<p>PerlのFile::KeePassとIO::Prompter、<a href="https://github.com/mooz/percol" title="mooz/percol">mooz/percol</a>が必要。</p>
+
+<div><script src='https://gist.github.com/3767494.js'></script>
+<noscript><pre><code>#!/usr/bin/env perl
+use strict;
+use warnings;
+use utf8;
+
+use File::KeePass;
+use IO::Prompter;
+use Encode;
+
+my $file = shift @ARGV;
+my $pass = prompt(&#39;Password: &#39;, -e =&gt; &#39;&#39;);
+
+my $k = File::KeePass-&gt;new;
+
+$k-&gt;load_db($file, $pass);
+
+$k-&gt;unlock;
+
+my @entries = $k-&gt;find_entries({});
+
+open(OUT, &#39;| percol | awk \&#39;BEGIN { FS = &quot; :: &quot;} { printf $2 }\&#39; | pbcopy &#39;);
+foreach my $entry (@entries) {
+  next unless ($entry-&gt;{title} &amp;&amp; $entry-&gt;{password});
+  print OUT encode_utf8(&quot;$entry-&gt;{title} :: $entry-&gt;{password}\n&quot;);
+}
+close(OUT);
+
+$k-&gt;clear;</code></pre></noscript></div>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>./keepass.pl ~/ebith.kdbx
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>みたいな感じで使う。
+percolのお陰で絞込み検索が素晴らしい感じなので便利。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/09/18/use-7-zip-from-a-filer/">ファイラから7-zip(7zG.exe)使うようにすると捗る</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-18T00:10:00+09:00" pubdate data-updated="true">Sep 18<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Windowsではずっと統合アーカイバプロジェクトのDLL群とそれらを使うアーカイバにお世話になってきたけど、<br/>
+<a href="http://sevenzip.sourceforge.jp/" title="7-Zip">7-Zip</a>のほうが速いので7-Zip付属の7zG.exe, 7z.exeとB2E(Bridge To Executables)に移行することにした。<br/>
+B2Eの本家は<a href="http://www.kmonos.net/lib/noah.ja.html" title="Noah - kMonos.NET">Noah</a>だけど、<a href="http://claybird.sakura.ne.jp/garage/lhaforge/" title="泥巣 : 作品庫 - LhaForge">LhaForge</a>の方がコマンドラインオプションが充実していて使いやすいのでそっちを使う。</p>
+
+<div><script src='https://gist.github.com/3737689.js'></script>
+<noscript><pre><code>load:
+  (name 7zG.exe)
+  (type 7z LZMA *LZMA2)
+
+encode:
+  (if (method 1) (cmd a -t7z -m0=LZMA (arc.7z) (list\*)))
+  (if (method 2) (cmd a -t7z -m0=LZMA2 (arc.7z) (list\*)))</code></pre></noscript></div>
+
+
+<p>zip, 7z圧縮用と展開用のスクリプト。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  C:\usr\app\lfarchive\LhaForge.exe /b2e /e                   #展開
+</span><span class='line'>  C:\usr\app\lfarchive\LhaForge.exe /b2e /c:zip /method:Store #圧縮(Zip Store)
+</span><span class='line'>  C:\usr\app\lfarchive\LhaForge.exe /b2e /c:7z /method:LZMA2  #圧縮(7z LZMA2)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>LhaForgeをファイラから呼ぶ場合こんな感じ。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -326,198 +464,6 @@ OSのインストール後の流れをメモっておく。</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/09/07/new-gaming-pc/">ゲーム用の新PC組んだ</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-09-07T21:00:00+09:00" pubdate data-updated="true">Sep 7<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://flic.kr/p/d7tBTJ" title="New gaming pc 1/2 by Ebith, on Flickr"><img src="http://farm9.staticflickr.com/8037/7949568956_1d55933fa2_n.jpg" alt="New gaming pc 1/2" /></a>
-<a href="http://flic.kr/p/d7tMUJ" title="New gaming pc 2/2 by Ebith, on Flickr"><img src="http://farm9.staticflickr.com/8035/7949602654_782f691be0_n.jpg" alt="New gaming pc 2/2" /></a></p>
-
-<h2>構成</h2>
-
-<ul>
-<li>ケース
-
-<ul>
-<li><a href="http://www.links.co.jp/items/antec-case/p280.html" title="P280 製品情報 コンピュータ関連製品の代理店事業 ｌ 株式会社リンクスインターナショナル">ANTEC P280</a> \10,544</li>
-</ul>
-</li>
-<li>電源
-
-<ul>
-<li><a href="http://www.owltech.co.jp/products/power/Seasonic/SS-X2/SS850_760_660_560KM.html" title="Seasonic電源 X-Series SS-850KM SS-760KM SS-660KM SS-560KM">Seasonic XSeries SS-760KM</a> \18,629</li>
-</ul>
-</li>
-<li>マザーボード
-
-<ul>
-<li><a href="http://www.asus.co.jp/Motherboards/Intel_Socket_1155/P8Z77V_PRO/" title="ASUS - マザーボード- ASUS P8Z77-V PRO">ASUS P8Z77-V PRO</a> \17,470</li>
-</ul>
-</li>
-<li>CPU
-
-<ul>
-<li><a href="http://ark.intel.com/ja/products/65520" title="ARK | Intel® Core™ i5-3570K Processor (6M Cache, up to 3.80 GHz)">Intel Core i5 3570K</a> \18,501</li>
-</ul>
-</li>
-<li>CPUクーラー
-
-<ul>
-<li><a href="http://www.scythe.co.jp/cooler/ninja3-revb.html" title="株式会社サイズ ｜ 商品詳細 ｜忍者参リビジョンB">SCYTHE 忍者参リビジョンB</a> \3,291</li>
-</ul>
-</li>
-<li>メモリ
-
-<ul>
-<li><a href="http://www.avexir.com/product/platinumspec.htm" title="AVEXIR">AVEXIR AVD3U16001108G-2MW</a> \8,980</li>
-</ul>
-</li>
-<li>GPU
-
-<ul>
-<li><a href="http://www.gigabyte.jp/products/product-page.aspx?pid=4211#ov" title="GIGABYTE - グラフィックスカード - NVIDIA - PCI Express Solution - GeForce 600 Series - GV-N670OC-2GD">GIGABYTE GV-N670OC-2GD</a> \37,634</li>
-</ul>
-</li>
-<li>ストレージ
-
-<ul>
-<li><a href="http://www.links.co.jp/item/px-256m3p/" title="PX-256M3P | コンピュータ関連製品の代理店事業 ｌ 株式会社リンクスインターナショナル">PLEXTOR PX-256M3P</a> \17,980</li>
-<li><a href="http://www.semicon.toshiba.co.jp/product/storage/selection/built-in/client_hdd35/DT01ACAxxx.html" title="クライアントHDD(3.5型)｜クライアントHDD(3.5型)｜東芝 セミコンダクター＆ストレージ社">TOSHIBA DT01ACA200</a> \9,480</li>
-</ul>
-</li>
-<li>光学ドライブ
-
-<ul>
-<li><a href="http://www.pioneerelectronics.com/PUSA/Computer/Computer+Drives/BDR-207DBK" title="BDR-207DBK - 12x Internal BD/DVD/CD Burner. SATA Interface. | Pioneer Electronics USA">Pioneer BDR-207DBK</a> \6,470</li>
-</ul>
-</li>
-<li>その他
-
-<ul>
-<li><a href="http://www.ainex.jp/products/as-05.htm" title="Ainex | AS-05">Ainex AS-05 シルバーグリス</a> \1,300</li>
-<li><a href="http://www.ainex.jp/products/bz-01.htm" title="Ainex | BZ-01">Ainex BZ-01 ブザーユニット</a> \336</li>
-</ul>
-</li>
-<li>流用品
-
-<ul>
-<li><a href="http://jp.creative.com/products/product.asp?category=209&amp;subcategory=669&amp;product=15853" title="Sound Blaster X-Fi XtremeGamer">CREATIVE Sound Blaster X-Fi XtremeGamer</a></li>
-<li><a href="http://www.jp.onkyo.com/pcaudio/pcidigitalaudioboard/se90pci/index.htm" title="ONKYO PCオーディオ製品情報：SE-90PCI - PCIe/PCIデジタルオーディオボード | オンキヨー株式会社">ONKYO SE-90PCI</a></li>
-<li><a href="http://www.scythe.co.jp/cooler/kaze-juni.html" title="株式会社サイズ ｜ 商品詳細 ｜KAZE-JYUNI">SCYTHE KAZE-JYUNI 800rpm SY1225SL12L</a> * 2</li>
-</ul>
-</li>
-<li>合計 \150,615</li>
-</ul>
-
-
-<h2>感想</h2>
-
-<p>ちょっと電源にお金割きすぎた感じあるのでCorsairの750AXみたいなもうちょい安いのでも良かったかもしれない。<br/>
-光学ドライブ無し予定だったけどブルーレイドライブ6500円だったので使い道無いのに付けてしまった。<br/>
-<a href="www.antecindia.co.in/pdf/manuals/P280_Manual_JP.pdf">P280のマニュアル</a>にネジの説明がカラー写真付きで載っていて素晴らしい。<br/>
-高級グリス塗るの初めてやったけど<a href="http://www.ainex.jp/data/as-05_mnl_web.pdf">AS-05のマニュアル</a>が詳しくて良かった。<br/>
-SSDはずっとX25-Mを使っていて速いなーと思っていたけどM3PはWindows 7の起動が15秒足らずとかでそれどころじゃなかった。<br/>
-BIOSまじグラフィカルやし、パッと見わかりやすくなっててBIOSとにらめっこする時間減ったし、USBメモリ挿すだけでアップデートできるとかすごい。<br/>
-Dark Souls: Prepare to Die Editionとっても楽しい。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/09/07/gyamblr-for-osx%28tumblr-api-v2%29/">Gyazoのアップロード先をTumblrにするやつ(Gyamblr) API V2版 for OS X</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-09-07T01:22:00+09:00" pubdate data-updated="true">Sep 7<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>気づいたらAPI v1の提供が終了したとかでアップロードできなくなっていたのでv2版書きました。</p>
-
-<h2>使い方</h2>
-
-<p>scriptをGyazoのものと差し替えれば動きますが、tumblifeのgemが必要だったりOAuthの例に漏れず各種トークンが必要だったりするのでよしなにしてください。<br/>
-トークン類は<a href="http://www.tumblr.com/oauth/apps" title="Tumblr">Tumblr</a>でアプリを登録して、oauth.rbを使うと良いと思います。</p>
-
-<div><script src='https://gist.github.com/3657917.js'></script>
-<noscript><pre><code>#!/usr/bin/env ruby
-require &#39;oauth&#39;
-
-consumer = OAuth::Consumer.new(
-  &#39;consumer_key&#39;,
-  &#39;consumer_secret&#39;,
-  {
-    site: &#39;http://api.tumblr.com&#39;,
-    request_token_url: &quot;http://www.tumblr.com/oauth/request_token&quot;,
-    authorize_url: &quot;http://www.tumblr.com/oauth/authorize&quot;,
-    access_token_url: &quot;http://www.tumblr.com/oauth/access_token&quot;
-  }
-)
-request_token = consumer.get_request_token
-system(&#39;open &#39; + request_token.authorize_url)
-
-p &#39;enter oauth_verifier&#39;
-oauth_verifier = gets.chomp!
-access_token = request_token.get_access_token(:oauth_verifier =&gt; oauth_verifier)
-
-p &#39;oauth_token : &#39; + access_token.token
-p &#39;oauth_token_secret : &#39; + access_token.secret</code></pre></noscript></div>
-
-
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/9/">&larr; Older</a>
@@ -533,6 +479,14 @@ p &#39;oauth_token_secret : &#39; + access_token.secret</code></pre></noscript><
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/05/31/bought-games/">今月買ったゲーム</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/05/31/steam-client-on-vimperator/">VimperatorプラグインなSteamクライアント作った</a>
+      </li>
     
       <li class="post">
         <a href="/2014/04/30/bought-games/">今月買ったゲーム</a>
@@ -566,19 +520,11 @@ p &#39;oauth_token_secret : &#39; + access_token.secret</code></pre></noscript><
         <a href="/2013/08/30/bought-games/">今月買ったゲーム</a>
       </li>
     
-      <li class="post">
-        <a href="/2013/07/31/bought-games/">今月買ったゲーム</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/06/28/bought-games/">今月買ったゲーム</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-  <span id="tag-cloud"><a href='/categories/3ds' style='font-size: 103.52941176470588%'>3DS(1)</a> <a href='/categories/adventcalendar' style='font-size: 110.58823529411765%'>adventCalendar(3)</a> <a href='/categories/archlinux' style='font-size: 103.52941176470588%'>ArchLinux(1)</a> <a href='/categories/bag' style='font-size: 103.52941176470588%'>bag(1)</a> <a href='/categories/done' style='font-size: 103.52941176470588%'>done(1)</a> <a href='/categories/food' style='font-size: 103.52941176470588%'>food(1)</a> <a href='/categories/game' style='font-size: 160.0%'>game(17)</a> <a href='/categories/gyazo' style='font-size: 103.52941176470588%'>Gyazo(1)</a> <a href='/categories/hardware' style='font-size: 107.05882352941177%'>hardware(2)</a> <a href='/categories/hubot' style='font-size: 103.52941176470588%'>Hubot(1)</a> <a href='/categories/ios' style='font-size: 103.52941176470588%'>iOS(1)</a> <a href='/categories/iphone' style='font-size: 103.52941176470588%'>iPhone(1)</a> <a href='/categories/irc' style='font-size: 107.05882352941177%'>IRC(2)</a> <a href='/categories/jailbreak' style='font-size: 107.05882352941177%'>JailBreak(2)</a> <a href='/categories/javascript' style='font-size: 103.52941176470588%'>JavaScript(1)</a> <a href='/categories/linux' style='font-size: 110.58823529411765%'>linux(3)</a> <a href='/categories/mac' style='font-size: 107.05882352941177%'>Mac(2)</a> <a href='/categories/nginx' style='font-size: 103.52941176470588%'>Nginx(1)</a> <a href='/categories/node-js' style='font-size: 114.11764705882354%'>Node.js(4)</a> <a href='/categories/octopress' style='font-size: 103.52941176470588%'>Octopress(1)</a> <a href='/categories/perl' style='font-size: 103.52941176470588%'>Perl(1)</a> <a href='/categories/raspberrypi' style='font-size: 103.52941176470588%'>RaspberryPi(1)</a> <a href='/categories/recipe' style='font-size: 103.52941176470588%'>recipe(1)</a> <a href='/categories/ruby' style='font-size: 107.05882352941177%'>Ruby(2)</a> <a href='/categories/software' style='font-size: 114.11764705882354%'>software(4)</a> <a href='/categories/ssl' style='font-size: 107.05882352941177%'>SSL(2)</a> <a href='/categories/terraria' style='font-size: 103.52941176470588%'>Terraria(1)</a> <a href='/categories/twitter' style='font-size: 103.52941176470588%'>Twitter(1)</a> <a href='/categories/ubuntu' style='font-size: 103.52941176470588%'>Ubuntu(1)</a> <a href='/categories/vimperator' style='font-size: 114.11764705882354%'>Vimperator(4)</a> <a href='/categories/vps' style='font-size: 107.05882352941177%'>VPS(2)</a> <a href='/categories/win' style='font-size: 107.05882352941177%'>Win(2)</a> </span>
+  <span id="tag-cloud"><a href='/categories/3ds' style='font-size: 103.33333333333333%'>3DS(1)</a> <a href='/categories/adventcalendar' style='font-size: 110.0%'>adventCalendar(3)</a> <a href='/categories/archlinux' style='font-size: 103.33333333333333%'>ArchLinux(1)</a> <a href='/categories/bag' style='font-size: 103.33333333333333%'>bag(1)</a> <a href='/categories/done' style='font-size: 103.33333333333333%'>done(1)</a> <a href='/categories/food' style='font-size: 103.33333333333333%'>food(1)</a> <a href='/categories/game' style='font-size: 160.0%'>game(18)</a> <a href='/categories/gyazo' style='font-size: 103.33333333333333%'>Gyazo(1)</a> <a href='/categories/hardware' style='font-size: 106.66666666666667%'>hardware(2)</a> <a href='/categories/hubot' style='font-size: 103.33333333333333%'>Hubot(1)</a> <a href='/categories/ios' style='font-size: 103.33333333333333%'>iOS(1)</a> <a href='/categories/iphone' style='font-size: 103.33333333333333%'>iPhone(1)</a> <a href='/categories/irc' style='font-size: 106.66666666666667%'>IRC(2)</a> <a href='/categories/jailbreak' style='font-size: 106.66666666666667%'>JailBreak(2)</a> <a href='/categories/javascript' style='font-size: 103.33333333333333%'>JavaScript(1)</a> <a href='/categories/linux' style='font-size: 110.0%'>linux(3)</a> <a href='/categories/mac' style='font-size: 106.66666666666667%'>Mac(2)</a> <a href='/categories/nginx' style='font-size: 103.33333333333333%'>Nginx(1)</a> <a href='/categories/node-js' style='font-size: 113.33333333333333%'>Node.js(4)</a> <a href='/categories/octopress' style='font-size: 103.33333333333333%'>Octopress(1)</a> <a href='/categories/perl' style='font-size: 103.33333333333333%'>Perl(1)</a> <a href='/categories/raspberrypi' style='font-size: 103.33333333333333%'>RaspberryPi(1)</a> <a href='/categories/recipe' style='font-size: 103.33333333333333%'>recipe(1)</a> <a href='/categories/ruby' style='font-size: 106.66666666666667%'>Ruby(2)</a> <a href='/categories/software' style='font-size: 113.33333333333333%'>software(4)</a> <a href='/categories/ssl' style='font-size: 106.66666666666667%'>SSL(2)</a> <a href='/categories/terraria' style='font-size: 103.33333333333333%'>Terraria(1)</a> <a href='/categories/twitter' style='font-size: 103.33333333333333%'>Twitter(1)</a> <a href='/categories/ubuntu' style='font-size: 103.33333333333333%'>Ubuntu(1)</a> <a href='/categories/vimperator' style='font-size: 113.33333333333333%'>Vimperator(4)</a> <a href='/categories/vimperator' style='font-size: 103.33333333333333%'>vimperator(1)</a> <a href='/categories/vps' style='font-size: 106.66666666666667%'>VPS(2)</a> <a href='/categories/win' style='font-size: 106.66666666666667%'>Win(2)</a> </span>
 </section>
 
 
