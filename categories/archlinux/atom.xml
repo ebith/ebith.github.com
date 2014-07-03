@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ArchLinux | おいら屋ファクトリー]]></title>
   <link href="http://blog.feelmy.net/categories/archlinux/atom.xml" rel="self"/>
   <link href="http://blog.feelmy.net/"/>
-  <updated>2014-05-31T22:04:57+09:00</updated>
+  <updated>2014-07-03T22:09:48+09:00</updated>
   <id>http://blog.feelmy.net/</id>
   <author>
     <name><![CDATA[ebith]]></name>
@@ -70,7 +70,7 @@ vi /etc/systemd/system/network.service
 vi /etc/resolve.conf
   nameserver 143.90.130.165
   nameserver 143.90.130.39
-systemctl disable <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#100;&#x68;&#99;&#x70;&#x63;&#100;&#x40;&#x65;&#116;&#x68;&#x30;&#x2e;&#x73;&#x65;&#x72;&#x76;&#x69;&#99;&#x65;">&#x64;&#x68;&#x63;&#x70;&#x63;&#x64;&#x40;&#101;&#x74;&#x68;&#48;&#46;&#115;&#x65;&#114;&#x76;&#105;&#99;&#101;</a>
+systemctl disable <a href="&#x6d;&#97;&#105;&#108;&#x74;&#111;&#x3a;&#100;&#104;&#99;&#x70;&#99;&#x64;&#64;&#101;&#x74;&#x68;&#x30;&#46;&#115;&#101;&#x72;&#x76;&#105;&#99;&#x65;">&#100;&#x68;&#x63;&#x70;&#x63;&#x64;&#x40;&#x65;&#x74;&#x68;&#x30;&#x2e;&#x73;&#x65;&#x72;&#118;&#105;&#x63;&#101;</a>
 systemctl enable network.service</p>
 
 <h1>ssh, sshd周り</h1>

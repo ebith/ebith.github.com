@@ -4,7 +4,7 @@
   <title><![CDATA[おいら屋ファクトリー]]></title>
   <link href="http://blog.feelmy.net/atom.xml" rel="self"/>
   <link href="http://blog.feelmy.net/"/>
-  <updated>2014-05-31T22:04:57+09:00</updated>
+  <updated>2014-07-03T22:09:48+09:00</updated>
   <id>http://blog.feelmy.net/</id>
   <author>
     <name><![CDATA[ebith]]></name>
@@ -12,6 +12,21 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[今月買ったゲーム]]></title>
+    <link href="http://blog.feelmy.net/2014/06/30/bought-games/"/>
+    <updated>2014-06-30T08:32:00+09:00</updated>
+    <id>http://blog.feelmy.net/2014/06/30/bought-games</id>
+    <content type="html"><![CDATA[<h2><a href="https://www.origin.com/ja-jp/store/buy/dead-space-2/pc-download/base-game/standard-edition">Dead Space 2</a> ¥450</h2>
+
+<p>Bundleで1と3買って2値下がるの待ってた</p>
+
+<h2><a href="http://store.steampowered.com/sub/30657/">Call of Juarez Gunslinger + Far Cry 3 &ndash; Blood Dragon</a> ¥530</h2>
+
+<h2><a href="http://store.steampowered.com/app/239030/">Papers, Please</a> ¥315</h2>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[今月買ったゲーム]]></title>
@@ -702,26 +717,6 @@
 <li><a href="http://www.daily-labo.com/ygg16_3.html" title="クライアント証明書の発行">クライアント証明書の発行</a></li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[今月遊んだゲーム]]></title>
-    <link href="http://blog.feelmy.net/2013/03/29/played-games/"/>
-    <updated>2013-03-29T00:00:00+09:00</updated>
-    <id>http://blog.feelmy.net/2013/03/29/played-games</id>
-    <content type="html"><![CDATA[<h2><a href="http://store.steampowered.com/app/23530">Earth Defense Force: Insect Armageddon</a> ¥185</h2>
-
-<p>オンラインCoopがある地球防衛軍。</p>
-
-<h2><a href="http://store.steampowered.com/agecheck/app/202170/">Sleeping Dogs</a> ¥723</h2>
-
-<p>面白くないわけじゃないけどGTAで良いやんという結論。</p>
-
-<h2><a href="http://amazon.jp/dp/B00A8E0L4S?tag=ebith-22">マクロス30 銀河を繋ぐ歌声</a> ¥6722</h2>
-
-<p>でかい画面でバルキリー動かせるの楽しい。機体も豊富。アクションRPGであることを受け入れられるなら楽しめる。<br/>
-50時間で2回フリーズした。低い空、機体ステータスの一部が見られない、インベントリの容量が小さすぎる、ちゃちなダンジョン、荒い機体テクスチャなど残念な仕様や要素も多い。</p>
 ]]></content>
   </entry>
   
